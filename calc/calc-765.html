@@ -1,0 +1,226 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-765.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-765" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>患者离开手术室前</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="question_title">
+                                护士是否与团队口头确认手术的名称
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="che1" id="a0" type="radio">
+                                        <label class="flex" for="a0">否</label>
+                                        <input class="flex_que q_radio" value="1" id="a1" name="che1" type="radio">
+                                        <label class="flex" for="a1">是</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                护士是否与团队口头确认仪器、海绵和针头计数无误
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="che2" id="b0" type="radio">
+                                        <label class="flex" for="b0">否，或不适用</label>
+                                        <input class="flex_que q_radio" value="1" id="b1" name="che2" type="radio">
+                                        <label class="flex" for="b1">是</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                护士是否与团队口头确认手术标本的标记方式（包括患者的姓名）
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="che3" id="c0" type="radio">
+                                        <label class="flex" for="c0">否，或不适用</label>
+                                        <input class="flex_que q_radio" value="1" id="c1" name="che3" type="radio">
+                                        <label class="flex" for="c1">是</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                护士是否与团队口头确认有需要解决的任何器械/仪器/设备问题
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="che4" id="d0" type="radio">
+                                        <label class="flex" for="d0">否</label>
+                                        <input class="flex_que q_radio" value="1" id="d1" name="che4" type="radio">
+                                        <label class="flex" for="d1">是</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                外科医生、麻醉专业人员和护士是否回顾有关患者恢复和处理的关键问题
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="che5" id="e0" type="radio">
+                                        <label class="flex" for="e0">否</label>
+                                        <input class="flex_que q_radio" value="1" id="e1" name="che5" type="radio">
+                                        <label class="flex" for="e1">是</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-md">ALERTS!:</div>
+                                <div class="flex-item">
+                                    <div id="resultmsg1" class="skin-color"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">Warnings:</div>
+                                <div class="flex-item">
+                                    <div id="resultmsg2" class="skin-color"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>手术安全检查表中的最后一步</p>
+            <p>在手术后30天内住院期间，该检查表的实施有可能降低包括死亡在内的并发症的发生率。 </p>
+            <p>用于手术室中的3个关键时段： 患者麻醉前 手术部位皮肤切开前 患者离开手术室之前 该检查表并不全面，鼓励增加和修改以适应当地医疗机构。 </p>
+            <p>关于该检查表 该研究由Haynes等人于2009年1月14日发表在《新英格兰医学杂志》上，以期解决外科手术并发症的问题。
+                研究者通过实施19项的手术安全检查表的简单方法，旨在改善团队沟通和护理的一致性。这是一项多中心、跨国、前瞻性的研究，研究对象所处地理位置和经济水平各异。首先前瞻性收集3733名连续入组的患者数据，随后在实施手术安全检查表之后前瞻性收集了3955名患者的数据。主要观察终点是手术后30天内住院期间并发症（包括死亡）的发生率。仅纳入16岁以上非心脏手术的患者。</p>
+            <p> 实施手术检查表的结果 手术死亡率，未使用组为1.5%，而使用组为0.8%（P=0.003）。 住院并发症发生率，未使用组为11.0%，而使用组为7.0%（P&lt;0.001）。
+                使用组的手术部位感染率和非计划再手术率也明显降低（p&lt;0.05）。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Haynes AB, Weiser TG, Berry WR, Lipsitz SR, Breizat AH, Dellinger EP, Herbosa T, Joseph S, Kibatala PL, Lapitan MC, Merry AF, Moorthy K, Reznick RK, Taylor B, Gawande AA; Safe Surgery Saves Lives Study Group.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">A surgical safety checklist to reduce morbidity and mortality in a global population.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">N Engl J Med. 2009 Jan 29;360(5):491-9. doi: 10.1056/NEJMsa0810119. Epub 2009 Jan 14.</span>
+        </a>
+    </div>
+</div>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

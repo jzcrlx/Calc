@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-416.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-416">狼疮性肾炎分型（国际肾脏病学会,ISN/RPS）</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab1" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="2">分型</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>I</th>
+                    <td>轻微系膜型LN</td>
+                    <td>光镜正常，免疫荧光和电镜可见系膜区免疫复合物沉积</td>
+                </tr>
+                <tr>
+                    <th>II</th>
+                    <td>系膜增生型LN</td>
+                    <td>最轻、预后最好、少量蛋白尿和血尿，肾功能良好，GC反应好。</td>
+                </tr>
+                <tr>
+                    <th>III</th>
+                    <td>局灶型LN</td>
+                    <td>&lt;50%的小球受累。系膜弥漫增殖的基础上局灶和阶段性细胞增殖，伴有坏死，少量或中等蛋白尿；</td>
+                </tr>
+                <tr>
+                    <th>IV</th>
+                    <td>弥漫节段型（IV‐S）或弥漫性球型（IV‐G）LN</td>
+                    <td>≥50%的小球受累。最严重，重度蛋白尿、血尿、管型尿，病变活动可冲击治疗；</td>
+                </tr>
+                <tr>
+                    <th>V</th>
+                    <td>膜型LN</td>
+                    <td>肾小球基底膜变厚，钉突形成，轻度系膜细胞增生，主要表现为NS；如可合并 III 型或 IV 型，应予分别诊断。</td>
+                </tr>
+                <tr>
+                    <th>VI</th>
+                    <td>晚期硬化型LN</td>
+                    <td>≥90%的小球表现为球性硬化，且不伴残余的活动性病变。</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>LN对SLE 预后影响甚大，肾衰竭是SLE的主要死因之一。LN 病理分型中的 I、II 型预后较好，IV、VI 型预后较差。</p>
+                <p>ISN/RPS: 国际肾脏学协会/肾脏病理学协会。</p>
+                <p>肾脏损害又称狼疮性肾炎（LN），表现为蛋白尿、血尿、管型尿，乃至肾衰竭。</p>
+                <p>肾脏病理可提供 LN 的活动性指标，包括肾小球细胞增殖性改变、纤维素样坏死、核碎裂、细胞性新月体、透明栓子、金属环、炎细胞浸润、肾小管间质的炎症等；</p>
+                <p>LN 的慢性指标则包括肾小球硬化、纤维性新月体、肾小管萎缩和间质纤维化。活动性指标高者，肾损害进展较快，但积极治疗可以逆转；</p>
+                <p>慢性指标提示肾脏不可逆的损害程度，药物治疗只能减缓而不能逆转慢性指数的继续升高。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">王吉耀主编. 内科学（八年制）（第2版）. 人民卫生出版社. 2010年. p1117.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

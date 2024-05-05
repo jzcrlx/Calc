@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-42.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="medcalc-42" class="post">
+	<div id="meta">                            
+		<select id="units">
+			<option value="si" name="si" selected="selected">国际单位(SI)</option>
+			<option value="us" name="us">美国单位(US)</option>
+		</select>	
+	</div><!--#meta-->                            
+	<div id="title">
+	  <h2>低密度脂蛋白计算 </h2>  
+	  <!-- <h3 id="desc">Calculates LDL based on total and HDL cholesterol and triglycerides.</h3> -->
+	</div>                         
+	<form name="medform" action="get" id="medform">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr class="req">
+				<td>总胆固醇</td>
+				<td><input name="tc" id="tc" type="text"> <label for="tc" class="chol">mmol/L</label></td>
+			</tr>
+			<tr class="req">
+				<td class="">高密度脂蛋白</td>
+				<td class=""><input name="hdl" id="hdl" type="text"> <label for="hdl" class="chol">mmol/L</label></td>
+			</tr>
+			<tr class="req">
+				<td class="">甘油三酯</td>
+				<td class=""><input name="trig" id="trig" type="text"> <label for="trig" class="trig">mmol/L</label></td>
+			</tr>
+			<tr class="answer">
+				<td>低密度脂蛋白（LDL）计算值</td>
+				<td><input readonly="readonly" placeholder="点击查看" name="result" id="result" type="text"> <label for="result" class="chol">mmol/L</label></td>
+			</tr>
+		</tbody></table>
+	</form>
+
+
+<!-- LEADERBOARD AD -->
+<!-- MDCalc_InternalMedicine_Leaderboard_728x90 -->
+<!-- <div style="width:728px; height:90px;" id="div-gpt-ad-1363049555981-4">
+<script type="text/javascript">
+//&lt;![CDATA[
+ord=Math.random()*10000000000000000;
+document.write('&lt;script type="text/javascript" src="//ad.doubleclick.net/N4688/adj/ubm.mdcalc/cardiology;pos=top;kw=SEARCH+TERM;cat=CATEGORY;sz=728x90;ord=' + ord + '?"&gt;&lt;\/script&gt;');
+//]]&gt;
+</script><script src="//ad.doubleclick.net/N4688/adj/ubm.mdcalc/cardiology;pos=top;kw=SEARCH+TERM;cat=CATEGORY;sz=728x90;ord=9779243474941830?" type="text/javascript"></script>
+<noscript>&lt;a href="//ad.doubleclick.net/N4688/jump/ubm.mdcalc/cardiology;pos=top;kw=SEARCH+TERM;cat=CATEGORY;sz=728x90;ord=123456789?" target="_blank" &gt;&lt;img src="//ad.doubleclick.net/N4688/ad/ubm.mdcalc/cardiology;pos=top;kw=SEARCH+TERM;cat=CATEGORY;sz=728x90;ord=123456789?" border="0" alt="" /&gt;&lt;/a&gt;</noscript>
+</div> -->
+<!-- end leaderboard ad -->
+<!--
+<div id="usage" class="extra">
+<a href="//www.nhlbi.nih.gov/guidelines/cholesterol/atp3upd04.htm">Latest LDL Guidelines</a> (NCEP 2004 Update):
+<ul>
+	<li>"Very" High Risk: Guidelines suggest &lt; 70mg/dL may be a reasonable option, but data may suggest there is little incremental benefit to this extreme but with high associated cost</li>
+	<li>High Risk (known CAD, known other atherosclerotic dz, diabetes, etc): &lt; 100 mg/dL</li>
+	<li>Moderate Risk (&gt; 1 risk factor): &lt;130 mg/dL</li>
+	<li>Lower Risk (0-1 risk factors): &lt;160 mg/dL</li>
+</ul>
+Risk Factors:
+<ul>
+	<li>Diabetes</li>
+	<li>Cigarette smoking</li>
+	<li>HTN (BP 140/90 mm Hg or on antihypertensive medication)</li>
+	<li>Low HDL cholesterol ( &lt; 40 mg/dL)</li>
+	<li>Family history of premature CAD (CAD in male first-degree relative, or father less than 55, or female first-degree relative or mother less than 65)</li>
+</ul></div>
+
+<div id="formula" class="extra">
+LDL Cholesterol = Total Cholesterol - HDL - (TG / 5)
+</div>
+<div id="postmeta">
+
+	<p>Posted in: <a rel="category tag" title="View all posts in Cardiac" href="//www.mdcalc.com/category/system/cardiac/">Cardiac</a> • <a rel="category tag" title="View all posts in Cardiology" href="//www.mdcalc.com/category/specialties/cardiology/">Cardiology</a> • <a rel="category tag" title="View all posts in Endocrine/Metabolic" href="//www.mdcalc.com/category/system/endocrinemetabolic/">Endocrine/Metabolic</a> • <a rel="category tag" title="View all posts in Endocrinology" href="//www.mdcalc.com/category/specialties/endocrinology/">Endocrinology</a></p>
+</div> postmeta-->
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

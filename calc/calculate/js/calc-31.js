@@ -1,0 +1,1 @@
+function MDCalc(z){if(z.age==3){if(z.female==1){tbw=.45}else{tbw=.5}}if(z.age==2){if(z.female==1){tbw=.5}else{tbw=.6}}if(z.age==1){tbw=.6}tbw=tbw*z.wt;if(pref=="si"){wt_conv=1}if(pref=="us"){wt_conv=1/2.2}tbw=tbw*wt_conv;ans=tbw*(z.na_pt/z.na-1);Answer(Round(ans,1))}

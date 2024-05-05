@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-763.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-763" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>多发性骨髓瘤预后(R-ISS)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block req">
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="select3">高危的染色体异常？<span class="info" onclick="showInfo('高危的染色体异常')"></span></label>
+                                        <input class="flex_que q_radio" value="1" name="select3" id="select3" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                β2微球蛋白？
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="select11">&gt;3.5mg/L</label>
+                                        <input class="flex_que q_radio" value="0" name="select1" id="select11" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="select12">3.5-5.5mg/L</label>
+                                        <input class="flex_que q_radio" value="1" name="select1" id="select12" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="select13">≥5.5mg/L</label>
+                                        <input class="flex_que q_radio" value="2" name="select1" id="select13" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                白蛋白?
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="select2" id="select21" type="radio">
+                                        <label class="flex" for="select21">≥35g/L</label>
+                                        <input class="flex_que q_radio" value="1" name="select2" id="select22" type="radio">
+                                        <label class="flex" for="select22">&lt;35g/L</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                乳酸脱氢酶?
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="select4" id="select41" type="radio">
+                                        <label class="flex" for="select41">正常</label>
+                                        <input class="flex_que q_radio" value="1" name="select4" id="select42" type="radio">
+                                        <label class="flex" for="select42">升高（&gt;正常上限）</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-lg">Stage:</div>
+                                    <div class="flex-item">
+                                        <div id="resultmsg1" class="skin-color"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-lg">5-year Overall Survival:</div>
+                                    <div class="flex-item">
+                                        <div id="resultmsg2" class="skin-color"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-lg">5-year Progression Free Survival:</div>
+                                    <div class="flex-item">
+                                        <div id="resultmsg3" class="skin-color"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-lg">Median Overall Survival:</div>
+                                    <div class="flex-item">
+                                        <div id="resultmsg4" class="skin-color"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-lg">Median Progression Free Survival:</div>
+                                    <div class="flex-item">
+                                        <div id="resultmsg5" class="skin-color"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>修订后的国际分期系统（R-ISS）包括原始ISS中的变量（血清β2微球蛋白和血清白蛋白），同时还纳入CD138磁珠分选结合间期荧光原位杂交技术（iFISH）检测的高危染色体异常以及血清LDH作为判断预后的指标。
+                修订的国际分期系统标准如下： I期：符合ISS分期I期标准，且iFISH检查为非细胞遗传学高危患者，同时LDH正常 II期：介于R-ISS的I、III期之间
+                III期：符合ISS分期III期标准，且iFISH检查为高危染色体异常或LDH升高</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Palumbo A et al</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Revised International Staging System for Multiple Myeloma: A Report From International Myeloma Working Group.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">J Clin Oncol. 2015 Sep 10;33(26):2863-9. doi: 10.1200/JCO.2015.61.2267. Epub 2015 Aug 3.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

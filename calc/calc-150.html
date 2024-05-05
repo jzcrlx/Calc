@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-150.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-128">外阴鳞状上皮内瘤变分类及特征</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2">
+                <thead>
+                <tr>
+                    <th rowspan="2">分类</th>
+                    <th colspan="2">特征</th>
+                </tr>
+                <tr>
+                    <th>肉眼</th>
+                    <th>镜下</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>普通型VIN(VIN,usual type)</th>
+                    <td colspan="2">皮肤病损界限清晰</td>
+                </tr>
+                <tr>
+                    <th>&nbsp;&nbsp;&nbsp;&nbsp;疣型VIN ( VIN, warty type )</th>
+                    <td>呈湿疣样外观</td>
+                    <td>见挖空细胞、角化不全及角化过度细胞，上皮棘层肥厚，细胞异型性明显</td>
+                </tr>
+                <tr>
+                    <th>&nbsp;&nbsp;&nbsp;&nbsp;基底细胞型VIN ( VIN, basaloid type )</th>
+                    <td>呈扁平样增生改变或非乳头瘤病变</td>
+                    <td>上皮层增厚，表皮内见大量增殖的、呈基底细胞样的未分化细胞从基底层向上扩展，挖空细胞少于疣型VIN</td>
+                </tr>
+                <tr>
+                    <th>&nbsp;&nbsp;&nbsp;&nbsp;混合型VIN[ VIN , mixed( warty/basaloid ) type ]</th>
+                    <td colspan="2">兼有疣型和基底细胞型VIN两种表现</td>
+                </tr>
+                <tr>
+                    <th rowspan="2">分化型VIN(VIN, differentiated type )</th>
+                    <td colspan="2">与HPV感染无关</td>
+                </tr>
+                <tr>
+                    <td>局部隆起、溃疡、疣状丘疹或过度角化斑片</td>
+                    <td>细胞分化好，细胞异型性局限于上皮基底层基底细胞角化不良，表皮网脊内常有角蛋白形成</td>
+                </tr>
+                <tr>
+                    <th>未分类型VIN(VIN, unclassified type )</th>
+                    <td colspan="2">其他不能归入普通型或分化型的VIN</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>2004年VIN新的定义仅指高级别VIN病变（即原VINⅡ及VINⅢ）。依据病理形态学、生物学及临床特点将VIN分为两类。</p>
+                <p>1.普通型VIN 与高危型HPV感染相关，多发生于年轻女性，超过30%的病例合并下生殖道其他部位瘤变（以CIN最常见），与外阴浸润性疣状癌及基底细胞癌有关。普通型VIN包括以下3种亚型：疣型VIN、基底细胞型VIN、混合型VIN。</p>
+                <p>2.分化型VIN 与HPV感染无关，病变在苔藓硬化基础上发生，形态主要为溃疡、疣状丘疹或过度角化斑片。多发生于绝经后女性，多不伴其他部位病变，与外阴角化性鳞状细胞癌有关。此外，外阴Paget病等其他不能归入上述两类的VIN病变归入未分类型VIN。 </p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">丰有吉主编. 妇产科学（八年制）（第2版）. 人民卫生出版社. 2010年. p313.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

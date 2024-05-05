@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-140.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-140" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>不同因素对膀胱癌复发与进展影响的评分</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block req">
+                            <div class="question_title">
+                                肿瘤数目
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="num" id="num1" type="radio">
+                                        <label class="flex" for="num1">单发</label>
+                                        <input class="flex_que q_radio" value="3" name="num" id="num2" type="radio">
+                                        <label class="flex" for="num2">2-7</label>
+                                        <input class="flex_que q_radio" value="6" name="num" id="num3" type="radio">
+                                        <label class="flex" for="num3">≥8</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                肿瘤大小
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="size" id="size1" type="radio">
+                                        <label class="flex" for="size1">≤3cm</label>
+                                        <input class="flex_que q_radio" value="3" name="size" id="size2" type="radio">
+                                        <label class="flex" for="size2">&gt;3cm</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                既往复发频率
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="freq" id="freq1" type="radio">
+                                        <label class="flex" for="freq1">原发</label>
+                                        <input class="flex_que q_radio" value="2" name="freq" id="freq2" type="radio">
+                                        <label class="flex" for="freq2">≤1次/年</label>
+                                        <input class="flex_que q_radio" value="4" name="freq" id="freq3" type="radio">
+                                        <label class="flex" for="freq3">&gt;1次/年</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                T分期
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="t" id="t1" type="radio">
+                                        <label class="flex" for="t1">T<sub>a</sub></label>
+                                        <input class="flex_que q_radio" value="1" name="t" id="t2" type="radio">
+                                        <label class="flex" for="t2">T<sub>1</sub></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                原位癌
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="yuan" id="yuan1" type="radio">
+                                        <label class="flex" for="yuan1">无</label>
+                                        <input class="flex_que q_radio" value="1" name="yuan" id="yuan2" type="radio">
+                                        <label class="flex" for="yuan2">有</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                分级
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="level" id="level1" type="radio">
+                                        <label class="flex" for="level1">G<sub>1</sub></label>
+                                        <input class="flex_que q_radio" value="1" name="level" id="level2" type="radio">
+                                        <label class="flex" for="level2">G<sub>2</sub></label>
+                                        <input class="flex_que q_radio" value="2" name="level" id="level3" type="radio">
+                                        <label class="flex" for="level3">G<sub>3</sub></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">复发评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-md">进展评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result2" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p></p>
+            <div class="table-wrap">
+                <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th colspan="4" style="text-align: center">不同评分膀胱癌复发的可能性</th>
+                    </tr>
+                    <tr>
+                        <th>评分</th>
+                        <th>1年复发几率（%）</th>
+                        <th>5年复发几率（%）</th>
+                        <th>复发的危险性</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>15（10~19）</td>
+                        <td>31（24~37）</td>
+                        <td>低危</td>
+                    </tr>
+                    <tr>
+                        <td>1~4</td>
+                        <td>24（21~26）</td>
+                        <td>46（42~49）</td>
+                        <td rowspan="2">中危</td>
+                    </tr>
+                    <tr>
+                        <td>5~9</td>
+                        <td>38（35~41）</td>
+                        <td>62（58~65）</td>
+                    </tr>
+                    <tr>
+                        <td>10~17</td>
+                        <td>61（55~67)</td>
+                        <td>78（73~84）</td>
+                        <td>高危</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="table-wrap">
+                <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th colspan="4" style="text-align: center">不同评分膀胱癌进展的可能性</th>
+                    </tr>
+                    <tr>
+                        <th>评分</th>
+                        <th>1年进展几率（%）</th>
+                        <th>5年进展几率（%）</th>
+                        <th>进展的危险性</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>0</td>
+                        <td>0.2（0.0~0.7）</td>
+                        <td>0.8（0~1.7）</td>
+                        <td rowspan="2">低危</td>
+                    </tr>
+                    <tr>
+                        <td>2~6</td>
+                        <td>1.0（0.4~1.6）</td>
+                        <td>6.0（5~8.0）</td>
+                    </tr>
+                    <tr>
+                        <td>7~13</td>
+                        <td>5.0（4.0~7.0）</td>
+                        <td>17（14~20）</td>
+                        <td>中危</td>
+                    </tr>
+                    <tr>
+                        <td>14~23</td>
+                        <td>17.0（10~24）</td>
+                        <td>45（35~55）</td>
+                        <td>高危</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Anderstrom C,Johansson SL, Von Schultz,et al. Primary adenocarcinoma of the urinary bladder：a clinicopathological and prognostic study. Cancer, 1983,52：1273-1280</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

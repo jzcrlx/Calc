@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-259.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-259">胫骨骨折改良Ellis分类</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>骨折特点</th>
+                    <th>轻度</th>
+                    <th>中度</th>
+                    <th>重度</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>移位</th>
+                    <td>0%~50%(直径)</td>
+                    <td>51%~100%</td>
+                    <td>100%</td>
+                </tr>
+                <tr>
+                    <th>粉碎程度</th>
+                    <td>无或轻微</td>
+                    <td>无或1个蝶形片</td>
+                    <td>2个或更多片或段</td>
+                </tr>
+                <tr>
+                    <th>软组织伤</th>
+                    <td>开放Ⅰ度(Gustilo)<p></p>闭合0度(Tscheme)*</td>
+                    <td>开放Ⅱ度<p></p>闭合Ⅰ度</td>
+                    <td>开放Ⅲ~Ⅴ度<p></p>闭合Ⅱ~Ⅲ度</td>
+                </tr>
+                <tr>
+                    <th>暴力</th>
+                    <td>低</td>
+                    <td>中</td>
+                    <td>高能、压伤</td>
+                </tr>
+                <tr>
+                    <th>骨折形态</th>
+                    <td>螺旋形</td>
+                    <td>横形、斜形</td>
+                    <td>横形、多块</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>*Tscheme闭合伤分级：</p>
+                <p>0度：无或仅有不重要的软组织损伤；轻度损伤，多由间接机械性损伤所致，如病理性骨折；</p>
+                <p>Ⅰ度：表皮擦伤或因骨折断端从内向外刺破；轻度或中度损伤，如未复位的螺旋形小腿骨折。</p>
+                <p>Ⅱ度：污染的深度损伤，直接暴力所致局部皮肤肌肉挫伤；可伴有骨筋膜室综合征，常见于中度、重度直接创伤，如汽车保险杠撞伤。</p>
+                <p>Ⅲ度：广泛皮肤挫裂伤，挤压伤或肌群毁灭、皮下分离；明显的骨筋膜室综合征，或一条主要动脉血管损伤，属严重损伤。骨骼粉碎。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">陈孝平主编. 外科学（八年制）（第2版）. 人民卫生出版社. 2010年.p970.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

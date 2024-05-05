@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-221.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-221" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>Essen卒中风险评分量表(ESRS)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="que_select_box">
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">年龄范围</div>
+                                        <div class="answer" name="age">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">年龄范围</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">&lt;65岁</div>
+                                                <div value="1" class="option">65~75岁</div>
+                                                <div value="2" class="option">&gt;75岁</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="high">高血压</label>
+                                    <input class="flex_que q_radio" value="1" id="high" name="high" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="diabetes">糖尿病</label>
+                                    <input class="flex_que q_radio" value="1" id="diabetes" name="diabetes" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="past">既往心肌梗死</label>
+                                    <input class="flex_que q_radio" value="1" id="past" name="past" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="blood">其他心血管疾病（除外心房颤动和心肌梗死）</label>
+                                    <input class="flex_que q_radio" value="1" id="blood" name="blood" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="waizhou">外周动脉疾病</label>
+                                    <input class="flex_que q_radio" value="1" id="waizhou" name="waizhou" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="smoke">吸烟</label>
+                                    <input class="flex_que q_radio" value="1" id="smoke" name="smoke" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="tia">既往缺血性脑卒中/TIA史</label>
+                                    <input class="flex_que q_radio" value="1" id="tia" name="tia" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>该量表根据氯吡格雷与阿司匹林相比用于缺血事件高危患者试验(Clopidogrel versus Aspirin in Patients at Risk of Ischaemic Events, CAPRIE)的卒中患者的数据开发。</p>
+            <p>ESRS可以预测稳定期或急性期患者的卒中或复合心血管事件的复发风险。</p>
+            <p>0~2分者年卒中复发风险较低；</p>
+            <p>3~6分者为高度风险，年卒中复发风险为7~9%左右；</p>
+            <p>6分以上者为极高度风险，年卒中复发风险达11%。</p>
+            <p>对于ESRS≥3分的高危患者应该给予氯吡格雷强化二级预防抗血小板治疗策略。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">A randomized, blinded, trial of clopidogrel versus aspirin in patients at risk of ischaemic events (caprie). Caprie steering committee [J]. Lancet, 1996, 348: 1329-1339.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-504.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-504">蛛网膜下腔常用局麻药剂量及浓度</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2">
+                <thead>
+                <tr>
+                    <th>药名</th>
+                    <th>高平面(mg)</th>
+                    <th>中平面(mg)</th>
+                    <th>低平面(mg)</th>
+                    <th>鞍区(mg)</th>
+                    <th>最高剂量(ng)</th>
+                    <th>最低有效浓度(%)</th>
+                    <th>常用浓度(%)</th>
+                    <th>维持时间(min)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>普鲁卡因</th>
+                    <td>120~180</td>
+                    <td>100~150</td>
+                    <td>75~125</td>
+                    <td>50~100</td>
+                    <td>180</td>
+                    <td>2.5</td>
+                    <td>5~6</td>
+                    <td>45~90</td>
+                </tr>
+                <tr>
+                    <th>丁卡因</th>
+                    <td>10~12</td>
+                    <td>8~10</td>
+                    <td>6~8</td>
+                    <td>4~6</td>
+                    <td>15</td>
+                    <td>0.1</td>
+                    <td>0.33</td>
+                    <td>75~120</td>
+                </tr>
+                <tr>
+                    <th>利多卡因</th>
+                    <td>100~120</td>
+                    <td>80~100</td>
+                    <td>60~80</td>
+                    <td>40~60</td>
+                    <td>120</td>
+                    <td>-</td>
+                    <td>2~4</td>
+                    <td>75~180</td>
+                </tr>
+                <tr>
+                    <th>布比卡因</th>
+                    <td>12~15</td>
+                    <td>7.5~12</td>
+                    <td>4.0~7.5</td>
+                    <td>2.5~6</td>
+                    <td>20</td>
+                    <td>-</td>
+                    <td>0.5~0.75</td>
+                    <td>180~360</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>局麻药注入蛛网膜下腔后，需经过一段时间方能充分发挥对神经根的阻滞效应，这段时间被称为脊麻诱导时间；诱导时间长短与用药种类、药液比重及配药方式有关。脊麻持续时间与药物种类、剂量有关外，主要取决于药物的浓度，与其呈正相关，但浓度过高可损害神经而致永久麻痹，因此临床上限定了蛛网膜下腔阻滞不同药物的适宜浓度。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">陈孝平主编. 外科学（八年制）（第2版）. 人民卫生出版社. 2010年.p119.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

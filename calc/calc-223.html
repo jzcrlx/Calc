@@ -1,0 +1,217 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-223.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-223" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>Hachinski缺血指数量表（HIS）</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="jixing">急性起病</label>
+                                    <input class="flex_que q_radio" value="2" id="jixing" name="jixing" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="stage">阶梯式恶化<span class="info" onclick="showInfo('阶梯式恶化')"></span></label>
+                                    <input class="flex_que q_radio" value="1" id="stage" name="stage" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="bodong">波动性病程<span class="info" onclick="showInfo('波动性病程')"></span></label>
+                                    <input class="flex_que q_radio" value="2" id="bodong" name="bodong" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="night">夜间意识模糊</label>
+                                    <input class="flex_que q_radio" value="1" id="night" name="night" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="renge">人格相对保持完整</label>
+                                    <input class="flex_que q_radio" value="1" id="renge" name="renge" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="qingxu">情绪低落</label>
+                                    <input class="flex_que q_radio" value="1" id="qingxu" name="qingxu" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="body">身体诉述<span class="info" onclick="showInfo('身体诉述')"></span></label>
+                                    <input class="flex_que q_radio" value="1" id="body" name="body" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="qinggan">情感失禁<span class="info" onclick="showInfo('情感失禁')"></span></label>
+                                    <input class="flex_que q_radio" value="1" id="qinggan" name="qinggan" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="high">有高血压或高血压史</label>
+                                    <input class="flex_que q_radio" value="1" id="high" name="high" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="zhongfeng">中风史<span class="info" onclick="showInfo('中风史')"></span></label>
+                                    <input class="flex_que q_radio" value="2" id="zhongfeng" name="zhongfeng" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="dongmai">动脉硬化<span class="info" onclick="showInfo('动脉硬化')"></span></label>
+                                    <input class="flex_que q_radio" value="1" id="dongmai" name="dongmai" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="juz">局灶神经系统症状<span class="info" onclick="showInfo('局灶神经系统症状')"></span></label>
+                                    <input class="flex_que q_radio" value="2" id="juz" name="juz" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="jut">局灶神经系统体征<span class="info" onclick="showInfo('局灶神经系统体征')"></span></label>
+                                    <input class="flex_que q_radio" value="2" id="jut" name="jut" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-md">评分:</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>Hachinski法总分：满分18分，得分在4分以下者，属老年性痴呆；7分以上者，则属血管性痴呆。</p>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">说明</span></h3>
+        <div class="jiedu">
+            <p>缺血指数量表（Hachinski lnchemic Score, HIS）是1975年由Hachinski制定的血管性痴呆简易检查量表，专门用于血管性痴呆简易检查和鉴别的量表，由13个项目组成。该量表仅用于血管性痴呆和老年性痴呆的鉴别诊断。评定须在痴呆诊断确认后进行。 </p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">1. Hachinski VC, et al. Cerebral blood flow in dementia. Arch Neurol. 1975 Sep;32(9):632-7.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">2. Mölsä PK, et al. Validity of clinical diagnosis in dementia: a prospective clinicopathological study. J Neurol Neurosurg Psychiatry. 1985 Nov;48(11):1085-90.</span>
+        </a>
+    </div>
+</div>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+function MDCalc(z){var hzwt=z.ht;if(pref=="us"){hzwt=hzwt*2.5399599}if(z.gender==0){var value=(.0414*hzwt-2.19-z.fev)/.0244}else if(z.gender==1){var value=(.0342*hzwt-1.578-z.fev)/.0255}Answer(Math.round(parseFloat(value)))}

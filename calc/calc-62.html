@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-62.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="medcalc-333" class="post">
+	<div id="meta">
+		<select id="units">
+			<option value="si" name="si" selected="selected">国际单位(SI)</option>
+			<option value="us" name="us">美国单位(US)</option>
+		</select>	
+	</div><!--#meta-->
+	<div id="title">
+	  <h2>根据白蛋白或肾功能衰竭校正苯妥英钠浓度 </h2> 
+	  <!-- <h3 id="desc">Corrects a phenytoin serum level for renal failure and/or hypoalbuminemia.</h3> -->
+	</div>
+	<form id="medform" name="medform" action="get">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr>
+				<td>计算患者肌酐清除率 &lt; 20? </td>
+				<td><label><input id="crcl" name="crcl" value="1" type="checkbox"> 是</label></td>
+			</tr>
+			<tr class="req">
+				<td>苯妥英钠浓度</td>
+				<td><input id="pheny" name="pheny" type="text"> <label class="pheny" for="pheny">μmol/L</label></td>
+			</tr>
+			<tr class="req">
+				<td>血清白蛋白</td>
+				<td><input id="alb" name="alb" type="text"> <label for="alb" class="alb">g/L</label></td>
+			</tr>
+			<tr class="answer">
+				<td>苯妥英钠校正浓度</td>
+				<td><input readonly="readonly" placeholder="点击查看" id="result" name="result" type="text"> <label class="pheny" for="result">μmol/L</label></td>
+			</tr>
+		</tbody></table>
+	</form>
+
+
+
+
+<!-- <div id="formula" class="extra">
+The Sheiner-Tozer Equation is Used for an Accurate Estimate:<br>
+Corrected Phenytoin = Measured Phenytoin Level / ( (adjustment x albumin) + 0.1)<br><br>Adjustment = 0.2; In patients with Creatinine Clearance &lt; 20, adjustment = 0.1.</div>
+
+<div id="source" class="extra">
+<a href="//www.ncbi.nlm.nih.gov/pubmed/599408">Martin E, Tozer TN, Sheiner LB, Riegelman S. The clinical pharmacokinetics of phenytoin. J Pharmacokinet Biopharm. 1977 Dec;5(6):579-96.</a></div>
+
+
+
+<div id="postmeta">
+
+	<p>Posted in: <a rel="category tag" title="View all posts in Critical Care" href="//www.mdcalc.com/category/specialties/critical-care/">Critical Care</a> • <a rel="category tag" title="View all posts in Neurologic" href="//www.mdcalc.com/category/system/neurologic/">Neurologic</a> • <a rel="category tag" title="View all posts in Neurology" href="//www.mdcalc.com/category/specialties/neurology/">Neurology</a></p>
+
+</div>postmeta -->
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

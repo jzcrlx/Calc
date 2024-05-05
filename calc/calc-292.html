@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-292.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-292">肌痉挛评定改良Ashworth量表</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2">
+                <thead>
+                <tr>
+                    <th>分级</th>
+                    <th>评定标准</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>0级</th>
+                    <td>肌张力不增加，被动活动患侧肢体在整个范围内均无阻力</td>
+                </tr>
+                <tr>
+                    <th>1级</th>
+                    <td>肌张力轻微增加，被动关节活动时，在终末出现阻力或突然卡住，然后阻力消失或仅有极小阻力</td>
+                </tr>
+                <tr>
+                    <th>1<sup>+</sup>级</th>
+                    <td>肌张力轻度增加，被动关节活动到一半后出现阻力或卡住，如继续被动活动关节则始终有小阻力</td>
+                </tr>
+                <tr>
+                    <th>2级</th>
+                    <td>肌张力明显增加，做被动关节活动时，大部分范围内均有肌张力增加，但仍可容易的活动受累的关节</td>
+                </tr>
+                <tr>
+                    <th>3级</th>
+                    <td>肌张力显著增加，做被动关节活动时全范围内有困难</td>
+                </tr>
+                <tr>
+                    <th>4级</th>
+                    <td>肌张力高度增加，僵直关节僵直于某一位置上，不能活动</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>中枢神经系统受损后，常常出现肌肉痉挛。痉挛是感觉运动系统的功能障碍，其特征是速度依赖性的肌张力增高并伴有腱反射亢进，是肌肉牵张反射亢进所致。痉挛是上运动神经元综合征的重要“阳性”体征，可限制患者运动而导致功能障碍。目前常用改良Ashworth量表进行肌肉痉挛的评定。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">吴江主编. 神经病学（八年制）（第2版）. 人民卫生出版社. 2010年.p497.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

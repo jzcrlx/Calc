@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-303.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-303" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>短暂性脑缺血发作(TIA)的ABCD评分系统</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="question_title">
+                                年龄(A)
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="nianling">＞60岁</label>
+                                        <input class="flex_que q_radio" value="1111" name="nianling" id="nianling" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                血压(B)
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="shousuoya">收缩压＞140mmHg或舒张压＞90mmHg(1mmHg=0.133kPa)</label>
+                                        <input class="flex_que q_radio" value="1111" name="shousuoya" id="shousuoya" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                临床症状(C)
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="dancewuli">单侧无力</label>
+                                        <input class="flex_que q_radio" value="2222" name="linchuang" id="dancewuli" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="bubanwuli">不伴无力的言语障碍</label>
+                                        <input class="flex_que q_radio" value="1111" name="linchuang" id="bubanwuli" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                症状持续时间(D)
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="chixu1">＞60min</label>
+                                        <input class="flex_que q_radio" value="2222" name="chixushijian" id="chixu1" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="chixu2">10~59min</label>
+                                        <input class="flex_que q_radio" value="1111" name="chixushijian" id="chixu2" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                糖尿病(D)
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="tangniaobing">有</label>
+                                        <input class="flex_que q_radio" value="0111" name="nianling" id="tangniaobing" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                双重(7d内)短暂性脑缺血发作(D)
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="7d">有</label>
+                                        <input class="flex_que q_radio" value="0022" name="7d" id="7d" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                影像检查(I)
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="yingxiang1">同侧颈动脉狭窄≥50%</label>
+                                        <input class="flex_que q_radio" value="0002" name="yingxiang" id="yingxiang1" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="yingxiang2">DWI检查出现高信号</label>
+                                        <input class="flex_que q_radio" value="0002" name="yingxiang" id="yingxiang2" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-bg">ABCD 分值:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-bg">ABCD 2分值:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result1" readonly="" id="result1" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-bg">ABCD 3分值:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result2" readonly="" id="result2" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-bg">ABCD 3-I分值:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result3" readonly="" id="result3" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p></p>
+            <div class="table-wrap">
+                <table class="countTab2">
+                    <tbody>
+                    <tr>
+                        <th colspan="4" style="text-align: left">不同ABCD分级方法所采用的不同风险分层界值(分)</th>
+                    </tr>
+                    <tr>
+                        <td>ABCD评分系统</td>
+                        <td>低危</td>
+                        <td>中危</td>
+                        <td>高危</td>
+                    </tr>
+                    <tr>
+                        <td>ABCD分值</td>
+                        <td>0~2</td>
+                        <td>3~4</td>
+                        <td>5~6</td>
+                    </tr>
+                    <tr>
+                        <td>ABCD 2分值</td>
+                        <td>0~3</td>
+                        <td>4~5</td>
+                        <td>6~7</td>
+                    </tr>
+                    <tr>
+                        <td>ABCD 3分值</td>
+                        <td>0~3</td>
+                        <td>4~5</td>
+                        <td>6~9</td>
+                    </tr>
+                    <tr>
+                        <td>ABCD 3-I分值</td>
+                        <td>0~3</td>
+                        <td>4~7</td>
+                        <td>8~13</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>常用的TIA危险分层工具为ABCD评分系统，其中ABCD 2评分能很好的预测短期卒中的风险，应用最为广泛。</p>
+            <p>ABCD 2评分结果为低危、中危和高危组在TIA后7天内发生脑梗死的比例分别为1.2%、5.9%和11.7%。</p>
+            <p>最新的研究表明，在ABCD 2评分基础上增加TIA发作频率与影像学检查(ABCD 3和 ABCD 3-I)，能更有效的评估TIA患者的早期卒中风险。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">1、Rothwell PM, et al. A simple score (ABCD) to identify individuals at high early risk of stroke after transient ischemic attack. Lancet. 2005; 366:29–36.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">2、Sciolla R, Melis F. for the SINPAC Group. Rapid identification of high-risk transient ischemic attacks. Prospective validation of the ABCD Score. Stroke 2008; 39:297–302.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text"> 3、短暂性脑缺血发作中国专家共识组. 短暂性脑缺血发作的中国专家共识更新版(2011年). 中华内科杂志.2011;50:530-3.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

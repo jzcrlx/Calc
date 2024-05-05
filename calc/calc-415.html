@@ -1,0 +1,201 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-415.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-415" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>系统性红斑狼疮诊断标准（美国风湿病协会,ACR）</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_infor2">
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="jiabu">颊部红斑：固定红斑，扁平或隆起，在两颧突出部位</label>
+                                    <input class="flex_que q_radio" value="1" id="jiabu" name="jiabu" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="panzhuang">盘状红斑:片状隆起于皮肤的红斑，粘附有角质脱屑和毛囊栓；陈旧病变可发生萎缩性瘢痕</label>
+                                    <input class="flex_que q_radio" value="1" id="panzhuang" name="panzhuang" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="guangguomin">光过敏:对日光有明显的反应，引起皮疹，从病史中得知或医生观察到</label>
+                                    <input class="flex_que q_radio" value="1" id="guangguomin" name="guangguomin" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="kouqiang">口腔溃疡: 经医生观察到的口腔或鼻咽部溃疡，一般为无痛性</label>
+                                    <input class="flex_que q_radio" value="1" id="kouqiang" name="kouqiang" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="guanjieyan">关节炎:非侵蚀性关节炎，累及2个或更多的外周关节，有压痛，肿胀，或积液</label>
+                                    <input class="flex_que q_radio" value="1" id="guanjieyan" name="guanjieyan" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="jiangmoyan">浆膜炎:胸膜炎或心包炎</label>
+                                    <input class="flex_que q_radio" value="1" id="jiangmoyan" name="jiangmoyan" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="shenzang">肾脏病变:蛋白尿＞0.5g/24h或+++，或管型（红细胞、血红蛋白、颗粒或混合管型）</label>
+                                    <input class="flex_que q_radio" value="1" id="shenzang" name="shenzang" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="shenjing">神经病变:癫痫发作或精神病，除外药物或已知的代谢紊乱</label>
+                                    <input class="flex_que q_radio" value="1" id="shenjing" name="shenjing" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="xueyexue">血液学疾病:溶血性贫血，或白细胞减少，或淋巴细胞减少，或血小板减少</label>
+                                    <input class="flex_que q_radio" value="1" id="xueyexue" name="xueyexue" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="mianyixue">免疫学异常:抗ds‐DNA阳性，或抗Sm抗体阳性，或抗磷脂抗体阳性（后者包括抗心磷脂抗体、或狼疮抗凝物阳性、或至少持续6个月的梅毒血清试验假阳性的3者中具备1项阳性）</label>
+                                    <input class="flex_que q_radio" value="1" id="mianyixue" name="mianyixue" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="kanghe">抗核抗体:在任何时候和未用药物诱发“药物性狼疮”的情况下，抗核抗体滴度异常</label>
+                                    <input class="flex_que q_radio" value="1" id="kanghe" name="kanghe" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-md">评分:</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>上述11 项中，符合 4 项或4项以上者，可以诊断为 SLE（特异性为95%，敏感性为75%）。</p>
+            <p>ACR: 美国风湿病学会。</p>
+            <p>（SLE）是自身免疫介导的、以免疫性炎症为突出表现的弥漫性结缔组织病，血清中出现以抗核抗体为代表的多种自身抗体和多系统累及是SLE的2个主要临床特征。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="//www.rheumatology.org/Portals/0/Files/1997%20Update%20of%201982%20Revised.pdf" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">1. Available at ACR website</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text"> 2. 王吉耀主编. 内科学（八年制）（第2版）. 人民卫生出版社. 2010年. p1119.</span>
+        </a>
+    </div>
+</div>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

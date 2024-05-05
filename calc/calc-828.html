@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-828.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-828" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>罗马指数(ROMA Index)评估卵巢癌患病风险</h2>
+        </div>
+        <form name="medform" action="get" id="medform">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">HE4</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="he4" type="number">
+                                </div>
+                                <div class="calc-unit-md">pmol/L</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">CA125</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="ca125" type="number">
+                                </div>
+                                <div class="calc-unit-md">U/mL</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-lg">绝经前ROMA指数:</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-lg">绝经后ROMA指数:</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="result1" readonly="" id="result1" placeholder="点击查看" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <h3><span class="jiedu-title">结果说明</span></h3>
+        <div class="jiedu">
+            <p style="font-weight: bold">生物参考区间</p>
+            <p>HE4 (人附睾蛋白4)：≤140 pmol/L。</p>
+            <p>CA125 (糖类抗原-125)：≤35 U/mL。</p>
+            <p style="font-weight: bold"> 绝经前妇女：</p>
+            <p>ROMA值≥11.4%，发现上皮性卵巢癌高风险</p>
+            <p>ROMA值&lt;11.4%，发现上皮性卵巢癌低风险</p>
+            <p style="font-weight: bold"> 绝经后妇女：</p>
+            <p>ROMA值≥29.9%，发现上皮性卵巢癌高风险</p>
+            <p>ROMA值&lt;29.9%，发现上皮性卵巢癌低风险</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">临床意义</span></h3>
+        <div class="jiedu">
+            <p>卵巢癌居妇科肿瘤死亡原因之首，因其起病隐匿，缺乏敏感的早期诊断工具，约70% 的患者就诊时已属进展期，并且约60%～70%的患者5年内复发或死亡。因此，提高患者生存率的关键是早期诊断和早期治疗。虽然 80%
+                的卵巢癌血清 CA125
+                会升高，但在Ⅰ期卵巢上皮癌中只有30-50%的患者升高，早期不敏感。HE4诊断卵巢癌的敏感性与CA125相似,但特异度强于CA125,HE4在妇科良性疾病患者中的阳性率明显低于CA125，特别是HE4在子宫内膜异位症患者中阳性占3%，CA125的阳性率高达67%,在特异度为
+                95% 时，Ⅰ期卵巢癌敏感度为45. 9%。</p>
+            <p>卵巢癌恶性风险评估模型法(ROMA模型) 通过结合患者月经情况，并依据血清 CA125及HE4水平，建立Logistic
+                回归模型，可用于卵巢癌发生情况的预测，被认为是目前最好的筛查卵巢癌的指标之一。结果显示，ROMA模型准确地将87.3% 良性疾病患者预测为卵巢恶性肿瘤低风险人群，82.6%
+                的Ⅰ、Ⅱ期卵巢上皮癌及所有卵巢癌患者中89. 2% 预测为高风险人群。运用此公式，以PP&gt;13.1% (绝经前女性)及PP&gt;27.7%(绝经后女性)作为截断点，Moore
+                将盆腔包块患者分为卵巢癌高风险组及卵巢癌低风险组。此公式总的敏感度、特异度、阳性预测值及阴性预测值分别为88.7%、74.7%、60.1% 及93.9%。目前 ROMA 模型已经被 FDA
+                批准用于评估女性盆腔包块。</p>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-431.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-431" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>类风湿关节炎分类标准和评分系统(ACR/EULAR)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">受累关节数</div>
+                        <div class="answer" name="shouguanjie">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">受累关节数</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">中大关节 1 个</div>
+                                <div value="1" class="option">中大关节 2~10 个</div>
+                                <div value="2" class="option">小关节 1~3个</div>
+                                <div value="3" class="option">小关节 4~10个</div>
+                                <div value="5" class="option">至少1个为小关节 ＞10个</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">血清学</div>
+                        <div class="answer" name="xueqing">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">血清学</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">RF或抗CCP抗体均阴性</div>
+                                <div value="2" class="option">RF或抗CCP抗体至少1项低滴度阳性</div>
+                                <div value="3" class="option">RF或抗CCP抗体至少1项高滴度(＞正常上限3倍)阳性</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">滑膜炎持续时间</div>
+                        <div class="answer" name="huamo">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">滑膜炎持续时间</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">＜6周</div>
+                                <div value="1" class="option">＞6周</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">急性时相反应物</div>
+                        <div class="answer" name="jixing">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">急性时相反应物</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">CRP或ESR均正常</div>
+                                <div value="1" class="option">CRP或ESR增高</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">评分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>2009年ACR和欧洲抗风湿病联盟(EULAR)提出了新的RA分类标准和评分系统，即：至少1个关节肿痛，并有滑膜炎的证据(临床或超声或MRI)；同时排除了其他疾病引起的关节炎，并有典型的常规放射学RA骨破坏的改变，可诊断为RA。另外，该标准对关节受累情况、血清学指标、滑膜炎持续时间和急性时相反应物4个部分进行评分，总得分6分以上也可诊断RA</p>
+            <p>典型病例按1987年美国风湿病学会(ACR)的分类标准诊断并不困难，但对于不典型及早期RA易出现误诊或漏诊。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">中华医学会风湿病学分会. 2010版类风湿关节炎诊断及治疗指南. 中华风湿病学杂志. 2010. 14; 265-70.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

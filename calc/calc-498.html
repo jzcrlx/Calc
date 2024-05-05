@@ -1,0 +1,608 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-498.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-498" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>功能独立性评定（FIM）量表</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="que_title">
+                    <span>自我照顾</span>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">进食</div>
+                        <div class="answer" name="jinshi">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">进食</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">梳洗</div>
+                        <div class="answer" name="shuxi">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">梳洗</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">洗浴</div>
+                        <div class="answer" name="xiyu">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">洗浴</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">穿脱上衣</div>
+                        <div class="answer" name="shangyi">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">穿脱上衣</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">穿脱下衣</div>
+                        <div class="answer" name="xiayi">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">穿脱下衣</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">用厕</div>
+                        <div class="answer" name="yongce">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">用厕</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>括约肌控制</span>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">排尿管理</div>
+                        <div class="answer" name="painiao">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">排尿管理</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">排便管理</div>
+                        <div class="answer" name="paibian">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">排便管理</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>转移</span>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">床、椅、轮椅转移</div>
+                        <div class="answer" name="chuang">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">床、椅、轮椅转移</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">如厕</div>
+                        <div class="answer" name="ruce">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">如厕</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">浴盆、淋浴室</div>
+                        <div class="answer" name="yupen">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">浴盆、淋浴室</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>行走</span>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">步行/轮椅或两者</div>
+                        <div class="answer" name="buxing">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">步行/轮椅或两者</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">上下楼梯</div>
+                        <div class="answer" name="louti">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">上下楼梯</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-lg">运动项目总分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result1" readonly="" id="result1" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>交流</span>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">理解（视、听或两者）</div>
+                        <div class="answer" name="lijie">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">理解（视、听或两者）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">表达（视、听或两者）</div>
+                        <div class="answer" name="biaoda">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">表达（视、听或两者）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>社会认知</span>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">社会交往</div>
+                        <div class="answer" name="shehui">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">社会交往</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">解决问题</div>
+                        <div class="answer" name="jiejue">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">解决问题</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">记忆</div>
+                        <div class="answer" name="jiyi">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">记忆</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">请选择</div>
+                                <div value="7" class="option">完全独立</div>
+                                <div value="6" class="option">有条件的独立</div>
+                                <div value="5" class="option">监护或从旁协助</div>
+                                <div value="4" class="option">最小量的接触帮助</div>
+                                <div value="3" class="option">中等程度的帮助</div>
+                                <div value="2" class="option">最大的帮助</div>
+                                <div value="1" class="option">完全帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-lg">认知项目总分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result2" readonly="" id="result2" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_infor">
+                        <div class="flex-center calc-item">
+                            <div class="calc-label-lg">FIM总分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>FIM评分分为7级，6、7级为独立，5、4、3、2、1级为不同程度的依赖：</p>
+            <p>独立：活动时不需任何人帮助</p>
+            <p>7分--完全独立：不需任何器具、任何帮助在合理的时间内安全地完成所有要求的动作内容。</p>
+            <p>6分--有条件的独立：完成动作内容需要下列一个或一个以上的条件：一般器具的帮助；完成动作需要额外多的时间；完成活动任务时需要考虑安全因素时。</p>
+            <p>依赖：完成动作时需要他人监护或帮助。</p>
+            <p>5分--监护或从旁协助：需要他人从旁协助、提示、说服，或他人帮助做所评测活动的准备，或帮助使用矫形支具或器具，但不需身体接触。如：为患者切食物、面包上涂果酱、打开器皿盖、洗漱前为患者准备水和毛巾等。</p>
+            <p>4分--最小量的接触帮助：患者付出的力在全部用力的75%以上，仅需他人少量的身体接触帮助。</p>
+            <p>3分--中等程度的帮助：患者所付出的力在全部用力的50%～75%之间，需要他人较多的直接帮助。</p>
+            <p>完全依赖：患者付出的力小于全部用力的50%，完成活动需要最大或完全的帮助。</p>
+            <p>按帮助程度分为：</p><p>2分--最大的帮助：患者付出的力低于全部用力的一半，但大于25%。</p>
+            <p>1分--完全帮助：患者自己付出的力小于25%。</p>
+            <p>总分126分，最低18分。</p>
+            <p>126分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;完全独立</p>
+            <p>108～125分&nbsp;&nbsp;&nbsp;&nbsp;基本上独立</p>
+            <p>90～107分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;有条件的独立</p>
+            <p>72～89分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;轻度依赖</p>
+            <p>54～71分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;中度依赖</p>
+            <p>36～53分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;重度依赖</p>
+            <p>19～35分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;极重度依赖</p>
+            <p>18分&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;完全依赖</p>
+            <p>FIM, Functional Independence Measure，功能独立性评定</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Keith RA, et al. The functional independence measure: a new tool for rehabilitation. Adv Clin Rehabil. 1987;1:6-18. </span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

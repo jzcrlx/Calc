@@ -1,0 +1,193 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-562.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-562" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>非酒精性脂肪肝NAS积分</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block req">
+                            <div class="question_title">
+                                肝细胞脂肪变
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="liver" id="liver1" type="radio">
+                                        <label class="flex" for="liver1">&lt;5%</label>
+                                        <input class="flex_que q_radio" value="1" name="liver" id="liver2" type="radio">
+                                        <label class="flex" for="liver2">5%～33%</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="liver" id="liver3" type="radio">
+                                        <label class="flex" for="liver3">34%～66%</label>
+                                        <input class="flex_que q_radio" value="3" name="liver" id="liver4" type="radio">
+                                        <label class="flex" for="liver4">&gt;66%</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                小叶内炎症（20倍镜计数坏死灶)
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="xiaoye" id="xiaoye1" type="radio">
+                                        <label class="flex" for="xiaoye1">无</label>
+                                        <input class="flex_que q_radio" value="1" name="xiaoye" id="xiaoye2" type="radio">
+                                        <label class="flex" for="xiaoye2">&lt;2个</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="xiaoye" id="xiaoye3" type="radio">
+                                        <label class="flex" for="xiaoye3">2～4个</label>
+                                        <input class="flex_que q_radio" value="3" name="xiaoye" id="xiaoye4" type="radio">
+                                        <label class="flex" for="xiaoye4">&gt;4个</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                肝细胞气球样变
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="qi" id="qi1" type="radio">
+                                        <label class="flex" for="qi1">无</label>
+                                        <input class="flex_que q_radio" value="1" name="qi" id="qi2" type="radio">
+                                        <label class="flex" for="qi2">少见</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="qi" id="qi3" type="radio">
+                                        <label class="flex" for="qi3">多见</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>NAS为半定量评分系统而非诊断程序，NAS&lt;3分可排除NASH，NAS&gt;4分则可诊断非酒精性脂肪肝(NASH)，介于两者之间者为非酒精性脂肪肝(NASH)可能。</p>
+            <p>规定不伴有小叶内炎症、气球样变和纤维化但肝脂肪变&gt;33%者为非酒精性单纯性脂肪肝(NAFL)，脂肪变达不到此程度者仅称为肝细胞脂肪变。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">非酒精性脂肪性肝病诊疗指南（2010年修订版）. 中华医学会肝病学分会脂肪肝和酒精性肝病学组.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

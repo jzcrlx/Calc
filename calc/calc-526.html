@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-526.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-526">烧伤深度分级(三度四分法)</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2">
+                <thead>
+                <tr>
+                    <th colspan="2">烧伤深度</th>
+                    <th>深度</th>
+                    <th>病理</th>
+                    <th>临床表现</th>
+                    <th>愈合过程</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th colspan="2">Ⅰ°</th>
+                    <td>为表皮角质层、透明层、颗粒层的损伤。生发层健在</td>
+                    <td>局部血管扩张，充血</td>
+                    <td>局部红肿，故又称红斑性烧伤。有疼痛和烧灼感，皮温稍增高，无水泡</td>
+                    <td>3~5天后局部由红色转为淡褐色，表皮皱缩脱落愈合</td>
+                </tr>
+                <tr>
+                    <th rowspan="2">Ⅱ°水泡型</th>
+                    <th>浅Ⅱ°</th>
+                    <td>达真皮浅层</td>
+                    <td>血浆样液体从血管内渗出，局部水肿渗液聚积于表皮，真皮间形成水泡</td>
+                    <td>剧痛，感觉过敏，局部红肿，有大小不一的水泡，内含黄色或淡红色血浆样液体或蛋白凝固的胶冻物。去除水疱腐皮后，可见创面潮红、脉络状或颗粒状扩张充血的毛细血管网</td>
+                    <td>约2周痊愈，不留疤痕，有色素沉着</td>
+                </tr>
+                <tr>
+                    <th>深Ⅱ°</th>
+                    <td>伤及真皮乳头层以下，但仍残留部分网状兜，有皮肤附件残留</td>
+                    <td>感觉神经部分破坏，局部组织坏死</td>
+                    <td>局部肿胀，痛觉迟钝，水泡可有可无，去除表皮后，创面微湿、微红或红白相间，有网状栓塞血管，触之较韧，温度较低，拔毛痛</td>
+                    <td>约3~4周后愈合，有疤痕明显</td>
+                </tr>
+                <tr>
+                    <th colspan="2">Ⅲ°焦痂型</th>
+                    <td>达皮肤全层，有时可深达皮下组织、肌肉和骨骼</td>
+                    <td>皮肤坏死蛋白凝固，形成焦痂</td>
+                    <td>皮肤痛觉消失，无弹性，干燥、无水泡，似皮革状、蜡白，焦黄，甚至碳化，针刺、拔毛不痛，可见粗大栓塞的树枝状血管网</td>
+                    <td>3~4周溶痂，肉芽创面形成，小自行愈合，大则需植皮，方能愈合</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">陈孝平主编. 外科学（八年制）（第2版）. 人民卫生出版社. 2010年.p224~6.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

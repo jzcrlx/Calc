@@ -1,0 +1,300 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-1073.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <style>
+
+</style>
+<div class="medcalc">
+    <div class="">
+        <!-- //www.mdcalc.com/calc/3939/ckd-epi-equations-glomerular-filtration-rate-gfr#evidence -->
+        <!-- 新版2021 去除黑人: //pubmed.ncbi.nlm.nih.gov/34554658/ -->
+        <a class="head-li" href="calc-47.html">MDRD</a>
+        <a class="head-li" href="calc-112.html">CKD-EPI (肌酐)</a>
+        <a class="head-li" href="calc-1072.html">CKD-EPI (胱抑素C)</a>
+        <a class="head-li head-li-active" href="calc-1073.html">CKD-EPI (肌酐-胱抑素C)</a>
+        <a class="head-li" href="calc-22.html">Cockcroft-Gault</a>
+    </div>
+    <div id="medcalc-1073" class="post">
+        <div id="meta">
+            <select id="units">
+                <option value="si" name="si" selected="selected">国际单位(SI)</option>
+                <option value="us" name="us">美国单位(US)</option>
+            </select>
+        </div>
+        <div id="title">
+            <h2>eGFR肾小球滤过率<br>(CKD-EPI 肌酐-胱抑素C)</h2>
+        </div>
+        <div class="unit-desc">肌酐国际单位: μmol/L，美国单位: mg/dL</div>
+        <form name="medform" action="get" id="medform">
+            <div class="question_box">
+                <div class="question_cont" style="color: #777777">
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-bg">年龄</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="age" type="number">
+                                </div>
+                                <div class="calc-unit-md">岁</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-bg">血清肌酐</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" id="scr" name="scr" placeholder="62 - 115" type="number">
+                                </div>
+                                <div class="calc-unit-md"><label for="scr" class="cr">μmol/L</label></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-bg">血清胱抑素C</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="scys" placeholder="0.51 - 1.09" type="number">
+                                </div>
+                                <div class="calc-unit-md">mg/L</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class=" calc-label-bg">
+                                    <label for="female">女性患者？</label>
+                                </div>
+                                <div class="flex-item">
+                                    <label><input class="flex_item q_radio" value="1" name="female" id="female" type="checkbox"> 是</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-bg">肾小球滤过率:<br>mL/(min/1.73m<sup>2</sup>)</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="formula-main">
+        <div class="formula-name formula-name-first skin-color font12">eGFR = 135 x (Scr/<em>A</em>)<sup><em>B</em></sup>x
+            (Scys/<em>C</em>)<sup><em>D</em></sup> x (0.9961)<sup style="font-size: 12px;">年龄</sup> x <em>E</em>
+        </div>
+        <div class="formula-li">
+            <div class="formula-li-index">1) 女性</div>
+            <div class="formula-li-txt">
+                <div class="formula-li-name"><em>E</em> 值：0.963</div>
+            </div>
+        </div>
+        <table class="countTab1 skin-color" style="font-size: 12px;margin-top: 10px">
+            <tbody>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <p><strong>Scr ≤0.7</strong></p>
+                </td>
+                <td>
+                    <p><strong>Scr &gt;0.7</strong></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><strong>Scys ≤0.8</strong></p>
+                </td>
+                <td>
+                    <p><em>A</em> = 0.7</p>
+                    <p><em>B</em> = -0.219</p>
+                    <p><em>C</em> = 0.8</p>
+                    <p><em>D</em> = -0.323</p>
+                </td>
+                <td>
+                    <p><em>A</em> = 0.7</p>
+                    <p><em>B</em> = -0.544</p>
+                    <p><em>C</em> = 0.8</p>
+                    <p><em>D</em> = -0.323</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><strong>Scys &gt;0.8</strong></p>
+                </td>
+                <td>
+                    <p><em>A</em> = 0.7</p>
+                    <p><em>B</em> = -0.219</p>
+                    <p><em>C</em> = 0.8</p>
+                    <p><em>D</em> = -0.778</p>
+                </td>
+                <td>
+                    <p><em></em></p>
+                    <p><em>A</em> = 0.7</p>
+                    <p><em>B</em> = -0.544</p>
+                    <p><em>C</em> = 0.8</p>
+                    <p><em>D</em> = -0.778</p>
+                    <p></p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="formula-li">
+            <div class="formula-li-index">2) 男性</div>
+            <div class="formula-li-txt">
+                <div class="formula-li-name"><em>E</em> 值：1</div>
+            </div>
+        </div>
+        <table class="countTab1 skin-color" style="font-size: 12px;margin-top: 10px">
+            <tbody>
+            <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <p><strong>Scr ≤0.9</strong></p>
+                </td>
+                <td>
+                    <p><strong>Scr &gt;0.9</strong></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><strong>Scys ≤0.8</strong></p>
+                </td>
+                <td>
+                    <p><em>A</em> = 0.9</p>
+                    <p><em>B</em> = -0.144</p>
+                    <p><em>C</em> = 0.8</p>
+                    <p><em>D</em> = -0.323</p>
+                </td>
+                <td>
+                    <p><em>A</em> = 0.9</p>
+                    <p><em>B</em> = -0.544</p>
+                    <p><em>C</em> = 0.8</p>
+                    <p><em>D</em> = -0.323</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><strong>Scys &gt;0.8</strong></p>
+                </td>
+                <td>
+                    <p><em>A</em> = 0.9</p>
+                    <p><em>B</em> = -0.144</p>
+                    <p><em>C</em> = 0.8</p>
+                    <p><em>D</em> = -0.778</p>
+                </td>
+                <td>
+                    <p><em></em></p>
+                    <p><em>A</em> = 0.9</p>
+                    <p><em>B</em> = -0.544</p>
+                    <p><em>C</em> = 0.8</p>
+                    <p><em>D</em> = -0.778</p>
+                    <p></p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="detail-btm-title">请截屏以保存计算结果</div>
+    </div>
+    <div style="padding-bottom: 20px">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="//pubmed.ncbi.nlm.nih.gov/34554658/" class="resource" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+            <span class="resource__text">1. Inker LA, Eneanya ND, Coresh J, et al. New creatinine- and cystatin c-based equations to estimate gfr without race. N Engl J Med. Published online September 23, 2021.</span>
+        </a>
+        <a href="//m.medlive.cn/guide/1/3640" class="resource" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+            <span class="resource__text">2. 2012 KDIGO Clinical Practice Guideline for Anemia in Chronic Kidney Disease</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

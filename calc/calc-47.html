@@ -1,0 +1,213 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-47.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div class="">
+        <!--"head-li-active"表示被选中项，依据需要追加即可。-->
+        <a class="head-li head-li-active" href="calc-47.html">MDRD</a>
+        <a class="head-li" href="calc-112.html">CKD-EPI (肌酐)</a>
+        <a class="head-li" href="calc-1072.html">CKD-EPI (胱抑素C)</a>
+        <a class="head-li" href="calc-1073.html">CKD-EPI (肌酐-胱抑素C)</a>
+        <a class="head-li" href="calc-22.html">Cockcroft-Gault</a>
+    </div>
+    <div id="medcalc-47" class="post">
+        <div id="meta">
+            <select id="units">
+                <option value="si" name="si" selected="selected">国际单位(SI)</option>
+                <option value="us" name="us">美国单位(US)</option>
+            </select>
+        </div><!--#meta-->
+        <div id="title">
+            <h2>eGFR肾小球滤过率<br>(2006年改良的IMDS-MDRD)</h2>
+        </div>
+        <div class="unit-desc">国际单位: μmol/L，美国单位: mg/dL</div>
+        <form name="medform" action="get" id="medform">
+            <table border="0" cellpadding="0" cellspacing="0">
+                <tbody><tr class="req">
+                    <td>
+                        <div class="flex-center calc-item">
+                            <div class="calc-label calc-label-md">
+                                年龄
+                            </div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="age" id="age" type="number">
+                            </div>
+                            <div class="calc-unit">
+                                岁
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="req">
+                    <td>
+                        <div class="flex-center calc-item">
+                            <div class="calc-label calc-label-md">
+                                血清肌酐
+                            </div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="cr" id="cr" placeholder="62 - 115" type="number">
+                            </div>
+                            <div class="calc-unit">
+                                <label for="cr" class="cr">μmol/L</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="req">
+                    <td>
+                        <div class="flex-center calc-item">
+                            <div class="calc-label calc-label-md">
+                                <label for="female">女性患者？</label>
+                            </div>
+                            <div class="flex-item">
+                                <label><input class="flex_item q_radio" value="1" name="female" id="female" type="checkbox"> 是</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="req">
+                    <td>
+                        <div class="flex-center calc-item">
+                            <div class="calc-label calc-label-md">
+                                <label for="afam">患者为黑人？</label>
+                            </div>
+                            <div class="flex-item">
+                                <label><input class="flex_item q_radio" value="1" name="afam" id="afam" type="checkbox"> 是</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="answer">
+                    <td>
+                        <div class="flex-center calc-item">
+                            <div class="calc-label calc-label-md">
+                                肾小球滤过率
+                            </div>
+                            <div class="flex-item">
+                                <input class="calc-input" readonly="readonly" placeholder="点击查看" name="result" id="result" type="number">
+                            </div>
+                            <div class="calc-unit">
+                                ml/min/1.73 m<sup>2</sup>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody></table>
+        </form>
+    </div>
+
+    <div class="formula-main">
+        <div class="formula-desc">该公式为原研究人员于2006年改良，采用更准确的同位素稀释质谱法（IDMS-Traceable）测量1628例临床样本进行验证，该公式仅适用于慢性肾脏疾病，不适合急性肾功能衰竭。还要注意，最近一项研究表明，
+            对于健康人，MDRD 公式可能低估肾小球滤过率达29%
+        </div>
+        <div class="formula-name skin-color font14">eGFR=186×Scr<sup>-1.154</sup>×(年龄)<sup>-0.203</sup>×(0.742，女性)</div>
+        <div class="formula-desc fontR">其中Scr单位mg/dL，age单位年</div>
+        <div class="formula-desc formula-desc-first">注：</div>
+        <div class="formula-desc">1. Scr为血清肌酐；</div>
+        <div class="formula-desc">2. 如果是黑人，值再乘以 1.212</div>
+        <div class="detail-btm-title">请截屏以保存计算结果</div>
+    </div>
+
+    <div style="padding-bottom: 20px">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="//pubmed.ncbi.nlm.nih.gov/10075613/" class="resource" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+            <span class="resource__text">Levey AS, Bosch JP, Lewis JB, Greene T, Rogers N, Roth D. A more accurate method to estimate glomerular filtration rate from serum creatinine: a new prediction equation. Modification of Diet in Renal Disease Study Group. Ann Intern Med. 1999;130(6):461-70.</span>
+        </a>
+        <a href="//annals.org/aim/article-abstract/727341/using-standardized-serum-creatinine-values-modification-diet-renal-disease-study?volume=145&amp;issue=4&amp;page=247" class="resource" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+            <span class="resource__text">Levey AS, Coresh J, Greene T, et al. Using standardized serum creatinine values in the modification of diet in renal disease study equation for estimating glomerular filtration rate. Ann Intern Med. 2006;145(4):247-54.</span>
+        </a>
+        <a href="//annals.org/aim/article-abstract/718024/using-serum-creatinine-estimate-glomerular-filtration-rate-accuracy-good-health?volume=141&amp;issue=12&amp;page=929#FN" class="resource" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+            <span class="resource__text">Rule AD, Larson TS, Bergstralh EJ, Slezak JM, Jacobsen SJ, Cosio FG. Using serum creatinine to estimate glomerular filtration rate: accuracy in good health and in chronic kidney disease. Ann Intern Med. 2004;141(12):929-37.</span>
+        </a>
+    </div>
+</div>
+
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

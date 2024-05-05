@@ -1,0 +1,279 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-22.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });        
+
+        function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div class="">
+        <!--"head-li-active"表示被选中项，依据需要追加即可。-->
+        <a class="head-li" href="calc-47.html">MDRD</a>
+        <a class="head-li" href="calc-112.html">CKD-EPI (肌酐)</a>
+        <a class="head-li" href="calc-1072.html">CKD-EPI (胱抑素C)</a>
+        <a class="head-li" href="calc-1073.html">CKD-EPI (肌酐-胱抑素C)</a>
+        <a class="head-li head-li-active" href="calc-22.html">Cockcroft-Gault</a>
+    </div>
+    <div id="medcalc-22" class="post">
+        <div id="meta">
+            <select id="units">
+                <option value="si" name="si" selected="selected">国际单位(SI)</option>
+                <option value="us" name="us">美国单位(US)</option>
+            </select>
+        </div><!--#meta-->
+        <div id="title">
+            <h2>肌酐清除率(Cockcroft-Gault)</h2>
+        </div>
+        <div class="unit-desc">国际单位: μmol/L，美国单位: mg/dL</div>
+        <form name="medform" action="get" id="medform">
+            <table border="0" cellpadding="0" cellspacing="0">
+                <tbody><tr class="req">
+                    <td>
+                        <div class="flex-center calc-item">
+                            <div class="calc-label calc-label-md">
+                                <label for="sex">女性患者？</label>
+                            </div>
+                            <div class="flex-item">
+                                <label><input class="flex_item q_radio" value="0.85" name="sex" id="sex" type="checkbox"> 是</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="req">
+                    <td>
+                        <div class="flex-center calc-item">
+                            <div class="calc-label calc-label-md">
+                                年龄
+                            </div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="age" id="age" type="number">
+                            </div>
+                            <div class="calc-unit">
+                                岁
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="req">
+                    <td>
+                        <div class="flex-center calc-item">
+                            <div class="calc-label calc-label-md">
+                                体重
+                            </div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="wt" id="wt" type="number">
+                            </div>
+                            <div class="calc-unit">
+                                <label for="wt" class="wt">千克</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="req">
+                    <td>
+                        <div class="flex-center calc-item">
+                            <div class="calc-label calc-label-md">
+                                肌酐
+                            </div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="cr" id="cr" placeholder="62 - 115" type="number">
+                            </div>
+                            <div class="calc-unit">
+                                <label for="cr" class="cr">μmol/L</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="flex-center calc-item question_block">
+                            <div class="calc-label calc-label-md">
+                                身高<br><span style="font-size: 12px">(可计算校正结果)</span>
+                            </div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="ht" id="ht" placeholder="152 - 213" type="number">
+                            </div>
+                            <div class="calc-unit">
+                                <label for="ht" class="ht">厘米</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr class="answer">
+                    <td style="padding-top: 10px;text-align: center">
+                        <button type="button" class="calc_btn" id="result">查看结果</button>
+                    </td>
+                </tr>
+                <tr class="answer" id="res-div" style="display: none">
+                    <td>
+                        <div class="result-list">
+                            <div class="result" id="res1">
+                                <h2><span id="resultmsg1"></span><span style="font-size: 14px"> mL/min</span></h2>
+                                <div id="resultmsg2" style="font-size: 14px"></div>
+                            </div>
+                            <div class="result" id="res2">
+                                <h2><span id="resultmsg3"></span><span style="font-size: 14px"> mL/min</span></h2>
+                                <div id="resultmsg4" style="font-size: 14px"></div>
+                            </div>
+                            <div class="result" id="res3">
+                                <h2><span id="resultmsg5"></span><span style="font-size: 14px"> mL/min</span></h2>
+                                <div id="resultmsg6" style="font-size: 14px"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+            </tbody></table>
+        </form>
+    </div>
+    <div class="detail-btm-title">请截屏以保存计算结果</div>
+    <div class="ReactCollapse--collapse" style="height: auto;" data-reactid="326">
+        <div class="ReactCollapse--content" data-reactid="327">
+            <div class="notice is-active" data-content="evidence" data-reactid="328">
+                <div data-reactid="329">
+                    <h3 style="margin-top: 0"><span style="font-size: 18px;margin-left: 10px;">计算公式</span></h3>
+                    <div data-reactid="349">
+                        <p><strong>男性：肌酐清除率 = (140-年龄)×(体重)/(72×肌酐)；</strong></p>
+                        <p><strong>女性：肌酐清除率 = (140-年龄)×(体重)/(72×肌酐)×0.85；</strong></p>
+                        <p style="margin-top: 10px">肥胖人群需要把体重换算为理想体重（IBW）再进行计算，Devine公式见下：</p>
+                        <ul>
+                            <li>男性：IBW,kg = 50 + [ 2.3 × (身高,英寸 – 60) ]</li>
+                            <li>女性：IBW,kg = 45.5 + [ 2.3 × (身高,英寸 – 60) ]</li>
+                        </ul>
+                        <p style="margin-top: 10px">校正体重(ABW,kg) = IBW,kg + 0.4 × (实际体重,kg – IBW,kg)</p>
+                    </div>
+                </div>
+                <div><h3><span class="jiedu-title">解读</span></h3>
+                    <div>
+                        <p style="margin-top: 10px">该公式是确定肌酐清除率最常用公式，通常用于估计肾小球滤过率（GFR）；虽然肌酐清除率较实际GFR高10-20％，但仍以肌酐清除率作为调整药物剂量的标准。</p>
+                        <p style="margin-top: 10px">
+                            多篇文献和专家意见指出，这一公式在极端体重人群（即，体重过轻、尤其是超重/肥胖）中不准确，因此对基于体重和BMI的COCKCROFT-GAULT公式进行了校正。根据BROWN以及WINTER等人的意见，校正和估计值如下：</p>
+                        <table>
+                            <tbody>
+                            <tr>
+                                <td><p><span>体重过轻者</span></p></td>
+                                <td><p><a href="calc-14.html" target="_blank" class="activeLink">BMI</a> &lt;18.5
+                                </p></td>
+                                <td><p><span>体重不再进行校正，即计算时使用实际(总)体重；</span></p></td>
+                            </tr>
+                            <tr>
+                                <td><p><span>正常体重者</span></p></td>
+                                <td><p>BMI 18.5-24.9</p></td>
+                                <td><p><span>计算时使用理想体重，范围使用实际体重；</span></p></td>
+                            </tr>
+                            <tr>
+                                <td><p><span>肥胖/超重者</span></p></td>
+                                <td><p>BMI ≥25</p></td>
+                                <td><p><span>计算时使用校正体重，范围使用理想体重</span></p></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <h3><span class="jiedu-title">参考文献</span></h3>
+                        <a href="//www.ncbi.nlm.nih.gov/pubmed/1244564" class="resource" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+                            <span class="resource__text">Cockcroft DW, Gault MH. Prediction of creatinine clearance from serum creatinine. Nephron. 1976;16(1):31-41. PubMed PMID: 1244564.</span>
+                        </a>
+                        <a href="//www.ncbi.nlm.nih.gov/pubmed/22576791" class="resource" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+                            <span class="resource__text">Winter MA, Guhr KN, Berg GM. Impact of various body weights and serum creatinine concentrations on the bias and accuracy of the Cockcroft-Gault equation. Pharmacotherapy. 2012 Jul;32(7):604-12. doi:10.1002/j.1875-9114.2012.01098.x. Epub 2012 May 10. PubMed PMID: 22576791.</span>
+                        </a>
+                        <a href="//www.ncbi.nlm.nih.gov/pubmed/23757387" class="resource" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+                            <span class="resource__text">Brown DL, Masselink AJ, Lalla CD. Functional range of creatinine clearance for renal drug dosing: a practical solution to the controversy of which weight to use in the Cockcroft-Gault equation. Ann Pharmacother. 2013 Jul-Aug;47(7-8):1039-44. doi: 10.1345/aph.1S176. Epub 2013 Jun 11. Review. PubMed PMID: 23757387.</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding-bottom: 20px">
+
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

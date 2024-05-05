@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-622.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-622" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>肝素诱导的血小板减少评分系统(HIT 4Ts score)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block req">
+                            <div class="question_title">
+                                血小板减少
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="thrombocytopenia1">下降&lt;30%(绝对值下降＜10×10^9/L)</label>
+                                        <input class="flex_que q_radio" value="0" name="thrombocytopenia" id="thrombocytopenia1" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="thrombocytopenia2">下降30-50%(绝对值下降10-19×10^9/L)</label>
+                                        <input class="flex_que q_radio" value="1" name="thrombocytopenia" id="thrombocytopenia2" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="thrombocytopenia3">下降＞50%(绝对值下降≥20×10^9/L)</label>
+                                        <input class="flex_que q_radio" value="2" name="thrombocytopenia" id="thrombocytopenia3" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                血小板减少时间(Timing)
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="timing0">使用肝素≤1天，但既往无肝素接触史</label>
+                                        <input class="flex_que q_radio" value="0" name="timing" id="timing0" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="timing1">使用肝素&gt;10天或时间不能确定，或≤1天（过去30-100天内曾经使用肝素）</label>
+                                        <input class="flex_que q_radio" value="1" name="timing" id="timing1" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="timing2">使用肝素5-10天或≤1天（过去30天内曾经使用肝素）</label>
+                                        <input class="flex_que q_radio" value="2" name="timing" id="timing2" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                血栓形成(Thrombosis)
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="thrombosis0">无</label>
+                                        <input class="flex_que q_radio" value="0" name="thrombosis" id="thrombosis0" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="thrombosis1">血栓再发或加重，非坏死性皮肤损伤、可疑血栓</label>
+                                        <input class="flex_que q_radio" value="1" name="thrombosis" id="thrombosis1" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="thrombosis2">新发血栓、皮肤坏疽、静注后急性全身反应</label>
+                                        <input class="flex_que q_radio" value="2" name="thrombosis" id="thrombosis2" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                其他致血小板减少原因
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="causes0">证据明确</label>
+                                        <input class="flex_que q_radio" value="0" name="causes" id="causes0" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="causes1">疑诊</label>
+                                        <input class="flex_que q_radio" value="1" name="causes" id="causes1" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="causes2">无证据</label>
+                                        <input class="flex_que q_radio" value="2" name="causes" id="causes2" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">GRACE评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>根据积分诊断HIT的可能性：</p>
+            <p>0-3分，轻度怀疑：诊断HIT概率很低；</p>
+            <p>4-5分，中度怀疑：抗体阴性者诊断HIT概率为0.6%，抗体阳性者诊断HIT概率为58.2%；</p>
+            <p>6-8分，高度怀疑：抗体阴性者诊断HIT概率为16%，抗体阳性者诊断HIT概率为98%。</p>
+            <p>HIT 的4Ts评分诊断系统阴性预测值较高。目前临床上先使用4T评分系统评价患者患HIT的可能性，如果高度或重度怀疑HIT，则应行相应实验室检查来确诊或排除HIT；如果只是低度怀疑，是否需要行实验室检查来明确或除外诊断尚无定论。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Lo GK, et al. Evaluation of pretest clinical score (4 T's) for the diagnosis of heparin-induced thrombocytopenia in two clinical settings. J Thromb Haemost. 2006;4(4):759-65.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

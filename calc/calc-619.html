@@ -1,0 +1,371 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-619.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-619" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>体循环至肺循环分流型先心病推荐手术安全性的无创评估及心导管评估表</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_title">
+                            <span>症状</span>
+                        </div>
+                        <div class="question_infor">
+                            <div class="que_select_box">
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">喂养困难</div>
+                                        <div class="answer" name="feed">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">喂养困难</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">无</div>
+                                                <div value="1" class="option">一直存在</div>
+                                                <div value="2" class="option">喂养困难好转</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            活动量
+                                        </div>
+                                        <div class="answer" name="activity">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">活动量</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">正常</div>
+                                                <div value="1" class="option">下降</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_title">
+                            <span>体征</span>
+                        </div>
+                        <div class="question_infor">
+                            <div class="que_select_box">
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            杂音
+                                        </div>
+                                        <div class="answer" name="noise">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">杂音</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">响</div>
+                                                <div value="0" class="option">由响变轻</div>
+                                                <div value="1" class="option">由响变轻</div>
+                                                <div value="1" class="option">轻</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_title">
+                            <span>SpO2</span>
+                        </div>
+                        <div class="question_infor">
+                            <div class="que_select_box">
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            非青紫型先心病
+                                        </div>
+                                        <div class="answer" name="ncchd">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">非青紫型先心病</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">≥95%</div>
+                                                <div value="1" class="option">＜95%并且鼻导管吸氧后≥95%</div>
+                                                <div value="2" class="option">＜95%并且鼻导管吸氧后＜95%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            青紫型先心病
+                                        </div>
+                                        <div class="answer" name="cchd">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">青紫型先心病</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">鼻导管吸氧后上升≥5%</div>
+                                                <div value="1" class="option">鼻导管吸氧后上升＜5%</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="fuzhong">浮肿、胸腔积液、腹水</label>
+                                        <input class="flex_que q_radio" value="1" id="fuzhong" name="fuzhong" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_title">
+                            <span>年龄</span>
+                        </div>
+                        <div class="question_infor">
+                            <div class="que_select_box">
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            手术年龄
+                                        </div>
+                                        <div class="answer" name="age">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">手术年龄</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">建议手术年龄内</div>
+                                                <div value="1" class="option">≤建议手术年龄上限1.5倍</div>
+                                                <div value="2" class="option">＞建议手术年龄上限1.5倍</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="21">21三体综合征</label>
+                                        <input class="flex_que q_radio" value="1" id="21" name="21" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_title">
+                            <span>辅助检查</span>
+                        </div>
+                        <div class="question_infor">
+                            <div class="que_select_box">
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            胸部正位片
+                                        </div>
+                                        <div class="answer" name="xiongbu">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">胸部正位片</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">正常心影大小，肺血管无扩张</div>
+                                                <div value="1" class="option">心影增大，肺血管扩张，肺野外侧带可见肺血管纹理</div>
+                                                <div value="2" class="option">心影稍扩大、正常心影或心影缩小，肺血管扩张后骤然缩小(截断图像)</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            ECG
+                                        </div>
+                                        <div class="answer" name="ecg">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">ECG</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">三尖瓣前分流:无右室大</div>
+                                                <div value="1" class="option">三尖瓣前分流：右室大</div>
+                                                <div value="0" class="option">三尖瓣后分流：左室大</div>
+                                                <div value="1" class="option">三尖瓣后分流：双室大</div>
+                                                <div value="2" class="option">三尖瓣后分流：右室大</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            超声心动图估测肺动脉压
+                                        </div>
+                                        <div class="answer" name="chaosheng">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">超声心动图估测肺动脉压</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">能估测，无PH</div>
+                                                <div value="1" class="option">能估测，有PH:三尖瓣前分流</div>
+                                                <div value="2" class="option">能估测，有PH:三尖瓣后分流</div>
+                                                <div value="0" class="option">不能估测PH:主肺动脉无增宽(＜1.0倍升主动脉内径)</div>
+                                                <div value="1" class="option">不能估测PH: 主肺动脉无明显增宽(1.0~1.5倍升主动脉内径)</div>
+                                                <div value="2" class="option">不能估测PH: 主肺动脉无明显增宽(1.0~1.5倍升主动脉内径)</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="ues">应用肺血管扩张剂</label>
+                                        <input class="flex_que q_radio" value="2" id="ues" name="ues" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>BCPS, 双向腔静脉-肺动脉吻合术; TCPC, 全腔静脉肺动脉吻合术; mPAP, 平均肺动脉压; PCWP, 肺毛细血管楔压, PVRI,
+                肺血管阻力指数。若患儿在无创评估中，能实现双心室修补的患儿得分＞8分、单心室修补的患儿＞6分为外科手术高危人群，这类患儿在围术期较容易出现反应性肺高压及肺高压危象，推荐这类患儿应在术前行心导管检查。</p>
+            <p>
+                心导管检查得分≥8分的患儿不建议行根治手术治疗。单心室修补的患儿由于最终实现Fontan循环，正常甚至低于正常的肺血管阻力是手术成功的关键因素，心导管评分≤4分的患儿若≤6个月可随访观察，＞6个月可行BCPS手术或TCPC术。5~7分患儿建议行肺动脉环缩术保护肺血管，术后每3个月进行随访，根据随访结果决定是否需行BCPS术或TCPC术，＞8分得患儿目前暂不考虑BCPS术或TCPC术。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">中华医学会小儿外科学分会胸心外科学组. 小儿先天性心脏病相关性肺高压诊断和治疗(专家共识). 中华小儿外科杂志, 2011, 32(4).1-13.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-440.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-440" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>胎儿生物物理监测Manning评分及处理原则</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block req">
+                            <div class="question_title">NST（20~40分钟）</div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="nst1"> ≥2次胎动，FHR加速，振幅≥15bpm，持续≥15秒</label>
+                                        <input class="flex_que q_radio" value="2" name="nst" id="nst1" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="nst2">＜2次胎动，FHR加速，振幅＜15bpm，持续＜15秒</label>
+                                        <input class="flex_que q_radio" value="0" name="nst" id="nst2" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">FBM（30分钟）</div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="fbm1">≥1次，持续≥30秒</label>
+                                        <input class="flex_que q_radio" value="2" name="fbm" id="fbm1" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="fbm2">无或持续＜30秒</label>
+                                        <input class="flex_que q_radio" value="0" name="fbm" id="fbm2" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">FM（30分钟）</div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="fm1">≥3次躯干和肢体活动（连续出现计1次）</label>
+                                        <input class="flex_que q_radio" value="2" name="fm" id="fm1" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="fm2">≤2次躯干和肢体活动</label>
+                                        <input class="flex_que q_radio" value="0" name="fm" id="fm2" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">FT（30分钟）</div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="ft1">≥1次躯干伸展后恢复到屈曲，手指摊开合拢</label>
+                                        <input class="flex_que q_radio" value="2" name="ft" id="ft1" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="ft2">无活动，肢体完全伸展，伸展缓慢，部分恢复到屈曲</label>
+                                        <input class="flex_que q_radio" value="0" name="ft" id="ft2" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">AFV</div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="afv1">≥1个羊水暗区，最大羊水池垂直直径≥2cm</label>
+                                        <input class="flex_que q_radio" value="2" name="afv" id="afv1" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="afv2">无或最大羊水池垂直直径＜2cm</label>
+                                        <input class="flex_que q_radio" value="0" name="afv" id="afv2" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <div class="table-wrap">
+                <p></p>
+                <table class="countTab2">
+                    <thead>
+                    <tr>
+                        <th>评分</th>
+                        <th>胎儿情况</th>
+                        <th>处理原则</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>10</th>
+                        <td>无急、慢性缺氧</td>
+                        <td>每周复查1次，高危妊娠每周复查2次</td>
+                    </tr>
+                    <tr>
+                        <th>8</th>
+                        <td>急、慢性缺氧可能性小</td>
+                        <td>每周复查1次，高危妊娠每周复查2次，羊水过少可终止妊娠</td>
+                    </tr>
+                    <tr>
+                        <th>6</th>
+                        <td>可疑急、慢性缺氧</td>
+                        <td>24小时内复查，仍≤6或羊水过少，可终止妊娠</td>
+                    </tr>
+                    <tr>
+                        <th>4</th>
+                        <td>可有急或慢性缺氧</td>
+                        <td>24小时内复查，仍≤6或羊水过少，可终止妊娠</td>
+                    </tr>
+                    <tr>
+                        <th>2</th>
+                        <td>急性缺氧或伴慢性缺氧</td>
+                        <td>若胎肺成熟，终止妊娠；胎肺不成熟给予激素治疗48小时内终止妊娠</td>
+                    </tr>
+                    <tr>
+                        <th>0</th>
+                        <td>急、慢性缺氧</td>
+                        <td>终止妊娠，胎肺不成熟，同时激素治疗</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>5项指标包括：无应激实验（NST）、胎儿呼吸样运动（FBM）、胎动（FM）、胎儿肌张力（FT）及羊水容量（AFV）。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">丰有吉主编. 妇产科学（八年制）（第2版）. 人民卫生出版社. 2010年. p56.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

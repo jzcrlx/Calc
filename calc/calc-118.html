@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-118.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-118" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>激素剂量换算</h2>
+        </div>
+        <form name="medform" action="get" id="medform" style="margin-top: 10px">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_block">
+                        <div class="question_title">
+                            输入药物
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex-center calc-item answer">
+                                <select id="drug1_unit">
+                                    <option value="25" name="drug1_unit" selected="selected">可的松</option>
+                                    <option value="20" name="drug1_unit">氢化可的松</option>
+                                    <option value="5" name="drug1_unit">强的松</option>
+                                    <option value="5" name="drug1_unit">强的松龙</option>
+                                    <option value="4" name="drug1_unit">甲强龙</option>
+                                    <option value="4" name="drug1_unit">曲安西龙</option>
+                                    <option value="0.8" name="drug1_unit">倍他米松</option>
+                                    <option value="0.75" name="drug1_unit">地塞米松</option>
+                                    <option value="0.5" name="drug1_unit">氯地米松</option>
+                                </select>
+                                <div class="flex-item calc-gap">
+                                    <input class="calc-input" name="drug1" id="drug1" type="number">
+                                </div>
+                                <div class="calc-unit-sm">mg</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <div class="question_title">
+                            转换药物
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex-center calc-item answer">
+                                <select id="drug2_unit">
+                                    <option value="25" name="drug2_unit" selected="selected">可的松</option>
+                                    <option value="20" name="drug2_unit">氢化可的松</option>
+                                    <option value="5" name="drug2_unit">强的松</option>
+                                    <option value="5" name="drug2_unit">强的松龙</option>
+                                    <option value="4" name="drug2_unit">甲强龙</option>
+                                    <option value="4" name="drug2_unit">曲安西龙</option>
+                                    <option value="0.8" name="drug2_unit">倍他米松</option>
+                                    <option value="0.75" name="drug2_unit">地塞米松</option>
+                                    <option value="0.5" name="drug2_unit">氯地米松</option>
+                                </select>
+                                <div class="flex-item calc-gap">
+                                    <input class="calc-input" name="drug2" id="result" readonly="" placeholder="点击查看" type="number">
+                                </div>
+                                <div class="calc-unit-sm">mg</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">计算公式</span></h3>
+        <div class="jiedu">
+            <p>可的松 25mg = 氢化可的松 20mg = 强的松 5mg = 强的松龙 5mg = 甲强龙 4mg = 曲安西龙 4mg = 倍他米松 0.8mg = 地塞米松 0.75mg = 氯地米松 0.5mg</p>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">说明</span></h3>
+        <div class="jiedu" style="height: 400px;overflow: auto;">
+            <p>（一）严格掌握糖皮质激素治疗的适应证</p>
+            <p>
+                糖皮质激素是一类临床适应证尤其是相对适应证较广的药物，但是，临床应用的随意性较大，未严格按照适应证给药的情况较为普遍，如单纯以退热和止痛为目的使用糖皮质激素，特别是在感染性疾病中以退热和止痛为目的使用。糖皮质激素有抑制自身免疫的药理作用，但并不适用于所有自身免疫病治疗如慢性淋巴细胞浸润性甲状腺炎（桥本病）、1型糖尿病、寻常型银屑病等。</p>
+            <p>（二）合理制订糖皮质激素治疗方案</p>
+            <p>糖皮质激素治疗方案应综合患者病情及药物特点制订，治疗方案包括选用品种、剂量、疗程和给药途径等。本《指导原则》中除非明确指出给药途径，皆为全身用药即口服或静脉给药。</p>
+            <p>1. 品种选择：各种糖皮质激素的药效学和人体药代动力学(吸收、分布、代谢和排出过程)特点不同，因此各有不同的临床适应证，应根据不同疾病和各种糖皮质激素的特点正确选用糖皮质激素品种。</p>
+            <p>2. 给药剂量：生理剂量和药理剂量的糖皮质激素具有不同的作用，应按不同治疗目的选择剂量。一般认为给药剂量（以泼尼松为例）可分为以下几种情况：</p>
+            <p>（1）长期服用维持剂量：2.5-15.0 mg/d；</p>
+            <p>（2）小剂量：&lt;0.5mg·kg<sup>-1</sup>·d<sup>-1</sup>；</p>
+            <p>（3）中等剂量：0.5-1.0 mg·kg<sup>-1</sup>·d<sup>-1</sup>；</p>
+            <p>（4）大剂量：大于1.0 mg·kg<sup>-1</sup>·d<sup>-1</sup>；</p>
+            <p>（5）冲击剂量：（以甲泼尼龙为例）7.5-30.0 mg·kg<sup>-1</sup>·d<sup>-1</sup>。</p>
+            <p>3. 疗程：不同的疾病糖皮质激素疗程不同，一般可分为以下几种情况：</p>
+            <p>
+                （1）冲击治疗：疗程多小于5天。适用于危重症病人的抢救，如暴发型感染、过敏性休克、严重哮喘持续状态、过敏性喉头水肿、狼疮性脑病、重症大疱性皮肤病、重症药疹、急进性肾炎等。冲击治疗须配合其他有效治疗措施，可迅速停药，若无效大部分情况下不可在短时间内重复冲击治疗。</p>
+            <p>（2）短程治疗：疗程小于1个月，包括应激性治疗。适用于感染或变态反应类疾病，如结核性脑膜炎及胸膜炎、剥脱性皮炎或器官移植急性排斥反应等。短程治疗须配合其他有效治疗措施，停药时需逐渐减量至停药。</p>
+            <p>（3）中程治疗：疗程3个月以内。适用于病程较长且多器官受累性疾病，如风湿热等。生效后减至维持剂量，停药时需要逐渐递减。</p>
+            <p>
+                （4）长程治疗：疗程大于3个月。适用于器官移植后排斥反应的预防和治疗及反复发作、多器官受累的慢性自身免疫病，如系统性红斑狼疮、溶血性贫血、系统性血管炎、结节病、大疱性皮肤病等。维持治疗可采用每日或隔日给药，停药前亦应逐步过渡到隔日疗法后逐渐停药。</p>
+            <p>（5）终身替代治疗：适用于原发性或继发性慢性肾上腺皮质功能减退症，并于各种应激情况下适当增加剂量。</p>
+            <p>4. 给药途径：包括口服、肌内注射、静脉注射或静脉滴注等全身用药，以及吸入、局部注射、点滴和涂抹等局部用药。</p>
+            <p>（三）重视疾病的综合治疗</p>
+            <p>在许多情况下，糖皮质激素治疗仅是疾病综合治疗的一部分，应结合病人实际情况，联合应用其他治疗手段，如严重感染病人，在积极有效的抗感染治疗和各种支持治疗的前提下，为缓解症状，确实需要的可使用糖皮质激素。</p>
+            <p>（四）监测糖皮质激素的不良反应</p>
+            <p>糖皮质激素的不良反应与用药品种、剂量、疗程、剂型及用法等明显相关，在使用中应密切监测不良反应，如感染、代谢紊乱（水电解质、血糖、血脂）、体重增加、出血倾向、血压异常、骨质疏松、股骨头坏死等，小儿应监测生长和发育情况。</p>
+            <p>（五）注意停药反应和反跳现象</p>
+            <p>糖皮质激素减量应在严密观察病情与糖皮质激素反应的前提下个体化处理，要注意可能出现的以下现象：</p>
+            <p>1. 停药反应：长期中或大剂量使用糖皮质激素时，减量过快或突然停用可出现肾上腺皮质功能减退样症状，轻者表现为精神萎靡、乏力、食欲减退、关节和肌肉疼痛，重者可出现发热、恶心、呕吐、低血压等，危重者甚至发生肾上腺皮质危象，需及时抢救。</p>
+            <p>2. 反跳现象：在长期使用糖皮质激素时，减量过快或突然停用可使原发病复发或加重，应恢复糖皮质激素治疗并常需加大剂量，稳定后再慢慢减量。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Goodman &amp; Gilman's The Parmacological basis of therapeutics. McGrawHill, 1997.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">卫生部办公厅关于印发《糖皮质激素类药物临床应用指导原则》的通知.卫办医政发〔2011〕23号.</span>
+        </a>
+    </div>
+</div>
+<script>
+
+</script>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

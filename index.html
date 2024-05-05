@@ -1,0 +1,4290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="calc/favicon.ico">
+    <link rel="stylesheet" href="calc/skin/common/table.css" />
+    <link rel="stylesheet" href="calc/skin/common/index.css" />
+    <link rel="stylesheet" href="calc/skin/common.css" />
+    <link rel="stylesheet" href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="calc/js/iscroll4.js"></script>
+    <script type="text/javascript" src="calc/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calc/calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calc/calculate/common/date.js"></script>
+    <script type="text/javascript" src="calc/js/common.js"></script>
+    <script type="text/javascript" src="calc/js/layer/layer.js"></script>
+    <script type="text/javascript" src="calc/calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.bottom').click(function () {
+                window.scrollTo(0, 0);
+            });
+            // 读取本机上我的收藏内容
+            ready_like();
+
+            // 读取本机上的使用记录
+            let my_his = new Array;
+            my_his = getLocalStorage('ko_his');
+            let strUl = '';
+            if (my_his.length > 0) {
+                for (i = 0; i < my_his.length; i++) {
+                    strUl += "<a href='calc/" + my_his[i].strFileName + "'> <li>" + (i + 1) + "、" + my_his[i].strTitle + "</li></a>";
+                }
+            } else {
+                // 无数据时
+                strUl = "<a><li>抱歉，暂无使用历史数据！</li></a>";
+            }
+            document.getElementById('ul-history').innerHTML = strUl;
+        });
+
+        function toggleClass(_this) {
+            $(_this).find(".second-title-icon").toggleClass("second-title-iconOpen");
+            $(_this).next("ul").toggle();
+        }
+
+        function goToSeach() {
+            let strKeys = document.getElementById("keys").value;
+            window.open("seach.html?keys=" + strKeys);
+        }
+
+
+        function ready_like() {
+            // 读取本机上的使用记录
+            let ko_like = new Array();
+            ko_like = getLocalStorage("ko_like");
+            let strUl = "";
+            if (ko_like.length > 0) {
+                for (i = 0; i < ko_like.length; i++) {
+                    strUl +=
+                        "<div class='showLikeDiv'><li><img class='img-like' src='calc/skin/common/images/del.png' width=20rpx height=20rpx  onclick='del_like(" +
+                        i +
+                        ")' title='取消收藏'/><a title='" +
+                        ko_like[i].strTitle +
+                        "' href='calc/" +
+                        ko_like[i].strFileName +
+                        "'>" +
+                        ko_like[i].strTitle +
+                        "</a></li></div>";
+                }
+            } else {
+                // 无数据时
+                strUl = "<a><li>抱歉，没有您的收藏！</li></a>";
+            }
+            document.getElementById("ul-like").innerHTML = strUl;
+        }
+
+        function del_like(num) {
+            //取消收藏过程
+            let ko_like = new Array();
+            ko_like = getLocalStorage("ko_like");
+            ko_like.splice(num, 1);
+            let storage = window.localStorage;
+            localStorage.setItem("ko_like", JSON.stringify(ko_like));
+            document.getElementById("ul-like").getElementsByTagName("div")[num].style.display = "none";
+            layer.open({
+                content: '已取消收藏！',
+                time: 2,
+                skin: 'msg',
+                anim: 'scale'
+            });
+
+        }
+
+        //后退过程
+        function goback() {
+            history.back(-1);
+        }
+
+        //显示二维码过程
+        function showQrcode() {
+            $("div.bottom-qrcode").toggle();
+        }
+
+        function goTop() {
+            // 回到页面顶端
+            $("html,body").animate({ scrollTop: 0 }, 50);
+        }
+
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <style>
+        /* 二维码样式 */
+        .bottom-qrcode {
+            background-color: white;
+            position: fixed;
+            color: blue;
+            bottom: calc(25% - 34px);
+            right: 0px;
+            font-size: medium;
+            line-height: 2em;
+            line-height: 0;
+            z-index: 100;
+            cursor: pointer;
+            text-align: center;
+            margin-right: 28px;
+            border-radius: 8px;
+        }
+
+        .panel-body {
+            margin: 10px;
+        }
+
+        #showTopBack {
+            /* 返回与顶端*/
+            background-color: #fff;
+            position: fixed;
+            color: #008000;
+            bottom: 25%;
+            right: 0px;
+            font-size: medium;
+            z-index: 100;
+            cursor: pointer;
+            width: 24px;
+            text-align: center;
+            border-radius: 3px;
+            border: 1px solid rgb(200, 200, 200);
+            text-decoration: none;
+            line-height: 1.8em;
+        }
+
+        #showTopBack :visited {
+            /*点击后不改颜色*/
+            color: #008000;
+        }
+
+        .-myBorder- {
+            border-bottom: 1px solid rgb(200, 200, 200);
+        }
+    </style>
+
+<body class="list">
+    <div title='点击关闭' class="bottom-qrcode" style="display: none;" onclick="showQrcode()">
+        <p>微信关注</p>
+        <div class="panel-body">
+            <img alt="微信关注" width="128" height="128" src="calc/images/imgJZCRLX.jpg">
+        </div>
+    </div>
+    <div id="showTopBack">
+        <a title='返回目录' onclick="goback()" class="fa fa-angle-double-left -myBorder-"></a><br/>
+        <a title='回到页面顶端' onclick="goTop()" class="fa fa-angle-double-up -myBorder-"></a><br/>
+        <a title='微信扫码关注，获取更多资源' onclick="showQrcode()" class="fa fa-qrcode -myBorder-"></a>
+    </div>
+
+    <div class="flex_box">
+        <div style="margin-top: 20px;width: 0px">
+        </div>
+        <div class="flex">
+            <form action="seach.html" method="get" id="myform" style="margin-top: 10px">
+                <!-- <form action="calc/show/2.html" method="get" id="myform" style="margin-top: 10px"></form> -->
+                <div class="search_input">
+                    <div class="text"><input style="border: medium none;outline: none;" placeholder="请输入关键词(支持拼音首字母)"
+                            name="keyword" type="text"></div>
+                    <div class="button">
+                        <button type="submit">查询</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="tabs">
+        <div class="tab-2">
+            <label for="tab2-1">我的收藏</label>
+            <input id="tab2-1" name="tabs-two" type="radio" checked="checked">
+            <div class="head-list" style="height: 10rem;overflow-y:auto;padding-top: 10px;">
+                <a href="calc/like.html" class="flex" style="display: block; color: #000;margin-left: 10px;">
+                    <div class="flex_box">
+                        <div style="width: 20px; margin-right: 3px;">
+                            <img src="calc/skin/common/images/like.png" style="width: 20px;" />
+                        </div>
+                        <div class="flex" style="line-height: 23px;">
+                            更多收藏>>
+                        </div>
+                    </div>
+                </a>
+                <ul id="ul-like">
+                    <!-- 此处显示数据 -->
+                </ul>
+            </div>
+        </div>
+        <div class="tab-2" style="height: 1em;">
+            <label for="tab2-2">使用历史</label>
+            <input id="tab2-2" name="tabs-two" type="radio">
+            <div class="head-list" style="height: 10rem;overflow-y:auto;padding-top: 10px;">
+                <a href="calc/history.html" class="flex" style="display: block;color: #000;margin-left: 10px;">
+                    <div class="flex_box">
+                        <div style="width: 20px; margin-right: 3px;">
+                            <img src="calc/skin/common/images/history.png" style="width: 20px;" />
+                        </div>
+                        <div class="flex" style="line-height: 23px">
+                            更多历史>>
+                        </div>
+                    </div>
+                </a>
+                <ul id="ul-history">
+                    <!-- 此处显示数据 -->
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+    <h3 class="first-title"><label>换算公式 - 急诊超人老谢</label></h3>
+    <ul class="first-item">
+        <div class="two-title-box">
+            <a href="calc/calc-116.html" class="two-title-item">
+                <li class="first-calc">乙肝五项检查</li>
+            </a>
+            <a href="calc/calc-14.html" style="text-align: right" class="two-title-item">
+                <li class="first-calc">体重指数(BMI)</li>
+            </a>
+        </div>
+        <div class="two-title-box">
+            <a href="calc/calc-120.html" class="two-title-item">
+                <li class="first-calc">体表面积(BSA)</li>
+            </a>
+            <a href="calc/calc-117.html" style="text-align: right" class="two-title-item">
+                <li class="first-calc">能量单位换算</li>
+            </a>
+        </div>
+        <div class="two-title-box">
+            <a href="calc/calc-118.html" class="two-title-item">
+                <li class="first-calc">激素剂量换算</li>
+            </a>
+            <a href="calc/calc-119.html" style="text-align: right" class="two-title-item">
+                <li class="first-calc">血糖单位换算</li>
+            </a>
+        </div>
+        <div class="two-title-box">
+            <a href="calc/calc-121.html" class="two-title-item">
+                <li class="first-calc">血脂单位换算</li>
+            </a>
+            <a href="calc/calc-123.html" style="text-align: right" class="two-title-item">
+                <li class="first-calc">补液公式(成人)</li>
+            </a>
+        </div>
+        <div class="two-title-box">
+            <a href="calc/calc-122.html" class="two-title-item">
+                <li class="first-calc">基础代谢率(Mifflin-St Jeor公式)</li>
+            </a>
+            <a href="calc/calc-1078.html" style="text-align: right" class="two-title-item">
+                <li class="first-calc  last-calc">狂犬病防治</li>
+            </a>
+        </div>
+
+    </ul>
+    <h3><label>医学计算工具 - 急诊超人老谢</label></h3>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>单位换算</h4>
+        <div class="second-title-txt">238项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-833.html">
+            <li>17-羟孕酮</li>
+        </a>
+        <a href="calc/calc-878.html">
+            <li>C-反应蛋白(CRP)</li>
+        </a>
+        <a href="calc/calc-899.html">
+            <li>CK-MB（活性）</li>
+        </a>
+        <a href="calc/calc-895.html">
+            <li>CK-MB质量（定量检测）</li>
+        </a>
+        <a href="calc/calc-877.html">
+            <li>C肽</li>
+        </a>
+        <a href="calc/calc-905.html">
+            <li>D-二聚体</li>
+        </a>
+        <a href="calc/calc-989.html">
+            <li>N-乙酰普鲁卡因酰胺(NAPA)</li>
+        </a>
+        <a href="calc/calc-984.html">
+            <li>N1-甲基烟酰胺（烟酸代谢物）</li>
+        </a>
+        <a href="calc/calc-988.html">
+            <li>N末端B型利钠肽原(NT-proBNP)</li>
+        </a>
+        <a href="calc/calc-1020.html">
+            <li>S100蛋白</li>
+        </a>
+        <a href="calc/calc-1048.html">
+            <li>TSH - 促甲状腺激素</li>
+        </a>
+        <a href="calc/calc-856.html">
+            <li>TSH 受体抗体(Anti-TSHR)</li>
+        </a>
+        <a href="calc/calc-848.html">
+            <li>α1-抗胰蛋白酶</li>
+        </a>
+        <a href="calc/calc-847.html">
+            <li>α1-酸性糖蛋白</li>
+        </a>
+        <a href="calc/calc-849.html">
+            <li>α1‑微球蛋白</li>
+        </a>
+        <a href="calc/calc-871.html">
+            <li>β-胶原降解产物(Ⅰ型胶原降解产物)</li>
+        </a>
+        <a href="calc/calc-832.html">
+            <li>β-羟丁酸</li>
+        </a>
+        <a href="calc/calc-872.html">
+            <li>β2-微球蛋白 (β2-M)</li>
+        </a>
+        <a href="calc/calc-927.html">
+            <li>γ-谷氨酰转肽酶（GGT）</li>
+        </a>
+        <a href="calc/calc-959.html">
+            <li>κ轻链</li>
+        </a>
+        <a href="calc/calc-962.html">
+            <li>λ轻链</li>
+        </a>
+        <a href="calc/calc-881.html">
+            <li>癌抗原 125</li>
+        </a>
+        <a href="calc/calc-882.html">
+            <li>癌抗原 15-3</li>
+        </a>
+        <a href="calc/calc-883.html">
+            <li>癌抗原 19-9</li>
+        </a>
+        <a href="calc/calc-884.html">
+            <li>癌抗原 72-4</li>
+        </a>
+        <a href="calc/calc-888.html">
+            <li>癌胚抗原</li>
+        </a>
+        <a href="calc/calc-851.html">
+            <li>氨(NH3)</li>
+        </a>
+        <a href="calc/calc-842.html">
+            <li>白蛋白</li>
+        </a>
+        <a href="calc/calc-1066.html">
+            <li>白细胞 (WBC)</li>
+        </a>
+        <a href="calc/calc-953.html">
+            <li>白细胞介素-6 (IL-6)</li>
+        </a>
+        <a href="calc/calc-903.html">
+            <li>半胱氨酸</li>
+        </a>
+        <a href="calc/calc-926.html">
+            <li>半乳糖</li>
+        </a>
+        <a href="calc/calc-994.html">
+            <li>苯巴比妥</li>
+        </a>
+        <a href="calc/calc-995.html">
+            <li>苯丙氨酸(phe)</li>
+        </a>
+        <a href="calc/calc-996.html">
+            <li>苯妥英</li>
+        </a>
+        <a href="calc/calc-1012.html">
+            <li>吡咯赖氨酸</li>
+        </a>
+        <a href="calc/calc-840.html">
+            <li>丙氨酸(Ala)</li>
+        </a>
+        <a href="calc/calc-841.html">
+            <li>丙氨酸氨基转移酶 (ALT/SGPT)</li>
+        </a>
+        <a href="calc/calc-836.html">
+            <li>丙酮</li>
+        </a>
+        <a href="calc/calc-1054.html">
+            <li>丙戊酸</li>
+        </a>
+        <a href="calc/calc-879.html">
+            <li>补体因子3(C3)</li>
+        </a>
+        <a href="calc/calc-880.html">
+            <li>补体因子4(C4)</li>
+        </a>
+        <a href="calc/calc-956.html">
+            <li>不饱和铁结合力(UIBC)</li>
+        </a>
+        <a href="calc/calc-1031.html">
+            <li>茶碱</li>
+        </a>
+        <a href="calc/calc-913.html">
+            <li>雌二醇</li>
+        </a>
+        <a href="calc/calc-915.html">
+            <li>雌酮</li>
+        </a>
+        <a href="calc/calc-912.html">
+            <li>促红细胞生成素</li>
+        </a>
+        <a href="calc/calc-839.html">
+            <li>促肾上腺皮质激素 (ACTH)</li>
+        </a>
+        <a href="calc/calc-1006.html">
+            <li>催乳素</li>
+        </a>
+        <a href="calc/calc-981.html">
+            <li>单核细胞</li>
+        </a>
+        <a href="calc/calc-980.html">
+            <li>单核细胞（绝对单核细胞计数）</li>
+        </a>
+        <a href="calc/calc-894.html">
+            <li>胆碱酯酶</li>
+        </a>
+        <a href="calc/calc-979.html">
+            <li>蛋氨酸（Met）</li>
+        </a>
+        <a href="calc/calc-892.html">
+            <li>低密度脂蛋白胆固醇</li>
+        </a>
+        <a href="calc/calc-908.html">
+            <li>地高辛</li>
+        </a>
+        <a href="calc/calc-852.html">
+            <li>淀粉酶</li>
+        </a>
+        <a href="calc/calc-834.html">
+            <li>对乙酰氨基酚</li>
+        </a>
+        <a href="calc/calc-992.html">
+            <li>泛酸（维生素 B5）</li>
+        </a>
+        <a href="calc/calc-1007.html">
+            <li>脯氨酸</li>
+        </a>
+        <a href="calc/calc-886.html">
+            <li>钙</li>
+        </a>
+        <a href="calc/calc-935.html">
+            <li>甘氨酸（Gly）</li>
+        </a>
+        <a href="calc/calc-1042.html">
+            <li>甘油三酯</li>
+        </a>
+        <a href="calc/calc-891.html">
+            <li>高密度脂蛋白胆固醇</li>
+        </a>
+        <a href="calc/calc-1030.html">
+            <li>睾酮</li>
+        </a>
+        <a href="calc/calc-933.html">
+            <li>谷氨酸（Glu）</li>
+        </a>
+        <a href="calc/calc-932.html">
+            <li>谷氨酸脱氢酶 (GLDH)</li>
+        </a>
+        <a href="calc/calc-934.html">
+            <li>谷氨酰胺 (Gln)</li>
+        </a>
+        <a href="calc/calc-990.html">
+            <li>骨钙素（OCN）</li>
+        </a>
+        <a href="calc/calc-904.html">
+            <li>胱氨酸</li>
+        </a>
+        <a href="calc/calc-902.html">
+            <li>胱抑素C</li>
+        </a>
+        <a href="calc/calc-925.html">
+            <li>果糖</li>
+        </a>
+        <a href="calc/calc-924.html">
+            <li>果糖胺</li>
+        </a>
+        <a href="calc/calc-1019.html">
+            <li>核黄素</li>
+        </a>
+        <a href="calc/calc-1015.html">
+            <li>红细胞</li>
+        </a>
+        <a href="calc/calc-1013.html">
+            <li>红细胞分布宽度变异系数</li>
+        </a>
+        <a href="calc/calc-1014.html">
+            <li>红细胞分布宽度标准差</li>
+        </a>
+        <a href="calc/calc-969.html">
+            <li>黄体生成素 (LH)</li>
+        </a>
+        <a href="calc/calc-1004.html">
+            <li>黄体酮</li>
+        </a>
+        <a href="calc/calc-838.html">
+            <li>活化部分凝血活酶时间 (APTT)</li>
+        </a>
+        <a href="calc/calc-1045.html">
+            <li>肌钙蛋白 I (TnI)</li>
+        </a>
+        <a href="calc/calc-1046.html">
+            <li>肌钙蛋白 T (TnT)</li>
+        </a>
+        <a href="calc/calc-900.html">
+            <li>肌酐</li>
+        </a>
+        <a href="calc/calc-983.html">
+            <li>肌红蛋白</li>
+        </a>
+        <a href="calc/calc-898.html">
+            <li>肌酸激酶</li>
+        </a>
+        <a href="calc/calc-978.html">
+            <li>甲醇</li>
+        </a>
+        <a href="calc/calc-850.html">
+            <li>甲胎蛋白(AFP)</li>
+        </a>
+        <a href="calc/calc-993.html">
+            <li>甲状旁腺激素（PTH）</li>
+        </a>
+        <a href="calc/calc-855.html">
+            <li>甲状腺过氧化物酶抗体(Anti-TPO)</li>
+        </a>
+        <a href="calc/calc-1034.html">
+            <li>甲状腺球蛋白 (Tg)</li>
+        </a>
+        <a href="calc/calc-858.html">
+            <li>甲状腺球蛋白抗体 (Anti-Tg)</li>
+        </a>
+        <a href="calc/calc-1035.html">
+            <li>甲状腺摄取</li>
+        </a>
+        <a href="calc/calc-1036.html">
+            <li>甲状腺素（总 T4）</li>
+        </a>
+        <a href="calc/calc-1038.html">
+            <li>甲状腺素结合球蛋白 (TBG)</li>
+        </a>
+        <a href="calc/calc-1000.html">
+            <li>钾 (K)</li>
+        </a>
+        <a href="calc/calc-846.html">
+            <li>碱性磷酸酶 (ALP)</li>
+        </a>
+        <a href="calc/calc-885.html">
+            <li>降钙素</li>
+        </a>
+        <a href="calc/calc-1003.html">
+            <li>降钙素原</li>
+        </a>
+        <a href="calc/calc-937.html">
+            <li>结合珠蛋白</li>
+        </a>
+        <a href="calc/calc-865.html">
+            <li>精氨酸(Arg)</li>
+        </a>
+        <a href="calc/calc-973.html">
+            <li>巨泌乳素</li>
+        </a>
+        <a href="calc/calc-887.html">
+            <li>卡马西平</li>
+        </a>
+        <a href="calc/calc-857.html">
+            <li>抗环瓜氨酸肽抗体(Anti-CCP)</li>
+        </a>
+        <a href="calc/calc-859.html">
+            <li>抗利尿激素(血管加压素)</li>
+        </a>
+        <a href="calc/calc-860.html">
+            <li>抗链球菌溶血素O(ASLO)</li>
+        </a>
+        <a href="calc/calc-862.html">
+            <li>抗苗勒氏管激素(AMH)</li>
+        </a>
+        <a href="calc/calc-861.html">
+            <li>抗凝血酶III活性</li>
+        </a>
+        <a href="calc/calc-1026.html">
+            <li>可溶性Fms样酪氨酸激酶1</li>
+        </a>
+        <a href="calc/calc-1028.html">
+            <li>可溶性转铁蛋白受体</li>
+        </a>
+        <a href="calc/calc-972.html">
+            <li>赖氨酸</li>
+        </a>
+        <a href="calc/calc-1049.html">
+            <li>酪氨酸（Tyr）</li>
+        </a>
+        <a href="calc/calc-1018.html">
+            <li>类风湿因子</li>
+        </a>
+        <a href="calc/calc-968.html">
+            <li>锂 (Li)</li>
+        </a>
+        <a href="calc/calc-964.html">
+            <li>利多卡因</li>
+        </a>
+        <a href="calc/calc-963.html">
+            <li>亮氨酸 (Leu)</li>
+        </a>
+        <a href="calc/calc-971.html">
+            <li>淋巴细胞 (LYMPH)</li>
+        </a>
+        <a href="calc/calc-970.html">
+            <li>淋巴细胞（淋巴细胞绝对计数）</li>
+        </a>
+        <a href="calc/calc-997.html">
+            <li>磷 (P)</li>
+        </a>
+        <a href="calc/calc-1029.html">
+            <li>鳞状细胞癌</li>
+        </a>
+        <a href="calc/calc-906.html">
+            <li>硫酸脱氢表雄酮</li>
+        </a>
+        <a href="calc/calc-890.html">
+            <li>氯化物</li>
+        </a>
+        <a href="calc/calc-922.html">
+            <li>卵泡刺激素 (FSH)</li>
+        </a>
+        <a href="calc/calc-907.html">
+            <li>毛地黄毒苷</li>
+        </a>
+        <a href="calc/calc-974.html">
+            <li>镁</li>
+        </a>
+        <a href="calc/calc-948.html">
+            <li>免疫球蛋白 A (IgA)</li>
+        </a>
+        <a href="calc/calc-949.html">
+            <li>免疫球蛋白 E (IgE)</li>
+        </a>
+        <a href="calc/calc-950.html">
+            <li>免疫球蛋白 G (IgG)</li>
+        </a>
+        <a href="calc/calc-951.html">
+            <li>免疫球蛋白 M (IgM)</li>
+        </a>
+        <a href="calc/calc-1027.html">
+            <li>钠</li>
+        </a>
+        <a href="calc/calc-1050.html">
+            <li>尿素</li>
+        </a>
+        <a href="calc/calc-1051.html">
+            <li>尿素氮 (BUN)</li>
+        </a>
+        <a href="calc/calc-1052.html">
+            <li>尿酸</li>
+        </a>
+        <a href="calc/calc-1033.html">
+            <li>凝血酶时间 (TT)</li>
+        </a>
+        <a href="calc/calc-1010.html">
+            <li>凝血酶原时间</li>
+        </a>
+        <a href="calc/calc-1011.html">
+            <li>凝血酶原时间（Quick检测法）</li>
+        </a>
+        <a href="calc/calc-897.html">
+            <li>皮质醇</li>
+        </a>
+        <a href="calc/calc-977.html">
+            <li>平均红细胞体积</li>
+        </a>
+        <a href="calc/calc-975.html">
+            <li>平均红细胞血红蛋白含量</li>
+        </a>
+        <a href="calc/calc-976.html">
+            <li>平均红细胞血红蛋白浓度</li>
+        </a>
+        <a href="calc/calc-982.html">
+            <li>平均血小板体积</li>
+        </a>
+        <a href="calc/calc-931.html">
+            <li>葡萄糖</li>
+        </a>
+        <a href="calc/calc-1001.html">
+            <li>前白蛋白</li>
+        </a>
+        <a href="calc/calc-1008.html">
+            <li>前列腺特异性抗原</li>
+        </a>
+        <a href="calc/calc-929.html">
+            <li>庆大霉素</li>
+        </a>
+        <a href="calc/calc-845.html">
+            <li>醛固酮</li>
+        </a>
+        <a href="calc/calc-844.html">
+            <li>醛缩酶</li>
+        </a>
+        <a href="calc/calc-938.html">
+            <li>人附睾蛋白4（HE4）</li>
+        </a>
+        <a href="calc/calc-946.html">
+            <li>人类生长激素(hGH)</li>
+        </a>
+        <a href="calc/calc-945.html">
+            <li>人绒毛膜促性腺激素 (hCG)</li>
+        </a>
+        <a href="calc/calc-1002.html">
+            <li>妊娠相关血浆蛋白 A</li>
+        </a>
+        <a href="calc/calc-960.html">
+            <li>乳酸</li>
+        </a>
+        <a href="calc/calc-961.html">
+            <li>乳酸脱氢酶 (LDH)</li>
+        </a>
+        <a href="calc/calc-1043.html">
+            <li>三碘甲状腺原氨酸(T3)</li>
+        </a>
+        <a href="calc/calc-1047.html">
+            <li>色氨酸 (Trp)</li>
+        </a>
+        <a href="calc/calc-985.html">
+            <li>神经元特异性烯醇化酶 (NSE)</li>
+        </a>
+        <a href="calc/calc-1016.html">
+            <li>肾素</li>
+        </a>
+        <a href="calc/calc-936.html">
+            <li>生长分化因子-15 (GDF-15)</li>
+        </a>
+        <a href="calc/calc-876.html">
+            <li>生物素(维生素B7)</li>
+        </a>
+        <a href="calc/calc-1017.html">
+            <li>视黄醇</li>
+        </a>
+        <a href="calc/calc-870.html">
+            <li>嗜碱性粒细胞(BASO)</li>
+        </a>
+        <a href="calc/calc-869.html">
+            <li>嗜碱性粒细胞(嗜碱性粒细胞绝对值)</li>
+        </a>
+        <a href="calc/calc-911.html">
+            <li>嗜酸性粒细胞</li>
+        </a>
+        <a href="calc/calc-910.html">
+            <li>嗜酸性粒细胞（嗜酸性粒细胞绝对计数）</li>
+        </a>
+        <a href="calc/calc-909.html">
+            <li>嗜酸性粒细胞阳离子蛋白</li>
+        </a>
+        <a href="calc/calc-1021.html">
+            <li>水杨酸盐</li>
+        </a>
+        <a href="calc/calc-1023.html">
+            <li>丝氨酸</li>
+        </a>
+        <a href="calc/calc-1032.html">
+            <li>苏氨酸 (Thr)</li>
+        </a>
+        <a href="calc/calc-837.html">
+            <li>酸性磷酸酶 (ACP)</li>
+        </a>
+        <a href="calc/calc-1069.html">
+            <li>糖化血红蛋白 (HbA1c)</li>
+        </a>
+        <a href="calc/calc-999.html">
+            <li>胎盘生长因子（PIGF)</li>
+        </a>
+        <a href="calc/calc-873.html">
+            <li>碳酸氢盐(HCO3-)</li>
+        </a>
+        <a href="calc/calc-868.html">
+            <li>天冬氨酸(Asp)</li>
+        </a>
+        <a href="calc/calc-867.html">
+            <li>天冬氨酸氨基转移酶(AST/SGOT)</li>
+        </a>
+        <a href="calc/calc-866.html">
+            <li>天冬酰胺(Asn)</li>
+        </a>
+        <a href="calc/calc-954.html">
+            <li>铁(Fe)</li>
+        </a>
+        <a href="calc/calc-918.html">
+            <li>铁蛋白</li>
+        </a>
+        <a href="calc/calc-944.html">
+            <li>同型半胱氨酸 (HCY)</li>
+        </a>
+        <a href="calc/calc-896.html">
+            <li>铜</li>
+        </a>
+        <a href="calc/calc-889.html">
+            <li>铜蓝蛋白</li>
+        </a>
+        <a href="calc/calc-1039.html">
+            <li>妥布霉素</li>
+        </a>
+        <a href="calc/calc-1055.html">
+            <li>万古霉素</li>
+        </a>
+        <a href="calc/calc-1057.html">
+            <li>维生素 B12（钴胺素、氰钴胺素）</li>
+        </a>
+        <a href="calc/calc-1056.html">
+            <li>维生素 B1（硫胺素）</li>
+        </a>
+        <a href="calc/calc-1058.html">
+            <li>维生素 B3（烟酸、烟酸）</li>
+        </a>
+        <a href="calc/calc-1059.html">
+            <li>维生素 B6（磷酸吡哆醛）</li>
+        </a>
+        <a href="calc/calc-1060.html">
+            <li>维生素 C（抗坏血酸）</li>
+        </a>
+        <a href="calc/calc-1061.html">
+            <li>维生素 D 总量</li>
+        </a>
+        <a href="calc/calc-1063.html">
+            <li>维生素 D3，1,25-二羟基（骨化三醇）</li>
+        </a>
+        <a href="calc/calc-1062.html">
+            <li>维生素 D，25-羟基（骨化二醇）</li>
+        </a>
+        <a href="calc/calc-1064.html">
+            <li>维生素 E（α-生育酚）</li>
+        </a>
+        <a href="calc/calc-1065.html">
+            <li>维生素 K（叶绿醌）</li>
+        </a>
+        <a href="calc/calc-928.html">
+            <li>胃泌素</li>
+        </a>
+        <a href="calc/calc-1005.html">
+            <li>胃泌素释放肽前体</li>
+        </a>
+        <a href="calc/calc-1022.html">
+            <li>硒代半胱氨酸</li>
+        </a>
+        <a href="calc/calc-901.html">
+            <li>细胞角蛋白19片段</li>
+        </a>
+        <a href="calc/calc-919.html">
+            <li>纤维蛋白原</li>
+        </a>
+        <a href="calc/calc-1053.html">
+            <li>缬氨酸（Val）</li>
+        </a>
+        <a href="calc/calc-1067.html">
+            <li>锌 (Zn) </li>
+        </a>
+        <a href="calc/calc-1025.html">
+            <li>性激素结合球蛋白</li>
+        </a>
+        <a href="calc/calc-854.html">
+            <li>雄烯二酮</li>
+        </a>
+        <a href="calc/calc-940.html">
+            <li>血红蛋白 (HGB)</li>
+        </a>
+        <a href="calc/calc-941.html">
+            <li>血红蛋白单体（亚基）</li>
+        </a>
+        <a href="calc/calc-942.html">
+            <li>血红蛋白四聚体</li>
+        </a>
+        <a href="calc/calc-1024.html">
+            <li>血清素</li>
+        </a>
+        <a href="calc/calc-939.html">
+            <li>血细胞比容(HCT)</li>
+        </a>
+        <a href="calc/calc-998.html">
+            <li>血小板（血小板）</li>
+        </a>
+        <a href="calc/calc-921.html">
+            <li>叶酸</li>
+        </a>
+        <a href="calc/calc-920.html">
+            <li>叶酸盐</li>
+        </a>
+        <a href="calc/calc-952.html">
+            <li>胰岛素</li>
+        </a>
+        <a href="calc/calc-947.html">
+            <li>胰岛素样生长因子1(IGF-1)</li>
+        </a>
+        <a href="calc/calc-1068.html">
+            <li>胰岛素样生长因子结合蛋白 3 (IGFBP-3)</li>
+        </a>
+        <a href="calc/calc-853.html">
+            <li>胰淀粉酶</li>
+        </a>
+        <a href="calc/calc-930.html">
+            <li>胰高血糖素</li>
+        </a>
+        <a href="calc/calc-916.html">
+            <li>乙醇</li>
+        </a>
+        <a href="calc/calc-843.html">
+            <li>乙醇脱氢酶(ADH)</li>
+        </a>
+        <a href="calc/calc-917.html">
+            <li>乙二醇</li>
+        </a>
+        <a href="calc/calc-835.html">
+            <li>乙酰乙酸（乙酰乙酸盐）</li>
+        </a>
+        <a href="calc/calc-958.html">
+            <li>异丙醇</li>
+        </a>
+        <a href="calc/calc-957.html">
+            <li>异亮氨酸（Ile）</li>
+        </a>
+        <a href="calc/calc-914.html">
+            <li>游离雌三醇</li>
+        </a>
+        <a href="calc/calc-1037.html">
+            <li>游离甲状腺素(FT4)</li>
+        </a>
+        <a href="calc/calc-1009.html">
+            <li>游离前列腺特异性抗原</li>
+        </a>
+        <a href="calc/calc-923.html">
+            <li>游离人绒毛膜促性腺激素β亚基（游离βhCG）</li>
+        </a>
+        <a href="calc/calc-1044.html">
+            <li>游离三碘甲状腺原氨酸(FT3)</li>
+        </a>
+        <a href="calc/calc-863.html">
+            <li>载脂蛋白A-1</li>
+        </a>
+        <a href="calc/calc-864.html">
+            <li>载脂蛋白B</li>
+        </a>
+        <a href="calc/calc-967.html">
+            <li>脂蛋白(a)</li>
+        </a>
+        <a href="calc/calc-966.html">
+            <li>脂多糖结合蛋白 (LBP)</li>
+        </a>
+        <a href="calc/calc-965.html">
+            <li>脂肪酶</li>
+        </a>
+        <a href="calc/calc-874.html">
+            <li>直接胆红素</li>
+        </a>
+        <a href="calc/calc-987.html">
+            <li>中性粒细胞（NEUT）</li>
+        </a>
+        <a href="calc/calc-986.html">
+            <li>中性粒细胞（中性粒细胞绝对值）</li>
+        </a>
+        <a href="calc/calc-1041.html">
+            <li>转铁蛋白</li>
+        </a>
+        <a href="calc/calc-991.html">
+            <li>总Ⅰ型前胶原氨基端延长肽(TP1NP)</li>
+        </a>
+        <a href="calc/calc-893.html">
+            <li>总胆固醇</li>
+        </a>
+        <a href="calc/calc-875.html">
+            <li>总胆红素</li>
+        </a>
+        <a href="calc/calc-1040.html">
+            <li>总蛋白</li>
+        </a>
+        <a href="calc/calc-955.html">
+            <li>总铁结合力 (TIBC)</li>
+        </a>
+        <a href="calc/calc-943.html">
+            <li>组氨酸（His）</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>内分泌学</h4>
+        <div class="second-title-txt">50项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-1069.html">
+            <li>糖化血红蛋白 (HbA1c)</li>
+        </a>
+        <a href="calc/calc-1.html">
+            <li>肺泡－动脉氧分压差</li>
+        </a>
+        <a href="calc/calc-8.html">
+            <li>阴离子间隙</li>
+        </a>
+        <a href="calc/calc-11.html">
+            <li>基础能量消耗</li>
+        </a>
+        <a href="calc/calc-122.html">
+            <li>基础代谢率(Mifflin-St Jeor公式)</li>
+        </a>
+        <a href="calc/calc-117.html">
+            <li>能量单位换算</li>
+        </a>
+        <a href="calc/calc-13.html">
+            <li>碳酸氢盐缺乏</li>
+        </a>
+        <a href="calc/calc-14.html">
+            <li>体重指数(BMI)</li>
+        </a>
+        <a href="calc/calc-120.html">
+            <li>体表面积(BSA)</li>
+        </a>
+        <a href="calc/calc-124.html">
+            <li>标准体重(IBW)</li>
+        </a>
+        <a href="calc/calc-15.html">
+            <li>低白蛋白血症患者钙浓度校正</li>
+        </a>
+        <a href="calc/calc-31.html">
+            <li>高钠血症患者游离水缺乏量计算</li>
+        </a>
+        <a href="calc/calc-42.html">
+            <li>低密度脂蛋白计算 </li>
+        </a>
+        <a href="calc/calc-45.html">
+            <li>维持液体计算</li>
+        </a>
+        <a href="calc/calc-47.html">
+            <li>eGFR肾小球滤过率(2006年改良的IMDS-MDRD)计算公式</li>
+        </a>
+        <a href="calc/calc-112.html">
+            <li>eGFR肾小球滤过率(CKD-EPI 肌酐)计算公式</li>
+        </a>
+        <a href="calc/calc-1072.html">
+            <li>eGFR肾小球滤过率(CKD-EPI 胱抑素C)计算公式</li>
+        </a>
+        <a href="calc/calc-1073.html">
+            <li>eGFR肾小球滤过率(CKD-EPI 肌酐-胱抑素C)计算公式</li>
+        </a>
+        <a href="calc/calc-22.html">
+            <li>eGFR肾小球滤过率(Cockcroft-Gault)计算公式</li>
+        </a>
+        <a href="calc/calc-69.html">
+            <li>血清渗透压</li>
+        </a>
+        <a href="calc/calc-70.html">
+            <li>高血糖时钠浓度校正公式</li>
+        </a>
+        <a href="calc/calc-119.html">
+            <li>血糖单位换算</li>
+        </a>
+        <a href="calc/calc-72.html">
+            <li>低钠血症时补钠值</li>
+        </a>
+        <a href="calc/calc-1070.html">
+            <li>补钾公式</li>
+        </a>
+        <a href="calc/calc-123.html">
+            <li>补液公式(成人)</li>
+        </a>
+        <a href="calc/calc-77.html">
+            <li>肾小管钾浓度梯度计算</li>
+        </a>
+        <a href="calc/calc-81.html">
+            <li>代谢性酸中毒代偿的Winters计算公式</li>
+        </a>
+        <a href="calc/calc-165.html">
+            <li>胰腺内分泌肿瘤(PEN)类型及相关临床综合征</li>
+        </a>
+        <a href="calc/calc-173.html">
+            <li>甲状腺肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-370.html">
+            <li>性发育Tanner分期</li>
+        </a>
+        <a href="calc/calc-371.html">
+            <li>性早熟疾病的辅助检查</li>
+        </a>
+        <a href="calc/calc-514.html">
+            <li>先天性甲状腺功能减退症的血清甲状腺激素诊断标准</li>
+        </a>
+        <a href="calc/calc-515.html">
+            <li>代谢综合征的诊断标准(IDF)</li>
+        </a>
+        <a href="calc/calc-516.html">
+            <li>代谢综合征诊断标准(CDS)</li>
+        </a>
+        <a href="calc/calc-517.html">
+            <li>甲状腺肿分级</li>
+        </a>
+        <a href="calc/calc-518.html">
+            <li>Graves眼病分级标准</li>
+        </a>
+        <a href="calc/calc-519.html">
+            <li>Graves眼病病情活动评分(CAS)</li>
+        </a>
+        <a href="calc/calc-520.html">
+            <li>糖尿病诊断标准(WHO)</li>
+        </a>
+        <a href="calc/calc-521.html">
+            <li>糖尿病视网膜病变国际临床分类法</li>
+        </a>
+        <a href="calc/calc-522.html">
+            <li>糖尿病肾病临床分期</li>
+        </a>
+        <a href="calc/calc-523.html">
+            <li>糖尿病足Wagner分级法</li>
+        </a>
+        <a href="calc/calc-524.html">
+            <li>妊娠期糖尿病 GDM 诊断标准</li>
+        </a>
+        <a href="calc/calc-525.html">
+            <li>妊娠期糖尿病的分期与分级</li>
+        </a>
+        <a href="calc/calc-719.html">
+            <li>tanner 分期</li>
+        </a>
+        <a href="calc/calc-755.html">
+            <li>代谢综合征诊断标准(AHA/NHLBI)</li>
+        </a>
+        <a href="calc/calc-764.html">
+            <li>个性化定制患者糖化血红蛋白目标</li>
+        </a>
+        <a href="calc/calc-766.html">
+            <li>降低糖尿病患者的血管风险</li>
+        </a>
+        <a href="calc/calc-771.html">
+            <li>血糖自我监测血糖(SMBG)</li>
+        </a>
+        <a href="calc/calc-1076.html">
+            <li>甲亢复发风险评分</li>
+        </a>
+        <a href="calc/calc-1077.html">
+            <li>甲减L-T4治疗剂量计算器</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>心脏病学</h4>
+        <div class="second-title-txt">102项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-15.html">
+            <li>低白蛋白血症患者钙浓度校正</li>
+        </a>
+        <a href="calc/calc-18.html">
+            <li>房颤患者卒中预防风险CHA2DS2-VASc评分</li>
+        </a>
+        <a href="calc/calc-19.html">
+            <li>心房纤颤卒中风险的CHADS2评分</li>
+        </a>
+        <a href="calc/calc-21.html">
+            <li>校正QT期间</li>
+        </a>
+        <a href="calc/calc-29.html">
+            <li>Framingham心脏风险评分</li>
+        </a>
+        <a href="calc/calc-30.html">
+            <li>Framingham心脏风险评分（国际单位）</li>
+        </a>
+        <a href="calc/calc-35.html">
+            <li>口服抗凝出血风险评估HAS-BLED评分</li>
+        </a>
+        <a href="calc/calc-42.html">
+            <li>低密度脂蛋白计算 </li>
+        </a>
+        <a href="calc/calc-43.html">
+            <li>Light标准诊断渗出液</li>
+        </a>
+        <a href="calc/calc-48.html">
+            <li>平均动脉压</li>
+        </a>
+        <a href="calc/calc-61.html">
+            <li>肺栓塞的PERC判定原则</li>
+        </a>
+        <a href="calc/calc-67.html">
+            <li>旧金山晕厥严重预后预测评分</li>
+        </a>
+        <a href="calc/calc-74.html">
+            <li>TIMI风险指数</li>
+        </a>
+        <a href="calc/calc-75.html">
+            <li>ST段抬高型心肌梗死TIMI评分</li>
+        </a>
+        <a href="calc/calc-586.html">
+            <li>非ST段抬高型心肌梗死TIMI评分(TIMI risk score)</li>
+        </a>
+        <a href="calc/calc-78.html">
+            <li>深静脉血栓Well评分</li>
+        </a>
+        <a href="calc/calc-79.html">
+            <li>肺栓塞Well评分 </li>
+        </a>
+        <a href="calc/calc-82.html">
+            <li>心绞痛分级(CCS)</li>
+        </a>
+        <a href="calc/calc-87.html">
+            <li>心脏瓣膜面积(Gorlin)</li>
+        </a>
+        <a href="calc/calc-93.html">
+            <li>心率(EKG)</li>
+        </a>
+        <a href="calc/calc-95.html">
+            <li>Killip分级</li>
+        </a>
+        <a href="calc/calc-100.html">
+            <li>NYHA心功能分级</li>
+        </a>
+        <a href="calc/calc-108.html">
+            <li>血管阻力</li>
+        </a>
+        <a href="calc/calc-109.html">
+            <li>GRACE缺血风险评估</li>
+        </a>
+        <a href="calc/calc-575.html">
+            <li>每搏输出量</li>
+        </a>
+        <a href="calc/calc-576.html">
+            <li>平均动脉压</li>
+        </a>
+        <a href="calc/calc-577.html">
+            <li>心脏射血分数</li>
+        </a>
+        <a href="calc/calc-578.html">
+            <li>体循环阻力</li>
+        </a>
+        <a href="calc/calc-579.html">
+            <li>肺循环阻力</li>
+        </a>
+        <a href="calc/calc-580.html">
+            <li>氧消耗</li>
+        </a>
+        <a href="calc/calc-581.html">
+            <li>氧输送</li>
+        </a>
+        <a href="calc/calc-582.html">
+            <li>氧气使用分率</li>
+        </a>
+        <a href="calc/calc-583.html">
+            <li>房颤卒中风险评分</li>
+        </a>
+        <a href="calc/calc-584.html">
+            <li>下肢深静脉血栓形成（DVT）诊断的Wells评分</li>
+        </a>
+        <a href="calc/calc-587.html">
+            <li>稳定性心绞痛分级（CCS）</li>
+        </a>
+        <a href="calc/calc-589.html">
+            <li>Killip心功能分级（急性心梗）</li>
+        </a>
+        <a href="calc/calc-590.html">
+            <li>慢性心衰分期</li>
+        </a>
+        <a href="calc/calc-591.html">
+            <li>慢性下肢缺血-股腘动脉病变TASC分级</li>
+        </a>
+        <a href="calc/calc-592.html">
+            <li>慢性下肢缺血-腘动脉以下病变TASC分级</li>
+        </a>
+        <a href="calc/calc-593.html">
+            <li>慢性下肢缺血-主髂动脉病变TASC分级</li>
+        </a>
+        <a href="calc/calc-594.html">
+            <li>急性下肢缺血分级</li>
+        </a>
+        <a href="calc/calc-595.html">
+            <li>(慢性)下肢缺血Fontaine和Rutherford分级</li>
+        </a>
+        <a href="calc/calc-596.html">
+            <li>国人未来10年缺血性心血管病（ICVD）的发病危险性评估(女性)</li>
+        </a>
+        <a href="calc/calc-597.html">
+            <li>欧洲心脏危险评估系统(EuroSCORE)</li>
+        </a>
+        <a href="calc/calc-598.html">
+            <li>PCI并发症风险评分(Mayo系统)</li>
+        </a>
+        <a href="calc/calc-599.html">
+            <li>房颤患者卒中预防风险CHADS2-AF评分</li>
+        </a>
+        <a href="calc/calc-600.html">
+            <li>房颤症状评分-AF</li>
+        </a>
+        <a href="calc/calc-601.html">
+            <li>华法林出血风险评分-老年患者</li>
+        </a>
+        <a href="calc/calc-602.html">
+            <li>慢性充血性心力衰竭的MUSIC危险评分</li>
+        </a>
+        <a href="calc/calc-603.html">
+            <li>心衰Forrester分级</li>
+        </a>
+        <a href="calc/calc-604.html">
+            <li>心衰VALIANT风险评分(VALIANT HF Risk Score)</li>
+        </a>
+        <a href="calc/calc-605.html">
+            <li>心瓣膜面积(Gorlin公式)</li>
+        </a>
+        <a href="calc/calc-606.html">
+            <li>妊娠高血压病的分类</li>
+        </a>
+        <a href="calc/calc-607.html">
+            <li>妊娠高血压终止妊娠的指征</li>
+        </a>
+        <a href="calc/calc-608.html">
+            <li>肺栓塞Geneva预后评分</li>
+        </a>
+        <a href="calc/calc-609.html">
+            <li>CRUSADE出血风险评分量表</li>
+        </a>
+        <a href="calc/calc-610.html">
+            <li>WHO-FC肺动脉高压功能分级</li>
+        </a>
+        <a href="calc/calc-611.html">
+            <li>房颤相关症状分级(EHRA积分)</li>
+        </a>
+        <a href="calc/calc-613.html">
+            <li>心脏杂音Levine6级分级法</li>
+        </a>
+        <a href="calc/calc-614.html">
+            <li>左心室收缩/舒张末期容积指数</li>
+        </a>
+        <a href="calc/calc-615.html">
+            <li>全身炎症反应综合征SIRS标准</li>
+        </a>
+        <a href="calc/calc-616.html">
+            <li>SYNTAX积分</li>
+        </a>
+        <a href="calc/calc-617.html">
+            <li>主动脉夹层DeBakey分型</li>
+        </a>
+        <a href="calc/calc-618.html">
+            <li>主动脉夹层Stanford分型</li>
+        </a>
+        <a href="calc/calc-619.html">
+            <li>体循环至肺循环分流型先心病推荐手术安全性的无创评估及心导管评估表</li>
+        </a>
+        <a href="calc/calc-620.html">
+            <li>动脉导管未闭评分标准</li>
+        </a>
+        <a href="calc/calc-648.html">
+            <li>腹膜炎分类</li>
+        </a>
+        <a href="calc/calc-627.html">
+            <li>Borg CR10分级</li>
+        </a>
+        <a href="calc/calc-628.html">
+            <li>Borg 分级</li>
+        </a>
+        <a href="calc/calc-654.html">
+            <li>Duke诊断标准</li>
+        </a>
+        <a href="calc/calc-655.html">
+            <li>CRB-65评分</li>
+        </a>
+        <a href="calc/calc-656.html">
+            <li>Jones诊断标准</li>
+        </a>
+        <a href="calc/calc-657.html">
+            <li>Kocher诊断标准</li>
+        </a>
+        <a href="calc/calc-658.html">
+            <li>Mannheim腹膜炎指数</li>
+        </a>
+        <a href="calc/calc-675.html">
+            <li>Geneva肺栓塞评分</li>
+        </a>
+        <a href="calc/calc-676.html">
+            <li>Hestia标准</li>
+        </a>
+        <a href="calc/calc-677.html">
+            <li>简易化PESI</li>
+        </a>
+        <a href="calc/calc-678.html">
+            <li>Padua预测评分</li>
+        </a>
+        <a href="calc/calc-680.html">
+            <li>RIETE评分</li>
+        </a>
+        <a href="calc/calc-681.html">
+            <li>Wells PE评分</li>
+        </a>
+        <a href="calc/calc-303.html">
+            <li>短暂性脑缺血发作(TIA)的ABCD评分系统</li>
+        </a>
+        <a href="calc/calc-683.html">
+            <li>短暂性脑缺血发作(TIA)的ABCD2评分</li>
+        </a>
+        <a href="calc/calc-684.html">
+            <li>短暂性脑缺血发作(TIA)的ABCD3-I评分</li>
+        </a>
+        <a href="calc/calc-685.html">
+            <li>HEART评分</li>
+        </a>
+        <a href="calc/calc-686.html">
+            <li>HEMORR₂HAGES 评分</li>
+        </a>
+        <a href="calc/calc-687.html">
+            <li>San Francisco晕厥规则</li>
+        </a>
+        <a href="calc/calc-688.html">
+            <li>Wells评分</li>
+        </a>
+        <a href="calc/calc-759.html">
+            <li>心房纤颤和动脉血栓栓塞风险</li>
+        </a>
+        <a href="calc/calc-760.html">
+            <li>Forrester心力衰竭分级</li>
+        </a>
+        <a href="calc/calc-761.html">
+            <li>Framingham慢性心力衰竭诊断标准</li>
+        </a>
+        <a href="calc/calc-779.html">
+            <li>不稳定型心绞痛Braunwald分级</li>
+        </a>
+        <a href="calc/calc-780.html">
+            <li>常见血流动力学检测参数及正常范围</li>
+        </a>
+        <a href="calc/calc-781.html">
+            <li>常用左室功能参数</li>
+        </a>
+        <a href="calc/calc-787.html">
+            <li>冠状动脉狭窄分级</li>
+        </a>
+        <a href="calc/calc-792.html">
+            <li>血压水平的定义和分类标准</li>
+        </a>
+        <a href="calc/calc-798.html">
+            <li>复发性静脉血栓栓塞症的DASH预测评分标准</li>
+        </a>
+        <a href="calc/calc-800.html">
+            <li>静脉血栓栓塞(VTE)风险的Padua预测评分</li>
+        </a>
+        <a href="calc/calc-1071.html">
+            <li>静脉血栓栓塞(VTE)风险的Caprini预测评分</li>
+        </a>
+        <a href="calc/calc-808.html">
+            <li>下肢深静脉血栓后遗症(PTS)的Villalta评分</li>
+        </a>
+        <a href="calc/calc-827.html">
+            <li>China-PAR 10年内发生动脉粥样硬化性心血管病(ASCVD)危险度评估</li>
+        </a>
+        <a href="calc/calc-1074.html">
+            <li>IWPC 华法林剂量计算公式</li>
+        </a>
+        <a href="calc/calc-1075.html">
+            <li>国际标准化比值(INR)</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>急诊危重病学</h4>
+        <div class="second-title-txt">103项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-1.html">
+            <li>肺泡－动脉氧分压差</li>
+        </a>
+        <a href="calc/calc-3.html">
+            <li>嗜中性粒细胞绝对值</li>
+        </a>
+        <a href="calc/calc-9.html">
+            <li>重症监护室死亡率与APACHE II评分</li>
+        </a>
+        <a href="calc/calc-11.html">
+            <li>基础能量消耗</li>
+        </a>
+        <a href="calc/calc-122.html">
+            <li>基础代谢率(Mifflin-St Jeor公式)</li>
+        </a>
+        <a href="calc/calc-13.html">
+            <li>碳酸氢盐缺乏</li>
+        </a>
+        <a href="calc/calc-14.html">
+            <li>体重指数(BMI)</li>
+        </a>
+        <a href="calc/calc-120.html">
+            <li>体表面积(BSA)</li>
+        </a>
+        <a href="calc/calc-19.html">
+            <li>心房纤颤卒中风险的CHADS2评分</li>
+        </a>
+        <a href="calc/calc-23.html">
+            <li>根据红细胞计数校正脑脊液白细胞计数</li>
+        </a>
+        <a href="calc/calc-474.html">
+            <li>社区获得性肺炎CURB-65严重程度评分</li>
+        </a>
+        <a href="calc/calc-25.html">
+            <li>小儿气管插管的管道规则</li>
+        </a>
+        <a href="calc/calc-27.html">
+            <li>钠排泄分数</li>
+        </a>
+        <a href="calc/calc-28.html">
+            <li>尿素排泄分数</li>
+        </a>
+        <a href="calc/calc-33.html">
+            <li>格拉斯哥昏迷评分</li>
+        </a>
+        <a href="calc/calc-34.html">
+            <li>格拉斯哥-布拉奇福德出血评分</li>
+        </a>
+        <a href="calc/calc-41.html">
+            <li>国王学院标准</li>
+        </a>
+        <a href="calc/calc-43.html">
+            <li>Light标准诊断渗出液</li>
+        </a>
+        <a href="calc/calc-45.html">
+            <li>维持液体计算</li>
+        </a>
+        <a href="calc/calc-47.html">
+            <li>eGFR肾小球滤过率(2006年改良的IMDS-MDRD)计算公式</li>
+        </a>
+        <a href="calc/calc-112.html">
+            <li>eGFR肾小球滤过率(CKD-EPI 肌酐)计算公式</li>
+        </a>
+        <a href="calc/calc-1072.html">
+            <li>eGFR肾小球滤过率(CKD-EPI 胱抑素C)计算公式</li>
+        </a>
+        <a href="calc/calc-1073.html">
+            <li>eGFR肾小球滤过率(CKD-EPI 肌酐-胱抑素C)计算公式</li>
+        </a>
+        <a href="calc/calc-22.html">
+            <li>肌酐清除率(Cockcroft-Gault)</li>
+        </a>
+        <a href="calc/calc-48.html">
+            <li>平均动脉压</li>
+        </a>
+        <a href="calc/calc-56.html">
+            <li>氧合指数</li>
+        </a>
+        <a href="calc/calc-57.html">
+            <li>烧伤补液（Parkland 公式）</li>
+        </a>
+        <a href="calc/calc-59.html">
+            <li>儿童的入量和出量（每公斤和每小时）</li>
+        </a>
+        <a href="calc/calc-360.html">
+            <li>儿童终末期肝病评分(PELD)</li>
+        </a>
+        <a href="calc/calc-61.html">
+            <li>肺栓塞的PERC判定原则</li>
+        </a>
+        <a href="calc/calc-62.html">
+            <li>根据白蛋白或肾衰竭校正苯妥英钠浓度</li>
+        </a>
+        <a href="calc/calc-64.html">
+            <li>成人社区获得性肺炎严重性评分PSI/PORT评分</li>
+        </a>
+        <a href="calc/calc-65.html">
+            <li>胰腺炎死亡率Ranson评分</li>
+        </a>
+        <a href="calc/calc-67.html">
+            <li>旧金山晕厥严重预后预测评分</li>
+        </a>
+        <a href="calc/calc-68.html">
+            <li>序贯器官衰竭估计评分(SOFA)</li>
+        </a>
+        <a href="calc/calc-70.html">
+            <li>高血糖时钠浓度校正公式</li>
+        </a>
+        <a href="calc/calc-71.html">
+            <li>低钠血症钠校正率</li>
+        </a>
+        <a href="calc/calc-72.html">
+            <li>低钠血症时补钠值</li>
+        </a>
+        <a href="calc/calc-1070.html">
+            <li>补钾公式</li>
+        </a>
+        <a href="calc/calc-123.html">
+            <li>补液公式(成人)</li>
+        </a>
+        <a href="calc/calc-74.html">
+            <li>TIMI风险指数</li>
+        </a>
+        <a href="calc/calc-79.html">
+            <li>肺栓塞Well评分 </li>
+        </a>
+        <a href="calc/calc-81.html">
+            <li>代谢性酸中毒代偿的Winters计算公式</li>
+        </a>
+        <a href="calc/calc-107.html">
+            <li>镇静-躁动评分</li>
+        </a>
+        <a href="calc/calc-203.html">
+            <li>FLACC 行为评分</li>
+        </a>
+        <a href="calc/calc-485.html">
+            <li>急性移植物抗宿主反应(GVHD)分级</li>
+        </a>
+        <a href="calc/calc-486.html">
+            <li>创伤时基础能耗估计</li>
+        </a>
+        <a href="calc/calc-487.html">
+            <li>呼吸机撤离呼吸参数标准</li>
+        </a>
+        <a href="calc/calc-561.html">
+            <li>急性胰腺炎评分Ranson标准</li>
+        </a>
+        <a href="calc/calc-563.html">
+            <li>急性上消化道出血Rockall评分</li>
+        </a>
+        <a href="calc/calc-570.html">
+            <li>急性阑尾炎Alvarado评分</li>
+        </a>
+        <a href="calc/calc-583.html">
+            <li>房颤卒中风险评分</li>
+        </a>
+        <a href="calc/calc-75.html">
+            <li>ST段抬高心肌梗塞的TIMI危险评分</li>
+        </a>
+        <a href="calc/calc-586.html">
+            <li>非ST段抬高心梗TIMI危险评分</li>
+        </a>
+        <a href="calc/calc-589.html">
+            <li>Killip心功能分级（急性心梗）</li>
+        </a>
+        <a href="calc/calc-594.html">
+            <li>急性下肢缺血分级</li>
+        </a>
+        <a href="calc/calc-597.html">
+            <li>欧洲心脏危险评估系统(EuroSCORE)</li>
+        </a>
+        <a href="calc/calc-599.html">
+            <li>房颤患者卒中预防风险CHADS2-AF评分</li>
+        </a>
+        <a href="calc/calc-600.html">
+            <li>房颤症状评分-AF</li>
+        </a>
+        <a href="calc/calc-109.html">
+            <li>GRACE缺血风险评估</li>
+        </a>
+        <a href="calc/calc-89.html">
+            <li>Δ脉压</li>
+        </a>
+        <a href="calc/calc-608.html">
+            <li>肺栓塞Geneva预后评分</li>
+        </a>
+        <a href="calc/calc-611.html">
+            <li>房颤相关症状分级(EHRA积分)</li>
+        </a>
+        <a href="calc/calc-615.html">
+            <li>全身炎症反应综合征SIRS标准</li>
+        </a>
+        <a href="calc/calc-634.html">
+            <li>Glasgow结局分级</li>
+        </a>
+        <a href="calc/calc-637.html">
+            <li>镇静-躁动评分</li>
+        </a>
+        <a href="calc/calc-638.html">
+            <li>ASA分级</li>
+        </a>
+        <a href="calc/calc-640.html">
+            <li>Cormack分级</li>
+        </a>
+        <a href="calc/calc-646.html">
+            <li>Rudkin镇静评分</li>
+        </a>
+        <a href="calc/calc-653.html">
+            <li>行为性疼痛分级</li>
+        </a>
+        <a href="calc/calc-655.html">
+            <li>CRB-65评分</li>
+        </a>
+        <a href="calc/calc-659.html">
+            <li>VAP PIRO评分</li>
+        </a>
+        <a href="calc/calc-660.html">
+            <li>CATCH规则</li>
+        </a>
+        <a href="calc/calc-661.html">
+            <li>儿科创伤评分</li>
+        </a>
+        <a href="calc/calc-662.html">
+            <li>Glasgow昏迷评分</li>
+        </a>
+        <a href="calc/calc-664.html">
+            <li>PECARN算法</li>
+        </a>
+        <a href="calc/calc-666.html">
+            <li>创伤程度评分</li>
+        </a>
+        <a href="calc/calc-667.html">
+            <li>FOUR昏迷评分</li>
+        </a>
+        <a href="calc/calc-670.html">
+            <li>New Orleans标准</li>
+        </a>
+        <a href="calc/calc-671.html">
+            <li>NEXUS II 头颅CT规则</li>
+        </a>
+        <a href="calc/calc-672.html">
+            <li>NEXUS颈椎射片规则</li>
+        </a>
+        <a href="calc/calc-673.html">
+            <li>Ottawa踝关节骨折诊断规则</li>
+        </a>
+        <a href="calc/calc-674.html">
+            <li>Ottawa膝关节骨折诊断规则</li>
+        </a>
+        <a href="calc/calc-675.html">
+            <li>Geneva肺栓塞评分</li>
+        </a>
+        <a href="calc/calc-676.html">
+            <li>Hestia标准</li>
+        </a>
+        <a href="calc/calc-677.html">
+            <li>简易化PESI</li>
+        </a>
+        <a href="calc/calc-679.html">
+            <li>PERC</li>
+        </a>
+        <a href="calc/calc-681.html">
+            <li>Wells PE评分</li>
+        </a>
+        <a href="calc/calc-682.html">
+            <li>Wells评分 </li>
+        </a>
+        <a href="calc/calc-303.html">
+            <li>短暂性脑缺血发作(TIA)的ABCD评分系统</li>
+        </a>
+        <a href="calc/calc-683.html">
+            <li>短暂性脑缺血发作(TIA)的ABCD2评分</li>
+        </a>
+        <a href="calc/calc-684.html">
+            <li>短暂性脑缺血发作(TIA)的ABCD3-I评分</li>
+        </a>
+        <a href="calc/calc-685.html">
+            <li>HEART评分</li>
+        </a>
+        <a href="calc/calc-687.html">
+            <li>San Francisco晕厥规则</li>
+        </a>
+        <a href="calc/calc-688.html">
+            <li>Wells评分</li>
+        </a>
+        <a href="calc/calc-691.html">
+            <li>Ottawa SAH规则</li>
+        </a>
+        <a href="calc/calc-696.html">
+            <li>ROSIER 分级</li>
+        </a>
+        <a href="calc/calc-708.html">
+            <li>气管插管时肌松程度分级</li>
+        </a>
+        <a href="calc/calc-757.html">
+            <li>老年人的出院死亡率</li>
+        </a>
+        <a href="calc/calc-778.html">
+            <li>Comfort疼痛评分</li>
+        </a>
+        <a href="calc/calc-785.html">
+            <li>高渗性高血糖状态(HHS)实验室诊断标准</li>
+        </a>
+        <a href="calc/calc-799.html">
+            <li>呼吸机相关性肺炎(VAP)的临床肺部感染评分(CPI)</li>
+        </a>
+        <a href="calc/calc-807.html">
+            <li>危重病(NUTRIC)评分中的营养风险</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>胃肠病学</h4>
+        <div class="second-title-txt">40项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-20.html">
+            <li>肝硬化死亡率的Child-Pugh评分</li>
+        </a>
+        <a href="calc/calc-32.html">
+            <li>格拉斯哥酒精性肝炎评分</li>
+        </a>
+        <a href="calc/calc-34.html">
+            <li>格拉斯哥-布拉奇福德出血评分</li>
+        </a>
+        <a href="calc/calc-36.html">
+            <li>肝性脑病临床分级</li>
+        </a>
+        <a href="calc/calc-41.html">
+            <li>国王学院标准</li>
+        </a>
+        <a href="calc/calc-73.html">
+            <li>粪便渗透压差</li>
+        </a>
+        <a href="calc/calc-129.html">
+            <li>食管癌TNM分期</li>
+        </a>
+        <a href="calc/calc-130.html">
+            <li>胃癌TNM分期</li>
+        </a>
+        <a href="calc/calc-131.html">
+            <li>小肠肿瘤TNM分期</li>
+        </a>
+        <a href="calc/calc-132.html">
+            <li>结直肠癌TNM分期</li>
+        </a>
+        <a href="calc/calc-133.html">
+            <li>肛管癌TNM分期</li>
+        </a>
+        <a href="calc/calc-134.html">
+            <li>胃肠道间质瘤TNM分期</li>
+        </a>
+        <a href="calc/calc-135.html">
+            <li>肝癌TNM分期</li>
+        </a>
+        <a href="calc/calc-136.html">
+            <li>胰腺癌TNM分期</li>
+        </a>
+        <a href="calc/calc-556.html">
+            <li>白蛋白/球蛋白比值</li>
+        </a>
+        <a href="calc/calc-557.html">
+            <li>淀粉酶肌酐清除比值</li>
+        </a>
+        <a href="calc/calc-558.html">
+            <li>蛋白质摄入量</li>
+        </a>
+        <a href="calc/calc-559.html">
+            <li>反流性食管炎GERD分级</li>
+        </a>
+        <a href="calc/calc-560.html">
+            <li>急性胰腺炎CT严重程度指数CTSI</li>
+        </a>
+        <a href="calc/calc-561.html">
+            <li>急性胰腺炎评分Ranson标准</li>
+        </a>
+        <a href="calc/calc-562.html">
+            <li>非酒精性脂肪肝NAS积分</li>
+        </a>
+        <a href="calc/calc-563.html">
+            <li>急性上消化道出血Rockall评分</li>
+        </a>
+        <a href="calc/calc-564.html">
+            <li>Truelove和Witts溃疡性结肠炎分度</li>
+        </a>
+        <a href="calc/calc-565.html">
+            <li>溃疡性结肠炎的Sutherland疾病活动指数</li>
+        </a>
+        <a href="calc/calc-566.html">
+            <li>WHO推荐的克罗恩病诊断要点</li>
+        </a>
+        <a href="calc/calc-567.html">
+            <li>克罗恩病活动指数(CDAI)简化计算法</li>
+        </a>
+        <a href="calc/calc-568.html">
+            <li>H.pylori感染的诊断标准</li>
+        </a>
+        <a href="calc/calc-569.html">
+            <li>H.pylori感染的根除标准</li>
+        </a>
+        <a href="calc/calc-570.html">
+            <li>急性阑尾炎Alvarado评分</li>
+        </a>
+        <a href="calc/calc-571.html">
+            <li>肝性脑病分级</li>
+        </a>
+        <a href="calc/calc-572.html">
+            <li>溃疡性结肠炎活动性Mayo评分</li>
+        </a>
+        <a href="calc/calc-573.html">
+            <li>消化道出血Forrest分级</li>
+        </a>
+        <a href="calc/calc-574.html">
+            <li>血清-腹水白蛋白梯度</li>
+        </a>
+        <a href="calc/calc-643.html">
+            <li>Balthazar分级</li>
+        </a>
+        <a href="calc/calc-644.html">
+            <li>ristol粪便分类表</li>
+        </a>
+        <a href="calc/calc-645.html">
+            <li>Rutgeerts分级</li>
+        </a>
+        <a href="calc/calc-694.html">
+            <li>Eckardt评分</li>
+        </a>
+        <a href="calc/calc-695.html">
+            <li>高危再酗酒评分</li>
+        </a>
+        <a href="calc/calc-699.html">
+            <li>Dukes 分期</li>
+        </a>
+        <a href="calc/calc-700.html">
+            <li>H.pylori 根除指征</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>血液病学</h4>
+        <div class="second-title-txt">31项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-3.html">
+            <li>嗜中性粒细胞绝对值</li>
+        </a>
+        <a href="calc/calc-4.html">
+            <li>网织红细胞绝对值</li>
+        </a>
+        <a href="calc/calc-34.html">
+            <li>格拉斯哥-布拉奇福德出血评分</li>
+        </a>
+        <a href="calc/calc-78.html">
+            <li>深静脉血栓Well评分</li>
+        </a>
+        <a href="calc/calc-138.html">
+            <li>霍奇金淋巴瘤HL分期（Ann Arbor分期系统）</li>
+        </a>
+        <a href="calc/calc-139.html">
+            <li>国际淋巴瘤预后指数IPI</li>
+        </a>
+        <a href="calc/calc-146.html">
+            <li>多发性骨髓瘤(MM)Durie-Salmon分期</li>
+        </a>
+        <a href="calc/calc-147.html">
+            <li>多发性骨髓瘤(MM)国际分期系统(ISS)</li>
+        </a>
+        <a href="calc/calc-148.html">
+            <li>霍奇金淋巴瘤(HL)国际预后评分(Hasenclever IPS Score)</li>
+        </a>
+        <a href="calc/calc-200.html">
+            <li>霍奇金和非霍奇金淋巴瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-206.html">
+            <li>化疗后骨髓抑制的分度</li>
+        </a>
+        <a href="calc/calc-207.html">
+            <li>急性髓系白血病的危险度分级</li>
+        </a>
+        <a href="calc/calc-399.html">
+            <li>Rh 和 ABO 溶血病的比较</li>
+        </a>
+        <a href="calc/calc-357.html">
+            <li>血总胆红素/血白蛋白</li>
+        </a>
+        <a href="calc/calc-621.html">
+            <li>DIC诊断积分系统</li>
+        </a>
+        <a href="calc/calc-622.html">
+            <li>肝素诱导的血小板减少评分系统(HIT 4Ts score)</li>
+        </a>
+        <a href="calc/calc-623.html">
+            <li>骨髓增生异常综合征(MDS)国际预后评分系统(IPSS)</li>
+        </a>
+        <a href="calc/calc-624.html">
+            <li>骨髓增生异常综合征(MDS)基于WHO分类的预后评分系统(WPSS)</li>
+        </a>
+        <a href="calc/calc-625.html">
+            <li>Lavin-Osband 分级法</li>
+        </a>
+        <a href="calc/calc-763.html">
+            <li>多发性骨髓瘤预后(R-ISS)</li>
+        </a>
+        <a href="calc/calc-767.html">
+            <li>滤泡性淋巴瘤预后</li>
+        </a>
+        <a href="calc/calc-768.html">
+            <li>弥漫性大B细胞淋巴瘤预后(R-IPI)</li>
+        </a>
+        <a href="calc/calc-786.html">
+            <li>骨髓增生异常综合征(MDS)的FAB分型</li>
+        </a>
+        <a href="calc/calc-801.html">
+            <li>慢性淋巴细胞白血病(CLL)的Binet分期系统</li>
+        </a>
+        <a href="calc/calc-802.html">
+            <li>慢性淋巴细胞白血病(CLL)的RAI分期系统</li>
+        </a>
+        <a href="calc/calc-803.html">
+            <li>慢性淋巴细胞白血病(CLL-IPI)国际预后指数</li>
+        </a>
+        <a href="calc/calc-811.html">
+            <li>套细胞淋巴瘤国际预后指数(MIPI)</li>
+        </a>
+        <a href="calc/calc-812.html">
+            <li>弥漫性大B细胞淋巴瘤预后(IPI24)</li>
+        </a>
+        <a href="calc/calc-813.html">
+            <li>MDS修订-国际预后评分系统(IPSS-R)</li>
+        </a>
+        <a href="calc/calc-829.html">
+            <li>慢性粒细胞白血病(CML) Sokal评分</li>
+        </a>
+        <a href="calc/calc-830.html">
+            <li>慢性粒细胞白血病(CML) Hasford评分</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>肿瘤学</h4>
+        <div class="second-title-txt">130项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-129.html">
+            <li>食管癌TNM分期</li>
+        </a>
+        <a href="calc/calc-130.html">
+            <li>胃癌TNM分期</li>
+        </a>
+        <a href="calc/calc-131.html">
+            <li>小肠肿瘤TNM分期</li>
+        </a>
+        <a href="calc/calc-132.html">
+            <li>结直肠癌TNM分期</li>
+        </a>
+        <a href="calc/calc-133.html">
+            <li>肛管癌TNM分期</li>
+        </a>
+        <a href="calc/calc-134.html">
+            <li>胃肠道间质瘤TNM分期</li>
+        </a>
+        <a href="calc/calc-135.html">
+            <li>肝癌TNM分期</li>
+        </a>
+        <a href="calc/calc-136.html">
+            <li>胰腺癌TNM分期</li>
+        </a>
+        <a href="calc/calc-137.html">
+            <li>巴塞罗那（BCLC）肝癌分期</li>
+        </a>
+        <a href="calc/calc-138.html">
+            <li>霍奇金淋巴瘤HL分期（Ann Arbor分期系统）</li>
+        </a>
+        <a href="calc/calc-139.html">
+            <li>国际淋巴瘤预后指数IPI</li>
+        </a>
+        <a href="calc/calc-140.html">
+            <li>不同因素对膀胱癌复发与进展影响的评分</li>
+        </a>
+        <a href="calc/calc-141.html">
+            <li>膀胱尿路上皮癌恶性程度分级系统</li>
+        </a>
+        <a href="calc/calc-142.html">
+            <li>膀胱癌TNM分期</li>
+        </a>
+        <a href="calc/calc-143.html">
+            <li>子宫内膜癌FIGO分期</li>
+        </a>
+        <a href="calc/calc-144.html">
+            <li>卵巢癌FIGO分期</li>
+        </a>
+        <a href="calc/calc-145.html">
+            <li>宫颈癌FIGO分期</li>
+        </a>
+        <a href="calc/calc-146.html">
+            <li>多发性骨髓瘤(MM)Durie-Salmon分期</li>
+        </a>
+        <a href="calc/calc-147.html">
+            <li>多发性骨髓瘤(MM)国际分期系统(ISS)</li>
+        </a>
+        <a href="calc/calc-148.html">
+            <li>霍奇金淋巴瘤(HL)国际预后评分(Hasenclever IPS Score)</li>
+        </a>
+        <a href="calc/calc-149.html">
+            <li>外阴癌FIGO分期</li>
+        </a>
+        <a href="calc/calc-150.html">
+            <li>外阴鳞状上皮内瘤变分类及特征</li>
+        </a>
+        <a href="calc/calc-151.html">
+            <li>子宫肉瘤FIGO分期</li>
+        </a>
+        <a href="calc/calc-152.html">
+            <li>未成熟畸胎瘤的分级方法</li>
+        </a>
+        <a href="calc/calc-153.html">
+            <li>滋养细胞肿瘤FIGO改良预后评分系统</li>
+        </a>
+        <a href="calc/calc-154.html">
+            <li>滋养细胞肿瘤解剖学FIGO分期</li>
+        </a>
+        <a href="calc/calc-155.html">
+            <li>输卵管癌手术-病理FIGO分期</li>
+        </a>
+        <a href="calc/calc-156.html">
+            <li>阴道癌FIGO及UICC分期</li>
+        </a>
+        <a href="calc/calc-157.html">
+            <li>乳腺癌术后复发风险分组及全身辅助治疗选择</li>
+        </a>
+        <a href="calc/calc-158.html">
+            <li>弥漫型恶性胸膜间皮瘤Butchart分期</li>
+        </a>
+        <a href="calc/calc-159.html">
+            <li>结直肠息肉分类</li>
+        </a>
+        <a href="calc/calc-160.html">
+            <li>结直肠癌组织学Broders分级</li>
+        </a>
+        <a href="calc/calc-161.html">
+            <li>胃肠道间质瘤(GIST)切除术后风险分级</li>
+        </a>
+        <a href="calc/calc-162.html">
+            <li>体能状态评分标准(KPS法与ZPS法)</li>
+        </a>
+        <a href="calc/calc-163.html">
+            <li>肌肉骨骼肿瘤Enneking外科分期</li>
+        </a>
+        <a href="calc/calc-164.html">
+            <li>肝门部胆管癌Bismuth-Corlette分型</li>
+        </a>
+        <a href="calc/calc-165.html">
+            <li>胰腺内分泌肿瘤(PEN)类型及相关临床综合征</li>
+        </a>
+        <a href="calc/calc-166.html">
+            <li>胸腹主动脉瘤Crawford分型</li>
+        </a>
+        <a href="calc/calc-167.html">
+            <li>腹腔器官肿瘤标志物分类</li>
+        </a>
+        <a href="calc/calc-168.html">
+            <li>唇和口腔肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-169.html">
+            <li>咽部肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-170.html">
+            <li>喉部肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-171.html">
+            <li>鼻腔与鼻窦肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-172.html">
+            <li>大唾液腺肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-173.html">
+            <li>甲状腺肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-174.html">
+            <li>头颈部的恶性黑色素瘤</li>
+        </a>
+        <a href="calc/calc-175.html">
+            <li>阑尾肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-176.html">
+            <li>神经内分泌瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-177.html">
+            <li>肝内胆管癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-178.html">
+            <li>胆囊癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-179.html">
+            <li>肝门胆管癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-180.html">
+            <li>远端胆管癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-181.html">
+            <li>Vater 壶腹癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-182.html">
+            <li>胸膜间皮瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-183.html">
+            <li>骨肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-184.html">
+            <li>软组织肉瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-185.html">
+            <li>皮肤鳞状细胞癌及其它皮肤肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-186.html">
+            <li>Merkel 细胞瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-128.html">
+            <li>皮肤黑色素瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-187.html">
+            <li>乳腺癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-188.html">
+            <li>外阴癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-189.html">
+            <li>阴道癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-190.html">
+            <li>宫颈癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-191.html">
+            <li>子宫体肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-192.html">
+            <li>卵巢癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-193.html">
+            <li>输卵管肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-194.html">
+            <li>妊娠滋养细胞肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-195.html">
+            <li>阴茎癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-196.html">
+            <li>前列腺癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-197.html">
+            <li>睾丸肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-198.html">
+            <li>膀胱肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-199.html">
+            <li>尿道肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-200.html">
+            <li>霍奇金和非霍奇金淋巴瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-201.html">
+            <li>原发性皮肤淋巴瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-202.html">
+            <li>乳腺影像报告数据系统(BI-RADS)</li>
+        </a>
+        <a href="calc/calc-203.html">
+            <li>FLACC 行为评分</li>
+        </a>
+        <a href="calc/calc-204.html">
+            <li>肿瘤患者体力状况(KPS/ZPS)</li>
+        </a>
+        <a href="calc/calc-205.html">
+            <li>体力状况 ECOG 评分标准(ZPS)</li>
+        </a>
+        <a href="calc/calc-206.html">
+            <li>化疗后骨髓抑制的分度</li>
+        </a>
+        <a href="calc/calc-207.html">
+            <li>急性髓系白血病的危险度分级</li>
+        </a>
+        <a href="calc/calc-626.html">
+            <li>体力状况(Zubrod)</li>
+        </a>
+        <a href="calc/calc-652.html">
+            <li>MASCC评分</li>
+        </a>
+        <a href="calc/calc-653.html">
+            <li>行为性疼痛分级</li>
+        </a>
+        <a href="calc/calc-699.html">
+            <li>Dukes 分期</li>
+        </a>
+        <a href="calc/calc-704.html">
+            <li>ZPS </li>
+        </a>
+        <a href="calc/calc-721.html">
+            <li>肺癌TNM分期(第八版)</li>
+        </a>
+        <a href="calc/calc-722.html">
+            <li>鼻咽癌</li>
+        </a>
+        <a href="calc/calc-723.html">
+            <li>HPV 相关性(P16+)口咽癌</li>
+        </a>
+        <a href="calc/calc-724.html">
+            <li>口咽(P16-)和喉咽癌</li>
+        </a>
+        <a href="calc/calc-725.html">
+            <li>结膜癌</li>
+        </a>
+        <a href="calc/calc-726.html">
+            <li>结膜黑色素瘤</li>
+        </a>
+        <a href="calc/calc-727.html">
+            <li>泪腺癌</li>
+        </a>
+        <a href="calc/calc-728.html">
+            <li>葡萄膜黑色素瘤</li>
+        </a>
+        <a href="calc/calc-729.html">
+            <li>视网膜母细胞瘤</li>
+        </a>
+        <a href="calc/calc-730.html">
+            <li>眼睑癌</li>
+        </a>
+        <a href="calc/calc-731.html">
+            <li>眼眶肉瘤</li>
+        </a>
+        <a href="calc/calc-732.html">
+            <li>甲状腺髓样癌</li>
+        </a>
+        <a href="calc/calc-733.html">
+            <li>甲状旁腺癌</li>
+        </a>
+        <a href="calc/calc-734.html">
+            <li>胸腺肿瘤</li>
+        </a>
+        <a href="calc/calc-735.html">
+            <li>肛门肿瘤</li>
+        </a>
+        <a href="calc/calc-736.html">
+            <li>睾丸青春期后生殖细胞肿瘤及恶性性索间质肿瘤</li>
+        </a>
+        <a href="calc/calc-737.html">
+            <li>卵巢、输卵管肿瘤和原发性腹膜癌</li>
+        </a>
+        <a href="calc/calc-738.html">
+            <li>女性外阴癌</li>
+        </a>
+        <a href="calc/calc-739.html">
+            <li>四肢和躯干软组织肉瘤</li>
+        </a>
+        <a href="calc/calc-740.html">
+            <li>乳腺肉瘤</li>
+        </a>
+        <a href="calc/calc-741.html">
+            <li>乳腺叶状肿瘤</li>
+        </a>
+        <a href="calc/calc-742.html">
+            <li>腹部和胸腔内脏器官软组织肉瘤</li>
+        </a>
+        <a href="calc/calc-743.html">
+            <li>腹膜后软组织肉瘤</li>
+        </a>
+        <a href="calc/calc-744.html">
+            <li>胆囊肉瘤</li>
+        </a>
+        <a href="calc/calc-745.html">
+            <li>肾肉瘤</li>
+        </a>
+        <a href="calc/calc-746.html">
+            <li>结肠、直肠神经内分泌肿瘤</li>
+        </a>
+        <a href="calc/calc-747.html">
+            <li>空肠回肠神经内分泌肿瘤</li>
+        </a>
+        <a href="calc/calc-748.html">
+            <li>阑尾神经内分泌肿瘤</li>
+        </a>
+        <a href="calc/calc-749.html">
+            <li>肾上腺神经内分泌肿瘤</li>
+        </a>
+        <a href="calc/calc-750.html">
+            <li>十二指肠和 Vater 壶腹神经内分泌肿瘤</li>
+        </a>
+        <a href="calc/calc-751.html">
+            <li>胃神经内分泌肿瘤</li>
+        </a>
+        <a href="calc/calc-752.html">
+            <li>胰腺神经内分泌肿瘤</li>
+        </a>
+        <a href="calc/calc-774.html">
+            <li>癌痛主诉疼痛分级法(VRS)</li>
+        </a>
+        <a href="calc/calc-775.html">
+            <li>实体瘤的疗效评价标准</li>
+        </a>
+        <a href="calc/calc-789.html">
+            <li>局限性前列腺癌风险分级</li>
+        </a>
+        <a href="calc/calc-801.html">
+            <li>慢性淋巴细胞白血病(CLL)的Binet分期系统</li>
+        </a>
+        <a href="calc/calc-802.html">
+            <li>慢性淋巴细胞白血病(CLL)的RAI分期系统</li>
+        </a>
+        <a href="calc/calc-803.html">
+            <li>慢性淋巴细胞白血病(CLL-IPI)国际预后指数</li>
+        </a>
+        <a href="calc/calc-768.html">
+            <li>弥漫性大B细胞淋巴瘤预后(R-IPI)</li>
+        </a>
+        <a href="calc/calc-763.html">
+            <li>多发性骨髓瘤预后(R-ISS)</li>
+        </a>
+        <a href="calc/calc-767.html">
+            <li>滤泡性淋巴瘤预后</li>
+        </a>
+        <a href="calc/calc-804.html">
+            <li>前列腺癌Gleason评分规则</li>
+        </a>
+        <a href="calc/calc-805.html">
+            <li>人体机能状态量表</li>
+        </a>
+        <a href="calc/calc-806.html">
+            <li>肾癌的UCLA综合分期系统</li>
+        </a>
+        <a href="calc/calc-828.html">
+            <li>罗马指数(ROMA Index)评估卵巢癌患病风险</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>肝病/传染病学</h4>
+        <div class="second-title-txt">21项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-15.html">
+            <li>低白蛋白血症患者钙浓度校正</li>
+        </a>
+        <a href="calc/calc-20.html">
+            <li>肝硬化死亡率的Child-Pugh评分</li>
+        </a>
+        <a href="calc/calc-831.html">
+            <li>ALBI分级评估肝功能(HCC)</li>
+        </a>
+        <a href="calc/calc-32.html">
+            <li>格拉斯哥酒精性肝炎评分</li>
+        </a>
+        <a href="calc/calc-34.html">
+            <li>格拉斯哥-布拉奇福德出血评分</li>
+        </a>
+        <a href="calc/calc-36.html">
+            <li>肝性脑病临床分级</li>
+        </a>
+        <a href="calc/calc-41.html">
+            <li>国王学院标准</li>
+        </a>
+        <a href="calc/calc-44.html">
+            <li>酒精性肝炎Maddrey判别函数 </li>
+        </a>
+        <a href="calc/calc-49.html">
+            <li>终末期肝病模型(12岁及12岁以上)</li>
+        </a>
+        <a href="calc/calc-360.html">
+            <li>儿童终末期肝病评分(PELD)</li>
+        </a>
+        <a href="calc/calc-113.html">
+            <li>天门冬氨酸氨基转移酶与血小板比值(APRI)评分</li>
+        </a>
+        <a href="calc/calc-114.html">
+            <li>HCC风险预测模型-适用于初治患者模型</li>
+        </a>
+        <a href="calc/calc-115.html">
+            <li>HCC风险预测模型-适用于在治患者模型</li>
+        </a>
+        <a href="calc/calc-23.html">
+            <li>根据红细胞计数校正脑脊液白细胞计数</li>
+        </a>
+        <a href="calc/calc-474.html">
+            <li>社区获得性肺炎CURB-65严重程度评分</li>
+        </a>
+        <a href="calc/calc-37.html">
+            <li>HIV针刺风险评估层次协议</li>
+        </a>
+        <a href="calc/calc-43.html">
+            <li>Light标准诊断渗出液</li>
+        </a>
+        <a href="calc/calc-64.html">
+            <li>成人社区获得性肺炎严重性评分PSI/PORT评分</li>
+        </a>
+        <a href="calc/calc-80.html">
+            <li>Westley哮吼评分</li>
+        </a>
+        <a href="calc/calc-459.html">
+            <li>肝功能CTP分级法</li>
+        </a>
+        <a href="calc/calc-460.html">
+            <li>肝损伤分级(AAST)</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>肾脏病学</h4>
+        <div class="second-title-txt">33项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-8.html">
+            <li>阴离子间隙</li>
+        </a>
+        <a href="calc/calc-20.html">
+            <li>肝硬化死亡率的Child-Pugh评分</li>
+        </a>
+        <a href="calc/calc-27.html">
+            <li>钠排泄分数</li>
+        </a>
+        <a href="calc/calc-28.html">
+            <li>尿素排泄分数</li>
+        </a>
+        <a href="calc/calc-31.html">
+            <li>高钠血症患者游离水缺乏量计算</li>
+        </a>
+        <a href="calc/calc-45.html">
+            <li>维持液体计算</li>
+        </a>
+        <a href="calc/calc-47.html">
+            <li>eGFR肾小球滤过率(2006年改良的IMDS-MDRD)计算公式</li>
+        </a>
+        <a href="calc/calc-112.html">
+            <li>eGFR肾小球滤过率(CKD-EPI 肌酐)计算公式</li>
+        </a>
+        <a href="calc/calc-1072.html">
+            <li>eGFR肾小球滤过率(CKD-EPI 胱抑素C)计算公式</li>
+        </a>
+        <a href="calc/calc-1073.html">
+            <li>eGFR肾小球滤过率(CKD-EPI 肌酐-胱抑素C)计算公式</li>
+        </a>
+        <a href="calc/calc-22.html">
+            <li>肌酐清除率(Cockcroft-Gault)</li>
+        </a>
+        <a href="calc/calc-49.html">
+            <li>终末期肝病模型(12岁及12岁以上)</li>
+        </a>
+        <a href="calc/calc-59.html">
+            <li>儿童的入量和出量（每公斤和每小时）</li>
+        </a>
+        <a href="calc/calc-69.html">
+            <li>血清渗透压</li>
+        </a>
+        <a href="calc/calc-71.html">
+            <li>低钠血症钠校正率</li>
+        </a>
+        <a href="calc/calc-72.html">
+            <li>低钠血症时补钠值</li>
+        </a>
+        <a href="calc/calc-1070.html">
+            <li>补钾公式</li>
+        </a>
+        <a href="calc/calc-77.html">
+            <li>肾小管钾浓度梯度计算</li>
+        </a>
+        <a href="calc/calc-90.html">
+            <li>钙排泄分数</li>
+        </a>
+        <a href="calc/calc-91.html">
+            <li>镁排泄分数</li>
+        </a>
+        <a href="calc/calc-531.html">
+            <li>残余肾功能</li>
+        </a>
+        <a href="calc/calc-532.html">
+            <li>尿阴离子间隙</li>
+        </a>
+        <a href="calc/calc-533.html">
+            <li>慢性肾脏病CKD分期</li>
+        </a>
+        <a href="calc/calc-534.html">
+            <li>肾囊性病变bosniak分级</li>
+        </a>
+        <a href="calc/calc-535.html">
+            <li>造影剂肾病危险因素评分</li>
+        </a>
+        <a href="calc/calc-536.html">
+            <li>尿蛋白排泄量估计</li>
+        </a>
+        <a href="calc/calc-537.html">
+            <li>肾衰指数</li>
+        </a>
+        <a href="calc/calc-538.html">
+            <li>肾癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-539.html">
+            <li>肾盂和输尿管肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-540.html">
+            <li>肾上腺肿瘤</li>
+        </a>
+        <a href="calc/calc-558.html">
+            <li>蛋白质摄入量</li>
+        </a>
+        <a href="calc/calc-615.html">
+            <li>全身炎症反应综合征SIRS标准</li>
+        </a>
+        <a href="calc/calc-642.html">
+            <li>KDIGO AKI分级</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>神经病学</h4>
+        <div class="second-title-txt">118项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-303.html">
+            <li>短暂性脑缺血发作(TIA)的ABCD评分系统</li>
+        </a>
+        <a href="calc/calc-683.html">
+            <li>短暂性脑缺血发作(TIA)的ABCD2评分</li>
+        </a>
+        <a href="calc/calc-684.html">
+            <li>短暂性脑缺血发作(TIA)的ABCD3-I评分</li>
+        </a>
+        <a href="calc/calc-16.html">
+            <li>加拿大颈椎规则</li>
+        </a>
+        <a href="calc/calc-18.html">
+            <li>房颤患者卒中预防风险CHA2DS2-VASc评分</li>
+        </a>
+        <a href="calc/calc-19.html">
+            <li>心房纤颤卒中风险的CHADS2评分</li>
+        </a>
+        <a href="calc/calc-23.html">
+            <li>根据红细胞计数校正脑脊液白细胞计数</li>
+        </a>
+        <a href="calc/calc-33.html">
+            <li>格拉斯哥昏迷评分</li>
+        </a>
+        <a href="calc/calc-38.html">
+            <li>蛛网膜下腔出血Hunt and Hess分类法</li>
+        </a>
+        <a href="calc/calc-40.html">
+            <li>脑内出血评分</li>
+        </a>
+        <a href="calc/calc-52.html">
+            <li>美国X线成像急症应用研究颈椎成像标准</li>
+        </a>
+        <a href="calc/calc-53.html">
+            <li>美国国立卫生研究院卒中量表</li>
+        </a>
+        <a href="calc/calc-62.html">
+            <li>根据白蛋白或肾衰竭校正苯妥英钠浓度 </li>
+        </a>
+        <a href="calc/calc-67.html">
+            <li>旧金山晕厥严重预后预测评分</li>
+        </a>
+        <a href="calc/calc-84.html">
+            <li>ASIA损伤分级</li>
+        </a>
+        <a href="calc/calc-99.html">
+            <li>肌力分级(MRC)</li>
+        </a>
+        <a href="calc/calc-111.html">
+            <li>ESSEN评分</li>
+        </a>
+        <a href="calc/calc-208.html">
+            <li>各类型颅内出血鉴别诊断</li>
+        </a>
+        <a href="calc/calc-209.html">
+            <li>斯堪地那维亚卒中量表</li>
+        </a>
+        <a href="calc/calc-210.html">
+            <li>血性脑脊液白细胞校正</li>
+        </a>
+        <a href="calc/calc-211.html">
+            <li>MRC肌力分级</li>
+        </a>
+        <a href="calc/calc-212.html">
+            <li>蛛网膜下腔出血HUNT-HESS分级</li>
+        </a>
+        <a href="calc/calc-213.html">
+            <li>旧金山晕厥标准（ SFSR）</li>
+        </a>
+        <a href="calc/calc-214.html">
+            <li>镇静程度评分</li>
+        </a>
+        <a href="calc/calc-215.html">
+            <li>美国国立卫生院卒中量表(NIHSS)</li>
+        </a>
+        <a href="calc/calc-216.html">
+            <li>颅内血管动静脉畸形(AVM) Spetsler-Martin分级</li>
+        </a>
+        <a href="calc/calc-217.html">
+            <li>Richmond躁动-镇静评分(RASS)</li>
+        </a>
+        <a href="calc/calc-218.html">
+            <li>产褥期抑郁症诊断标准</li>
+        </a>
+        <a href="calc/calc-219.html">
+            <li>爱丁堡产后抑郁量表（EPDS）</li>
+        </a>
+        <a href="calc/calc-220.html">
+            <li>经前焦虑障碍PMDD诊断标准</li>
+        </a>
+        <a href="calc/calc-221.html">
+            <li>Essen卒中风险评分量表(ESRS)</li>
+        </a>
+        <a href="calc/calc-222.html">
+            <li>简易智能精神状态检查量表(MMSE)</li>
+        </a>
+        <a href="calc/calc-223.html">
+            <li>Hachinski缺血指数量表（HIS）</li>
+        </a>
+        <a href="calc/calc-224.html">
+            <li>汉密尔顿抑郁量表(HAMD)</li>
+        </a>
+        <a href="calc/calc-225.html">
+            <li>简明精神病量表(BPRS)</li>
+        </a>
+        <a href="calc/calc-226.html">
+            <li>年中华医学会神经病学分会血管性痴呆诊断标准草案要点</li>
+        </a>
+        <a href="calc/calc-227.html">
+            <li>Wingerchuk推荐视神经脊髓炎诊断标准</li>
+        </a>
+        <a href="calc/calc-228.html">
+            <li>Chiari畸形分型CT及MRI表现</li>
+        </a>
+        <a href="calc/calc-229.html">
+            <li>Fugl-Meyer平衡功能评定</li>
+        </a>
+        <a href="calc/calc-230.html">
+            <li>Poser(1983)多发性硬化诊断标准</li>
+        </a>
+        <a href="calc/calc-231.html">
+            <li>不同部位脊髓疾病的好发部位及损害表现</li>
+        </a>
+        <a href="calc/calc-232.html">
+            <li>丛集性头痛诊断标准</li>
+        </a>
+        <a href="calc/calc-233.html">
+            <li>偏头痛诊断标准ⅠCHD-Ⅱ R1 </li>
+        </a>
+        <a href="calc/calc-234.html">
+            <li>前庭周围性眩晕及前庭中枢性眩晕的鉴别</li>
+        </a>
+        <a href="calc/calc-235.html">
+            <li>压迫性脊髓病的横向定位诊断</li>
+        </a>
+        <a href="calc/calc-236.html">
+            <li>吞咽功能障碍饮水试验</li>
+        </a>
+        <a href="calc/calc-237.html">
+            <li>吞咽障碍的饮食分级</li>
+        </a>
+        <a href="calc/calc-238.html">
+            <li>国际抗癫痫联盟新的癫痫持续状态分类</li>
+        </a>
+        <a href="calc/calc-239.html">
+            <li>多发性硬化McDonald诊断标准</li>
+        </a>
+        <a href="calc/calc-240.html">
+            <li>多发性硬化的临床分型</li>
+        </a>
+        <a href="calc/calc-241.html">
+            <li>小脑扁桃体下疝畸形（chiari畸形）分型</li>
+        </a>
+        <a href="calc/calc-242.html">
+            <li>少发复发性紧张型头痛（IETTH）诊断标准</li>
+        </a>
+        <a href="calc/calc-243.html">
+            <li>慢性紧张型头痛（CTTH）诊断标准</li>
+        </a>
+        <a href="calc/calc-244.html">
+            <li>托吡酯加量方法（日剂量）</li>
+        </a>
+        <a href="calc/calc-245.html">
+            <li>持续植物状态中美临床诊断标准</li>
+        </a>
+        <a href="calc/calc-246.html">
+            <li>昏迷、植物状态、最低意识状态和闭锁综合征的临床特征比较</li>
+        </a>
+        <a href="calc/calc-247.html">
+            <li>真性球麻痹和假性球麻痹的鉴别</li>
+        </a>
+        <a href="calc/calc-288.html">
+            <li>神经性耳聋与传导性耳聋的鉴别</li>
+        </a>
+        <a href="calc/calc-289.html">
+            <li>神经系统副肿瘤综合征（PNS）诊断标准</li>
+        </a>
+        <a href="calc/calc-290.html">
+            <li>神经纤维瘤病NFⅠ和NFⅡ诊断标准</li>
+        </a>
+        <a href="calc/calc-291.html">
+            <li>肌力评定Brunnstrom分期</li>
+        </a>
+        <a href="calc/calc-292.html">
+            <li>肌痉挛评定改良Ashworth量表</li>
+        </a>
+        <a href="calc/calc-293.html">
+            <li>脊髓空洞症Barnett分型</li>
+        </a>
+        <a href="calc/calc-294.html">
+            <li>药物过度使用性头痛ⅠCHD-Ⅱ R1诊断标准</li>
+        </a>
+        <a href="calc/calc-295.html">
+            <li>阿尔兹海默病临床诊断标准</li>
+        </a>
+        <a href="calc/calc-296.html">
+            <li>雷诺现象的Taylor-Pelmear分期</li>
+        </a>
+        <a href="calc/calc-297.html">
+            <li>雷诺病和雷诺现象鉴别</li>
+        </a>
+        <a href="calc/calc-298.html">
+            <li>频发复发性紧张型头痛（FETTH）诊断标准</li>
+        </a>
+        <a href="calc/calc-299.html">
+            <li>骨骼肌肌力检查方法</li>
+        </a>
+        <a href="calc/calc-300.html">
+            <li>脊髓休克和脊髓震荡的鉴别</li>
+        </a>
+        <a href="calc/calc-301.html">
+            <li>运动瘫痪类型的鉴别</li>
+        </a>
+        <a href="calc/calc-302.html">
+            <li>颈神经根受累的症状和体征</li>
+        </a>
+        <a href="calc/calc-304.html">
+            <li>急性缺血性脑卒中的TOSAT分型</li>
+        </a>
+        <a href="calc/calc-305.html">
+            <li>神经损伤 Seddon 分类</li>
+        </a>
+        <a href="calc/calc-306.html">
+            <li>神经损伤 Sunderland 分类法</li>
+        </a>
+        <a href="calc/calc-307.html">
+            <li>Frankel 脊髓损伤分级法</li>
+        </a>
+        <a href="calc/calc-308.html">
+            <li>Rancho Los Amigos 认知功能分级表</li>
+        </a>
+        <a href="calc/calc-309.html">
+            <li>帕金森病分级标准</li>
+        </a>
+        <a href="calc/calc-310.html">
+            <li>痴呆的诊断标准</li>
+        </a>
+        <a href="calc/calc-311.html">
+            <li>进行性肌营养不良的功能分组</li>
+        </a>
+        <a href="calc/calc-312.html">
+            <li>改良 Ashworth 分级评定标准</li>
+        </a>
+        <a href="calc/calc-313.html">
+            <li>中国脑卒中患者临床神经功能缺损评分</li>
+        </a>
+        <a href="calc/calc-314.html">
+            <li>克莱顿皇家医院行为量表</li>
+        </a>
+        <a href="calc/calc-315.html">
+            <li>匹兹堡脑干评分（PBSS）</li>
+        </a>
+        <a href="calc/calc-316.html">
+            <li>持续性植物状态评分表（PVS表）</li>
+        </a>
+        <a href="calc/calc-317.html">
+            <li>改良 Rankin 量表</li>
+        </a>
+        <a href="calc/calc-601.html">
+            <li>华法林出血风险评分-老年患者</li>
+        </a>
+        <a href="calc/calc-632.html">
+            <li>ASIA损伤分级</li>
+        </a>
+        <a href="calc/calc-633.html">
+            <li>Fisher分级</li>
+        </a>
+        <a href="calc/calc-634.html">
+            <li>Glasgow结局分级</li>
+        </a>
+        <a href="calc/calc-635.html">
+            <li>皮节定位图</li>
+        </a>
+        <a href="calc/calc-636.html">
+            <li>West Haven Scale</li>
+        </a>
+        <a href="calc/calc-637.html">
+            <li>镇静-躁动评分</li>
+        </a>
+        <a href="calc/calc-652.html">
+            <li>MASCC评分</li>
+        </a>
+        <a href="calc/calc-662.html">
+            <li>Glasgow昏迷评分</li>
+        </a>
+        <a href="calc/calc-664.html">
+            <li>PECARN算法</li>
+        </a>
+        <a href="calc/calc-666.html">
+            <li>创伤程度评分</li>
+        </a>
+        <a href="calc/calc-667.html">
+            <li>FOUR昏迷评分</li>
+        </a>
+        <a href="calc/calc-670.html">
+            <li>New Orleans标准</li>
+        </a>
+        <a href="calc/calc-689.html">
+            <li>Cincinnati院前脑卒中评分</li>
+        </a>
+        <a href="calc/calc-690.html">
+            <li>简易精神测试评分</li>
+        </a>
+        <a href="calc/calc-691.html">
+            <li>Ottawa SAH规则</li>
+        </a>
+        <a href="calc/calc-692.html">
+            <li>失语分类</li>
+        </a>
+        <a href="calc/calc-709.html">
+            <li>汉密尔顿焦虑量表</li>
+        </a>
+        <a href="calc/calc-717.html">
+            <li>SANS</li>
+        </a>
+        <a href="calc/calc-753.html">
+            <li>TIA预后：发病后90天内中风风险</li>
+        </a>
+        <a href="calc/calc-769.html">
+            <li>年轻人躁狂症评定表(YMRS)</li>
+        </a>
+        <a href="calc/calc-794.html">
+            <li>重症肌无力临床分型(Osserman)</li>
+        </a>
+        <a href="calc/calc-795.html">
+            <li>自杀风险因素评估量表</li>
+        </a>
+        <a href="calc/calc-818.html">
+            <li>霍亚分期（Hoehn-Yahr）</li>
+        </a>
+        <a href="calc/calc-819.html">
+            <li>帕金森病简明调查问卷（PDQ-8）</li>
+        </a>
+        <a href="calc/calc-820.html">
+            <li>老年抑郁量表（GDS）</li>
+        </a>
+        <a href="calc/calc-821.html">
+            <li>匹兹堡睡眠质量指数（PSQI）</li>
+        </a>
+        <a href="calc/calc-822.html">
+            <li>统一帕金森病评定量表(UPDRS 3.0版)</li>
+        </a>
+        <a href="calc/calc-823.html">
+            <li>贝克抑郁自评量表（BDI）</li>
+        </a>
+        <a href="calc/calc-824.html">
+            <li>世界运动障碍病学会新版帕金森病综合评价量表(MDS-UPDRS)</li>
+        </a>
+        <a href="calc/calc-825.html">
+            <li>世界运动障碍病学会新版帕金森病综合评价量表(MDS-UPDRS) - 医生评分部分</li>
+        </a>
+        <a href="calc/calc-826.html">
+            <li>世界运动障碍病学会新版帕金森病综合评价量表(MDS-UPDRS) - 患者自评部分</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>妇产科</h4>
+        <div class="second-title-txt">39项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-10.html">
+            <li>阿普加评分</li>
+        </a>
+        <a href="calc/calc-63.html">
+            <li>预产期计算</li>
+        </a>
+        <a href="calc/calc-188.html">
+            <li>外阴癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-189.html">
+            <li>阴道癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-190.html">
+            <li>宫颈癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-191.html">
+            <li>子宫体肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-192.html">
+            <li>卵巢癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-193.html">
+            <li>输卵管肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-194.html">
+            <li>妊娠滋养细胞肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-433.html">
+            <li>不同妊娠周数的宫底高度及子宫长度</li>
+        </a>
+        <a href="calc/calc-434.html">
+            <li>妊娠期甲亢程度与用药剂量间的关系</li>
+        </a>
+        <a href="calc/calc-435.html">
+            <li>妊娠期甲状腺功能实验室检查</li>
+        </a>
+        <a href="calc/calc-436.html">
+            <li>常用孕妇用药对胎儿的影响</li>
+        </a>
+        <a href="calc/calc-437.html">
+            <li>正常恶露性状</li>
+        </a>
+        <a href="calc/calc-438.html">
+            <li>紧急避孕药物剂量和方案</li>
+        </a>
+        <a href="calc/calc-439.html">
+            <li>胎儿成熟度的监测</li>
+        </a>
+        <a href="calc/calc-440.html">
+            <li>胎儿生物物理监测Manning评分及处理原则</li>
+        </a>
+        <a href="calc/calc-441.html">
+            <li>重度子痫前期诊断</li>
+        </a>
+        <a href="calc/calc-442.html">
+            <li>胎儿发育指数</li>
+        </a>
+        <a href="calc/calc-443.html">
+            <li>预产期</li>
+        </a>
+        <a href="calc/calc-444.html">
+            <li>宫颈成熟度评分(Bishop 评分)</li>
+        </a>
+        <a href="calc/calc-445.html">
+            <li>卵巢过度刺激综合征（OHSS）的分度与分级</li>
+        </a>
+        <a href="calc/calc-446.html">
+            <li>Baden-Walker盆底器官膨出的阴道半程系统分级法</li>
+        </a>
+        <a href="calc/calc-447.html">
+            <li>Insler宫颈雌激素作用程度评分法</li>
+        </a>
+        <a href="calc/calc-448.html">
+            <li>外阴皮肤疾病分类法(ISSVD)</li>
+        </a>
+        <a href="calc/calc-449.html">
+            <li>外阴阴道假丝酵母菌病临床分类</li>
+        </a>
+        <a href="calc/calc-450.html">
+            <li>外阴阴道假丝酵母菌病临床表现的评分标准</li>
+        </a>
+        <a href="calc/calc-451.html">
+            <li>宫颈细胞学检查TBS分类</li>
+        </a>
+        <a href="calc/calc-452.html">
+            <li>盆腔器官脱垂分期（POP-Q分期法）</li>
+        </a>
+        <a href="calc/calc-453.html">
+            <li>盆腔器官脱垂评估指示点（POP-Q分期）</li>
+        </a>
+        <a href="calc/calc-454.html">
+            <li>盆腔炎性疾病（PID）诊断标准</li>
+        </a>
+        <a href="calc/calc-455.html">
+            <li>阴道分泌物革兰染色Nugent评分标准</li>
+        </a>
+        <a href="calc/calc-456.html">
+            <li>阴道穹窿膨出Julian分级法</li>
+        </a>
+        <a href="calc/calc-457.html">
+            <li>Reid阴道镜评分标准(RCI)</li>
+        </a>
+        <a href="calc/calc-458.html">
+            <li>更年期评定量表(MRS)</li>
+        </a>
+        <a href="calc/calc-606.html">
+            <li>妊娠高血压病的分类</li>
+        </a>
+        <a href="calc/calc-607.html">
+            <li>妊娠高血压终止妊娠的指征</li>
+        </a>
+        <a href="calc/calc-651.html">
+            <li>Malinas 评分</li>
+        </a>
+        <a href="calc/calc-810.html">
+            <li>阴道分娩的VBAC风险评分(Flamm 模型)</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>骨科学</h4>
+        <div class="second-title-txt">89项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-46.html">
+            <li>肢体损伤严重程度评分(MESS)</li>
+        </a>
+        <a href="calc/calc-54.html">
+            <li>渥太华和匹兹堡膝关节规则</li>
+        </a>
+        <a href="calc/calc-55.html">
+            <li>渥太华足踝损伤鉴别诊断标准</li>
+        </a>
+        <a href="calc/calc-248.html">
+            <li>亚洲人骨质疏松自我筛查工具</li>
+        </a>
+        <a href="calc/calc-249.html">
+            <li>骨质疏松症风险一分钟测试题（国际骨质疏松症基金会,IOF）</li>
+        </a>
+        <a href="calc/calc-250.html">
+            <li>脊柱关节病诊断标准（Amor诊断标准）</li>
+        </a>
+        <a href="calc/calc-251.html">
+            <li>JOA脊髓型颈椎病评分</li>
+        </a>
+        <a href="calc/calc-252.html">
+            <li>JOA腰背痛疾病治疗成绩标准评分</li>
+        </a>
+        <a href="calc/calc-253.html">
+            <li>脊髓损伤严重程度Frankel功能分级和ASIA分级</li>
+        </a>
+        <a href="calc/calc-254.html">
+            <li>Pavlov比值测定</li>
+        </a>
+        <a href="calc/calc-255.html">
+            <li>漏斗胸指数</li>
+        </a>
+        <a href="calc/calc-256.html">
+            <li>开放性骨折Gustilo-Anderson分类</li>
+        </a>
+        <a href="calc/calc-257.html">
+            <li>股骨转子间骨折改良Evans分类</li>
+        </a>
+        <a href="calc/calc-258.html">
+            <li>胫骨平台骨折Schatzker分型</li>
+        </a>
+        <a href="calc/calc-259.html">
+            <li>胫骨骨折改良Ellis分类</li>
+        </a>
+        <a href="calc/calc-260.html">
+            <li>腰椎间盘突出症的症状和体征</li>
+        </a>
+        <a href="calc/calc-261.html">
+            <li>跟骨骨折Sanders分类</li>
+        </a>
+        <a href="calc/calc-262.html">
+            <li>踝关节骨折Danis-Weber分类</li>
+        </a>
+        <a href="calc/calc-263.html">
+            <li>踝关节骨折Lauge-Hansen分类</li>
+        </a>
+        <a href="calc/calc-264.html">
+            <li>骨盆骨折Tile分型</li>
+        </a>
+        <a href="calc/calc-265.html">
+            <li>骨盆骨折Young和Burgress分型</li>
+        </a>
+        <a href="calc/calc-266.html">
+            <li>髋臼骨折AO分型</li>
+        </a>
+        <a href="calc/calc-267.html">
+            <li>髋臼骨折Letournel-Judet分型</li>
+        </a>
+        <a href="calc/calc-268.html">
+            <li>Karlsson 术后疗效评分标准</li>
+        </a>
+        <a href="calc/calc-269.html">
+            <li>Lazzcano 术后疗效评分标准</li>
+        </a>
+        <a href="calc/calc-270.html">
+            <li>Mcintyre 肱骨髁上骨折分类表</li>
+        </a>
+        <a href="calc/calc-271.html">
+            <li>关节盂软骨内骨折 Ideberg 分型</li>
+        </a>
+        <a href="calc/calc-272.html">
+            <li>复发性肩关节半脱位 Rockwood 分类</li>
+        </a>
+        <a href="calc/calc-273.html">
+            <li>孟氏骨折Bado 分型</li>
+        </a>
+        <a href="calc/calc-274.html">
+            <li>尺骨鹰嘴骨折 Delee 分型</li>
+        </a>
+        <a href="calc/calc-275.html">
+            <li>屈曲压缩骨折 Ferguson 分型</li>
+        </a>
+        <a href="calc/calc-276.html">
+            <li>开放性骨折 Anderson 分类</li>
+        </a>
+        <a href="calc/calc-277.html">
+            <li>开放性骨折的 Gustilo-Anderson 分类</li>
+        </a>
+        <a href="calc/calc-278.html">
+            <li>开放性骨折的朱通伯分类</li>
+        </a>
+        <a href="calc/calc-279.html">
+            <li>开放性骨折的王亦璁分类</li>
+        </a>
+        <a href="calc/calc-280.html">
+            <li>月骨周围脱位分期</li>
+        </a>
+        <a href="calc/calc-281.html">
+            <li>月骨周围脱位根据损伤程度与位置分型</li>
+        </a>
+        <a href="calc/calc-282.html">
+            <li>桡骨头骨折 Hotchkiss 分类</li>
+        </a>
+        <a href="calc/calc-283.html">
+            <li>桡骨头骨折 Mason 分类</li>
+        </a>
+        <a href="calc/calc-284.html">
+            <li>桡骨远端骨折 Fernanda 分类</li>
+        </a>
+        <a href="calc/calc-285.html">
+            <li>桡骨远端骨折 Fryman 分类</li>
+        </a>
+        <a href="calc/calc-286.html">
+            <li>桡骨远端骨折 Lidstrom 分度</li>
+        </a>
+        <a href="calc/calc-287.html">
+            <li>桡骨远端骨折按关节面情况的分级</li>
+        </a>
+        <a href="calc/calc-318.html">
+            <li>桡骨远端骨折（Smith 骨折）分类</li>
+        </a>
+        <a href="calc/calc-319.html">
+            <li>爆裂骨折 Denis 分型</li>
+        </a>
+        <a href="calc/calc-320.html">
+            <li>第一掌骨基底部骨折 Green 分类法</li>
+        </a>
+        <a href="calc/calc-321.html">
+            <li>肘关节 Cassebaum 评分系统</li>
+        </a>
+        <a href="calc/calc-322.html">
+            <li>肘关节尺骨冠状突骨折的 Regan 分型</li>
+        </a>
+        <a href="calc/calc-323.html">
+            <li>肩关节不稳定的 Thomas 分类</li>
+        </a>
+        <a href="calc/calc-324.html">
+            <li>肩关节不稳定的 Silliman 分类</li>
+        </a>
+        <a href="calc/calc-325.html">
+            <li>肩关节后方不稳定(Posterior shoulder instability, PSI)分类</li>
+        </a>
+        <a href="calc/calc-326.html">
+            <li>肩关节后脱位分型</li>
+        </a>
+        <a href="calc/calc-327.html">
+            <li>肩胛骨 Zdravkovic-Damholt 分型</li>
+        </a>
+        <a href="calc/calc-328.html">
+            <li>肩胛骨喙突骨折 Eyres - Brooks 分型</li>
+        </a>
+        <a href="calc/calc-329.html">
+            <li>肩胛骨骨折的 Miller 分类</li>
+        </a>
+        <a href="calc/calc-330.html">
+            <li>肩锁关节的损伤 Tossy 的分类</li>
+        </a>
+        <a href="calc/calc-331.html">
+            <li>肩锁关节脱位 Allman 分类法</li>
+        </a>
+        <a href="calc/calc-332.html">
+            <li>肩锁关节脱位 Rockwood 分类法</li>
+        </a>
+        <a href="calc/calc-333.html">
+            <li>肩锁关节脱位的 Tossi 分型</li>
+        </a>
+        <a href="calc/calc-334.html">
+            <li>肱骨内上髁骨折分度</li>
+        </a>
+        <a href="calc/calc-335.html">
+            <li>肱骨外髁骨折北京积水潭医院分型</li>
+        </a>
+        <a href="calc/calc-336.html">
+            <li>肱骨小头骨折（Kocher骨折）Mehdian 分型标准</li>
+        </a>
+        <a href="calc/calc-337.html">
+            <li>肱骨近端骨折 AO 分类</li>
+        </a>
+        <a href="calc/calc-338.html">
+            <li>肱骨近端骨折 Codman 分类</li>
+        </a>
+        <a href="calc/calc-339.html">
+            <li>肱骨近端骨折 Kocher 分类</li>
+        </a>
+        <a href="calc/calc-340.html">
+            <li>肱骨近端骨折 Neer 分类</li>
+        </a>
+        <a href="calc/calc-341.html">
+            <li>肱骨近端骨折 Watson－Jones 分类</li>
+        </a>
+        <a href="calc/calc-342.html">
+            <li>肱骨髁上骨折分类</li>
+        </a>
+        <a href="calc/calc-343.html">
+            <li>肱骨髁间骨折 Riseborough 分型</li>
+        </a>
+        <a href="calc/calc-344.html">
+            <li>肱骨髁间骨折机制分型</li>
+        </a>
+        <a href="calc/calc-345.html">
+            <li>脊柱骨折 Denis 分类</li>
+        </a>
+        <a href="calc/calc-346.html">
+            <li>腕舟骨骨折</li>
+        </a>
+        <a href="calc/calc-347.html">
+            <li>舟月不稳定的分级</li>
+        </a>
+        <a href="calc/calc-348.html">
+            <li>舟骨骨折 AO 分型</li>
+        </a>
+        <a href="calc/calc-349.html">
+            <li>舟骨骨折的 herbert 分型</li>
+        </a>
+        <a href="calc/calc-350.html">
+            <li>锁骨远端骨折 Neer 分型</li>
+        </a>
+        <a href="calc/calc-351.html">
+            <li>锁骨骨折分类</li>
+        </a>
+        <a href="calc/calc-352.html">
+            <li>骨不愈合和延迟愈合的 Weber-Cech 分类</li>
+        </a>
+        <a href="calc/calc-353.html">
+            <li>腕管综合征功能评定表</li>
+        </a>
+        <a href="calc/calc-354.html">
+            <li>HSS 膝关节评分</li>
+        </a>
+        <a href="calc/calc-355.html">
+            <li>胸腰椎损伤分类及损伤程度评分</li>
+        </a>
+        <a href="calc/calc-356.html">
+            <li>中华骨科学会脊柱学组腰背痛手术评分标准</li>
+        </a>
+        <a href="calc/calc-702.html">
+            <li>Allman 分类法</li>
+        </a>
+        <a href="calc/calc-703.html">
+            <li>Gartland 分型</li>
+        </a>
+        <a href="calc/calc-713.html">
+            <li>美国肩肘外科评分</li>
+        </a>
+        <a href="calc/calc-714.html">
+            <li>HSS 评分</li>
+        </a>
+        <a href="calc/calc-715.html">
+            <li>肩关节疾患治疗成绩判定标准</li>
+        </a>
+        <a href="calc/calc-716.html">
+            <li>Ishida - Ikuta 评分系统</li>
+        </a>
+        <a href="calc/calc-718.html">
+            <li>颈椎病患者脊髓功能状态评定</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>儿科学</h4>
+        <div class="second-title-txt">85项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-10.html">
+            <li>阿普加评分</li>
+        </a>
+        <a href="calc/calc-25.html">
+            <li>小儿气管插管的管道规则</li>
+        </a>
+        <a href="calc/calc-26.html">
+            <li>呼气流量峰值估算（最大呼吸流量）</li>
+        </a>
+        <a href="calc/calc-45.html">
+            <li>维持液体计算</li>
+        </a>
+        <a href="calc/calc-59.html">
+            <li>儿童的入量和出量（每公斤和每小时）</li>
+        </a>
+        <a href="calc/calc-80.html">
+            <li>Westley哮吼评分</li>
+        </a>
+        <a href="calc/calc-102.html">
+            <li>儿科创伤评分</li>
+        </a>
+        <a href="calc/calc-106.html">
+            <li>复苏剂量(儿科)</li>
+        </a>
+        <a href="calc/calc-357.html">
+            <li>血总胆红素/血白蛋白</li>
+        </a>
+        <a href="calc/calc-358.html">
+            <li>尿羟脯氨酸指数</li>
+        </a>
+        <a href="calc/calc-125.html">
+            <li>儿童补液</li>
+        </a>
+        <a href="calc/calc-360.html">
+            <li>儿童终末期肝病评分(PELD)</li>
+        </a>
+        <a href="calc/calc-361.html">
+            <li>理想身高</li>
+        </a>
+        <a href="calc/calc-362.html">
+            <li>尿钙/尿肌酐比</li>
+        </a>
+        <a href="calc/calc-363.html">
+            <li>儿童无球囊气管内插管尺寸</li>
+        </a>
+        <a href="calc/calc-364.html">
+            <li>相对剂量反应试验</li>
+        </a>
+        <a href="calc/calc-365.html">
+            <li>小儿体表面积</li>
+        </a>
+        <a href="calc/calc-366.html">
+            <li>小儿药物计算公式-按体表面积计算</li>
+        </a>
+        <a href="calc/calc-367.html">
+            <li>小儿药物计算公式-按年龄计算</li>
+        </a>
+        <a href="calc/calc-368.html">
+            <li>小儿药物计算公式-按体重计算</li>
+        </a>
+        <a href="calc/calc-369.html">
+            <li>餐后血清锌浓度反应试验</li>
+        </a>
+        <a href="calc/calc-370.html">
+            <li>性发育Tanner分期</li>
+        </a>
+        <a href="calc/calc-371.html">
+            <li>性早熟疾病的辅助检查</li>
+        </a>
+        <a href="calc/calc-372.html">
+            <li>简易胎龄评估量表</li>
+        </a>
+        <a href="calc/calc-373.html">
+            <li>临床常用液体成分及张力</li>
+        </a>
+        <a href="calc/calc-374.html">
+            <li>儿童口服铁制剂的规格及剂量表</li>
+        </a>
+        <a href="calc/calc-375.html">
+            <li>儿童各年龄血苯丙氨酸理想浓度控制范围</li>
+        </a>
+        <a href="calc/calc-376.html">
+            <li>儿童碘缺乏诊断标准(尿碘浓度测定)</li>
+        </a>
+        <a href="calc/calc-377.html">
+            <li>儿童铅中毒诊断标准(血铅水平测定)</li>
+        </a>
+        <a href="calc/calc-378.html">
+            <li>先天性甲低的甲状腺素(L-T4)替代治疗剂量表</li>
+        </a>
+        <a href="calc/calc-379.html">
+            <li>各种损失液每100ml所需补水和电解质液量</li>
+        </a>
+        <a href="calc/calc-380.html">
+            <li>外科病儿脱水补液量和补液张力</li>
+        </a>
+        <a href="calc/calc-381.html">
+            <li>婴儿添加辅食的步骤与方法</li>
+        </a>
+        <a href="calc/calc-382.html">
+            <li>婴儿营养素的需要</li>
+        </a>
+        <a href="calc/calc-383.html">
+            <li>小儿出牙顺序</li>
+        </a>
+        <a href="calc/calc-384.html">
+            <li>小儿各年龄动作及行为发育</li>
+        </a>
+        <a href="calc/calc-385.html">
+            <li>小儿各年龄呼吸频率平均值</li>
+        </a>
+        <a href="calc/calc-386.html">
+            <li>小儿各年龄平均血压</li>
+        </a>
+        <a href="calc/calc-387.html">
+            <li>小儿各年龄心率平均值及范围</li>
+        </a>
+        <a href="calc/calc-388.html">
+            <li>小儿囟门与颅缝闭合时间</li>
+        </a>
+        <a href="calc/calc-389.html">
+            <li>小儿肠外营养(TPN)推荐用量</li>
+        </a>
+        <a href="calc/calc-390.html">
+            <li>小儿身体各部位比例</li>
+        </a>
+        <a href="calc/calc-391.html">
+            <li>川崎病（KD）诊断标准</li>
+        </a>
+        <a href="calc/calc-392.html">
+            <li>新生儿常见疾病机械通气初调参数</li>
+        </a>
+        <a href="calc/calc-393.html">
+            <li>新生儿缺氧缺血性脑病（HIE）诊断标准和临床分度</li>
+        </a>
+        <a href="calc/calc-394.html">
+            <li>新生儿肠外营养(TPN)推荐用量表</li>
+        </a>
+        <a href="calc/calc-395.html">
+            <li>新生儿黄疸干预指征</li>
+        </a>
+        <a href="calc/calc-396.html">
+            <li>药物激发试验</li>
+        </a>
+        <a href="calc/calc-397.html">
+            <li>风湿热Jones诊断标准</li>
+        </a>
+        <a href="calc/calc-398.html">
+            <li>儿童心衰指数评分</li>
+        </a>
+        <a href="calc/calc-399.html">
+            <li>Rh 和 ABO 溶血病的比较</li>
+        </a>
+        <a href="calc/calc-400.html">
+            <li>不同日龄及不同出生体重儿的最适温度</li>
+        </a>
+        <a href="calc/calc-401.html">
+            <li>不同时龄足月新生儿黄疸干预标准</li>
+        </a>
+        <a href="calc/calc-402.html">
+            <li>不同胎龄/出生体重早产儿黄疸干预标准</li>
+        </a>
+        <a href="calc/calc-403.html">
+            <li>各胎龄新生儿神经、肌肉、成熟度</li>
+        </a>
+        <a href="calc/calc-404.html">
+            <li>新生儿热能的需要量</li>
+        </a>
+        <a href="calc/calc-405.html">
+            <li>新生儿电解质、矿物质、微量元素及维生素需要量</li>
+        </a>
+        <a href="calc/calc-406.html">
+            <li>新生儿窒息复苏常用药物表</li>
+        </a>
+        <a href="calc/calc-407.html">
+            <li>早产儿体重增长速度</li>
+        </a>
+        <a href="calc/calc-408.html">
+            <li>气管插管型号的选择</li>
+        </a>
+        <a href="calc/calc-409.html">
+            <li>小儿骨骺损伤S-H分类法</li>
+        </a>
+        <a href="calc/calc-410.html">
+            <li>婴儿心衰分级评分表</li>
+        </a>
+        <a href="calc/calc-126.html">
+            <li>新生儿休克评分表</li>
+        </a>
+        <a href="calc/calc-620.html">
+            <li>动脉导管未闭评分标准</li>
+        </a>
+        <a href="calc/calc-626.html">
+            <li>体力状况(Zubrod)</li>
+        </a>
+        <a href="calc/calc-648.html">
+            <li>腹膜炎分类</li>
+        </a>
+        <a href="calc/calc-651.html">
+            <li>Malinas 评分</li>
+        </a>
+        <a href="calc/calc-652.html">
+            <li>MASCC评分</li>
+        </a>
+        <a href="calc/calc-653.html">
+            <li>行为性疼痛分级</li>
+        </a>
+        <a href="calc/calc-654.html">
+            <li>Duke诊断标准</li>
+        </a>
+        <a href="calc/calc-655.html">
+            <li>CRB-65评分</li>
+        </a>
+        <a href="calc/calc-657.html">
+            <li>Kocher诊断标准</li>
+        </a>
+        <a href="calc/calc-658.html">
+            <li>Mannheim腹膜炎指数</li>
+        </a>
+        <a href="calc/calc-660.html">
+            <li>CATCH规则</li>
+        </a>
+        <a href="calc/calc-661.html">
+            <li>儿科创伤评分</li>
+        </a>
+        <a href="calc/calc-662.html">
+            <li>Glasgow昏迷评分</li>
+        </a>
+        <a href="calc/calc-664.html">
+            <li>PECARN算法</li>
+        </a>
+        <a href="calc/calc-665.html">
+            <li>PRAM评分</li>
+        </a>
+        <a href="calc/calc-705.html">
+            <li>DOWNE 评分法</li>
+        </a>
+        <a href="calc/calc-706.html">
+            <li>新生儿硬肿症评分标准</li>
+        </a>
+        <a href="calc/calc-719.html">
+            <li>tanner 分期</li>
+        </a>
+        <a href="calc/calc-720.html">
+            <li>新生儿成熟度评估表</li>
+        </a>
+        <a href="calc/calc-756.html">
+            <li>儿童细菌性脑膜炎评分</li>
+        </a>
+        <a href="calc/calc-776.html">
+            <li>Adelaide儿科昏迷评分(APCS)</li>
+        </a>
+        <a href="calc/calc-784.html">
+            <li>改良Barkovich的新生儿缺氧缺血性脑病MRI分类(HIE-MRI)影像学评分</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>呼吸科</h4>
+        <div class="second-title-txt">56项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-1.html">
+            <li>肺泡-动脉氧分压差</li>
+        </a>
+        <a href="calc/calc-24.html">
+            <li>社区获得性肺炎CURB-65严重程度评分</li>
+        </a>
+        <a href="calc/calc-26.html">
+            <li>呼气流量峰值估算（最大呼吸流量）</li>
+        </a>
+        <a href="calc/calc-43.html">
+            <li>Light标准诊断渗出液</li>
+        </a>
+        <a href="calc/calc-56.html">
+            <li>氧合指数</li>
+        </a>
+        <a href="calc/calc-61.html">
+            <li>肺栓塞的PERC判定原则</li>
+        </a>
+        <a href="calc/calc-64.html">
+            <li>成人社区获得性肺炎严重性评分PSI/PORT评分</li>
+        </a>
+        <a href="calc/calc-79.html">
+            <li>肺栓塞Well评分 </li>
+        </a>
+        <a href="calc/calc-80.html">
+            <li>Westley哮吼评分</li>
+        </a>
+        <a href="calc/calc-88.html">
+            <li>临床肺部感染评分</li>
+        </a>
+        <a href="calc/calc-92.html">
+            <li>GOLD分级</li>
+        </a>
+        <a href="calc/calc-97.html">
+            <li>肺龄</li>
+        </a>
+        <a href="calc/calc-463.html">
+            <li>肺内右-左分流率</li>
+        </a>
+        <a href="calc/calc-464.html">
+            <li>动-静脉氧气含量差</li>
+        </a>
+        <a href="calc/calc-465.html">
+            <li>1秒率</li>
+        </a>
+        <a href="calc/calc-466.html">
+            <li>肺总量</li>
+        </a>
+        <a href="calc/calc-467.html">
+            <li>功能余气量</li>
+        </a>
+        <a href="calc/calc-468.html">
+            <li>最大呼气中段流量</li>
+        </a>
+        <a href="calc/calc-469.html">
+            <li>肺顺应性</li>
+        </a>
+        <a href="calc/calc-470.html">
+            <li>气道阻力</li>
+        </a>
+        <a href="calc/calc-471.html">
+            <li>呼吸商</li>
+        </a>
+        <a href="calc/calc-472.html">
+            <li>通气效率</li>
+        </a>
+        <a href="calc/calc-473.html">
+            <li>通气血流比</li>
+        </a>
+        <a href="calc/calc-474.html">
+            <li>社区获得性肺炎CURB-65严重程度评分</li>
+        </a>
+        <a href="calc/calc-476.html">
+            <li>链球菌咽炎的修正centor评分</li>
+        </a>
+        <a href="calc/calc-477.html">
+            <li>临床肺部感染CPIS评分</li>
+        </a>
+        <a href="calc/calc-478.html">
+            <li>慢性阻塞性肺病(COPD)的BODE指数</li>
+        </a>
+        <a href="calc/calc-479.html">
+            <li>成人峰值流量预测值</li>
+        </a>
+        <a href="calc/calc-480.html">
+            <li>喉梗阻分度</li>
+        </a>
+        <a href="calc/calc-481.html">
+            <li>肺癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-482.html">
+            <li>6分钟步行试验</li>
+        </a>
+        <a href="calc/calc-484.html">
+            <li>预期肺栓塞早期死亡率的风险分级</li>
+        </a>
+        <a href="calc/calc-485.html">
+            <li>急性移植物抗宿主反应(GVHD)分级</li>
+        </a>
+        <a href="calc/calc-486.html">
+            <li>创伤时基础能耗估计</li>
+        </a>
+        <a href="calc/calc-487.html">
+            <li>呼吸机撤离呼吸参数标准</li>
+        </a>
+        <a href="calc/calc-581.html">
+            <li>氧输送</li>
+        </a>
+        <a href="calc/calc-582.html">
+            <li>氧气使用分率</li>
+        </a>
+        <a href="calc/calc-626.html">
+            <li>体力状况(Zubrod)</li>
+        </a>
+        <a href="calc/calc-627.html">
+            <li>Borg CR10分级</li>
+        </a>
+        <a href="calc/calc-628.html">
+            <li>Borg 分级</li>
+        </a>
+        <a href="calc/calc-629.html">
+            <li>改良呼吸困难分级</li>
+        </a>
+        <a href="calc/calc-630.html">
+            <li>GOLD分级</li>
+        </a>
+        <a href="calc/calc-631.html">
+            <li>呼吸困难分级</li>
+        </a>
+        <a href="calc/calc-647.html">
+            <li>Epworth嗜睡量表</li>
+        </a>
+        <a href="calc/calc-653.html">
+            <li>行为性疼痛分级</li>
+        </a>
+        <a href="calc/calc-655.html">
+            <li>CRB-65评分</li>
+        </a>
+        <a href="calc/calc-659.html">
+            <li>VAP PIRO评分</li>
+        </a>
+        <a href="calc/calc-665.html">
+            <li>PRAM评分</li>
+        </a>
+        <a href="calc/calc-675.html">
+            <li>Geneva肺栓塞评分</li>
+        </a>
+        <a href="calc/calc-676.html">
+            <li>Hestia标准</li>
+        </a>
+        <a href="calc/calc-677.html">
+            <li>简易化PESI</li>
+        </a>
+        <a href="calc/calc-678.html">
+            <li>Padua预测评分</li>
+        </a>
+        <a href="calc/calc-679.html">
+            <li>PERC</li>
+        </a>
+        <a href="calc/calc-680.html">
+            <li>RIETE评分</li>
+        </a>
+        <a href="calc/calc-681.html">
+            <li>Wells PE评分</li>
+        </a>
+        <a href="calc/calc-682.html">
+            <li>Wells评分 </li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>外科学</h4>
+        <div class="second-title-txt">29项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-7.html">
+            <li>急性阑尾炎Alvarado评分</li>
+        </a>
+        <a href="calc/calc-16.html">
+            <li>加拿大颈椎规则</li>
+        </a>
+        <a href="calc/calc-17.html">
+            <li>加拿大头部CT规则</li>
+        </a>
+        <a href="calc/calc-20.html">
+            <li>肝硬化死亡率的Child-Pugh评分</li>
+        </a>
+        <a href="calc/calc-38.html">
+            <li>蛛网膜下腔出血Hunt and Hess分类法</li>
+        </a>
+        <a href="calc/calc-40.html">
+            <li>脑内出血评分</li>
+        </a>
+        <a href="calc/calc-41.html">
+            <li>国王学院标准</li>
+        </a>
+        <a href="calc/calc-46.html">
+            <li>肢体损伤严重程度评分(MESS)</li>
+        </a>
+        <a href="calc/calc-49.html">
+            <li>终末期肝病模型(12岁及12岁以上)</li>
+        </a>
+        <a href="calc/calc-51.html">
+            <li>新奥尔良头部创伤规则</li>
+        </a>
+        <a href="calc/calc-52.html">
+            <li>美国X线成像急症应用研究颈椎成像标准</li>
+        </a>
+        <a href="calc/calc-57.html">
+            <li>烧伤补液（Parkland 公式）</li>
+        </a>
+        <a href="calc/calc-58.html">
+            <li>PECARN（儿童急诊医疗应用研究网络）儿童头部创伤算法</li>
+        </a>
+        <a href="calc/calc-360.html">
+            <li>儿童终末期肝病评分(PELD)</li>
+        </a>
+        <a href="calc/calc-66.html">
+            <li>修订创伤评分</li>
+        </a>
+        <a href="calc/calc-159.html">
+            <li>结直肠息肉分类</li>
+        </a>
+        <a href="calc/calc-160.html">
+            <li>结直肠癌组织学Broders分级</li>
+        </a>
+        <a href="calc/calc-161.html">
+            <li>胃肠道间质瘤(GIST)切除术后风险分级</li>
+        </a>
+        <a href="calc/calc-166.html">
+            <li>胸腹主动脉瘤Crawford分型</li>
+        </a>
+        <a href="calc/calc-167.html">
+            <li>腹腔器官肿瘤标志物分类</li>
+        </a>
+        <a href="calc/calc-195.html">
+            <li>阴茎癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-196.html">
+            <li>前列腺癌 TNM 分期</li>
+        </a>
+        <a href="calc/calc-197.html">
+            <li>睾丸肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-198.html">
+            <li>膀胱肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-199.html">
+            <li>尿道肿瘤 TNM 分期</li>
+        </a>
+        <a href="calc/calc-765.html">
+            <li>患者离开手术室前</li>
+        </a>
+        <a href="calc/calc-772.html">
+            <li>诱导麻醉之前</li>
+        </a>
+        <a href="calc/calc-791.html">
+            <li>下肢动脉硬化闭塞症(ASO)Rutherford分类</li>
+        </a>
+        <a href="calc/calc-797.html">
+            <li>ACR/EULAR痛风分类标准</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>泌尿外科学</h4>
+        <div class="second-title-txt">5项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-411.html">
+            <li>尿道损伤欧洲泌尿外科协会(EAU)分类</li>
+        </a>
+        <a href="calc/calc-412.html">
+            <li>尿石的一般特征</li>
+        </a>
+        <a href="calc/calc-413.html">
+            <li>人类精液变量参考值(WHO)</li>
+        </a>
+        <a href="calc/calc-414.html">
+            <li>国际勃起功能评分5项(IIEF-5)</li>
+        </a>
+        <a href="calc/calc-809.html">
+            <li>修正的尿失禁量表(RUIS)</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>烧伤外科</h4>
+        <div class="second-title-txt">21项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-16.html">
+            <li>加拿大颈椎规则</li>
+        </a>
+        <a href="calc/calc-52.html">
+            <li>美国X线成像急症应用研究颈椎成像标准</li>
+        </a>
+        <a href="calc/calc-66.html">
+            <li>修订创伤评分</li>
+        </a>
+        <a href="calc/calc-526.html">
+            <li>(烧伤深度分级(三度四分法)</li>
+        </a>
+        <a href="calc/calc-527.html">
+            <li>烧伤面积(新九分法)</li>
+        </a>
+        <a href="calc/calc-57.html">
+            <li>烧伤补液（Parkland 公式）</li>
+        </a>
+        <a href="calc/calc-529.html">
+            <li>烧伤补液（第三军医大学公式）</li>
+        </a>
+        <a href="calc/calc-530.html">
+            <li>烧伤热量供应公式</li>
+        </a>
+        <a href="calc/calc-626.html">
+            <li>体力状况(Zubrod)</li>
+        </a>
+        <a href="calc/calc-652.html">
+            <li>MASCC评分</li>
+        </a>
+        <a href="calc/calc-660.html">
+            <li>CATCH规则</li>
+        </a>
+        <a href="calc/calc-661.html">
+            <li>儿科创伤评分</li>
+        </a>
+        <a href="calc/calc-662.html">
+            <li>Glasgow昏迷评分</li>
+        </a>
+        <a href="calc/calc-664.html">
+            <li>PECARN算法</li>
+        </a>
+        <a href="calc/calc-666.html">
+            <li>创伤程度评分</li>
+        </a>
+        <a href="calc/calc-667.html">
+            <li>FOUR昏迷评分</li>
+        </a>
+        <a href="calc/calc-670.html">
+            <li>New Orleans标准</li>
+        </a>
+        <a href="calc/calc-671.html">
+            <li>NEXUS II 头颅CT规则</li>
+        </a>
+        <a href="calc/calc-672.html">
+            <li>NEXUS颈椎射片规则</li>
+        </a>
+        <a href="calc/calc-673.html">
+            <li>Ottawa踝关节骨折诊断规则</li>
+        </a>
+        <a href="calc/calc-674.html">
+            <li>Ottawa膝关节骨折诊断规则</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>麻醉学</h4>
+        <div class="second-title-txt">46项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-83.html">
+            <li>ASA分级</li>
+        </a>
+        <a href="calc/calc-85.html">
+            <li>烧伤面积(九分法)</li>
+        </a>
+        <a href="calc/calc-86.html">
+            <li>心输出量(超声)</li>
+        </a>
+        <a href="calc/calc-92.html">
+            <li>GOLD分级</li>
+        </a>
+        <a href="calc/calc-94.html">
+            <li>静脉补液滴速</li>
+        </a>
+        <a href="calc/calc-98.html">
+            <li>Mallampati分级</li>
+        </a>
+        <a href="calc/calc-105.html">
+            <li>Ramsay镇静水平评分</li>
+        </a>
+        <a href="calc/calc-106.html">
+            <li>复苏剂量(儿科)</li>
+        </a>
+        <a href="calc/calc-500.html">
+            <li>改良Bromage评分(运动阻滞评分)</li>
+        </a>
+        <a href="calc/calc-501.html">
+            <li>非心脏手术术前心脏风险指数(改良Lee’s评分)</li>
+        </a>
+        <a href="calc/calc-502.html">
+            <li>常用局麻药理化性质和麻醉效能</li>
+        </a>
+        <a href="calc/calc-503.html">
+            <li>硬膜外阻滞常用局麻药浓度的剂量</li>
+        </a>
+        <a href="calc/calc-504.html">
+            <li>蛛网膜下腔常用局麻药剂量及浓度</li>
+        </a>
+        <a href="calc/calc-505.html">
+            <li>OAA/S评分法</li>
+        </a>
+        <a href="calc/calc-506.html">
+            <li>Prince-Henry评分法</li>
+        </a>
+        <a href="calc/calc-507.html">
+            <li>Stewart苏醒评分法</li>
+        </a>
+        <a href="calc/calc-508.html">
+            <li>VAS 评分(疼痛视觉模拟评分系统)</li>
+        </a>
+        <a href="calc/calc-509.html">
+            <li>Tarlov 神经功能评分标准</li>
+        </a>
+        <a href="calc/calc-510.html">
+            <li>全麻效果评级标准</li>
+        </a>
+        <a href="calc/calc-511.html">
+            <li>内脏牵拉反应</li>
+        </a>
+        <a href="calc/calc-512.html">
+            <li>寒战分级</li>
+        </a>
+        <a href="calc/calc-513.html">
+            <li>改良马氏评分</li>
+        </a>
+        <a href="calc/calc-89.html">
+            <li>Δ脉压</li>
+        </a>
+        <a href="calc/calc-608.html">
+            <li>肺栓塞Geneva预后评分</li>
+        </a>
+        <a href="calc/calc-626.html">
+            <li>体力状况(Zubrod)</li>
+        </a>
+        <a href="calc/calc-648.html">
+            <li>腹膜炎分类</li>
+        </a>
+        <a href="calc/calc-630.html">
+            <li>GOLD分级</li>
+        </a>
+        <a href="calc/calc-635.html">
+            <li>皮节定位图</li>
+        </a>
+        <a href="calc/calc-637.html">
+            <li>镇静-躁动评分</li>
+        </a>
+        <a href="calc/calc-638.html">
+            <li>ASA分级</li>
+        </a>
+        <a href="calc/calc-639.html">
+            <li>Bromage分级</li>
+        </a>
+        <a href="calc/calc-640.html">
+            <li>Cormack分级</li>
+        </a>
+        <a href="calc/calc-641.html">
+            <li>NACA分级</li>
+        </a>
+        <a href="calc/calc-652.html">
+            <li>MASCC评分</li>
+        </a>
+        <a href="calc/calc-653.html">
+            <li>行为性疼痛分级</li>
+        </a>
+        <a href="calc/calc-654.html">
+            <li>Duke诊断标准</li>
+        </a>
+        <a href="calc/calc-655.html">
+            <li>CRB-65评分</li>
+        </a>
+        <a href="calc/calc-662.html">
+            <li>Glasgow昏迷评分</li>
+        </a>
+        <a href="calc/calc-667.html">
+            <li>FOUR昏迷评分</li>
+        </a>
+        <a href="calc/calc-693.html">
+            <li>Charlson共病指数</li>
+        </a>
+        <a href="calc/calc-707.html">
+            <li>椎管内麻醉(硬、腰、骶)效果评级标准</li>
+        </a>
+        <a href="calc/calc-710.html">
+            <li>清醒程度分级</li>
+        </a>
+        <a href="calc/calc-712.html">
+            <li>神经阻滞效果评级标准</li>
+        </a>
+        <a href="calc/calc-777.html">
+            <li>ASA麻醉风险分级标准</li>
+        </a>
+        <a href="calc/calc-783.html">
+            <li>改良Aldrete评分标准</li>
+        </a>
+        <a href="calc/calc-790.html">
+            <li>麻醉后离院评分标准(PADS)</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>风湿免疫科</h4>
+        <div class="second-title-txt">23项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-817.html">
+            <li>皮肤病生活质量指数(DLQI)</li>
+        </a>
+        <a href="calc/calc-816.html">
+            <li>Bath强直性脊柱炎功能指数(BASFI)</li>
+        </a>
+        <a href="calc/calc-815.html">
+            <li>银屑病静态临床医生整体评估(PGA)</li>
+        </a>
+        <a href="calc/calc-814.html">
+            <li>银屑病面积与严重性指数（PASI评分）</li>
+        </a>
+        <a href="calc/calc-415.html">
+            <li>系统性红斑狼疮诊断标准(ACR)</li>
+        </a>
+        <a href="calc/calc-416.html">
+            <li>狼疮性肾炎分型(SN/RPS)</li>
+        </a>
+        <a href="calc/calc-417.html">
+            <li>类风湿关节炎诊断标准(ACR)</li>
+        </a>
+        <a href="calc/calc-418.html">
+            <li>类风湿关节炎X线分类标准</li>
+        </a>
+        <a href="calc/calc-419.html">
+            <li>类风湿关节炎RA临床缓解标准</li>
+        </a>
+        <a href="calc/calc-420.html">
+            <li>类风湿关节炎关节功能状态分级标准</li>
+        </a>
+        <a href="calc/calc-421.html">
+            <li>膝关节骨关节炎临床诊断标准</li>
+        </a>
+        <a href="calc/calc-422.html">
+            <li>膝关节骨关节炎临床及放射学诊断标准</li>
+        </a>
+        <a href="calc/calc-423.html">
+            <li>手关节骨关节炎诊断标准</li>
+        </a>
+        <a href="calc/calc-424.html">
+            <li>髋关节骨关节炎临床诊断标准</li>
+        </a>
+        <a href="calc/calc-425.html">
+            <li>髋关节骨关节炎临床及放射学诊断标准</li>
+        </a>
+        <a href="calc/calc-426.html">
+            <li>强直性脊柱炎诊断标准</li>
+        </a>
+        <a href="calc/calc-427.html">
+            <li>骶髂关节病变X线分级</li>
+        </a>
+        <a href="calc/calc-428.html">
+            <li>成人still病的Yamaguchi诊断标准</li>
+        </a>
+        <a href="calc/calc-429.html">
+            <li>系统性红斑狼疮(SLE)的病情活动程度评分(SLEDAI)</li>
+        </a>
+        <a href="calc/calc-430.html">
+            <li>类风湿关节炎疾病活动性评分</li>
+        </a>
+        <a href="calc/calc-431.html">
+            <li>类风湿关节炎分类标准和评分系统</li>
+        </a>
+        <a href="calc/calc-432.html">
+            <li>自身免疫性肝炎的诊断标准与评分系统</li>
+        </a>
+        <a href="calc/calc-754.html">
+            <li>白塞综合征的国际研究标准</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>康复科</h4>
+        <div class="second-title-txt">3项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-497.html">
+            <li>Barthel指数评定</li>
+        </a>
+        <a href="calc/calc-498.html">
+            <li>功能独立性评定(FIM)量表</li>
+        </a>
+        <a href="calc/calc-499.html">
+            <li>Barthel 指数量表(BI)</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>毒理学</h4>
+        <div class="second-title-txt">2项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-5.html">
+            <li>醋氨酚过量和乙酰半胱氨酸剂量</li>
+        </a>
+        <a href="calc/calc-41.html">
+            <li>国王学院标准</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>护理学</h4>
+        <div class="second-title-txt">8项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-637.html">
+            <li>镇静-躁动评分</li>
+        </a>
+        <a href="calc/calc-644.html">
+            <li>ristol粪便分类表</li>
+        </a>
+        <a href="calc/calc-646.html">
+            <li>Rudkin镇静评分</li>
+        </a>
+        <a href="calc/calc-653.html">
+            <li>行为性疼痛分级</li>
+        </a>
+        <a href="calc/calc-662.html">
+            <li>Glasgow昏迷评分</li>
+        </a>
+        <a href="calc/calc-667.html">
+            <li>FOUR昏迷评分</li>
+        </a>
+        <a href="calc/calc-697.html">
+            <li>Katz评分</li>
+        </a>
+        <a href="calc/calc-698.html">
+            <li>Norton分级</li>
+        </a>
+    </ul>
+    <div class="second-title-box" onclick="toggleClass(this);">
+        <h4>其他</h4>
+        <div class="second-title-txt">7项<span class="second-title-icon"></span></div>
+    </div>
+    <ul style="display: none;">
+        <a href="calc/calc-758.html">
+            <li>老年住院患者的跌倒风险</li>
+        </a>
+        <a href="calc/calc-762.html">
+            <li>Lund-Mackay鼻窦炎分级</li>
+        </a>
+        <a href="calc/calc-770.html">
+            <li>小儿喉炎的Alberta Croup严重程度分级</li>
+        </a>
+        <a href="calc/calc-773.html">
+            <li>Morse跌倒危险因素评估量表</li>
+        </a>
+        <a href="calc/calc-782.html">
+            <li>痤疮分级</li>
+        </a>
+        <a href="calc/calc-788.html">
+            <li>喉镜显露分级</li>
+        </a>
+        <a href="calc/calc-832.html">
+            <li>β-羟丁酸(beta-Hydroxybutyric acid)</li>
+        </a>
+    </ul>
+    <div class="bottom">
+        <a href="javascript:void(0);">返回顶部</a>
+    </div>
+
+    <div style="
+        text-align: center;
+        color: black;
+        margin-top: 2rem;
+        font-size: small;
+        line-height: 2rem;
+      ">
+        <p style="text-align: center">
+            <img src="calc/images/imgJZCRLX.jpg" width="120px" height="120px" />
+        </p>
+        <a style="line-height: 1.3rem">
+            <p>谢锐威 - 急诊超人老谢</p>
+            <p>深圳市中西医结合医院</p>
+            <p>扫码关注公众号，获取更多更新</p>
+        </a>
+        <p>Tips：当清除浏览数据后，收藏夹及使用历史将会被清除。</p>
+    </div>
+</body>
+
+</html>

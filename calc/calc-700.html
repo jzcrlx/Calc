@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-700.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-700">H.pylori&nbsp;根除指征</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap"><table class="countTab1"> <thead> <tr> <th colspan="3">推荐的根除幽门螺杆菌适应证和推荐强度</th> </tr> </thead> <tbody> <tr> <th>幽门螺杆菌阳性</th> <th>强烈推荐</th> <th>推荐</th> </tr> <tr> <th>消化性溃疡(不论是否活动和有无并发症史)</th> <td>√</td> <td></td> </tr> <tr> <th>胃黏膜相关淋巴组织淋巴瘤</th> <td>√</td> <td></td> </tr> <tr> <th>慢性胃炎伴消化不良症状</th> <td></td> <td>√</td> </tr> <tr> <th>慢性胃炎伴胃黏膜萎缩、糜烂</th> <td></td> <td>√</td> </tr> <tr> <th>早期胃肿瘤已行内镜下切除或手术胃次全切除</th> <td></td> <td>√</td> </tr> <tr> <th>长期服用质子泵抑制剂</th> <td></td> <td>√</td> </tr> <tr> <th>胃癌家族史</th> <td></td> <td>√</td> </tr> <tr> <th>计划长期服用非甾体抗炎药(包括低剂量阿司匹林)</th> <td></td> <td>√</td> </tr> <tr> <th>不明原因的缺铁性贫血</th> <td></td> <td>√</td> </tr> <tr> <th>特发性血小板减少性紫癜</th> <td></td> <td>√</td> </tr> <tr> <th>其他幽门螺杆菌相关性疾病(如淋巴细胞性胃炎、增生性胃息肉、Ménétrier病)</th> <td></td> <td>√</td> </tr> <tr> <th>证实有幽门螺杆菌感染</th> <td></td> <td>√</td> </tr> </tbody>
+        </table></div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>“治疗所有Hp阳性者，但如无意治疗，就不要进行检测”。这是世界胃肠病组织制定的“发展中国家Hp感染临床指南”中提出的良好实践要点(good practice point)[28]。因此应该根据根除适应证进行Hp检测，不应任意地扩大检测对象。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">中华医学会消化病学分会幽门螺杆菌和消化性溃疡学组/全国幽门螺杆菌研究协作组. 第五次全国幽门螺杆菌感染处理共识报告. 2017</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

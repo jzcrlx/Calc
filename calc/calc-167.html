@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-167.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-167">腹腔器官肿瘤标志物分类</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>肿瘤标志物</th>
+                    <th>常见肿瘤</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th rowspan="4">肿瘤胚胎性抗原</th>
+                    <td>甲胎蛋白(AFP)</td>
+                    <td>肝癌、生殖细胞肿瘤</td>
+                </tr>
+                <tr>
+                    <td>癌胚抗原(CEA)</td>
+                    <td>消化道肿瘤</td>
+                </tr>
+                <tr>
+                    <td>胰腺癌胚抗原(POA)</td>
+                    <td>胰腺癌</td>
+                </tr>
+                <tr>
+                    <td>胚胎硫糖蛋白(FSA，胃液)</td>
+                    <td>胃癌</td>
+                </tr>
+                <tr>
+                    <th rowspan="4">糖脂类</th>
+                    <td>糖链抗原19-9(CA19-9)</td>
+                    <td>消化道肿瘤、胰腺癌</td>
+                </tr>
+                <tr>
+                    <td>癌抗原72-4(CA72-4)</td>
+                    <td>卵巢癌、消化道肿瘤</td>
+                </tr>
+                <tr>
+                    <td>癌抗原125(CA125)</td>
+                    <td>卵巢上皮癌</td>
+                </tr>
+                <tr>
+                    <td>癌抗原242(CA242)</td>
+                    <td>消化道肿瘤</td>
+                </tr>
+                <tr>
+                    <th rowspan="3">酶类</th>
+                    <td>α-L-岩藻糖苷酶(AFU)</td>
+                    <td>肝癌</td>
+                </tr>
+                <tr>
+                    <td>γ-谷氨酰转肽酶(γ-GT)</td>
+                    <td>肝癌</td>
+                </tr>
+                <tr>
+                    <td>半乳糖转糖基酶</td>
+                    <td>结肠癌</td>
+                </tr>
+                <tr>
+                    <th rowspan="3">激素</th>
+                    <td>绒毛膜促性腺激素(β-hCG)</td>
+                    <td>恶性葡萄胎、睾丸癌</td>
+                </tr>
+                <tr>
+                    <td>促肾上腺皮质激素(ACTH)</td>
+                    <td>消化道肿瘤、肺癌</td>
+                </tr>
+                <tr>
+                    <td>甲状旁腺素(PTH)</td>
+                    <td>肾腺癌、肺鳞癌</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">陈孝平主编. 外科学（八年制）（第2版）. 人民卫生出版社. 2010年.p703-4</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

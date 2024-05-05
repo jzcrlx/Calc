@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-112.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div class="">
+        <!--"head-li-active"表示被选中项，依据需要追加即可。-->
+        <a class="head-li" href="calc-47.html">MDRD</a>
+        <a class="head-li  head-li-active" href="calc-112.html">CKD-EPI (肌酐)</a>
+        <a class="head-li" href="calc-1072.html">CKD-EPI (胱抑素C)</a>
+        <a class="head-li" href="calc-1073.html">CKD-EPI (肌酐-胱抑素C)</a>
+        <a class="head-li" href="calc-22.html">Cockcroft-Gault</a>
+    </div>
+    <div id="medcalc-112" class="post">
+        <div id="meta">
+            <select id="units">
+                <option value="si" name="si" selected="selected">国际单位(SI)</option>
+                <option value="us" name="us">美国单位(US)</option>
+            </select>
+        </div><!--#meta-->
+        <div id="title">
+            <h2>eGFR肾小球滤过率<br>(2021 CKD-EPI 肌酐)</h2>
+            <!--参见calc-47 -->
+        </div>
+        <div class="unit-desc">国际单位: μmol/L，美国单位: mg/dL</div>
+        <form name="medform" action="get" id="medform">
+            <table border="0" cellpadding="0" cellspacing="0">
+                <tbody><tr class="req">
+                    <td>
+                        <div class="flex-center calc-item">
+                            <div class="calc-label calc-label-bg">
+                                年龄
+                            </div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="age" id="age" type="number">
+                            </div>
+                            <div class="calc-unit">
+                                岁
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="req">
+                    <td>
+                        <div class="flex-center calc-item">
+                            <div class="calc-label calc-label-bg">
+                                血清肌酐
+                            </div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="cr" id="cr" placeholder="62 - 115" type="number">
+                            </div>
+                            <div class="calc-unit">
+                                <label for="cr" class="cr">μmol/L</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="req">
+                    <td>
+                        <div class="flex-center calc-item">
+                            <div class="calc-label calc-label-bg">
+                                <label for="female">女性患者？</label>
+                            </div>
+                            <div class="flex-item">
+                                <label><input class="flex_item q_radio" value="1" name="female" id="female" type="checkbox"> 是</label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="answer">
+                    <td>
+                        <div class="flex-center calc-item">
+                            <div class="calc-label calc-label-bg">
+                                肾小球滤过率<br>mL/min/1.73m<sup>2</sup>
+                            </div>
+                            <div class="flex-item">
+                                <input class="calc-input" readonly="readonly" placeholder="点击查看" name="result" id="result" type="text">
+                            </div>
+                            &nbsp;&nbsp;
+                        </div>
+                    </td>
+                </tr>
+            </tbody></table>
+        </form>
+    </div>
+    <div class="formula-main">
+        <div class="formula-name formula-name-first skin-color font14">2021 eGFR = 142 x (Scr/<em>A</em>)<sup><em>B</em></sup> x (0.9938)<sup style="font-size: 12px;">年龄</sup> x <em>C</em></div>
+        <div class="formula-li">
+            <div class="formula-li-index">1) 女性</div>
+            <div class="formula-li-txt">
+                <div class="formula-li-name"><em>C</em> 值：1.012</div>
+            </div>
+        </div>
+        <table class="countTab1 skin-color" style="font-size: 12px;margin-top: 10px">
+            <tbody>
+            <tr>
+                <td>
+                    <p><strong>Scr ≤0.7mg/dL</strong></p>
+                </td>
+                <td>
+                    <p><strong>Scr &gt;0.7mg/dL</strong></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><em>A</em> = 0.7</p>
+                    <p><em>B</em> = -0.241</p>
+                </td>
+                <td>
+                    <p><em>A</em> = 0.7</p>
+                    <p><em>B</em> = -1.2</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="formula-li">
+            <div class="formula-li-index">2) 男性</div>
+            <div class="formula-li-txt">
+                <div class="formula-li-name"><em>C</em> 值：1</div>
+            </div>
+        </div>
+        <table class="countTab1 skin-color" style="font-size: 12px;margin-top: 10px">
+            <tbody>
+            <tr>
+                <td>
+                    <p><strong>Scr ≤0.9mg/dL</strong></p>
+                </td>
+                <td>
+                    <p><strong>Scr &gt;0.9mg/dL</strong></p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p><em>A</em> = 0.9</p>
+                    <p><em>B</em> = -0.302</p>
+                </td>
+                <td>
+                    <p><em>A</em> = 0.9</p>
+                    <p><em>B</em> = -1.2</p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="detail-btm-title">请截屏以保存计算结果</div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">公式说明</span></h3>
+        <div class="jiedu">
+            <p>CKD-EPI（肌酐）由Levey等人于 2009 年开发，Inker等人于 2012 年验证，发现比 MDRD 方程更准确。近期关于对黑人患者使用的争论已经出现(种族是一种社会结构，而不是生物结构)，因此，Inker等人在 2021 年更新了 CKD-EPI 公式，以便从方程中去除种族因素。</p>
+        </div>
+    </div>
+    <div style="padding-bottom: 20px">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="//www.ncbi.nlm.nih.gov/pubmed/19414839" class="resource" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+            <span class="resource__text">1. Levey AS, Stevens LA, Schmid CH, et al. A new equation to estimate glomerular filtration rate. Ann Intern Med. 2009;150(9):604-12.</span>
+        </a>
+        <a href="//www.ncbi.nlm.nih.gov/pubmed/22762315" class="resource" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+            <span class="resource__text">2. Inker LA, Schmid CH, Tighiouart H, et al. Estimating glomerular filtration rate from serum creatinine and cystatin C. N Engl J Med. 2012;367(1):20-9.</span>
+        </a>
+        <a href="//pubmed.ncbi.nlm.nih.gov/34554658/" class="resource" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+            <span class="resource__text">3. Inker LA, Eneanya ND, Coresh J, et al. New creatinine- and cystatin c-based equations to estimate gfr without race. N Engl J Med. Published online September 23, 2021.</span>
+        </a>
+        <a href="//www.kidney.org/professionals/kdoqi/gfr_calculator/formula" class="resource" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+            <span class="resource__text">4. CKD-EPI Creatinine Equation (2021)</span>
+        </a>
+        <a href="//m.medlive.cn/guide/1/3640" class="resource" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+            <span class="resource__text">5. 2012 KDIGO Clinical Practice Guideline for Anemia in Chronic Kidney Disease</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,375 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-769.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-769" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>年轻人躁狂症评定表(YMRS)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">心境高涨</div>
+                        <div class="answer" name="select1">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">心境高涨</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">询问时承认有轻度或可能的心境高涨</div>
+                                <div value="2" class="option">主观感到有肯定的心境高涨；乐观自信；愉悦与内容相称</div>
+                                <div value="3" class="option">心境高涨；与内容不相称；幽默</div>
+                                <div value="4" class="option">欣快；不适当的发笑；唱歌</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">活动-精力增加</div>
+                        <div class="answer" name="select2">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">活动-精力增加</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">主观上增加</div>
+                                <div value="2" class="option">活跃；手势增多</div>
+                                <div value="3" class="option">精力过剩；有时活动过多；坐立不安（可以安静下来）</div>
+                                <div value="4" class="option">运动性兴奋；持续活动过多（无法安静下来）</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">性兴趣</div>
+                        <div class="answer" name="select3">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">性兴趣</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常；未增加</div>
+                                <div value="1" class="option">轻度或可能增加</div>
+                                <div value="2" class="option">询问时承认主观上有肯定的性兴趣增加</div>
+                                <div value="3" class="option">自发谈及性内容；详细描述；自述性欲增强</div>
+                                <div value="4" class="option">明显的性举动 (指对病人、工作人员或检查者)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">睡眠</div>
+                        <div class="answer" name="select4">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">睡眠</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">睡眠没有减少</div>
+                                <div value="1" class="option">睡眠比平时减少不超过1小时</div>
+                                <div value="2" class="option">睡眠比平时减少1小时以上</div>
+                                <div value="3" class="option">自述睡眠需求减少</div>
+                                <div value="4" class="option">否认需要睡眠</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">易激惹</div>
+                        <div class="answer" name="select5">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">易激惹</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="2" class="option">主观上感到易激惹</div>
+                                <div value="4" class="option">检查中有时易激惹，近期有愤怒或烦恼发作</div>
+                                <div value="6" class="option">检查中经常易激惹，自始至终回答简短、生硬</div>
+                                <div value="8" class="option">敌意；不合作；无法检查</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">言语</div>
+                        <div class="answer" name="select6">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">言语</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">未增加</div>
+                                <div value="2" class="option">感觉话多</div>
+                                <div value="4" class="option">时有语速或语量增加，或啰嗦</div>
+                                <div value="6" class="option">紧迫；持续有语速和语量增加，难以打断</div>
+                                <div value="8" class="option">急迫；无法打断，说个不停</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">语言——思维形式障碍</div>
+                        <div class="answer" name="select7">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">语言——思维形式障碍</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">赘述；轻度分散；思维敏捷</div>
+                                <div value="2" class="option">分散；失去思维的目标；经常改变话题；思维加速</div>
+                                <div value="3" class="option">思维奔逸；离题；难以跟上其思维；音联，模仿语言</div>
+                                <div value="4" class="option">语无伦次；无法交流</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">思维内容</div>
+                        <div class="answer" name="select8">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">思维内容</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="2" class="option">可疑的设想, 新的兴趣</div>
+                                <div value="4" class="option">特殊的计划；超宗教的内容</div>
+                                <div value="6" class="option">夸大或偏执观念；援引观念</div>
+                                <div value="8" class="option">妄想；幻觉</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">破坏-攻击行为</div>
+                        <div class="answer" name="select9">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">破坏-攻击行为</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无，合作</div>
+                                <div value="2" class="option">好讽刺；时有提高嗓门，戒备</div>
+                                <div value="4" class="option">要求多；威胁</div>
+                                <div value="6" class="option">检查中威胁检查者；大声喊叫；检查困难</div>
+                                <div value="8" class="option">攻击；破坏；无法检查</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">外表</div>
+                        <div class="answer" name="select10">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">外表</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">穿戴修饰得体</div>
+                                <div value="1" class="option">轻度邋遢</div>
+                                <div value="2" class="option">修饰不佳；中度凌乱；过分修饰</div>
+                                <div value="3" class="option">蓬乱；衣着不整；过分的化妆</div>
+                                <div value="4" class="option">极度邋遢；过分佩戴饰品；奇装异服</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">自知力</div>
+                        <div class="answer" name="select11">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">自知力</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">存在；承认有病；同意需要治疗</div>
+                                <div value="1" class="option">承认可能有病</div>
+                                <div value="2" class="option">承认有行为改变，但否认有病</div>
+                                <div value="3" class="option">承认可能有行为改变，但否认有病</div>
+                                <div value="4" class="option">否认有任何行为改变</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">得分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_infor">
+                        <div class="flex-center calc-item">
+                            <div class="calc-label-md">Interpretation:</div>
+                            <div class="flex-item">
+                                <div id="resultmsg" class="skin-color"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>杨氏躁狂评定量表（YMRS）是一种临床访问量表，用于评估躁狂状态的严重程度，主要用于研究。</p>
+            <p>因为缺乏量化躁狂症严重程度的特定量表，华盛顿大学教学医院Renard医院的Young RC、Biggs JT、Ziegler VE、Meyer DA于1978年提出该量表。</p>
+            <p>
+                彼时用于量化躁狂状态严重程度的量表有Beigel量表、Petterson量表和简明精神病评定量表，然而，这些量表的使用经验表明，需要提出一个比Petterson量表范围更广、灵敏度更高，但比Beigel量表的严重程度分级条目更简短、更明确的供临床医生使用的访问量表，由此提出杨氏躁狂评定量表，该量表共有11个条目，并非用作诊断工具，而是用来评定躁狂状态的严重程度。 </p>
+            <p>
+                YMRS量表由训练有素的临床医生实施，可能需要15到30分钟。该量表广受欢迎，因为简洁、广泛认可，并易于管理。其理想用途是筛查或对躁狂状态进行分期。每一项条目的目的均为评估患者异常的严重程度，使其有助于持续评估躁狂症状，可以帮助指导临床医生的制定治疗计划和进展。 </p>
+            <p>该量表共有11个条目，以患者对其临床状况的主观报告为基础，一般限于前48小时，但在最初的研究中没有明确说明。这些条目是根据已发表的对躁狂症核心症状的描述而选择确定，但并不完全包括所有可能的症状。</p>
+            <p>有四项按0-8级评分（易激惹、言语、思维内容和破坏性/攻击性行为），其余七项按0-4级评分。
+                典型的YMRS基线评分可能会有很大差异，因为其取决于患者的临床特征。2013年，在一项对3684名患者进行的为期两年的前瞻性观察研究中，通过应用临床总体印象疾病严重度量表-双相障碍版确定了供临床医生使用基准（严重程度阈值，最小临床显著性差异[MCSD]）。</p>
+            <p>
+                患者队列包括急性躁狂/双相情感障碍的混合状态。YMRS严重度最佳阈值25（阳性预测值[PPV]=83.0%；阴性预测值[NPV]=66.0%）被确定为重度躁狂。重度躁狂患者组住院率较高，患者在基线时出现精神病症状，并且药物滥用和依赖性增加。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Young RC, Biggs JT, Ziegler VE, Meyer DA. A rating scale for mania: reliability, validity and sensitivity. Br J Psychiatry. 1978;133:429-35.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Lukasiewicz M, Gerard S, Besnard A, et al. Young Mania Rating Scale: how to interpret the numbers? Determination of a severity threshold and of the minimal clinically significant difference in the EMBLEM cohort. Int J Methods Psychiatr Res. 2013;22(1):46-58.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

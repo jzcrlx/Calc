@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-761.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-761" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>Framingham慢性心力衰竭诊断标准</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box end">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che1">阵发性夜间呼吸困难？</label>
+                                    <input class="flex_que q_radio" value="1" id="che1" name="che1" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che2">颈静脉怒张？</label>
+                                    <input class="flex_que q_radio" value="1" id="che2" name="che2" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che3">肺啰音？</label>
+                                    <input class="flex_que q_radio" value="1" id="che3" name="che3" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che4">放射线检查示心脏扩大？</label>
+                                    <input class="flex_que q_radio" value="1" id="che4" name="che4" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che5">急性肺水肿？</label>
+                                    <input class="flex_que q_radio" value="1" id="che5" name="che5" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che6">第三心音性奔马律？</label>
+                                    <input class="flex_que q_radio" value="1" id="che6" name="che6" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che7">中心静脉压升高（&gt;16cm H20）？</label>
+                                    <input class="flex_que q_radio" value="1" id="che7" name="che7" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che8">肝颈静脉反流征阳性？</label>
+                                    <input class="flex_que q_radio" value="1" id="che8" name="che8" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che9">治疗5天后，体重减轻&gt;9.90磅或&gt;4.5公斤？</label>
+                                    <input class="flex_que q_radio" value="1" id="che9" name="che9" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che10">双侧踝关节水肿？</label>
+                                    <input class="flex_que q_radio" value="1" id="che10" name="che10" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che11">夜间咳嗽？</label>
+                                    <input class="flex_que q_radio" value="1" id="che11" name="che11" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che12">活动后呼吸困难？</label>
+                                    <input class="flex_que q_radio" value="1" id="che12" name="che12" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che13">肝肿大？</label>
+                                    <input class="flex_que q_radio" value="1" id="che13" name="che13" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che14">胸腔积液？</label>
+                                    <input class="flex_que q_radio" value="1" id="che14" name="che14" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che15">肺活量降低最大肺活量的1/3？？</label>
+                                    <input class="flex_que q_radio" value="1" id="che15" name="che15" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="che16">心动过速（心室率&gt;120 bpm）？</label>
+                                    <input class="flex_que q_radio" value="1" id="che16" name="che16" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">结果:</div>
+                                <div class="flex-item">
+                                    <div id="resultmsg" class="skin-color"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

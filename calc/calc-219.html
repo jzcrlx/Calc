@@ -1,0 +1,311 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-219.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-219" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>爱丁堡产后抑郁量表（EPDS）</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="que_title">
+                    <span>在过去的7日</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">1.我能够笑并观看事物有趣的方面</div>
+                        <div class="answer" name="xiaoguankan">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">我能够笑并观看事物有趣的方面</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="3" class="option">根本不</div>
+                                <div value="2" class="option">现在肯定不多</div>
+                                <div value="1" class="option">现在不是那样多</div>
+                                <div value="0" class="option">如我总能做到那样多</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">2.我期待着享受事态</div>
+                        <div class="answer" name="qidai">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">我期待着享受事态</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="3" class="option">全然难得有</div>
+                                <div value="2" class="option">肯定较原来做得少</div>
+                                <div value="1" class="option">较我原来做得少</div>
+                                <div value="0" class="option">如我曾做到那样多</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">3.当事情做错，我多会责备自己</div>
+                        <div class="answer" name="zebei">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">当事情做错，我多会责备自己</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="3" class="option">是，大多时间如此</div>
+                                <div value="2" class="option">是，有时如此</div>
+                                <div value="1" class="option">并不经常</div>
+                                <div value="0" class="option">不，永远不</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">4.没有充分的原因我会焦虑或苦恼</div>
+                        <div class="answer" name="jiaolv">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">没有充分的原因我会焦虑或苦恼</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="3" class="option">是，非常多</div>
+                                <div value="2" class="option">是，有时</div>
+                                <div value="1" class="option">极难得</div>
+                                <div value="0" class="option">不，总不</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">6.事情对我来说总是发展到顶点</div>
+                        <div class="answer" name="dingdian">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">事情对我来说总是发展到顶点</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="3" class="option">是，在大多数情况下我全然不能应付</div>
+                                <div value="2" class="option">是，有时我不能像平时那样应付</div>
+                                <div value="1" class="option">不，大多数时间我应付得相当好</div>
+                                <div value="0" class="option">我应付与过去一样好</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">7.我难以入睡，很不愉快</div>
+                        <div class="answer" name="rumian">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">我难以入睡，很不愉快</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="3" class="option">是，大多数时间如此</div>
+                                <div value="2" class="option">是，有时</div>
+                                <div value="1" class="option">并不经常</div>
+                                <div value="0" class="option">不，全然不</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">8.我感到悲伤或痛苦</div>
+                        <div class="answer" name="tongku">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">我感到悲伤或痛苦</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="3" class="option">是，大多数时间如此</div>
+                                <div value="2" class="option">是，相当经常</div>
+                                <div value="1" class="option">并不经常</div>
+                                <div value="0" class="option">不，根本不</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">9.我很不愉快，我哭泣</div>
+                        <div class="answer" name="kuqi">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">我很不愉快，我哭泣</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="3" class="option">是，大多数时间</div>
+                                <div value="2" class="option">是，相当常见</div>
+                                <div value="1" class="option">偶然有</div>
+                                <div value="0" class="option">不，绝不</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">10.出现自伤想法</div>
+                        <div class="answer" name="zishang">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">出现自伤想法</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="3" class="option">是，相当经常</div>
+                                <div value="2" class="option">有时</div>
+                                <div value="1" class="option">极难得</div>
+                                <div value="0" class="option">永远不</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">评分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>爱丁堡产后抑郁量表(Edinburgh postnatal depression scale, EPDS )。</p>
+            <p>目前多采用的诊断标准。该表包括10项内容，于产后6周进行调查。每项内容分4级评分(0～3分)，总分相加≥13分者可诊断为产褥期抑郁症。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">1、JL Cox, et al. Detection of Postnatal Depression: Development of the 10-item Edinburgh Postnatal Depression Scale. Br J Psychiatry. 1987;150:782-6.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+        <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">2、KL Wisner, et al. Clinical practice. Postpartum depression. N Engl J Med. 2002;347(3):194-9.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

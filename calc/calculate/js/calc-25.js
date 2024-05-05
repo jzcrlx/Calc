@@ -1,0 +1,1 @@
+function MDCalc(z){value=z.age/4+4;value2=z.age/4+3;Answer(Round(value,1));Answer2(Round(value2,1));Text("16 years old or older usually is sufficient for adult sizes.")}$("#units").hide();

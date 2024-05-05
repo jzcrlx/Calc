@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-235.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-235">压迫性脊髓病的横向定位诊断</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab1">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>髓内病变</th>
+                    <th>髓外硬膜内病变</th>
+                    <th>硬膜外病变</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>早期症状</th>
+                    <td>多为双侧</td>
+                    <td>一侧进展为双侧</td>
+                    <td>多一侧开始</td>
+                </tr>
+                <tr>
+                    <th>根痛</th>
+                    <td>少见</td>
+                    <td>早期剧烈，部位明显</td>
+                    <td>早期可有</td>
+                </tr>
+                <tr>
+                    <th>感觉障碍</th>
+                    <td>分离性</td>
+                    <td>传导束性，一侧开始</td>
+                    <td>多为双侧传导束性</td>
+                </tr>
+                <tr>
+                    <th>痛温觉障碍</th>
+                    <td>自上向下发展</td>
+                    <td>自下向上发展</td>
+                    <td>双侧自下向上发展</td>
+                </tr>
+                <tr>
+                    <th>节段性肌无力和萎缩</th>
+                    <td>早期出现明显</td>
+                    <td>少见局限</td>
+                    <td>少见</td>
+                </tr>
+                <tr>
+                    <th>锥体束征</th>
+                    <td>不明显</td>
+                    <td>早期出现一侧开始</td>
+                    <td>较早出现，多为双侧</td>
+                </tr>
+                <tr>
+                    <th>括约肌功能障碍</th>
+                    <td>早期出现</td>
+                    <td>晚期出现</td>
+                    <td>较晚期出现</td>
+                </tr>
+                <tr>
+                    <th>棘突压痛、叩痛</th>
+                    <td>无</td>
+                    <td>较常见</td>
+                    <td>常见</td>
+                </tr>
+                <tr>
+                    <th>椎管梗阻</th>
+                    <td>晚期出现</td>
+                    <td>早期出现</td>
+                    <td>较早期出现</td>
+                </tr>
+                <tr>
+                    <th>CSF蛋白增高</th>
+                    <td>不明显</td>
+                    <td>明显</td>
+                    <td>较明显</td>
+                </tr>
+                <tr>
+                    <th>脊柱X线平片改变</th>
+                    <td>无</td>
+                    <td>可有</td>
+                    <td>明显</td>
+                </tr>
+                <tr>
+                    <th>脊髓造影完全缺损</th>
+                    <td>脊髓梭形膨大</td>
+                    <td>杯口状</td>
+                    <td>锯齿状</td>
+                </tr>
+                <tr>
+                    <th>MRI检查</th>
+                    <td>梭形膨大</td>
+                    <td>髓外占位，脊髓移位</td>
+                    <td>硬膜外占位，脊髓移位</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">吴江主编. 神经病学（八年制）（第2版）. 2010年. p141-2.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

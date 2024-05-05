@@ -1,0 +1,303 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-609.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-609" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>CRUSADE出血风险评分量表</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="que_select_box">
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">基线HCT(%)</div>
+                                        <div class="answer" name="hct">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">基线HCT(%)</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">&gt;39.9</div>
+                                                <div value="2" class="option">37-39.9</div>
+                                                <div value="3" class="option">34-36.9</div>
+                                                <div value="7" class="option">31-33.9</div>
+                                                <div value="9" class="option">&lt;31</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            GFR(Cockcroft-Gault公式法)
+                                        </div>
+                                        <div class="answer" name="gfr">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">GFR (ml/min)</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">&gt;120</div>
+                                                <div value="7" class="option">91-120</div>
+                                                <div value="17" class="option">61-90</div>
+                                                <div value="28" class="option">31-60</div>
+                                                <div value="35" class="option">16-30</div>
+                                                <div value="39" class="option">&lt;16</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            心率(bpm)
+                                        </div>
+                                        <div class="answer" name="hr">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">心率(bpm)</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">&lt;71</div>
+                                                <div value="1" class="option">71-80</div>
+                                                <div value="3" class="option">81-90</div>
+                                                <div value="6" class="option">91-100</div>
+                                                <div value="8" class="option">101-110</div>
+                                                <div value="10" class="option">111-120</div>
+                                                <div value="11" class="option">&gt;120</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            收缩压(mmHg)
+                                        </div>
+                                        <div class="answer" name="sbp">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">收缩压(mmHg)</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="10" class="option">&lt;91</div>
+                                                <div value="8" class="option">91-100</div>
+                                                <div value="5" class="option">101-120</div>
+                                                <div value="1" class="option">121-180</div>
+                                                <div value="3" class="option">181-200</div>
+                                                <div value="5" class="option">&gt;200</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="sex">女性</label>
+                                    <input class="flex_que q_radio" value="8" id="sex" name="sex" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="heart">心衰</label>
+                                    <input class="flex_que q_radio" value="7" id="heart" name="heart" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="tang">糖尿病</label>
+                                    <input class="flex_que q_radio" value="6" id="tang" name="tang" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="blood">既往血管疾病</label>
+                                    <input class="flex_que q_radio" value="6" id="blood" name="blood" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p></p>
+            <div class="table-wrap">
+                <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>风险分级</th>
+                        <th>评分范围</th>
+                        <th>发生大出血的风险(%)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>很低</td>
+                        <td>&lt;21</td>
+                        <td>3.1</td>
+                    </tr>
+                    <tr>
+                        <td>低</td>
+                        <td>21-30</td>
+                        <td>5.5</td>
+                    </tr>
+                    <tr>
+                        <td>中</td>
+                        <td>31-40</td>
+                        <td>8.6</td>
+                    </tr>
+                    <tr>
+                        <td>高</td>
+                        <td>41-50</td>
+                        <td>11.9</td>
+                    </tr>
+                    <tr>
+                        <td>很高</td>
+                        <td>&gt;50</td>
+                        <td>19.5</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>*大出血的定义：颅内出血，腹膜后出血，HCT下降≥12%，或需要输血。</p>
+            <p>出血是NSTE-ACS患者首要评估的不良事件之一，其发生率与患者远期预后呈正相关，降低院内出血发生率也是临床医生的首要任务之一。</p>
+            <p>GRACE评分和TIMI评分是目前最为流行的两种出血风险评估方法。GRACE评分可以精准的评估患者院内出血风险，但GRACE评分计算繁琐，需要在计算机及相关软件的支持下才能进行。而TIMI评分计算相对简单，但预测精准度不如GRACE评分。</p>
+            <p>2011 ESC新公布的NSTE-ACS治疗指南推荐采用CRUSADE评分评估患者远期预后和出血风险，该评分项目是来自于CRUSADE队列注册研究结果，通过对71277例患者的基线资料和出血事件相关性分析得出此评分，并在17857例患者中得到了有效验证。</p>
+            <p>与GRACE评分和TIMI评分相比，CRUSADE评分兼具两者的准确性与易操控性。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">1. The CRUSADE Bleeding Score to assess Baseline Risk of Major Bleeding in Non-ST segment Elevation Myocardial Infarction. Circulation, 2009;119: 1873-1882.</span>
+        </a>
+        <a href="//www.crusadebleedingscore.org" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">2. //www.crusadebleedingscore.org</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-389.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-389">小儿肠外营养(TPN)推荐用量表</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="5">1岁以上儿童静脉输注葡萄糖推荐量(g/kg/d)</th>
+                </tr>
+                <tr>
+                    <th>年龄</th>
+                    <th>第1天</th>
+                    <th>第2天</th>
+                    <th>第3天</th>
+                    <th>第4天</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>1~3岁</th>
+                    <td>6</td>
+                    <td>8</td>
+                    <td>10</td>
+                    <td>12~14</td>
+                </tr>
+                <tr>
+                    <th>3~6岁</th>
+                    <td>4</td>
+                    <td>6</td>
+                    <td>8</td>
+                    <td>10~12</td>
+                </tr>
+                <tr>
+                    <th>&gt;6岁</th>
+                    <td>3</td>
+                    <td>5</td>
+                    <td>8</td>
+                    <td>&lt;10</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="4">1岁以上儿童肠外液体推荐量</th>
+                </tr>
+                <tr>
+                    <th>年龄</th>
+                    <th>液体量(ml/kg/d)</th>
+                    <th>Na+(mmol/kg/d)</th>
+                    <th>K+(mmol/kg/d)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>~1岁</th>
+                    <td>80~150</td>
+                    <td>2.0~4.0</td>
+                    <td>2.0~4.0</td>
+                </tr>
+                <tr>
+                    <th>~2岁</th>
+                    <td>80~120</td>
+                    <td>2.0~4.0</td>
+                    <td>2.0~4.0</td>
+                </tr>
+                <tr>
+                    <th>~3岁</th>
+                    <td>80~100</td>
+                    <td>2.0~4.0</td>
+                    <td>2.0~4.0</td>
+                </tr>
+                <tr>
+                    <th>~6岁</th>
+                    <td>60~80</td>
+                    <td>2.0~4.0</td>
+                    <td>2.0~4.0</td>
+                </tr>
+                <tr>
+                    <th>&gt;6</th>
+                    <td>50~70</td>
+                    <td>2.0~4.0</td>
+                    <td>2.0~4.0</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="4">小儿钙磷镁肠外推荐摄入量</th>
+                </tr>
+                <tr>
+                    <th>年龄</th>
+                    <th>钙mg(mmol)/kg/d</th>
+                    <th>磷mg(mmol)/kg/d</th>
+                    <th>镁mg(mmol)/kg/d</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>0~6个月</th>
+                    <td>32(0.8)</td>
+                    <td>14(0.5)</td>
+                    <td>5(0.2)</td>
+                </tr>
+                <tr>
+                    <th>7~12个月</th>
+                    <td>20(0.5)</td>
+                    <td>15(0.5)</td>
+                    <td>4.2(0.2)</td>
+                </tr>
+                <tr>
+                    <th>1~13岁</th>
+                    <td>11(0.2)</td>
+                    <td>6(0.2)</td>
+                    <td>2.4(0.1)</td>
+                </tr>
+                <tr>
+                    <th>14~18岁</th>
+                    <td>7(0.2)</td>
+                    <td>6(0.2)</td>
+                    <td>2.4(0.1)</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="3">小儿肠外补充维生素推荐摄入量</th>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th>婴儿(剂量/kg/d)</th>
+                    <th>儿童(剂量/d)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>维生素A(μg)<sup>a</sup></th>
+                    <td>150~300(500~1000IU)</td>
+                    <td>150(500IU)</td>
+                </tr>
+                <tr>
+                    <th>维生素D(μg)</th>
+                    <td>0.8(32IU)</td>
+                    <td>10(400IU)</td>
+                </tr>
+                <tr>
+                    <th>维生素E(mg)</th>
+                    <td>2.8~3.5</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <th>维生素K(μg)</th>
+                    <td>10</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <th>维生素C(mg)</th>
+                    <td>15~25</td>
+                    <td>80</td>
+                </tr>
+                <tr>
+                    <th>维生素B1(mg)</th>
+                    <td>0.35~0.5</td>
+                    <td>1.2</td>
+                </tr>
+                <tr>
+                    <th>维生素B2(mg)</th>
+                    <td>0.15~0.2</td>
+                    <td>1.4</td>
+                </tr>
+                <tr>
+                    <th>维生素B6(mg)</th>
+                    <td>0.15~0.2</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <th>维生素PP(mg)</th>
+                    <td>4.0~6.8</td>
+                    <td>17</td>
+                </tr>
+                <tr>
+                    <th>维生素B12(mg)</th>
+                    <td>0.3</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <th>维生素B5(mg)</th>
+                    <td>1.0~2.0</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <th>生物素(mg)</th>
+                    <td>5.0~8.0</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <th>叶酸(mg)</th>
+                    <td>56</td>
+                    <td>140</td>
+                </tr>
+                <tr>
+                    <td colspan="3">注：<sup>a</sup>1μgRE(视黄醇当量)=1μg视黄醇=3.33 IU维生素A</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>当患儿无法经肠道摄取营养或摄入不足时，应考虑通过完全或部分肠外营养供给热量、液体、营养素。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">中华医学会肠外肠内营养学分会儿科协作组. 中国儿科肠内肠外营养支持临床应用指南. 中华儿科杂志. 2010:48(6):436-41.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

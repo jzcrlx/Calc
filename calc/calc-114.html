@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-114.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div class="">
+        <!--"head-li-active"表示被选中项，依据需要追加即可。-->
+        <a class="head-li head-li-active" href="calc-114.html">1.适用于初治患者模型</a>
+        <a class="head-li" href="calc-115.html">2.适用于在治患者模型</a>
+    </div>
+    <div id="medcalc-114" class="post">
+        <div id="meta" style="height: 0">
+        </div>
+        <div id="title" style="display: none;">
+            <h2>HCC风险预测模型-适用于初治患者模型</h2>
+        </div>
+        <form name="medform" action="get" id="medform">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_block req">
+                        <div class="question_title">
+                            性别
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="sex_1">男</label>
+                                <input class="flex_item q_radio" value="2" name="sex" id="sex_1" type="radio">
+                                <label class="flex" for="sex_2">女</label>
+                                <input class="flex_item q_radio" value="0" name="sex" id="sex_2" type="radio">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            年龄(岁)
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="age_1">30-34</label>
+                                <input class="flex_item q_radio" value="0" name="age" id="age_1" type="radio">
+                                <label class="flex" for="age_2">35-39</label>
+                                <input class="flex_item q_radio" value="1" name="age" id="age_2" type="radio">
+                            </div>
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="age_3">40-44</label>
+                                <input class="flex_item q_radio" value="2" name="age" id="age_3" type="radio">
+                                <label class="flex" for="age_4">45-49</label>
+                                <input class="flex_item q_radio" value="3" name="age" id="age_4" type="radio">
+                            </div>
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="age_5">50-54</label>
+                                <input class="flex_item q_radio" value="4" name="age" id="age_5" type="radio">
+                                <label class="flex" for="age_6">55-59</label>
+                                <input class="flex_item q_radio" value="5" name="age" id="age_6" type="radio">
+                            </div>
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="age_7">60-64</label>
+                                <input class="flex_item q_radio" value="6" name="age" id="age_7" type="radio">
+                                <label class="flex hide"></label>
+                                <input class="flex_item q_radio hide" name="age" type="radio">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            丙氨基酸基转移酶(ALT,U/L)
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="alt_1">&lt;15</label>
+                                <input class="flex_item q_radio" value="0" name="alt" id="alt_1" type="radio">
+                                <label class="flex" for="alt_2">15-44</label>
+                                <input class="flex_item q_radio" value="1" name="alt" id="alt_2" type="radio">
+                            </div>
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="alt_3">≥45</label>
+                                <input class="flex_item q_radio" value="2" name="alt" id="alt_3" type="radio">
+                                <label class="flex hide"></label>
+                                <input class="flex_item q_radio hide" name="alt" type="radio">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            e抗原(HBeAg)
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="hbeag_1">阴性</label>
+                                <input class="flex_item q_radio" value="0" name="hbeag" id="hbeag_1" type="radio">
+                                <label class="flex" for="hbeag_2">阳性</label>
+                                <input class="flex_item q_radio" value="2" name="hbeag" id="hbeag_2" type="radio">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            HBV DNA 载量(coples/mL)
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="hbv_1">&lt;300</label>
+                                <input class="flex_item q_radio" value="0" name="hbv" id="hbv_1" type="radio">
+                                <label class="flex" for="hbv_2">300-999</label>
+                                <input class="flex_item q_radio" value="0" name="hbv" id="hbv_2" type="radio">
+                            </div>
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="hbv_3">10000-99999</label>
+                                <input class="flex_item q_radio" value="3" name="hbv" id="hbv_3" type="radio">
+                                <label class="flex" for="hbv_4">100000-999999</label>
+                                <input class="flex_item q_radio" value="5" name="hbv" id="hbv_4" type="radio">
+                            </div>
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="hbv_5">≥100000</label>
+                                <input class="flex_item q_radio" value="4" name="hbv" id="hbv_5" type="radio">
+                                <label class="flex hide"></label>
+                                <input class="flex_item q_radio hide" name="hbv" type="radio">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn_box">
+                    <input class="submit_btn" type="button">
+                    <input class="reset_btn" type="button">
+                </div>
+                <div class="prompt_box" style="font-weight: bold;font-size: 12px">
+                    <div class="">
+                        注意：本工具适用于HBV DNA≥20IUmL的初治乙肝患者
+                    </div>
+                    <div class="">
+                        受限于您个人提供数据，本测试结果仅供参考，不代表任何诊疗意见，具体诊疗应以专业医师意见为准。
+                    </div>
+                </div>
+                <div class="reference_box">
+                    <div class="reference_tit">
+                        参考文献：
+                    </div>
+                    <div class="">
+                        Risk estimation for hepatocellular carcinoma in chronic hepatitis B (REACH-B):
+                        development and validation of a predictive score
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var projectId = 2;
+        //提交
+        $('.submit_btn').on('click', function (event) {
+            event.stopPropagation();
+            var data = {};
+            var radios = $(".q_radio:radio:checked");
+            radios.each(function () {
+                var name = $(this).attr("name");
+                var value = $(this).val();
+                data[name] = value;
+            });
+            calc(projectId, data);
+        });
+
+        //重置
+        $('.reset_btn').on('click', function (event) {
+            event.stopPropagation();
+            $('.q_radio').prop('checked', false);
+        });
+
+    });
+</script>
+
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

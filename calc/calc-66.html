@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-66.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="medcalc-66" class="post">
+	<div id="meta">
+		<select id="units" style="display: none;">
+			<option value="si" name="si" selected="selected">国际单位(SI)</option>
+			<option value="us" name="us">美国单位(US)</option>
+		</select>	
+	</div><!--#meta-->
+	<div id="title">
+	  <h2>修正的创伤评分</h2> 
+	  <!-- <h3 id="desc">Quantifies severity of trauma injuries based on GCS, blood pressure, and respiratory rate.</h3> -->
+	</div>
+	<form id="medform" name="medform" action="get">
+		<table border="0" cellpadding="0" cellspacing="0">                                      
+			<tbody><tr>
+				<td coslpan="2">注意：使用患者第一组数据</td>
+			</tr>	
+			<tr class="req">
+				<td>格拉斯哥昏迷评分</td>
+				<td><label><input id="gcs" name="gcs" type="text"> 分</label></td>
+			</tr>    
+			<tr class="req">
+				<td>收缩压</td>
+				<td><label><input id="sbp" name="sbp" type="text"> mm Hg</label></td>
+			</tr>
+			<tr class="req">
+				<td>呼吸频率</td>
+				<td><label><input id="rr" name="rr" type="text"> bpm </label></td>
+			</tr>
+			<tr class="answer">
+				<td>修正的创伤评分:</td>
+				<td><input readonly="readonly" placeholder="点击查看" id="result" name="result" type="text"></td>
+			</tr>  
+			<tr class="msg answer">
+				<td colspan="2"><div id="resultmsg"> </div></td>
+			</tr>
+		</tbody></table>
+	</form>
+
+
+<!-- LEADERBOARD AD -->
+
+
+
+
+
+<!-- MDCalc_Surgery_Leaderboard_728x90 -->
+<!-- <div style="width: 728px; height: 90px;" id="div-gpt-ad-1363049555981-16">
+<script type="text/javascript">
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363049555981-16'); });
+</script><iframe width="728" scrolling="no" height="90" frameborder="0" id="google_ads_iframe_/27484587/MDCalc_Surgery_Leaderboard_728x90_0" name="google_ads_iframe_/27484587/MDCalc_Surgery_Leaderboard_728x90_0" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;" src="javascript:&quot;&lt;html&gt;&lt;body style='background:transparent'&gt;&lt;/body&gt;&lt;/html&gt;&quot;"></iframe><iframe width="0" scrolling="no" height="0" frameborder="0" id="google_ads_iframe_/27484587/MDCalc_Surgery_Leaderboard_728x90_0__hidden__" name="google_ads_iframe_/27484587/MDCalc_Surgery_Leaderboard_728x90_0__hidden__" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom; visibility: hidden; display: none;" src="javascript:&quot;&lt;html&gt;&lt;body style='background:transparent'&gt;&lt;/body&gt;&lt;/html&gt;&quot;"></iframe>
+</div>
+ -->
+
+<!-- end leaderboard ad -->
+
+
+
+
+<!-- <div id="formula" class="extra">
+    <table cellspacing="3" cellpadding="3" border="2"> 
+	<thead><tr> 
+	<th>Glasgow Coma Scale</th><th>Systolic Blood Pressure</th><th>Respiratory Rate</th><th>Numerical Value Assigned</th></tr> 
+</thead>
+<tbody>
+	<tr> 
+	<td>13-15</td><td>&gt;89</td><td>10-29</td><td>4</td></tr> 
+	<tr> 
+	<td>9-12</td><td>76-89</td><td>&gt;29</td><td>3</td></tr> 
+	<tr> 
+	<td>6-8</td><td>50-75</td><td>6-9</td><td>2</td> 
+	</tr> 
+	<tr><td>4-5</td><td>1-49</td><td>1-5</td><td>1</td></tr> 
+	<tr> 
+	<td>3</td><td>0</td><td>0</td><td>0</td></tr> 
+
+	</tbody></table> 
+
+	<p>RTS = (0.9368 * GCS Value) + (0.7326 * SBP Value) + (0.2908 * RR Value) </p></div>
+
+<div id="source" class="extra">
+<ul><li><a href="//www.ncbi.nlm.nih.gov/pubmed/2657085">Champion HR et al, "A Revision of the Trauma Score", J Trauma 29:623-629,1989</a></li>
+<li><a>Champion HR et al, "Trauma Score", Crit Care Med 9:672-676,1981</a></li></ul></div>
+
+
+
+<div id="postmeta">
+
+	<p>Posted in: <a rel="category tag" title="View all posts in Surgery" href="//www.mdcalc.com/category/specialties/surgery/">Surgery</a> • <a rel="category tag" title="View all posts in Trauma" href="//www.mdcalc.com/category/specialties/trauma/">Trauma</a></p>
+
+</div>postmeta -->
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

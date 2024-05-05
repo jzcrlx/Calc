@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-608.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-608" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>肺栓塞Geneva预后评分</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="calc-label-lg">年龄</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="age" type="number">
+                                </div>
+                                <div class="calc-unit-ssm">岁</div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="sex">男性</label>
+                                    <input class="flex_que q_radio" value="1" id="sex" name="sex" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="cancer">癌症</label>
+                                    <input class="flex_que q_radio" value="1" id="cancer" name="cancer" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="xinshuai">心衰</label>
+                                    <input class="flex_que q_radio" value="1" id="xinshuai" name="xinshuai" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="manxing">慢性肺部疾病 </label>
+                                    <input class="flex_que q_radio" value="1" id="manxing" name="manxing" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="hr">心率&gt;110/分钟</label>
+                                    <input class="flex_que q_radio" value="1" id="hr" name="hr" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="sbp">收缩压＜100mmHg</label>
+                                    <input class="flex_que q_radio" value="1" id="sbp" name="sbp" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="huxi">呼吸频率&gt;30/分钟</label>
+                                    <input class="flex_que q_radio" value="1" id="huxi" name="huxi" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="tem">体温＜36℃</label>
+                                    <input class="flex_que q_radio" value="1" id="tem" name="tem" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="ding">定向障碍、嗜睡、昏睡、昏迷</label>
+                                    <input class="flex_que q_radio" value="1" id="ding" name="ding" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="dongmai">动脉血氧饱和度＜90%</label>
+                                    <input class="flex_que q_radio" value="1" id="dongmai" name="dongmai" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>Ⅰ和Ⅱ级（0~1%）为低风险。</p>
+            <p></p>
+            <div class="table-wrap">
+                <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>评分</th>
+                        <th>危险分层</th>
+                        <th>30天全因死亡率</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>＜65分</td>
+                        <td>Ⅰ级</td>
+                        <td>0%</td>
+                    </tr>
+                    <tr>
+                        <td>66~85分</td>
+                        <td>Ⅱ级</td>
+                        <td>1%</td>
+                    </tr>
+                    <tr>
+                        <td>86~105分</td>
+                        <td>Ⅲ级</td>
+                        <td>3.1%</td>
+                    </tr>
+                    <tr>
+                        <td>106~125分</td>
+                        <td>Ⅳ级</td>
+                        <td>10.4%</td>
+                    </tr>
+                    <tr>
+                        <td>＞125分</td>
+                        <td>Ⅴ级</td>
+                        <td>24.4%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">欧洲心脏病学会(ESC). 急性肺动脉栓塞诊断治疗指南. Eur Heart J, 2008; 29(18):2276-2315.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-477.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-477" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>临床肺部感染CPIS评分</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">痰液</div>
+                        <div class="answer" name="tanye">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">痰液</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">少量</div>
+                                <div value="1" class="option">大量</div>
+                                <div value="2" class="option">大量+脓性</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">胸片</div>
+                        <div class="answer" name="xiongpian">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">胸片</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">弥漫</div>
+                                <div value="2" class="option">局部</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">体温</div>
+                        <div class="answer" name="tiwen">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">体温</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">36.5 - 38.4 °C</div>
+                                <div value="1" class="option">38.5 - 38.9 °C</div>
+                                <div value="2" class="option">&lt; 36 或 &gt;39 °C</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">白细胞计数</div>
+                        <div class="answer" name="baixibao">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">白细胞计数</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">4 - 11 x 10⁹/L</div>
+                                <div value="1" class="option">&lt; 4 或 &gt; 11 x 10⁹/L</div>
+                                <div value="2" class="option">&lt; 4 或&gt; 11 x 10⁹/L + 杆状核中性粒细胞</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">PaO₂ / FiO₂</div>
+                        <div class="answer" name="pa">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">PaO₂ / FiO₂</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">&gt; 240 或 ARDS</div>
+                                <div value="2" class="option">≤ 240 且无 ARDS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">进展</div>
+                        <div class="answer" name="jinzhan">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">进展</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无影像学进展</div>
+                                <div value="2" class="option">影像学进展（已排除慢性心衰和 ARDS）</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">培养</div>
+                        <div class="answer" name="peiyang">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">培养</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">培养无致病菌生长或见极少或少量致病菌</div>
+                                <div value="1" class="option">致病菌与 Gram 染色所见一致（极少/少量）</div>
+                                <div value="1" class="option">培养见中等或大量致病菌</div>
+                                <div value="2" class="option">致病菌与 Gram 染色所见一致（中等/大量）</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">得分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">临床应用</span></h3>
+        <div class="jiedu">
+            <p>基础评估通过前 5 项指标进行。72 小时后用全部 7 项指标再行一次评估。</p>
+            <p>临床肺部感染评分（Clinical Pulmonary Infection Score, CPIS）6 分及以上者（基线评估或 72 小时重复评估）高度提示呼吸机相关性肺炎。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="//www.ncbi.nlm.nih.gov/m/pubmed/12024096/" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Pugin J. Minerva Anestesiol. 2002 Apr;68(4):261-5.</span>
+        </a>
+        <a href="//www.ncbi.nlm.nih.gov/m/pubmed/10934078/" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Singh N. Am J Respir Crit Care Med. 2000 Aug;162(2 Pt 1):505-11.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

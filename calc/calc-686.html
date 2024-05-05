@@ -1,0 +1,212 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-686.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-686" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>HEMORR₂HAGES 评分</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="ageOver75">年龄 &gt; 75 岁</label>
+                                    <input class="flex_que q_radio" value="1" id="ageOver75" name="ageOver75" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="priorMajorBleed">既往大出血史</label>
+                                    <input class="flex_que q_radio" value="2" id="priorMajorBleed" name="priorMajorBleed" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="hepaticOrRenalDisease">肝病或肾病</label>
+                                    <input class="flex_que q_radio" value="1" id="hepaticOrRenalDisease" name="hepaticOrRenalDisease" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="alcoholAbuse">酗酒</label>
+                                    <input class="flex_que q_radio" value="1" id="alcoholAbuse" name="alcoholAbuse" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="malignancy">恶性肿瘤</label>
+                                    <input class="flex_que q_radio" value="1" id="malignancy" name="malignancy" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="hypertension">未控制的高血压</label>
+                                    <input class="flex_que q_radio" value="1" id="hypertension" name="hypertension" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="anemia">贫血</label>
+                                    <input class="flex_que q_radio" value="1" id="anemia" name="anemia" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="fallRisk">极高的跌倒风险</label>
+                                    <input class="flex_que q_radio" value="1" id="fallRisk" name="fallRisk" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="priorStroke">既往脑卒中史</label>
+                                    <input class="flex_que q_radio" value="1" id="priorStroke" name="priorStroke" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="platelet">血小板计数或功能降低</label>
+                                    <input class="flex_que q_radio" value="1" id="platelet" name="platelet" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-md">评分:</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">结论:</div>
+                                <div class="flex-item">
+                                    <div id="resultmsg" class="skin-color"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>HEMORR2HAGES 评分（HEMORR2HAGES Score）是用于预测房颤患者出血风险的临床分级系统。它将现有的各项分级系统中的出血危险因素整合在一起，构成了一个改良的分级系统。</p>
+            <p>缩写的具体含义如下：</p>
+            <ul>
+                <li>肝病或肾病（<b>H</b>epatic or renal disease）：<br>
+                    肝病：肝硬化，AST 或 APT 升高两倍以上，或白蛋白 &lt; 3.6 g/dL<br>
+                    肾功能不全：肌酐清除率 &lt; 30 ml/min</li>
+                <li>酗酒（<b>E</b>tanol abuse）</li>
+                <li>恶性肿瘤（<b>M</b>alignancy）</li>
+                <li>老年（<b>O</b>lder）：年龄 ≥ 75 岁</li>
+                <li>血小板计数或功能降低（<b>R</b>educed platelet count or function）：<br>
+                    血小板 &lt; 75,000，常规使用抗血小板药物（如每日服用阿司匹林）或非甾体类抗炎药；或恶液质</li>
+                <li>再出血（<b>R</b>e-Bleeding）</li>
+                <li>未控制的高血压（<b>H</b>ypertension）</li>
+                <li>贫血（<b>A</b>nemia）</li>
+                <li>遗传因素（<b>G</b>enetic factors）</li>
+                <li>极高的跌倒风险（<b>E</b>xcessive fall risk）</li>
+                <li>脑卒中（<b>S</b>troke）</li>
+            </ul>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="//www.ncbi.nlm.nih.gov/m/pubmed/16504638/" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Gage BF. Am Heart J. 2006 Mar;151(3):713-9.</span>
+        </a>
+    </div>
+</div>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

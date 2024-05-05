@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-815.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-815" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>银屑病静态临床医生整体评估(PGA)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="question_sub_title">
+                    采用静态PGA确定某一给定时间点患者银屑病总体损伤情况。根据下述量表评定浸润、红斑与鳞屑的整体损伤情况。
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">浸润 (I) (平均整体损伤)</div>
+                        <div class="answer" name="jinrun">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">浸润 (I) (平均整体损伤)</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无斑块突出之证据</div>
+                                <div value="1" class="option">斑块极轻度隆起 = 0.25 mm</div>
+                                <div value="2" class="option">斑块轻度隆起, = 0.5 mm</div>
+                                <div value="3" class="option">斑块中度隆起, = 0.75 mm</div>
+                                <div value="4" class="option">斑块明显隆起, = 1 mm</div>
+                                <div value="5" class="option">斑块严重隆起, = 1.25 mm或以上</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">
+                            红斑（E）(平均整体损伤)
+                        </div>
+                        <div class="answer" name="hongban">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">红斑（E）(平均整体损伤)</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无红斑可见,可能存在色素沉着</div>
+                                <div value="1" class="option">微弱红斑</div>
+                                <div value="2" class="option">颜色为淡红色</div>
+                                <div value="3" class="option">颜色为中度红色</div>
+                                <div value="4" class="option">颜色为亮红色</div>
+                                <div value="5" class="option">颜色为暗红色至深红色</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">
+                            鳞屑（S）(平均整体损伤)
+                        </div>
+                        <div class="answer" name="linxuan">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">鳞屑（S）(平均整体损伤)</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无可见鳞屑</div>
+                                <div value="1" class="option">极轻度；偶尔见细鳞屑于5%以下损伤处</div>
+                                <div value="2" class="option">轻度，主要为细鳞屑</div>
+                                <div value="3" class="option">中度，主要为粗糙鳞屑</div>
+                                <div value="4" class="option">明显，主要为非粘性厚鳞屑</div>
+                                <div value="5" class="option">严重，主要为粘性极厚鳞屑</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">PGI评分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">结果:</div>
+                            <div class="flex-item">
+                                <div id="resultmsg1" class="skin-color"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

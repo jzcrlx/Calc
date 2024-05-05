@@ -1,0 +1,1286 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-822.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-822" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>统一帕金森病评定量表(UPDRS 3.0版)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="que_title">
+                    <span>Ⅰ. 精神、行为和情绪</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">1.智力损害</div>
+                        <div class="answer" name="item1">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">1.智力损害</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻微智力损害，持续健忘，能部分回忆过去的事件，无其他困难</div>
+                                <div value="2" class="option">中等记忆损害，有定向障碍，解决复杂问题有中等程度的困难</div>
+                                <div value="3" class="option">严重记忆损害伴时间及（经常有）地点定向障碍，解决问题有严重困难</div>
+                                <div value="4" class="option">严重记忆损害，仅保留人物定向，不能作出判断或解决问题，生活需要他人帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">2.思维障碍(由于痴呆或药物中毒)</div>
+                        <div class="answer" name="item2">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">2.思维障碍（由于痴呆或药物中毒）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">生动的梦境</div>
+                                <div value="2" class="option">“良性”幻觉，自知力良好</div>
+                                <div value="3" class="option">偶然或经常的幻觉或妄想, 无自知力, 可能影响日常活动</div>
+                                <div value="4" class="option">持续的幻觉、妄想或富于色彩的精神病, 不能自我照料</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">3.抑郁</div>
+                        <div class="answer" name="item3">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">3.抑郁</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">悲观和内疚时间比正常多，持续时间不超过1周</div>
+                                <div value="2" class="option">持续抑郁（1周或以上）</div>
+                                <div value="3" class="option">持续抑郁伴自主神经症状（失眠、食欲减退、体重下降、兴趣降低）</div>
+                                <div value="4" class="option">持续抑郁伴自主神经症状和自杀念头或意愿</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">4.动力或始动力</div>
+                        <div class="answer" name="item4">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">4.动力或始动力</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">比通常缺少决断力，较被动</div>
+                                <div value="2" class="option">对选择性（非常规）活动无兴趣或动力</div>
+                                <div value="3" class="option">对每天的（常规）活动无兴趣或动力</div>
+                                <div value="4" class="option">退缩，完全无动力</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>II. 日常生活活动</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">5.言语 (接受)</div>
+                        <div class="answer" name="item5">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">5.言语 (接受)</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">轻微受影响，无听懂困难</div>
+                                <div value="2" class="option">中度受影响，有时要求重复才听懂</div>
+                                <div value="3" class="option">严重受影响，经常要求重复才听懂</div>
+                                <div value="4" class="option">经常不能理解</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">6.唾液分泌</div>
+                        <div class="answer" name="item6">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">6.唾液分泌</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">口腔内唾液分泌轻微但肯定增多，可能有夜间流涎</div>
+                                <div value="2" class="option">中等程度的唾液分泌过多，可能有轻微流涎</div>
+                                <div value="3" class="option">明显过多的唾液伴流涎</div>
+                                <div value="4" class="option">明显流涎，需持续用纸巾或手帕擦拭</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">7.吞咽</div>
+                        <div class="answer" name="item7">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">7.吞咽</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">极少呛咳</div>
+                                <div value="2" class="option">偶然呛咳</div>
+                                <div value="3" class="option">需进软食</div>
+                                <div value="4" class="option">需要鼻饲或胃造瘘进食</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">8.书写</div>
+                        <div class="answer" name="item8">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">8.书写</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">轻微缓慢或字变小</div>
+                                <div value="2" class="option">中度缓慢或字变小，所有字迹均清</div>
+                                <div value="3" class="option">严重受影响，不是所有字迹均清楚</div>
+                                <div value="4" class="option">大多数字迹不清楚</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">9.切割食物和使用餐具</div>
+                        <div class="answer" name="item9">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">9.切割食物和使用餐具</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">稍慢和笨拙，但不需要帮助</div>
+                                <div value="2" class="option">尽管慢和笨拙，但能切割多数食物，需要某种程度的帮助</div>
+                                <div value="3" class="option">需要他人帮助切割食物，但能自己缓慢进食</div>
+                                <div value="4" class="option">需要喂食</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">10.着装</div>
+                        <div class="answer" name="item10">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">10.着装</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">略慢，不需帮助</div>
+                                <div value="2" class="option">偶尔需要帮助扣扣子及将手臂放进袖里</div>
+                                <div value="3" class="option">需要相当多的帮助，但还能独立做某些事情</div>
+                                <div value="4" class="option">完全需要帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">11.个人卫生</div>
+                        <div class="answer" name="item11">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">11.个人卫生</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">稍慢，但不需要帮助</div>
+                                <div value="2" class="option">需要帮助淋浴或盆浴，或做个人卫生很慢</div>
+                                <div value="3" class="option">洗脸、刷牙、梳头及洗澡均需帮助</div>
+                                <div value="4" class="option">需导尿或其他机械帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">12.翻身和整理床单</div>
+                        <div class="answer" name="item12">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">12.翻身和整理床单</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">稍慢且笨拙，但无需帮助</div>
+                                <div value="2" class="option">能独立翻身或整理床单，但很困难</div>
+                                <div value="3" class="option">能起始，但不能完成翻身或整理床单</div>
+                                <div value="4" class="option">完全需要帮助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">13.跌跤（与冻结“freezing”无关）</div>
+                        <div class="answer" name="item13">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">13.跌跤（与冻结“freezing”无关）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">偶有</div>
+                                <div value="2" class="option">有时有，少于每天1次</div>
+                                <div value="3" class="option">平均每天1次</div>
+                                <div value="4" class="option">多于每天1次</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">14.行走中冻结</div>
+                        <div class="answer" name="item14">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">14.行走中冻结</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">少见，可有启动困难</div>
+                                <div value="2" class="option">有时有冻结</div>
+                                <div value="3" class="option">经常有，偶有因冻结跌跤</div>
+                                <div value="4" class="option">经常因冻结跌跤</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">15.行走</div>
+                        <div class="answer" name="item15">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">15.行走</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">轻微困难，可能上肢不摆动或倾向于拖步</div>
+                                <div value="2" class="option">中度困难，但稍需或不需帮助</div>
+                                <div value="3" class="option">严重行走困难，需要帮助</div>
+                                <div value="4" class="option">即使给予帮助也不能行走</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">16.震颤</div>
+                        <div class="answer" name="item16">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">16.震颤</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻微，不常有</div>
+                                <div value="2" class="option">中度，感觉烦恼</div>
+                                <div value="3" class="option">严重，许多活动受影响</div>
+                                <div value="4" class="option">明显，大多数活动受影响</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">17.与帕金森病有关的感觉主诉</div>
+                        <div class="answer" name="item17">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">17.与帕金森病有关的感觉主诉</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">偶然有麻木、麻刺感或轻微疼痛</div>
+                                <div value="2" class="option">经常有麻木、麻刺感或轻微疼痛，不痛苦</div>
+                                <div value="3" class="option">经常的痛苦感</div>
+                                <div value="4" class="option">极度的痛苦感</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>Ⅲ. 运动检查</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">18.言语(表达)</div>
+                        <div class="answer" name="item18">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">18.言语(表达)</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">表达、理解和(或)音量轻度下降</div>
+                                <div value="2" class="option">单音调，含糊但可听懂，中度受损</div>
+                                <div value="3" class="option">单音调，含糊但可听懂，重度受损</div>
+                                <div value="4" class="option">无法听懂</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">19.面部表情</div>
+                        <div class="answer" name="item19">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">19.面部表情</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">略呆板，可能是正常的“面无表情”</div>
+                                <div value="2" class="option">轻度但肯定是面部表情差</div>
+                                <div value="3" class="option">中度表情呆板，有时张口</div>
+                                <div value="4" class="option">面具脸，几乎完全没有表情，口张开在1/4英寸(0.6 cm)或以上</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>20. 静止性震颤：</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">20a. 面部、嘴唇、下颌</div>
+                        <div class="answer" name="item20a">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">20a. 面部、嘴唇、下颌</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">表达、理解和(或)音量轻度下降</div>
+                                <div value="2" class="option">单音调，含糊但可听懂，中度受损</div>
+                                <div value="3" class="option">单音调，含糊但可听懂，重度受损</div>
+                                <div value="4" class="option">无法听懂</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">20b. 右上肢</div>
+                        <div class="answer" name="item20b">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">20b. 右上肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻度，有时出现</div>
+                                <div value="2" class="option">幅度小而持续，或中等幅度间断出现</div>
+                                <div value="3" class="option">幅度中等，多数时间出现</div>
+                                <div value="4" class="option">幅度大，多数时间出现</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">20c.左上肢</div>
+                        <div class="answer" name="item20c">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">20c.左上肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻度，有时出现</div>
+                                <div value="2" class="option">幅度小而持续，或中等幅度间断出现</div>
+                                <div value="3" class="option">幅度中等，多数时间出现</div>
+                                <div value="4" class="option">幅度大，多数时间出现</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">20d.右下肢</div>
+                        <div class="answer" name="item20d">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">20d.右下肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻度，有时出现</div>
+                                <div value="2" class="option">幅度小而持续，或中等幅度间断出现</div>
+                                <div value="3" class="option">幅度中等，多数时间出现</div>
+                                <div value="4" class="option">幅度大，多数时间出现</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">20e.左下肢</div>
+                        <div class="answer" name="item20e">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">20e.左下肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻度，有时出现</div>
+                                <div value="2" class="option">幅度小而持续，或中等幅度间断出现</div>
+                                <div value="3" class="option">幅度中等，多数时间出现</div>
+                                <div value="4" class="option">幅度大，多数时间出现</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>21.手部动作性或姿势性震颤：</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">21a. 右上肢</div>
+                        <div class="answer" name="item21a">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">21a. 右上肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻度，活动时出现</div>
+                                <div value="2" class="option">幅度中等，活动时出现</div>
+                                <div value="3" class="option">幅度中等，持物或活动时出现</div>
+                                <div value="4" class="option">幅度大，影响进食</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">21b. 左上肢</div>
+                        <div class="answer" name="item21b">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">21b. 左上肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻度，活动时出现</div>
+                                <div value="2" class="option">幅度中等，活动时出现</div>
+                                <div value="3" class="option">幅度中等，持物或活动时出现</div>
+                                <div value="4" class="option">幅度大，影响进食</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>22. 强直：</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">22a. 颈部</div>
+                        <div class="answer" name="item22a">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">22a. 颈部</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻度，或仅在镜像运动及加强试验时可查出</div>
+                                <div value="2" class="option">轻到中度</div>
+                                <div value="3" class="option">明显，但活动范围不受限</div>
+                                <div value="4" class="option">严重，活动范围受限</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">22b. 右上肢</div>
+                        <div class="answer" name="item22b">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">22b. 右上肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻度，或仅在镜像运动及加强试验时可查出</div>
+                                <div value="2" class="option">轻到中度</div>
+                                <div value="3" class="option">明显，但活动范围不受限</div>
+                                <div value="4" class="option">严重，活动范围受限</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">22c. 左上肢</div>
+                        <div class="answer" name="item22c">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">22c. 左上肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻度，或仅在镜像运动及加强试验时可查出</div>
+                                <div value="2" class="option">轻到中度</div>
+                                <div value="3" class="option">明显，但活动范围不受限</div>
+                                <div value="4" class="option">严重，活动范围受限</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">22d. 右下肢</div>
+                        <div class="answer" name="item22d">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">22d. 右下肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻度，或仅在镜像运动及加强试验时可查出</div>
+                                <div value="2" class="option">轻到中度</div>
+                                <div value="3" class="option">明显，但活动范围不受限</div>
+                                <div value="4" class="option">严重，活动范围受限</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">22e. 左下肢</div>
+                        <div class="answer" name="item22e">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">22e. 左下肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻度，或仅在镜像运动及加强试验时可查出</div>
+                                <div value="2" class="option">轻到中度</div>
+                                <div value="3" class="option">明显，但活动范围不受限</div>
+                                <div value="4" class="option">严重，活动范围受限</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>23. 手指拍打试验（拇食指尽可能大幅度、快速地做连续对掌动作）：</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">23a. 右手</div>
+                        <div class="answer" name="item23a">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">23a. 右手</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常（≥15次/5秒）</div>
+                                <div value="1" class="option">轻度减慢和(或)幅度减小（11～14次/5秒）</div>
+                                <div value="2" class="option">中等障碍，有肯定的早期疲劳现象，运动中可以有偶尔的停顿（7～10 次/5秒）</div>
+                                <div value="3" class="option">严重障碍，动作起始困难或运动中有停顿（3～6次/5秒）</div>
+                                <div value="4" class="option">几乎不能执行动作（0～2次/5秒）</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">23b. 左手</div>
+                        <div class="answer" name="item23b">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">23b. 左手</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常（≥15次/5秒）</div>
+                                <div value="1" class="option">轻度减慢和(或)幅度减小（11～14次/5秒）</div>
+                                <div value="2" class="option">中等障碍，有肯定的早期疲劳现象，运动中可以有偶尔的停顿（7～10 次/5秒）</div>
+                                <div value="3" class="option">严重障碍，动作起始困难或运动中有停顿（3～6次/5秒）</div>
+                                <div value="4" class="option">几乎不能执行动作（0～2次/5秒）</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>24. 手运动（尽可能大幅度地做快速连续的伸掌握拳动作）：</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">24a. 右手</div>
+                        <div class="answer" name="item24a">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">24a. 右手</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">轻度减慢或幅度减小</div>
+                                <div value="2" class="option">中度障碍，有肯定的早期疲劳现象，运动中可以有偶尔的停顿</div>
+                                <div value="3" class="option">严重障碍，动作起始时经常犹豫或运动中有停顿</div>
+                                <div value="4" class="option">几乎不能执行动作</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">24b. 左手</div>
+                        <div class="answer" name="item24b">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">24b. 左手</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">轻度减慢或幅度减小</div>
+                                <div value="2" class="option">中度障碍，有肯定的早期疲劳现象，运动中可以有偶尔的停顿</div>
+                                <div value="3" class="option">严重障碍，动作起始时经常犹豫或运动中有停顿</div>
+                                <div value="4" class="option">几乎不能执行动作</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>25. 轮替动作（两手垂直或水平作最大幅度的旋前和旋后动作：</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">25a. 右手</div>
+                        <div class="answer" name="item25a">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">25a. 右手</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">轻度减慢或幅度减小</div>
+                                <div value="2" class="option">中度障碍，有肯定的早期疲劳现象，偶在运动中出现停顿</div>
+                                <div value="3" class="option">严重障碍，动作起始时经常犹豫或运动中有停顿</div>
+                                <div value="4" class="option">几乎不能执行动作</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">25b. 左手</div>
+                        <div class="answer" name="item25b">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">25b. 左手</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">轻度减慢或幅度减小</div>
+                                <div value="2" class="option">中度障碍，有肯定的早期疲劳现象，偶在运动中出现停顿</div>
+                                <div value="3" class="option">严重障碍，动作起始时经常犹豫或运动中有停顿</div>
+                                <div value="4" class="option">几乎不能执行动作</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>26. 腿部灵活性（连续快速地脚后跟踏地，腿完全抬高，幅度约为2厘米）：</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">26a. 右下肢</div>
+                        <div class="answer" name="item26a">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">26a. 右下肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">轻度减慢或幅度减小</div>
+                                <div value="2" class="option">中度障碍，有肯定的早期疲劳现象，偶在运动中出现停顿</div>
+                                <div value="3" class="option">严重障碍，动作起始时经常犹豫或运动中有停顿</div>
+                                <div value="4" class="option">几乎不能执行动作</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">26b. 左下肢</div>
+                        <div class="answer" name="item26b">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">26b. 左下肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">轻度减慢或幅度减小</div>
+                                <div value="2" class="option">中度障碍，有肯定的早期疲劳现象，偶在运动中出现停顿</div>
+                                <div value="3" class="option">严重障碍，动作起始时经常犹豫或运动中有停顿</div>
+                                <div value="4" class="option">几乎不能执行动作</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">27. 起立（患者双手臂抱胸从直背木椅或金属椅子站起）</div>
+                        <div class="answer" name="item27">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">27. 起立（患者双手臂抱胸从直背木椅或金属椅子站起）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">缓慢，或可能需要试1次以上</div>
+                                <div value="2" class="option">需扶扶手站起</div>
+                                <div value="3" class="option">向后倒的倾向，必须试几次才能站起，但不需帮助</div>
+                                <div value="4" class="option">没有帮助不能站起</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">28. 姿势</div>
+                        <div class="answer" name="item28">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">28. 姿势</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常直立</div>
+                                <div value="1" class="option">不很直，轻度前倾，可能是正常老年人的姿势</div>
+                                <div value="2" class="option">中度前倾，肯定是不正常，可能有轻度的向一侧倾斜</div>
+                                <div value="3" class="option">严重前倾伴脊柱后突，可能有中度的向一侧倾斜</div>
+                                <div value="4" class="option">显著屈曲，姿势极度异常</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">29. 步态</div>
+                        <div class="answer" name="item29">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">29. 步态</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">行走缓慢，可有曳步，步距小，但无慌张步态或前冲步态</div>
+                                <div value="2" class="option">行走困难，但还不需要帮助，可有某种程度的慌张步态、小步或前冲</div>
+                                <div value="3" class="option">严重异常步态，行走需帮助</div>
+                                <div value="4" class="option">即使给予帮助也不能行走</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">30. 姿势的稳定性（突然向后拉双肩时所引起姿势反应，患者应睁眼直立，双脚略分开并做好准备）</div>
+                        <div class="answer" name="item30">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">30. 姿势的稳定性（突然向后拉双肩时所引起姿势反应，患者应睁眼直立，双脚略分开并做好准备）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="1" class="option">后倾，无需帮助可自行恢复</div>
+                                <div value="2" class="option">无姿势反应，如果不扶可能摔倒</div>
+                                <div value="3" class="option">非常不稳，有自发的失去平衡现象</div>
+                                <div value="4" class="option">不借助外界帮助不能站立</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">31. 躯体少动（梳头缓慢，手臂摆动减少，幅度减小，整体活动减少）</div>
+                        <div class="answer" name="item31">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">31. 躯体少动（梳头缓慢，手臂摆动减少，幅度减小，整体活动减少）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">略慢，似乎是故意的，在某些人可能是正常的，幅度可能减小</div>
+                                <div value="2" class="option">运动呈轻度缓慢和减少，肯定不正常，或幅度减小</div>
+                                <div value="3" class="option">中度缓慢，运动缺乏或幅度小</div>
+                                <div value="4" class="option">明显缓慢，运动缺乏或幅度小</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>Ⅳ.治疗的并发症：</span>
+                    <br>A. 异动症<br>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">32. 持续时间：(异动症存在时间所占1天觉醒状态时间的比例－病史信息)</div>
+                        <div class="answer" name="item32">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">32. 持续时间：(异动症存在时间所占1天觉醒状态时间的比例－病史信息)</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">1%～25％</div>
+                                <div value="2" class="option">26%～50％</div>
+                                <div value="3" class="option">51%～75％</div>
+                                <div value="4" class="option">76%～100％</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">33. 残疾：(异动症所致残疾的程度－病史信息，可经检查修正)</div>
+                        <div class="answer" name="item33">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">33. 残疾：(异动症所致残疾的程度－病史信息，可经检查修正)</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无残疾</div>
+                                <div value="1" class="option">轻度残疾</div>
+                                <div value="2" class="option">中度残疾</div>
+                                <div value="3" class="option">严重残疾</div>
+                                <div value="4" class="option">完全残疾</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">34. 痛性异动症所致疼痛的程度</div>
+                        <div class="answer" name="item34">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">34. 痛性异动症所致疼痛的程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无痛性异动症</div>
+                                <div value="1" class="option">轻微</div>
+                                <div value="2" class="option">中度</div>
+                                <div value="3" class="option">严重</div>
+                                <div value="4" class="option">极度</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">35. 清晨肌张力不全</div>
+                        <div class="answer" name="item35">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">35. 清晨肌张力不全</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">有</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>B. 临床波动</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">36. “关”是否能根据服药时间预测</div>
+                        <div class="answer" name="item36">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">36. “关”是否能根据服药时间预测</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">不能</div>
+                                <div value="1" class="option">能</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">37.“关”是否不能根据服药时间预测</div>
+                        <div class="answer" name="item37">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">37.“关”是否不能根据服药时间预测</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">不是</div>
+                                <div value="1" class="option">是</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">38. “关”是否会突然出现（如在数秒内出现）</div>
+                        <div class="answer" name="item38">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">38. “关”是否会突然出现（如在数秒内出现）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">不会</div>
+                                <div value="1" class="option">会</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">39. “关”平均所占每天觉醒状态时间的比例测</div>
+                        <div class="answer" name="item39">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">39. “关”平均所占每天觉醒状态时间的比例</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">1%～25％</div>
+                                <div value="2" class="option">51%～75％</div>
+                                <div value="3" class="option">76%～100％</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_title">
+                    <span>C. 其他并发症</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">40. 患者有无食欲减退、恶心或呕吐</div>
+                        <div class="answer" name="item40">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">40. 患者有无食欲减退、恶心或呕吐</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">有</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">41.患者是否有睡眠障碍（如失眠或睡眠过多）</div>
+                        <div class="answer" name="item41">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">41. 患者是否有睡眠障碍（如失眠或睡眠过多）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">有</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">42. 患者是否有直立性低血压或头晕</div>
+                        <div class="answer" name="item42">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">42. 患者是否有直立性低血压或头晕</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">有</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">评分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div style="margin-bottom: 15px">
+        <h3><span class="jiedu-title">相关公式</span></h3>
+        <div class="jiedu">
+            <p><a href="calc-824.html">世界运动障碍病学会新版帕金森病综合评价量表（MDS-UPDRS）</a></p>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

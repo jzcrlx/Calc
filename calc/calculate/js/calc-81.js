@@ -1,0 +1,1 @@
+function MDCalc(z){a=z.hco3;value=1.5*a+8;value=Math.round(value*1)/1;high=value+2;low=value-2;range=low+"-"+high;Answer(range)}

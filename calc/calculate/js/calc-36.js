@@ -1,0 +1,1 @@
+function MDCalc(z){if(z.grade==1){msg="I 级肝性脑病"}if(z.grade==2){msg="II 级肝性脑病"}if(z.grade==3){msg="III 级肝性脑病"}if(z.grade==4){msg="IV 级肝性脑病"}Text(msg)}$("#units").hide();

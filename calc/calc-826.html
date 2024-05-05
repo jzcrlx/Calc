@@ -1,0 +1,1010 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-826.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-825" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>世界运动障碍病学会新版帕金森病综合评价量表(MDS-UPDRS) - <span style="font-size: 16px;color: #f60">患者自评部分</span></h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+
+                        <div class="question_block">
+                            <div class="question_sub_title" style="color: #4e5969">
+                                <p style="font-weight: bold">指导语：</p>
+                                <p>● 这份问卷将询问您日常生活中的一些问题。<span style="font-weight: bold;">此问卷共20个问题。</span>为了尽可能的详尽，问卷当中可能包含了一些您目前或是到目前为止并未出现的问题。如果您没有这些问题，请直接选“0”来表示没有问题。
+                                </p>
+                                <p>● 请您仔细阅读每一个问题，并在阅读完每一个选项之后再选出最适合您的答案。我们想知道的是包括今天在内，您<span style="font-weight: bold;">过去一周平均或一般的功能状况</span>。虽然您在一天中的某些时候活动要好于其它时候，但每个问题只能有一个答案。因此，请您选出最能描述您在大部分时间状态的答案。
+                                </p>
+                                <p>● 除了帕金森病之外，您可能还有其他疾病。但您不必把帕金森病和其他疾病所造成的症状区分开来。</p>
+                                <p>● 答案请选择<b>最适合您的答案</b>即可，<b>请勿空项</b>。 </p>
+                                <p>● 你的医生或护士可与您一起查看这些问题，但这份问卷须由<b>患者本人或与其照料者</b>一起来完成。 </p>
+                                <p style="font-size: 16px;color: #f60;font-weight: bold">
+                                    重要提示：该问卷仅为患者自评部分，非完整MDS-UPDRS评分，请你在完成此问卷后，在就诊时可出示该问卷评分(截图)给医生，帮忙医生完成整个MDS-UPDRS评分。</p>
+                            </div>
+                            <div class="question_block">
+                                <div class="question_infor">
+                                    <div class="flex-center calc-item">
+                                        <div class="calc-label-md">患者姓名</div>
+                                        <div class="flex-item">
+                                            <input class="calc-input" name="patientName" id="patientNameId" placeholder="必填" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_title" style="margin-bottom: 10px;font-size: 16px">
+                                第 1 部分（Part I）：日常生活中的非运动症状（nM-EDL）
+                            </div>
+
+                            <div>
+                                <div class="question_title">
+                                    1.7 睡眠问题
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您是否有晚上入睡困难或是难以保持整晚持续的睡眠？早上醒来您觉得休息的如何？</p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item71">正常：没有睡眠问题。</label>
+                                                <input class="flex_que q_radio" value="0" name="item7" id="item71" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item72">轻微：有睡眠问题，但通常可以休息一整夜。</label>
+                                                <input class="flex_que q_radio" value="1" name="item7" id="item72" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item73">轻度：有睡眠问题，有时不能保持整晚处于睡眠状态。</label>
+                                                <input class="flex_que q_radio" value="2" name="item7" id="item73" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item74">中度：有睡眠问题，且难以保持整晚都处于睡眠状态，但通常还是能睡眠一多半的时间。</label>
+                                                <input class="flex_que q_radio" value="3" name="item7" id="item74" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item75">重度：我通常整夜大部分时间不能入睡。</label>
+                                                <input class="flex_que q_radio" value="4" name="item7" id="item75" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    1.8 白天嗜睡
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您是否在白天不能总是保持清醒状态？</p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item81">正常：没有白天嗜睡</label>
+                                                <input class="flex_que q_radio" value="0" name="item8" id="item81" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item82">轻微：有白天想睡的情况存在，但我可以忍住并保持清醒。</label>
+                                                <input class="flex_que q_radio" value="1" name="item8" id="item82" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item83">轻度：当我独自一人和放松的情况下有时候会睡着，例如，在看书或看电视时。</label>
+                                                <input class="flex_que q_radio" value="2" name="item8" id="item83" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item84">中度：我有时候在不应该睡的情况下睡着。例如，在吃饭或与人谈话的时候。</label>
+                                                <input class="flex_que q_radio" value="3" name="item8" id="item84" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item85">重度：我经常在不该睡的情况下睡着。例如，在吃饭或与人谈话的时候。</label>
+                                                <input class="flex_que q_radio" value="4" name="item8" id="item85" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    1.9 疼痛和其它感觉
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去的一周内，您是否有身体不适的感觉，如疼痛，刺痛或是抽痛？</p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item91">正常：没有不适的感觉</label>
+                                                <input class="flex_que q_radio" value="0" name="item9" id="item91" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item92">轻微：我有不适的感觉，但我可以毫无困难的做事和与人相处。</label>
+                                                <input class="flex_que q_radio" value="1" name="item9" id="item92" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item93">轻度：这些不适的感觉使我在做事和与人相处时有一定的困扰。</label>
+                                                <input class="flex_que q_radio" value="2" name="item9" id="item93" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item94">中度：这些不适的感觉给我造成很大的困扰，但我仍能做事或与人相处。</label>
+                                                <input class="flex_que q_radio" value="3" name="item9" id="item94" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item95">重度：这些不适的感觉使我无法做事或与人相处。</label>
+                                                <input class="flex_que q_radio" value="4" name="item9" id="item95" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    1.10 排尿问题
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去的一周内，您是否有控制排尿的困难？例如，尿急、尿频、或尿失禁？</p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item101">正常：没有排尿的问题。</label>
+                                                <input class="flex_que q_radio" value="0" name="item10" id="item101" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item102">轻微：我有尿频或尿急，但这些并不影响我的日常活动。</label>
+                                                <input class="flex_que q_radio" value="1" name="item10" id="item102" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item103">轻度：排尿问题对我的日常活动造成一些影响，但我没有尿失禁。</label>
+                                                <input class="flex_que q_radio" value="2" name="item10" id="item103" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item104">：中度：排尿问题对我的日常活动造成很大影响，包括尿失禁。</label>
+                                                <input class="flex_que q_radio" value="3" name="item10" id="item104" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item105">重度：我无法控制排尿且需要使用尿垫或放置导尿管。</label>
+                                                <input class="flex_que q_radio" value="4" name="item10" id="item105" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    1.11 便秘问题
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您是否有便秘问题，以致造成排便困难？</p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item111">正常：没有便秘</label>
+                                                <input class="flex_que q_radio" value="0" name="item11" id="item111" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item112">轻微：我有便秘。排便时我需要额外用力，但这个问题并没有干扰我的生活或使我不适。</label>
+                                                <input class="flex_que q_radio" value="1" name="item11" id="item112" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item113">轻度：便秘使我的生活有一些困扰或使我感到不适。</label>
+                                                <input class="flex_que q_radio" value="2" name="item11" id="item113" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item114">中度：便秘使我的生活有很大困扰或让我感到很不舒服，但我仍能做事。</label>
+                                                <input class="flex_que q_radio" value="3" name="item11" id="item114" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item115">重度：我通常需要他人帮助才能排便。</label>
+                                                <input class="flex_que q_radio" value="4" name="item11" id="item115" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    1.12 站立时头晕
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>过去的一周内，当您从坐位或卧位站起时，是否感到有头昏，眩晕或头昏眼花的感觉？</p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item121">正常：没有眩晕或头昏眼花的感觉</label>
+                                                <input class="flex_que q_radio" value="0" name="item12" id="item121" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item122">轻微：出现过眩晕或头昏眼花的感觉，但并不影响我做事。</label>
+                                                <input class="flex_que q_radio" value="1" name="item12" id="item122" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item123">轻度：眩晕或头昏眼花的感觉使我站立时需要扶住东西，但并不需要坐回去或躺下来。</label>
+                                                <input class="flex_que q_radio" value="2" name="item12" id="item123" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item124">中度：站立时眩晕或头昏眼花使我需要坐下来或躺下以免晕倒或跌倒。</label>
+                                                <input class="flex_que q_radio" value="3" name="item12" id="item124" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item125">重度：眩晕或头昏眼花会使我晕倒或跌倒。</label>
+                                                <input class="flex_que q_radio" value="4" name="item12" id="item125" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    1.13 疲乏
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您是否常常感到疲乏？这种感觉并不是困倦或悲伤所致。</p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item131">正常：没有疲乏感。</label>
+                                                <input class="flex_que q_radio" value="0" name="item13" id="item131" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item132">轻微：有疲乏感，但这并不影响我做事或与人相处。</label>
+                                                <input class="flex_que q_radio" value="1" name="item13" id="item132" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item133">轻度：疲乏感使我做事或与人相处有一定的困难。</label>
+                                                <input class="flex_que q_radio" value="2" name="item13" id="item133" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item134">中度：疲乏感使我做事或与人相处有很大困难，但这并不会让我无法做事。</label>
+                                                <input class="flex_que q_radio" value="3" name="item13" id="item134" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item135">重度：疲乏感使我无法做事或与人相处。</label>
+                                                <input class="flex_que q_radio" value="4" name="item13" id="item135" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title" style="margin-bottom: 10px;font-size: 16px">
+                                    第二部分：日常生活中的运动症状（M-EDL）
+                                </div>
+                                <div class="question_title">
+                                    2.1 言语
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您觉得说话有问题吗？</p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item211">正常：没有问题。</label>
+                                                <input class="flex_que q_radio" value="0" name="item21" id="item211" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item212">轻微：我说话声音小，含糊或不顺畅，但别人不需要我重复。</label>
+                                                <input class="flex_que q_radio" value="1" name="item21" id="item212" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item213">轻度：别人偶尔需要我重复说一遍，但不是每天都这样。 </label>
+                                                <input class="flex_que q_radio" value="2" name="item21" id="item213" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item214">中度：我说话不清楚，以至于每天都会有人要求我重复说，但大部分内容他们还是能理解。</label>
+                                                <input class="flex_que q_radio" value="3" name="item21" id="item214" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item215">重度：别人大部分时间或完全不能听懂我讲话。</label>
+                                                <input class="flex_que q_radio" value="4" name="item21" id="item215" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    2.2 唾液与流涎
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，当你清醒或睡觉时，是否通常会有唾液过多？</p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item221">正常：没有问题。</label>
+                                                <input class="flex_que q_radio" value="0" name="item22" id="item221" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item222">轻微：我唾液增多，但不会流口水。</label>
+                                                <input class="flex_que q_radio" value="1" name="item22" id="item222" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item223">轻度：我睡觉的时候会流口水，但清醒的时候不会。 </label>
+                                                <input class="flex_que q_radio" value="2" name="item22" id="item223" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item224">中度：我清醒的时候有时也会流口水，但通常不需要纸巾或手帕擦拭。</label>
+                                                <input class="flex_que q_radio" value="3" name="item22" id="item224" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item225">重度：我口水很多以至于经常需要用纸巾或手帕擦拭以免弄脏衣服。</label>
+                                                <input class="flex_que q_radio" value="4" name="item22" id="item225" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    2.3 咀嚼与吞咽
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您吃药丸或吃饭通常有问题吗？您是否需要将药物切碎或碾碎，或是将食物做成软食、切碎或是搅拌后才能进食以免呛咳？</p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item231">正常：没有问题。</label>
+                                                <input class="flex_que q_radio" value="0" name="item23" id="item231" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item232">：轻微：我知道我咀嚼缓慢或是吞咽时要费点劲，但我并不呛咳，食物也不需要特殊准备。</label>
+                                                <input class="flex_que q_radio" value="1" name="item23" id="item232" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item233">轻度：由于有咀嚼或吞咽的问题，我的药丸需要切碎或是我的食物需要特殊准备，但在过去一周内我没有呛到。</label>
+                                                <input class="flex_que q_radio" value="2" name="item23" id="item233" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item234">中度：在过去一周内我至少呛了一次。</label>
+                                                <input class="flex_que q_radio" value="3" name="item23" id="item234" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item235">重度：由于有咀嚼和吞咽的问题，我需要鼻饲饮食。</label>
+                                                <input class="flex_que q_radio" value="4" name="item23" id="item235" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    2.4 .进食
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您在进食和使用餐具上通常有无困难？例如，您用手拿食物或使用刀叉、汤勺、筷子有困难吗？</p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item241">正常：没有问题。</label>
+                                                <input class="flex_que q_radio" value="0" name="item24" id="item241" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item242">轻微：我进食慢，但不需要帮助，而且进食时食物也不会洒出来。 </label>
+                                                <input class="flex_que q_radio" value="1" name="item24" id="item242" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item243">轻度：我进食慢，偶尔饭会洒出来。准备食物时偶尔需要帮助，例如切肉。</label>
+                                                <input class="flex_que q_radio" value="2" name="item24" id="item243" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item244">中度：我在进食时经常需要帮助，但还是有一些可以独立完成。</label>
+                                                <input class="flex_que q_radio" value="3" name="item24" id="item244" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item245">重度：我进食时大部分或全部需要帮助。</label>
+                                                <input class="flex_que q_radio" value="4" name="item24" id="item245" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    2.5 穿衣
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您穿衣通常有无困难？例如，您是否穿衣缓慢或需要别人帮忙扣扣子，拉拉链，穿脱衣服或首饰？</p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item251">正常：没有问题。</label>
+                                                <input class="flex_que q_radio" value="0" name="item25" id="item251" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item252">轻微：我动作缓慢但不需要帮助。</label>
+                                                <input class="flex_que q_radio" value="1" name="item25" id="item252" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item253">轻度：我动作缓慢，有少数情况需要帮助（如扣扣子，戴手镯）</label>
+                                                <input class="flex_que q_radio" value="2" name="item25" id="item253" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item254">中度：我许多情况下需要帮助。</label>
+                                                <input class="flex_que q_radio" value="3" name="item25" id="item254" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item255">重度：我穿衣时大部分或全部需要帮助。</label>
+                                                <input class="flex_que q_radio" value="4" name="item25" id="item255" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    2.6 卫生清洁
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您在洗漱、沐浴、刮胡子、刷牙、梳头或是做其它个人卫生时，是否常常觉得动作缓慢或是需要帮助？ </p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item261">正常：没有问题。</label>
+                                                <input class="flex_que q_radio" value="0" name="item26" id="item261" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item262">轻度：我在一些个人卫生清洁方面需要他人帮助。</label>
+                                                <input class="flex_que q_radio" value="1" name="item26" id="item262" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item263">中度：我在许多个人卫生清洁方面需要他人的帮助。</label>
+                                                <input class="flex_que q_radio" value="2" name="item26" id="item263" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item264">重度：我在个人卫生清洁方面大部分或全部都需要他人帮助。</label>
+                                                <input class="flex_que q_radio" value="3" name="item26" id="item264" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item265"></label>
+                                                <input class="flex_que q_radio" value="4" name="item26" id="item265" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    2.7 书写
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您的字迹别人是否常常感到难以辨认？ </p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item271">正常：没有问题。</label>
+                                                <input class="flex_que q_radio" value="0" name="item27" id="item271" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item272">轻微：我写字慢、笨拙或不工整，但所有的字迹是清晰可辨的。</label>
+                                                <input class="flex_que q_radio" value="1" name="item27" id="item272" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item273">轻度：我的某些字不清楚且难以辨认。</label>
+                                                <input class="flex_que q_radio" value="2" name="item27" id="item273" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item274">中度：我的许多字不清楚且难以辨认。</label>
+                                                <input class="flex_que q_radio" value="3" name="item27" id="item274" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item275">重度：我的大部分或全部字迹无法辨认。</label>
+                                                <input class="flex_que q_radio" value="4" name="item27" id="item275" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    2.8 嗜好和其他活动
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您在做您爱好或喜欢做的事情时是否通常感到有困难？ </p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item281">正常：没有问题。</label>
+                                                <input class="flex_que q_radio" value="0" name="item28" id="item281" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item282">轻微：我的动作有一点慢，但还是能轻松的做这些活动。</label>
+                                                <input class="flex_que q_radio" value="1" name="item28" id="item282" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item283">轻度：我做这些活动时有一些困难。</label>
+                                                <input class="flex_que q_radio" value="2" name="item28" id="item283" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item284">中度：我做这些活动时有很大困难，但还是会经常做这些活动</label>
+                                                <input class="flex_que q_radio" value="3" name="item28" id="item284" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item285">重度：我无法做了，或很少做这些活动。</label>
+                                                <input class="flex_que q_radio" value="4" name="item28" id="item285" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    2.9 翻身
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您在床上翻身是否经常感到有困难？ </p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item291">正常：没有问题。</label>
+                                                <input class="flex_que q_radio" value="0" name="item29" id="item291" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item292">轻微：我翻身是有一点困难，但我不需要帮助。</label>
+                                                <input class="flex_que q_radio" value="1" name="item29" id="item292" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item293">轻度：我翻身困难且偶尔需要别人的帮助。</label>
+                                                <input class="flex_que q_radio" value="2" name="item29" id="item293" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item294">中度：我翻身常常需要别人的帮助。</label>
+                                                <input class="flex_que q_radio" value="3" name="item29" id="item294" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item295">重度：如果没有别人的帮助，我根本无法翻身。</label>
+                                                <input class="flex_que q_radio" value="4" name="item29" id="item295" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    2.10 震颤
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您是否经常有抖动或震颤？ </p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2101">正常：我没有抖动或震颤。</label>
+                                                <input class="flex_que q_radio" value="0" name="item210" id="item2101" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2102">轻微：我有抖动或是震颤，但它并不影响活动。</label>
+                                                <input class="flex_que q_radio" value="1" name="item210" id="item2102" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2103">轻度：抖动或震颤仅影响我的很少一些活动。</label>
+                                                <input class="flex_que q_radio" value="2" name="item210" id="item2103" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2104">中度：抖动或震颤影响了我的许多活动。</label>
+                                                <input class="flex_que q_radio" value="3" name="item210" id="item2104" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2105">重度：抖动或震颤影响了我大部分或所有的活动。</label>
+                                                <input class="flex_que q_radio" value="4" name="item210" id="item2105" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    2.11 起床，下车或是从较低的椅子上站起来
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您在起床、下车或是从较低的椅子上站起来是否常常感到困难？ </p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2111">正常：没有问题。</label>
+                                                <input class="flex_que q_radio" value="0" name="item211" id="item2111" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2112">轻微：我动作慢或笨拙，但我通常能一次完成。</label>
+                                                <input class="flex_que q_radio" value="1" name="item211" id="item2112" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2113">轻度：我需要尝试一次以上才能完成，或偶尔需要帮助。</label>
+                                                <input class="flex_que q_radio" value="2" name="item211" id="item2113" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2114">中度：我有些时候需要帮助才能完成，但大多数情况下我可以自己完成。</label>
+                                                <input class="flex_que q_radio" value="3" name="item211" id="item2114" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2115">重度：我大部分情况下或完全需要别人的帮助。</label>
+                                                <input class="flex_que q_radio" value="4" name="item211" id="item2115" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    2.12. 行走与平衡
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您在行走和保持平衡上是否常常有困难？</p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2121">正常：没有问题。</label>
+                                                <input class="flex_que q_radio" value="0" name="item212" id="item2121" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2122">轻微：我稍微有点慢或是可能走路拖步，但我不需要助行器。</label>
+                                                <input class="flex_que q_radio" value="1" name="item212" id="item2122" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2123">轻度：我走路偶尔需要助行器，但我不需要别人的帮助。</label>
+                                                <input class="flex_que q_radio" value="2" name="item212" id="item2123" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2124">中度：我通常需要使用助行器（拐杖，助步车）走路以免摔倒，但并不经常需要别人的帮助。</label>
+                                                <input class="flex_que q_radio" value="3" name="item212" id="item2124" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2125">重度：我通常需要别人的帮助才能走路以免摔倒。</label>
+                                                <input class="flex_que q_radio" value="4" name="item2122" id="item2125" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="question_title">
+                                    2.13 僵住
+                                </div>
+                                <div class="question_sub_title">
+                                    <p>在过去一周内，您平时走路时，是否会突然停住或僵住，就好像是脚被粘在地上的感觉？</p>
+                                </div>
+                                <div class="question_block ">
+                                    <div class="question_infor2">
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2131">正常：没有问题。</label>
+                                                <input class="flex_que q_radio" value="0" name="item213" id="item2131" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2132">轻微：我有短暂的僵住，但能很容易的再走起来。我没有因为行走时僵住而需要别人的帮助或需要助行器（拐杖或助步车）。</label>
+                                                <input class="flex_que q_radio" value="1" name="item213" id="item2132" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2133">轻度：我有行走时僵住且再走起来有困难，但我不需要别人的帮助或助行器（拐杖或助步车）</label>
+                                                <input class="flex_que q_radio" value="2" name="item213" id="item2133" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2134">中度：当我僵住时再走起来很困难。由于僵住，我有时需要助行器或是别人的帮助。</label>
+                                                <input class="flex_que q_radio" value="3" name="item213" id="item2134" type="radio">
+                                            </div>
+                                        </div>
+                                        <div class="flex-center calc-que">
+                                            <div class="flex_box align_items_center">
+                                                <label class="flex" for="item2135">重度：由于僵住，我在大部分或全部的时间里需要助行器或别人的帮助。</label>
+                                                <input class="flex_que q_radio" value="4" name="item213" id="item2135" type="radio">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-sm"><b>患者姓名:</b></div>
+                                    <div class="flex-item">
+                                        <div id="resultmsg" class="skin-color" style="color: #f60"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="result-list">
+                                <div class="result">
+                                    <div style="font-size: 14px;font-weight: bold">PartⅠ【非运动症状患者问卷（1.7~1.13）】总评分
+                                        <span id="resultmsg1" style="font-size: 20px;color: #f60" class="skin-color-bold">0</span><span> 分</span>
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="result">
+                                    <div style="font-size: 14px;font-weight: bold">Part Ⅱ【日常生活中的运动症状（M-EDL）】总评分
+                                        <span id="resultmsg2" style="font-size: 20px;color: #f60" class="skin-color-bold">0</span><span> 分</span>
+                                    </div>
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <div class="jiedu">
+            <p>提示: 请截图保存结果,并将此结果告诉医生</p>
+        </div>
+    </div>
+    <div class="bottom" onclick="gotoTop()">
+        <a href="javascript:void(0);">返回顶部</a>
+    </div>
+</div>
+<script>
+    function gotoTop() {
+        window.scrollTo(0, 0);
+    }
+
+</script>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

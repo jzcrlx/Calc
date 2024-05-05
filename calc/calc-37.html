@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-37.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+	<div id="medcalc-37" class="post">
+		<div id="meta">
+		</div>
+		<div id="title">
+			<h2>HIV针刺风险评估层次协议</h2>
+		</div>
+		<form id="medform" name="medform" action="get">
+			<div class="que_select_box">
+				<div class="que_block req">
+					<div class="que_infor">
+						<div class="txt">来源人群</div>
+						<div class="answer" name="sourcepop">请选择</div>
+					</div>
+					<div class="que_mark">
+						<div class="option-content">
+							<div class="option-title">
+								<div class="option-title-text">来源人群</div>
+								<div class="option-title-close"></div>
+							</div>
+							<div class="options">
+								<div value="1" class="option">已知HIV感染者:急性艾滋病*</div>
+								<div value="10" class="option">已知HIV感染者:无症状</div>
+								<div value="100" class="option">未知艾滋病毒状况:高危状况**</div>
+								<div value="1000" class="option">未知艾滋病毒状况:低危状况</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="que_block req">
+					<div class="que_infor">
+						<div class="txt">接种物种类</div>
+						<div class="answer" name="inoculum">请选择</div>
+					</div>
+					<div class="que_mark">
+						<div class="option-content">
+							<div class="option-title">
+								<div class="option-title-text">接种物种类</div>
+								<div class="option-title-close"></div>
+							</div>
+							<div class="options">
+								<div value="1" class="option">新鲜血液</div>
+								<div value="10" class="option">其他高危液体（ex: 精液）</div>
+								<div value="100" class="option">干的非新鲜血液</div>
+								<div value="1000" class="option">低风险分泌物（如：眼泪，尿液，唾液）</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="que_block req">
+					<div class="que_infor">
+						<div class="txt">
+							传播方法
+						</div>
+						<div class="answer" name="transmission">请选择</div>
+					</div>
+					<div class="que_mark">
+						<div class="option-content">
+							<div class="option-title">
+								<div class="option-title-text">传播方法</div>
+								<div class="option-title-close"></div>
+							</div>
+							<div class="options">
+								<div value="1" class="option">静脉注射</div>
+								<div value="10" class="option">深层肌肉注射</div>
+								<div value="100" class="option">深层经皮伴明显出血</div>
+								<div value="200" class="option">浅表经皮不伴出血</div>
+								<div value="500" class="option">仅黏膜接触</div>
+								<div value="1000" class="option">未受损皮肤</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="que_block req">
+					<div class="que_infor">
+						<div class="txt">
+							接种物容积
+						</div>
+						<div class="answer" name="volume">请选择</div>
+					</div>
+					<div class="que_mark">
+						<div class="option-content">
+							<div class="option-title">
+								<div class="option-title-text">接种物容积</div>
+								<div class="option-title-close"></div>
+							</div>
+							<div class="options">
+								<div value="100" class="option">整块</div>
+								<div value="10" class="option">可测量的 (&gt;1mL)</div>
+								<div value="5" class="option">中号的（大口径，空心针&gt;22G）</div>
+								<div value="3" class="option">小号的（小口径，空心针&lt;22G)</div>
+								<div value="1" class="option">迹线（Ex: 缝针）</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="answer_block">
+					<div class="question_infor">
+						<div class="flex-center calc-item ">
+							<div class="calc-label-md">总风险:</div>
+							<div class="flex-item">
+								<input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+							</div>
+						</div>
+					</div>
+					<div class="question_infor">
+						<div class="flex-center calc-item">
+							<div class="calc-label-md">结果:</div>
+							<div class="flex-item">
+								<div id="resultmsg" class="skin-color"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

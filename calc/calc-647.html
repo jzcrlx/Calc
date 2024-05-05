@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-647.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-647" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>Epworth嗜睡量表</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box end">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block req">
+                            <div class="question_title">
+                                坐着阅读时
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="read" id="read1" type="radio">
+                                        <label class="flex" for="read1">从不</label>
+                                        <input class="flex_que q_radio" value="1" name="read" id="read2" type="radio">
+                                        <label class="flex" for="read2">轻度</label>
+                                        <input class="flex_que q_radio" value="2" name="read" id="read3" type="radio">
+                                        <label class="flex" for="read3">中度</label>
+                                        <input class="flex_que q_radio" value="3" name="read" id="read4" type="radio">
+                                        <label class="flex" for="read4">高度</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                看电视时
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="tv" id="tv1" type="radio">
+                                        <label class="flex" for="tv1">从不</label>
+                                        <input class="flex_que q_radio" value="1" name="tv" id="tv2" type="radio">
+                                        <label class="flex" for="tv2">轻度</label>
+                                        <input class="flex_que q_radio" value="2" name="tv" id="tv3" type="radio">
+                                        <label class="flex" for="tv3">中度</label>
+                                        <input class="flex_que q_radio" value="3" name="tv" id="tv4" type="radio">
+                                        <label class="flex" for="tv4">高度</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                在公共场所（如剧院或会议中）独自就坐
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="meeting" id="meeting1" type="radio">
+                                        <label class="flex" for="meeting1">从不</label>
+                                        <input class="flex_que q_radio" value="1" name="meeting" id="meeting2" type="radio">
+                                        <label class="flex" for="meeting2">轻度</label>
+                                        <input class="flex_que q_radio" value="2" name="meeting" id="meeting3" type="radio">
+                                        <label class="flex" for="meeting3">中度</label>
+                                        <input class="flex_que q_radio" value="3" name="meeting" id="meeting4" type="radio">
+                                        <label class="flex" for="meeting4">高度</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                作为乘客乘车 1 小时
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="bus" id="bus1" type="radio">
+                                        <label class="flex" for="bus1">从不</label>
+                                        <input class="flex_que q_radio" value="1" name="bus" id="bus2" type="radio">
+                                        <label class="flex" for="bus2">轻度</label>
+                                        <input class="flex_que q_radio" value="2" name="bus" id="bus3" type="radio">
+                                        <label class="flex" for="bus3">中度</label>
+                                        <input class="flex_que q_radio" value="3" name="bus" id="bus4" type="radio">
+                                        <label class="flex" for="bus4">高度</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                午后躺下休息
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="rest" id="rest1" type="radio">
+                                        <label class="flex" for="rest1">从不</label>
+                                        <input class="flex_que q_radio" value="1" name="rest" id="rest2" type="radio">
+                                        <label class="flex" for="rest2">轻度</label>
+                                        <input class="flex_que q_radio" value="2" name="rest" id="rest3" type="radio">
+                                        <label class="flex" for="rest3">中度</label>
+                                        <input class="flex_que q_radio" value="3" name="rest" id="rest4" type="radio">
+                                        <label class="flex" for="rest4">高度</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                坐着并与某人谈话时
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="talk" id="talk1" type="radio">
+                                        <label class="flex" for="talk1">从不</label>
+                                        <input class="flex_que q_radio" value="1" name="talk" id="talk2" type="radio">
+                                        <label class="flex" for="talk2">轻度</label>
+                                        <input class="flex_que q_radio" value="2" name="talk" id="talk3" type="radio">
+                                        <label class="flex" for="talk3">中度</label>
+                                        <input class="flex_que q_radio" value="3" name="talk" id="talk4" type="radio">
+                                        <label class="flex" for="talk4">高度</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                餐后静坐（未饮酒）
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="drink" id="drink1" type="radio">
+                                        <label class="flex" for="drink1">从不</label>
+                                        <input class="flex_que q_radio" value="1" name="drink" id="drink2" type="radio">
+                                        <label class="flex" for="drink2">轻度</label>
+                                        <input class="flex_que q_radio" value="2" name="drink" id="drink3" type="radio">
+                                        <label class="flex" for="drink3">中度</label>
+                                        <input class="flex_que q_radio" value="3" name="drink" id="drink4" type="radio">
+                                        <label class="flex" for="drink4">高度</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                停车几分钟后
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="park" id="park1" type="radio">
+                                        <label class="flex" for="park1">从不</label>
+                                        <input class="flex_que q_radio" value="1" name="park" id="park2" type="radio">
+                                        <label class="flex" for="park2">轻度</label>
+                                        <input class="flex_que q_radio" value="2" name="park" id="park3" type="radio">
+                                        <label class="flex" for="park3">中度</label>
+                                        <input class="flex_que q_radio" value="3" name="park" id="park4" type="radio">
+                                        <label class="flex" for="park4">高度</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-hg">入院后六月内死亡率:</div>
+                                    <div class="flex-item">
+                                        <div id="resultmsg" class="skin-color"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

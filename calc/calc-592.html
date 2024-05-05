@@ -1,0 +1,135 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-592.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-592">慢性下肢缺血-腘动脉以下病变TASC分级</h2>
+    </div>
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab1">
+                <thead>
+                <tr>
+                    <th>分级</th>
+                    <th>临床表现</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>A级</th>
+                    <td>1.胫动脉或腘动脉单发狭窄，长度&lt;1cm</td>
+                </tr>
+                <tr>
+                    <th>B级</th>
+                    <td>1.胫动脉或腘动脉多发局灶性狭窄，每段长度&lt;1cm<br> 2.胫动脉三分叉部位1-2处局灶性狭窄，每段长度&lt;1cm<br> 3.与股腘动脉PTA相关的胫、腘动脉短段狭窄</td>
+                </tr>
+                <tr>
+                    <th>C级</th>
+                    <td>1.狭窄段在1-4cm<br> 2.胫动脉或腘动脉闭塞，长度1-2cm<br> 3.胫动脉三分叉部位广泛性狭窄</td>
+                </tr>
+                <tr>
+                    <th>D级</th>
+                    <td>1.胫动脉或腘动脉闭塞，长度&gt;2cm<br> 2.胫、腘动脉弥漫性病变</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>"A"级病变局限，有较好的预期结果，应该通过腔内技术来治疗；</p>
+                <p>"B"级病变稍有延长，但权衡手术与腔内治疗的危险性和预期通畅情况，仍然以腔内治疗为主；</p>
+                <p>"C"级病变通过手术重建有较好的效果，但对于伴有高危因素的患者可以尝试选择创伤小的腔内技术；</p>
+                <p>"D"级病变则应当选择手术治疗。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">中华医学会外科学分会血管外科学组. 下肢动脉硬化性闭塞症治疗指南. 中华实用外科杂志，2008,28（11）：923-924.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

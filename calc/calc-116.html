@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-116.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-116" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>乙肝五项检查</h2>
+        </div>
+        <form name="medform" action="get" id="medform" style="margin-top: 10px">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_block req">
+                        <div class="question_title">
+                            表面抗原(HBsAg)<span class="info" onclick="showInfo('表面抗原(HBsAg)',1)">
+                        </span></div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="hbsag_1">阴性</label>
+                                <input class="flex_item q_radio gap60" value="0" name="hbsag" id="hbsag_1" type="radio">
+                                <label class="flex" for="hbsag_2">阳性</label>
+                                <input class="flex_item q_radio" value="1" name="hbsag" id="hbsag_2" type="radio">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            表面抗体(抗-HBs)<span class="info" onclick="showInfo('表面抗体(抗-HBs)',2)">
+                        </span></div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="hbsab_1">阴性</label>
+                                <input class="flex_item q_radio gap60" value="0" name="hbsab" id="hbsab_1" type="radio">
+                                <label class="flex" for="hbsab_2">阳性</label>
+                                <input class="flex_item q_radio" value="1" name="hbsab" id="hbsab_2" type="radio">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            e抗原(HBeAg)<span class="info" onclick="showInfo('e抗原(HBeAg)',3)">
+                        </span></div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="hbeag_1">阴性</label>
+                                <input class="flex_item q_radio gap60" value="0" name="hbeag" id="hbeag_1" type="radio">
+                                <label class="flex" for="hbeag_2">阳性</label>
+                                <input class="flex_item q_radio" value="1" name="hbeag" id="hbeag_2" type="radio">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            e抗体(抗-HBe)<span class="info" onclick="showInfo('e抗体(抗-HBe)',4)">
+                        </span></div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="hbeab_1">阴性</label>
+                                <input class="flex_item q_radio gap60" value="0" name="hbeab" id="hbeab_1" type="radio">
+                                <label class="flex" for="hbeab_2">阳性</label>
+                                <input class="flex_item q_radio" value="1" name="hbeab" id="hbeab_2" type="radio">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            核心抗体(抗-HBc)<span class="info" onclick="showInfo('核心抗体(抗-HBc)',5)">
+                        </span></div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="hbcabigg_1">阴性</label>
+                                <input class="flex_item q_radio gap60" value="0" name="hbcabigg" id="hbcabigg_1" type="radio">
+                                <label class="flex" for="hbcabigg_2">阳性</label>
+                                <input class="flex_item q_radio" value="1" name="hbcabigg" id="hbcabigg_2" type="radio">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block">
+                        <div class="question_title" style="font-weight: normal">
+                            核心抗体(抗-HBc) IgM
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex_box align_items_center">
+                                <label class="flex" for="hbcabigm_1">阴性</label>
+                                <input class="flex_item q_radio gap60" value="0" name="hbcabigm" id="hbcabigm_1" type="radio">
+                                <label class="flex" for="hbcabigm_2">阳性</label>
+                                <input class="flex_item q_radio" value="1" name="hbcabigm" id="hbcabigm_2" type="radio">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="btn_box" style="padding-bottom: 10px">
+                    <input class="submit_btn" type="button">
+                    <input class="reset_btn" type="button">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="prompt_box" style="font-size: 14px;display: none;">
+        <div style="font-weight: bold;">检测值:</div>
+        <div id="resultmsg" style="line-height: 20px">
+
+        </div>
+        <div style="font-weight: bold;">临床意义:</div>
+        <div id="resultmsg2" style="line-height: 20px">
+
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">解读</span></h3>
+        <div class="jiedu">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th style="width: 70px">检测项</th>
+                    <th style="width: 45px;text-align: center">检测值</th>
+                    <th>临床意义</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>HBsAg<br>抗-HBs<br>HBeAg<br>抗-HBe<br>抗-HBc</td>
+                    <td style="text-align: center">阴性<br>阴性<br>阴性<br>阴性<br>阴性</td>
+                    <td>易感</td>
+                </tr>
+                <tr>
+                    <td>HBsAg<br>抗-HBs<br>抗-HBc</td>
+                    <td style="text-align: center">阴性<br>阳性<br>阴性</td>
+                    <td>因接种乙型肝炎疫苗而免疫</td>
+                </tr>
+                <tr>
+                    <td>HBsAg<br>抗-HBs<br>抗-HBc</td>
+                    <td style="text-align: center">阴性<br>阳性<br>阳性</td>
+                    <td>既往感染过乙肝病毒，已免疫</td>
+                </tr>
+                <tr>
+                    <td>HBsAg<br>抗-HBs<br>抗-HBc<br>抗-HBc IgM</td>
+                    <td style="text-align: center">阳性<br>阴性<br>阳性<br>阳性</td>
+                    <td>急性感染</td>
+                </tr>
+                <tr>
+                    <td>HBsAg<br>抗-HBs<br>抗-HBc<br>抗-HBc IgM</td>
+                    <td style="text-align: center">阳性<br>阴性<br>阳性<br>阴性</td>
+                    <td>慢性感染</td>
+                </tr>
+                <tr>
+                    <td>HBsAg<br>抗-HBs<br>抗-HBc</td>
+                    <td style="text-align: center">阴性<br>阴性<br>阳性</td>
+                    <td>原因未明，可能存在以下4种情况：<br>1. 最常见于HBV感染已恢复<br>2. 抗-HBc假阳性，易感<br>3. 低水平慢性感染<br>4. 急性感染恢复期</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="//www.cdc.gov/hepatitis/HBV/PDFs/SerologicChartv8.pdf" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Interpretation of Hepatitis B Serologic Test Results. Centers for Disease Control and Prevention. www.cdc.gov/hepatitis</span>
+        </a>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        var projectId = 2;
+        //提交
+        $('.submit_btn').on('click', function (event) {
+            event.stopPropagation();
+            var data = {};
+            var radios = $(".q_radio:radio:checked");
+            radios.each(function () {
+                var name = $(this).attr("name");
+                var value = $(this).val();
+                data[name] = value;
+            });
+            calc(projectId, data);
+        });
+
+        //重置
+        $('.reset_btn').on('click', function (event) {
+            event.stopPropagation();
+            $('.q_radio').prop('checked', false);
+            $('.prompt_box').hide();
+        });
+    });
+</script>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

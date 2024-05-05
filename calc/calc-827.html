@@ -1,0 +1,291 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-827.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-827" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>China-PAR 10年内发生动脉粥样硬化性心血管病(ASCVD)危险度评估</h2>
+        </div>
+        <form name="medform" action="get" id="medform">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-bg">性别</div>
+                                <div class="flex-item">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="sex" id="sex_1" type="radio">
+                                        <label class="flex" for="sex_1">男</label>
+                                        <input class="flex_que q_radio" value="0" name="sex" id="sex_2" type="radio">
+                                        <label class="flex" for="sex_2">女</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-bg">年龄</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="age" id="age" placeholder="20岁及以上" type="number">
+                                </div>
+                                <div class="calc-unit-md">岁</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-bg">未治疗时收缩压</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="sbp" type="number">
+                                </div>
+                                <div class="calc-unit-md">mmHg</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-bg">总胆固醇</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="tc" type="number">
+                                </div>
+                                <div class="calc-unit-md">mg/dL</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-bg">HDL-C</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="hdl" type="number">
+                                </div>
+                                <div class="calc-unit-md">mg/dL</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-bg">腰围</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="waist" type="number">
+                                </div>
+                                <div class="calc-unit-md">cm</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question_block req">
+                        <div class="question_title">
+                            吸烟
+                        </div>
+                        <div class="question_infor2">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <input class="flex_que q_radio" value="1" name="smoke" id="smoke1" type="radio">
+                                    <label class="flex" for="smoke1">是</label>
+                                    <input class="flex_que q_radio" value="0" name="smoke" id="smoke2" type="radio">
+                                    <label class="flex" for="smoke2">否</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            糖尿病
+                        </div>
+                        <div class="question_infor2">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <input class="flex_que q_radio" value="1" name="dm" id="dm1" type="radio">
+                                    <label class="flex" for="dm1">是</label>
+                                    <input class="flex_que q_radio" value="0" name="dm" id="dm2" type="radio">
+                                    <label class="flex" for="dm2">否</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            居住地
+                        </div>
+                        <div class="question_infor2">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <input class="flex_que q_radio" value="0" name="place" id="place1" type="radio">
+                                    <label class="flex" for="place1">中国南方</label>
+                                    <input class="flex_que q_radio" value="1" name="place" id="place2" type="radio">
+                                    <label class="flex" for="place2">中国北方</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            居住城市/农村
+                        </div>
+                        <div class="question_infor2">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <input class="flex_que q_radio" value="1" name="city" id="city1" type="radio">
+                                    <label class="flex" for="city1">城市</label>
+                                    <input class="flex_que q_radio" value="0" name="city" id="city2" type="radio">
+                                    <label class="flex" for="city2">农村</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            心血管疾病(ASCVD)家族史
+                        </div>
+                        <div class="question_infor2">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <input class="flex_que q_radio" value="1" name="ascvd" id="ascvd1" type="radio">
+                                    <label class="flex" for="ascvd1">有</label>
+                                    <input class="flex_que q_radio" value="0" name="ascvd" id="ascvd2" type="radio">
+                                    <label class="flex" for="ascvd2">无</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-md">评分:</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                </div>
+                                <div class="calc-unit-md">%</div>
+                            </div>
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-lg">10年心血管病风险:</div>
+                                <div class="flex-item">
+                                    <div id="resultmsg1" class="skin-color"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <h3><span class="jiedu-title">说明</span></h3>
+        <div class="jiedu">
+            <p style="font-weight: bold">10年风险评估</p>
+            <p>1. 对于10年风险达到高危或单个心血管病危险因素达到治疗起始值的个体，推荐进行经常性10年风险评估，每年评估1次，并与医生沟通，采取相应的临床治疗（Ⅰ类推荐，C级证据）。</p>
+            <p>2. 对于35岁及以上存在心血管病危险因素的个体（如：高血压、糖尿病、血脂异常、超重或肥胖、吸烟等），推荐每1~2年进行1次10年风险评估（Ⅰ类推荐，C级证据）。</p>
+            <p>3. 对于35岁及以上不存在心血管病危险因素的个体，应当密切关注自身健康状况，应每2~3年进行1次10年风险评估（Ⅱa类推荐，C级证据）。</p>
+            <p>4. 对于20~34岁个体，应关注自身的心血管病危险因素，应考虑每3~5年进行1次10年风险评估（Ⅱa类推荐，C级证据）。</p>
+            <br>
+            <p style="font-weight: bold">终生风险评估</p>
+            <p>年龄20~59岁且10年风险处于中、低危的成年人，可以考虑每3~5年进行1次终生风险评估（Ⅱb类推荐，C级证据）。</p>
+            <br>
+            <p style="font-weight: bold">风险等级划分</p>
+            <p>1. 心血管病10年风险分层：应用ChinaPAR模型，评估心血管病10年风险≥10.0%为高危，10年风险在5.0%~9.9%为中危，10年风险&lt;5.0%为低危。</p>
+            <p>2. 心血管病终生风险分层：应用China-PAR模型，评估心血管病终生风险≥32.8%为高危，&lt;32.8%为低危。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Yang X,et al. Predicting the 10-Year Risks of Atherosclerotic Cardiovascular Disease in Chinese Population: The China-PAR Project (Prediction for ASCVD Risk in China).Circulation. 2016 Nov 8;134(19):1430-1440.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

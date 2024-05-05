@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-604.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-604" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>心衰VALIANT风险评分(VALIANT HF Risk Score)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block req">
+                            <div class="que_select_box">
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">年龄</div>
+                                        <div class="answer" name="age">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">年龄</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">≤50岁</div>
+                                                <div value="4" class="option">51-60岁</div>
+                                                <div value="5" class="option">61-70岁</div>
+                                                <div value="9" class="option">71-80岁</div>
+                                                <div value="10" class="option">&gt;80岁</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            种族
+                                        </div>
+                                        <div class="answer" name="race">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">种族</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">白种人或亚洲人</div>
+                                                <div value="6" class="option">非裔美国人</div>
+                                                <div value="4" class="option">其他种族</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="tnb">糖尿病</label>
+                                    <input class="flex_que q_radio" value="1" id="tnb" name="tnb" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="jiwang">既往心肌梗塞史</label>
+                                    <input class="flex_que q_radio" value="5" id="jiwang" name="jiwang" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="zhouwei">周围血管病</label>
+                                    <input class="flex_que q_radio" value="5" id="zhouwei" name="zhouwei" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="zuosu">左束支传导阻滞:有新发LBBB</label>
+                                    <input class="flex_que q_radio" value="5" id="zuosu" name="zuosu" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="que_select_box">
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            Killip分级
+                                        </div>
+                                        <div class="answer" name="killip">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">Killip分级</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">1或2级</div>
+                                                <div value="3" class="option">3或4级</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">45天时的NYHA心功能分级</div>
+                                        <div class="answer" name="nyha">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">45天时的NYHA心功能分级</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">I</div>
+                                                <div value="3" class="option">II</div>
+                                                <div value="5" class="option">III</div>
+                                                <div value="9" class="option">IV</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p></p>
+            <div class="table-wrap">
+                <table class="countTab2">
+                    <thead>
+                    <tr>
+                        <th colspan="9">结果解读</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>评分</th>
+                        <td>0-5</td>
+                        <td>6-8</td>
+                        <td>9-11</td>
+                        <td>12-14</td>
+                        <td>15-17</td>
+                        <td>18-20</td>
+                        <td>21-23</td>
+                        <td>≥24</td>
+                    </tr>
+                    <tr>
+                        <th>3年内因心衰入院的风险</th>
+                        <td>2.3%</td>
+                        <td>5.1%</td>
+                        <td>8%</td>
+                        <td>12.2%</td>
+                        <td>18.4%</td>
+                        <td>24.7%</td>
+                        <td>29.8%</td>
+                        <td>33.3%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p></p>
+            <p>对于既往无心衰病史的患者，经历急性心梗伴肺充血和/或左室功能不全（超声心动LVEF≤35%，核素扫描LVEF≤40%）后存活者，VALIANT心衰评分可用于预测3年内发生心衰并住院的风险。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Lewis EF, et al. Predictors of the first heart failure hospitalization in patients who are stable survivors of myocardial infarction complicated by pulmonary congestion and/or left ventricular dysfunction: a VALIANT study. Eur Heart J. 2008;29(6):748-56.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

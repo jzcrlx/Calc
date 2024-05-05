@@ -1,0 +1,1 @@
+function MDCalc(z){rr=60/z.hr;rr=Math.sqrt(rr);value=z.qt/rr;Answer(Round(value,1))}$("#units").hide();

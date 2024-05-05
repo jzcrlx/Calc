@@ -1,0 +1,1 @@
+function MDCalc(z){z.age=z.age/10;value=z.hr*z.age*z.age/z.sbp;Answer(Round(value,0));if(value<30){msg="研究表明是低TRI级别，即医院死亡率为 -10% 或更低."}if(value>29){msg="研究表明为“中/高TRI”，即医院死亡率>10%."}Text(msg)}$("#units").hide();

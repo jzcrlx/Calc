@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-478.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-478" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>慢性阻塞性肺病(COPD)的BODE指数</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block req">
+                            <div class="question_title">
+                                FEV<sub>1</sub>占预计值%
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="fev" id="fev1" type="radio">
+                                        <label class="flex" for="fev1">≥65</label>
+                                        <input class="flex_que q_radio" value="1" name="fev" id="fev2" type="radio">
+                                        <label class="flex" for="fev2">50-64</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="fev" id="fev3" type="radio">
+                                        <label class="flex" for="fev3">36-49</label>
+                                        <input class="flex_que q_radio" value="3" name="fev" id="fev4" type="radio">
+                                        <label class="flex" for="fev4">≤35</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                6分钟步行距离（m）
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="six" id="six1" type="radio">
+                                        <label class="flex" for="six1">≥350</label>
+                                        <input class="flex_que q_radio" value="1" name="six" id="six2" type="radio">
+                                        <label class="flex" for="six2">250-349</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="six" id="six3" type="radio">
+                                        <label class="flex" for="six3">150-249</label>
+                                        <input class="flex_que q_radio" value="3" name="six" id="six4" type="radio">
+                                        <label class="flex" for="six4">≤149</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                呼吸困难分级
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="huxi" id="huxi1" type="radio">
+                                        <label class="flex" for="huxi1">0-1</label>
+                                        <input class="flex_que q_radio" value="1" name="huxi" id="huxi2" type="radio">
+                                        <label class="flex" for="huxi2">2</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="huxi" id="huxi3" type="radio">
+                                        <label class="flex" for="huxi3">3</label>
+                                        <input class="flex_que q_radio" value="3" name="huxi" id="huxi4" type="radio">
+                                        <label class="flex" for="huxi4">4</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                体重指数
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="bmi" id="bmi1" type="radio">
+                                        <label class="flex" for="bmi1">&gt;21</label>
+                                        <input class="flex_que q_radio" value="1" name="bmi" id="bmi2" type="radio">
+                                        <label class="flex" for="bmi2">≤21</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p></p>
+            <div class="table-wrap">
+                <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th colspan="3">按照BODE评分进行病情分级：</th>
+                    </tr>
+                    <tr>
+                        <th>病情分级</th>
+                        <th>BODE评分</th>
+                        <th>COPD患者52个月死亡率</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>轻度</th>
+                        <td>0~2</td>
+                        <td>20%</td>
+                    </tr>
+                    <tr>
+                        <th>中度</th>
+                        <td>3~4</td>
+                        <td>60%</td>
+                    </tr>
+                    <tr>
+                        <th>重度</th>
+                        <td>5~6</td>
+                        <td>70%</td>
+                    </tr>
+                    <tr>
+                        <th>极重度</th>
+                        <td>7~10</td>
+                        <td>80%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>BODE指数预测COPD患者全因死亡率和呼吸相关死亡率的准确度比单独的FEV<sub>1</sub>要高。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">1. Celli BR et al.The Body-Mass Index,Airflow Obstruction,Dyspnea,and Exercise Capacity Index in Chronic Obsructive Pulmonary Disease.NEJM 2004;350:1005.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">2. Celli BR et al.Predictors of Survival in COPD:More than Just the FEV1.Respir Med 2008;102(Suppl):S27.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

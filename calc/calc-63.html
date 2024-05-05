@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-63.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="medcalc-423" class="post">
+    <div id="meta">
+        <select id="units" style="display: none;">
+            <option value="si" name="si" selected="selected">国际单位(SI)</option>
+            <option value="us" name="us">美国单位(US)</option>
+        </select>
+    </div><!--#meta-->
+    <div id="title">
+        <h2>预产期计算 </h2>
+        <!-- <h3 id="desc">Calculates pregnancy dates, forward from last period or backward from due date.</h3> -->
+    </div>
+    <form id="medform" name="medform" action="get">
+        <div style="color: red">注: 以下三个项目,仅需输入其中任意一项</div>
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tbody><tr class="not_req">
+                <td>当前胎龄</td>
+                <td>
+                    <input style="width: 50px" name="wks" id="wks" type="text"> <label for="wks">周</label>
+                    <input style="width: 50px" name="days" value="0" id="days" type="text"> <label for="days">天</label>
+                </td>
+            </tr>
+            <tr class="not_req">
+                <td>末次月经日期</td>
+                <td><input name="lmp" id="lmp" type="text" width="15"> <small>yyyy-MM-dd格式</small></td>
+            </tr>
+            <tr class="not_req">
+                <td>到期日（估计预产期）</td>
+                <td><input name="duedates" id="duedates" type="text"> <small>yyyy-MM-dd格式</small></td>
+            </tr>
+            <tr class="answer">
+                <td colspan="2">
+                    <div class="answer" style="margin-bottom: 20px">
+                        <div style="padding-top: 10px;text-align: center">
+                            <button type="button" class="calc_btn" id="result" style="width: 80px">
+                                <span class="skin-color">计 算</span>
+                            </button>
+                            <button type="reset" class="calc_btn " id="clear" style="width: 80px;margin-left: 20px;">
+                                重 置
+                            </button>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr class="answer">
+                <td>估计孕龄</td>
+                <td>
+                    <div id="resultmsg"></div>
+                </td>
+            </tr>
+            <tr class="answer">
+                <td>末次月经日期计算</td>
+                <td>
+                    <div id="resultmsg2"></div>
+                </td>
+            </tr>
+            <tr class="answer">
+                <td>估计到期日（40周）</td>
+                <td>
+                    <div id="resultmsg3"></div>
+                </td>
+            </tr>
+            <tr class="answer">
+                <td>估计受孕日</td>
+                <td>
+                    <div id="resultmsg4"></div>
+                </td>
+            </tr>
+        </tbody></table>
+    </form>
+
+
+    <!-- <div id="postmeta">
+
+        <p>Posted in: <a rel="category tag" title="View all posts in OB-Gyn" href="//www.mdcalc.com/category/specialties/ob-gyn/">OB-Gyn</a></p>
+
+    </div>postmeta -->
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

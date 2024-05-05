@@ -1,0 +1,198 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-729.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-729">视网膜母细胞瘤</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                <tr>
+                    <td>Pathological T-----原发肿瘤</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>x</sub>未知的眼内肿瘤；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>0</sub>无眼内肿瘤证据；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>1</sub>眼内肿瘤，无浸润,无脉络膜浸润，无视神经乳头侵犯；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>2</sub>肿瘤伴有浸润；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>2a</sub>伴有脉络膜浸润，及视神经乳头侵犯；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>2b</sub>肿瘤侵犯虹膜基质和/或小梁网和/或巩膜静脉窦；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>3</sub>肿瘤伴有浸润；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>3a</sub>脉络膜侵犯（最大径＞3mm，或者多灶性脉络膜受累，总直径＞3mm，或者全层脉络膜受累）；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>3b</sub>视神经乳头受累,未累及视神经断端；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>3c</sub>巩膜内三分之二层受累；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>3d</sub>巩膜全层浸润；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>4</sub>肿瘤侵犯眼外：肿瘤侵犯视神经断端，肿瘤侵犯围绕视神经的脑膜，巩膜全层浸润，侵及巩膜外层、邻近的脂肪组织、眼外肌、骨、结膜、或眼睑；
+                    </td>
+                </tr>
+                <tr>
+                    <td>N（区域淋巴结）</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;N<sub>x</sub>区域淋巴结无法评估；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;N<sub>0</sub>无区域淋巴结转移</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;N<sub>1</sub>区域淋巴结转移；</td>
+                </tr>
+                <tr>
+                    <td>M(远处转移）</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;M<sub>1</sub>有远处转移</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;M<sub>1a</sub>病理证实肿瘤转移（如骨髓，肝脏或其他）；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;M<sub>1b</sub>病理证实肿瘤转移，脑脊液或者中枢神经实质；</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-wrap">
+            <table class="countTab1" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>分期</th>
+                    <th>T</th>
+                    <th>N</th>
+                    <th>M</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>Ⅰ期</th>
+                    <td>T1，T2，T3</td>
+                    <td>N0</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <th>Ⅱ期</th>
+                    <td>T4</td>
+                    <td>N0</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <th>Ⅲ期</th>
+                    <td>Any</td>
+                    <td>N1</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <th>Ⅳ期</th>
+                    <td>Any</td>
+                    <td>Any</td>
+                    <td>M1</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

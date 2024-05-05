@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-241.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-241">小脑扁桃体下疝畸形（chiari畸形）分型</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2">
+                <thead>
+                <tr>
+                    <th>
+                        <div align="left">依畸形的形成及轻重程度分为四型：</div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Ⅰ型，小脑扁桃体及下蚓部疝到椎管内，有时可达第3颈椎，延髓与第四脑室位置正常或轻度下移，约50%有脊髓积水空洞症，一般无脊髓脊膜膨出；</td>
+                </tr>
+                <tr>
+                    <td>Ⅱ型，最常见，小脑、延髓、第四脑室均下移疝入椎管内，延髓与上颈髓重叠，脑桥延长变薄，第四脑室正中孔与导水管粘连狭窄致梗阻性脑积水，多伴脊髓脊膜膨出；</td>
+                </tr>
+                <tr>
+                    <td>Ⅲ型，最严重，除Ⅱ型特点外，常合并高颈、枕部脑膜脑膨出；</td>
+                </tr>
+                <tr>
+                    <td>Ⅳ型，表现小脑发育不全，不向下方移位。</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>小脑扁桃体下疝畸形的病理改变包括以下表现：</p>
+                <p>① 小脑扁桃体经枕骨大孔下疝到椎管内，有时可充满整个小脑延髓池；</p>
+                <p>② 延髓变长，与第四脑室下部一起疝入椎管内，延髓、上颈髓均受压变扁；</p>
+                <p>③ 第四脑室正中孔与导水管粘连狭窄致梗阻性脑积水；</p>
+                <p>④ 脑干与小脑的下移使Ⅴ-Ⅶ对脑神经受牵拉变长；</p>
+                <p>⑤ 枕骨大孔区颅内结构粘连，蛛网膜下腔闭塞，形成囊肿；</p>
+                <p>⑥ 如中脑下移可合并桥池、外侧池闭塞。</p>
+                <p>此畸形常合并颅底、枕骨大孔区畸形、枕部脑膜脑膨出、脊椎裂、脊髓脊膜膨出、脊髓空洞症等多种畸形。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">吴江主编. 神经病学（八年制）（第2版）. 人民卫生出版社. 2010年.p375.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

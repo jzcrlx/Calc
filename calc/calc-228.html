@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-228.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-228">Chiari畸形分型CT及MRI表现</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2">
+                <tbody>
+                <tr>
+                    <th>
+                        <div align="left">CT扫描&nbsp;&nbsp;&nbsp;&nbsp;Chiari畸形需行非离子型碘水椎管和脑池造影后CT扫描或延迟扫描，结合矢状面重建图像，可见以下改变：</div>
+                    </th>
+                </tr>
+                <tr>
+                    <td>Ⅰ型：颈髓后方有对称呈新月形或长方形低密度影，此为下疝的小脑扁桃体。</td>
+                </tr>
+                <tr>
+                    <td>
+                        Ⅱ型：除Ⅰ型表现外，颅骨、硬膜、脑实质、脑室与脑池可有以下变化：①6个月内婴儿在额、顶、枕骨板出现多个颅骨陷窝。半数以上患者岩骨后界变平或呈扁形，内耳道变短，年龄越大改变越显著。大脑镰线状强化变细为发育不良，线状强化中断为穿孔。天幕低位使后颅窝狭小，幕孔增宽和幕切迹延长。②四叠体丘突间沟消失。丘突融合，鸟嘴样变形的中脑向后下延伸到小脑半球之间。包绕脑干的小脑外侧部位，脑桥小脑角池与脑桥腹侧形成"三峰状"影像。③第四脑室小或不显影，第三脑室、侧脑室扩大，冠状面见前角外缘形成切迹，与第三脑室内凹的外形构成"3"字形。枕大池消失。
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <div align="left">MRI&nbsp;&nbsp;&nbsp;&nbsp;比CT图像更准确、清晰、直观，可直接明确诊断。其影像表现如下：</div>
+                    </th>
+                </tr>
+                <tr>
+                    <td>Ⅰ型：①小脑扁桃体变形移位，呈舌状由枕骨大孔向下疝超过5mm，进入颈椎管上部；②枕大池变小，可合并颅颈交界区畸形；③可合并脑积水和脊髓空洞症各占20%~25%。</td>
+                </tr>
+                <tr>
+                    <td>
+                        Ⅱ型：①小脑狭长的舌状突出物可经环椎移至C2-4水平或以下，小脑发育不良向尾端延长，经枕大孔疝至C1椎弓上缘，枕大孔明显扩大；②脑干明显延长，延髓疝入颈椎管内；③颈髓下移，上颈部神经根相对上升至出口水平，小脑与第四脑室疝入椎管；④天幕发育不良，也可天幕低位，使直窦、横窦、窦汇的位置下移；⑤可合并多种多样复杂畸形，如脊髓脊膜膨出、脑积水，以及脊髓空洞症、大脑畸形、颅底陷入和脊髓纵裂畸形等。
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ⅲ型：除Ⅱ型表现外，均有明显的颅底陷入，颈椎畸形，枕大孔扩大，低枕部或高颈部的脑膜脑膨出。</td>
+                </tr>
+                <tr>
+                    <td>Ⅳ型：严重的小脑发育不全，无移位，第四脑室扩大，后颅窝脑池、脑沟增宽。</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">吴江主编. 神经病学（八年制）（第2版）. 人民卫生出版社. 2010年.p376.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

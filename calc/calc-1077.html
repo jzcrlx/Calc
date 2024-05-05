@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-1077.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-1077" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>甲减L-T<sub>4</sub>治疗剂量计算器</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block req">
+                            <div class="question_title">
+                                年龄
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio age" value="1" name="age" id="age1" type="radio">
+                                        <label class="flex" for="age1">&lt;18岁</label>
+                                        <input class="flex_que q_radio age" value="2" name="age" id="age2" type="radio">
+                                        <label class="flex" for="age2">≥18,&lt;60岁</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio age" value="3" name="age" id="age3" type="radio">
+                                        <label class="flex" for="age3">≥60岁</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                性别
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio sex" value="1" name="sex" id="sex1" type="radio">
+                                        <label class="flex" for="sex1">男</label>
+                                        <input class="flex_que q_radio sex" value="2" name="sex" id="sex2" type="radio">
+                                        <label class="flex" for="sex2">女</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block q1" style="display: none">
+                            <div class="question_title">
+                                怀孕
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="baby" id="baby1" type="radio">
+                                        <label class="flex" for="baby1">是</label>
+                                        <input class="flex_que q_radio" value="2" name="baby" id="baby2" type="radio">
+                                        <label class="flex" for="baby2">否</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block q2" style="display: none">
+                            <div class="question_title">
+                                心脏病
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="heart" id="heart1" type="radio">
+                                        <label class="flex" for="heart1">有</label>
+                                        <input class="flex_que q_radio" value="2" name="heart" id="heart2" type="radio">
+                                        <label class="flex" for="heart2">无</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                体重
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-item">
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="weight" type="number">
+                                    </div>
+                                    <div class="calc-unit-md">kg</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="answer_block" style="margin-top: 20px">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-bg">L-T<sub>4</sub>替代剂量:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                    <div class="calc-unit-sm">μg</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">说明</span></h3>
+        <div class="jiedu">
+            <p>左甲状腺素（L-T<sub>4</sub>）治疗剂量取决于甲减的程度、病因、年龄、特殊情况、体重和个体差异。
+                本计算器仅为甲减患者L-T<sub>4</sub>治疗剂量提供基本参考，更精准的药物调整还需要结合甲功报告和临床表现。 </p>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">用法和用量</span></h3>
+        <div class="jiedu">
+            <p>口服，宜晨起空腹（早餐前至少半小时）或睡前服用，均为每天1次。</p>
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>患者类型</th>
+                    <th>起始剂量</th>
+                    <th>完全替代剂量</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>成人</td>
+                    <td>起始 25~50 μg/d，每 3~7 天 增 加25 μg，直至治疗达标</td>
+                    <td>1.6~1.8ug·kg<sup>-1</sup>·d<sup>-1</sup></td>
+                </tr>
+                <tr>
+                    <td>老年人、有心脏病者</td>
+                    <td>小剂量起始 12.5 μg/d，每 1~2 周增加 12.5 μg，缓慢增加剂量</td>
+                    <td>1.0ug·kg<sup>-1</sup>·d<sup>-1</sup></td>
+                </tr>
+                <tr>
+                    <td>儿童</td>
+                    <td>12.5-50μg/d起始</td>
+                    <td>2.0ug·kg<sup>-1</sup>·d<sup>-1</sup></td>
+                </tr>
+                <tr>
+                    <td>妊娠女性</td>
+                    <td>完全替代剂量起始或者尽快增至治疗剂量</td>
+                    <td>比妊娠前↑ 20%-30%</td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">不良反应及处理</span></h3>
+        <div class="jiedu">
+            <p>主要为药物过量导致甲状腺功能亢进症状，如心悸、心动过速、震颤、多汗、失眠、体重下降等。如出现不良反应，应减量或停用，直至症状消失后，以较低剂量重新使用，4~6
+                周后测定血清FSH和FT<sub>4</sub>以确定是否达到治疗目标。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="//m.medlive.cn/guide/1/23508" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">1. 中华医学会,.甲状腺功能减退症基层合理用药指南[J].中华全科医师杂志,2021,20(05):520-522.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">2. 国家药品监督管理局药品审评中心.窄治疗指数药物生物等效性研究技术指导原则. 2020年第62号.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">3. 窄治疗指数药物文献汇编.上海医药.2020;41(增刊2):22-24.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">4. Lillevang-Johansen M, et al. Thyroid. 2018 May;28(5):566-574.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">5. Flynn RW, et al. J Clin Endocrinol Metab 2010,95(1):186-93.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">6. 单忠艳,滕卫平.甲状腺激素——临床应用70年[J].中华内分泌代谢杂志,2020(05):365-370.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">7. Benvenga S, Carlé A. Adv Ther. 2019 Sep;36(Suppl 2):59-71.</span>
+        </a>
+
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

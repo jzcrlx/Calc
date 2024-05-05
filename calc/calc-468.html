@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-468.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-468" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>最大呼气中段流量</h2>
+        </div>
+        <form name="medform" action="get" id="medform">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-hg">用力肺活量FVC</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="fvc" type="number">
+                                </div>
+                                <div class="calc-unit-ssm">ml</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-hg">最大呼气中段时间MET</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="met" type="number">
+                                </div>
+                                <div class="calc-unit-ssm">s</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-hg">MMEF:</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                </div>
+                                <div class="calc-unit-ssm">ml/s</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">计算公式</span></h3>
+        <div class="jiedu">
+            <p>MMEF = FVC/(2*MET)</p>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">说明</span></h3>
+        <div class="jiedu">
+            <p>英文名称: Maximum Mid-Expiratory Flow,MMEF</p>
+            <p>结果值正常范围: 男性：(3452±1160)ml/s；女性：(2836±946)ml/s</p>
+            <p>MMEF是用力呼出肺活量的25%-75%的平均流量，是检测空气污染对小气道功能影响的灵敏指标。最大通气量可反映气道阻塞的严重程度，又可了解患者的呼吸储备力、肌肉强度和动力水平，可作为手术前评价。其减少见于： (1)气道阻力增加：如各种慢性阻塞性肺疾病、支气管哮喘或支气管肿瘤等。 (2)肺组织损害：如肺炎、肺结核、肺泡出血、肺水肿、肺间质纤维化等。 (3)胸廓、胸膜病变：如严重脊柱后侧弯、肋骨骨折、气胸、大量胸腔积液等。 (4)神经系统和呼吸肌活动障碍：如麻醉、脑炎、脊髓灰质炎和重症肌无力等。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">欧阳钦主编. 临床诊断学（八年制）（第2版）. 人民卫生出版社. 2010年.p402.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

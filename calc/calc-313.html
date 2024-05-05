@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-313.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-313" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>中国脑卒中患者临床神经功能缺损评分</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_infor2">
+                        <div class="que_title">
+                            <span> 一、意识（最大刺激、最佳反应）</span>
+                        </div>
+                        <div class="question_block">
+                            <div class="que_select_box">
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">1. 提问：①年龄；②：现在是几月份 相差 2 岁或 1 个月都算正确</div>
+                                        <div class="answer" name="tiwen">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">提问：①年龄；②：现在是几月份 相差 2 岁或 1 个月都算正确</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">都正确</div>
+                                                <div value="1" class="option">一项正确</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            2. 两项指令：握拳、伸掌、睁眼、闭眼（可示范）
+                                        </div>
+                                        <div class="answer" name="zhiling">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">两项指令：握拳、伸掌、睁眼、闭眼（可示范）</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">均完成</div>
+                                                <div value="3" class="option">完成一项</div>
+                                                <div value="4" class="option">均不能完成，进行以下检查</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            3. 强烈局部刺激健侧肢体
+                                        </div>
+                                        <div class="answer" name="qianglie">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">强烈局部刺激健侧肢体</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">定向退让</div>
+                                                <div value="7" class="option">定向肢体回缩</div>
+                                                <div value="8" class="option">肢体伸直</div>
+                                                <div value="9" class="option">无反应</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req" style="background-color: #edf8fc;border-radius: 5px;">
+                                    <div class="que_infor que_title">
+                                        <div class="txt" style="font-size: 14px;"><span>二、水平凝视功能</span></div>
+                                        <div class="answer" name="ningshi">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">水平凝视功能</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">正常</div>
+                                                <div value="2" class="option">侧方凝视功能受限</div>
+                                                <div value="4" class="option">眼球侧方凝视</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req" style="background-color: #edf8fc;border-radius: 5px;">
+                                    <div class="que_infor que_title">
+                                        <div class="txt" style="font-size: 14px;"><span>三、面瘫</span></div>
+                                        <div class="answer" name="miantan">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">面瘫</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">正常</div>
+                                                <div value="1" class="option">轻瘫，可动</div>
+                                                <div value="2" class="option">全瘫</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req" style="background-color: #edf8fc;border-radius: 5px;">
+                                    <div class="que_infor que_title">
+                                        <div class="txt" style="font-size: 14px;"><span>四、语言</span></div>
+                                        <div class="answer" name="yuyan">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">语言</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">正常</div>
+                                                <div value="2" class="option">交谈有一定困难，需借助表情动作表达；或流利但不易听懂，错语较多</div>
+                                                <div value="5" class="option">可简单交流，但复述困难，语言多纡回，有命名障碍</div>
+                                                <div value="6" class="option">词不达意</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req" style="background-color: #edf8fc;border-radius: 5px;">
+                                    <div class="que_infor que_title">
+                                        <div class="txt" style="font-size: 14px;"><span>五、上肢肌力</span></div>
+                                        <div class="answer" name="shangzhijili">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">上肢肌力</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">Ⅴ级 正常</div>
+                                                <div value="1" class="option">Ⅳ级 不能抵抗外力</div>
+                                                <div value="2" class="option">Ⅲ级 抬臂高于肩</div>
+                                                <div value="3" class="option">Ⅲ级 平肩或以下</div>
+                                                <div value="4" class="option">Ⅱ级 上肢与躯干夹角＞45°</div>
+                                                <div value="5" class="option">Ⅰ级 上肢与躯干夹角≤45°</div>
+                                                <div value="6" class="option">0</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req" style="background-color: #edf8fc;border-radius: 5px;">
+                                    <div class="que_infor que_title">
+                                        <div class="txt" style="font-size: 14px;"><span>六、手肌力</span></div>
+                                        <div class="answer" name="shoujili">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">手肌力</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">Ⅴ级 正常</div>
+                                                <div value="1" class="option">Ⅳ级 不能紧握拳</div>
+                                                <div value="2" class="option">Ⅲ级 握空拳，能伸开</div>
+                                                <div value="3" class="option">Ⅲ级 能屈指，不能伸</div>
+                                                <div value="4" class="option">Ⅱ级 能屈指，不能及拳</div>
+                                                <div value="5" class="option">Ⅰ级 指微动</div>
+                                                <div value="6" class="option">0</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req" style="background-color: #edf8fc;border-radius: 5px;">
+                                    <div class="que_infor que_title">
+                                        <div class="txt" style="font-size: 14px;"><span>七、下肢肌力</span></div>
+                                        <div class="answer" name="xiazhijili">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">下肢肌力</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">Ⅴ级 正常</div>
+                                                <div value="1" class="option">Ⅳ级 不能抵抗外力</div>
+                                                <div value="2" class="option">Ⅲ级 抬腿45°以上，踝或趾可动</div>
+                                                <div value="3" class="option">Ⅲ级 抬腿45°左右，踝或趾不能动</div>
+                                                <div value="4" class="option">Ⅱ级 抬腿离床不足45°</div>
+                                                <div value="5" class="option">Ⅰ级 水平移动，不能抬高</div>
+                                                <div value="6" class="option">0</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req" style="background-color: #edf8fc;border-radius: 5px;">
+                                    <div class="que_infor que_title">
+                                        <div class="txt" style="font-size: 14px;"><span>八、步行能力</span></div>
+                                        <div class="answer" name="buxing">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">步行能力</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">正常行走</div>
+                                                <div value="1" class="option">独立行走 5m 以上，跛行</div>
+                                                <div value="2" class="option">独立行走，需拐杖</div>
+                                                <div value="3" class="option">他人扶持下可以行走</div>
+                                                <div value="4" class="option">能自己站立，不能走</div>
+                                                <div value="5" class="option">坐不需支持，但不能站立</div>
+                                                <div value="6" class="option">卧床</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div style="margin-bottom: 15px">
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>0～15 分 轻型神经功能缺损； </p>
+            <p>16～30 分 中型神经功能缺损；</p>
+            <p>31～45 分 重型神经功能缺损。</p>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

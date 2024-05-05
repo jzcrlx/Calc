@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-598.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-598" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>PCI并发症风险评分(Mayo系统)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block req">
+                            <div class="que_select_box">
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">年龄（岁）</div>
+                                        <div class="answer" name="age">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">年龄（岁）</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">&lt;40</div>
+                                                <div value="1" class="option">40-49</div>
+                                                <div value="2" class="option">50-59</div>
+                                                <div value="3" class="option">60-69</div>
+                                                <div value="4" class="option">70-79</div>
+                                                <div value="5" class="option">80-89</div>
+                                                <div value="6" class="option">90-99</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="pci">行PCI前有休克</label>
+                                    <input class="flex_que q_radio" value="3" id="pci" name="pci" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="shen">肾功能不全（血肌酐&gt;265μmol/L）或终末期慢性肾脏病病史</label>
+                                    <input class="flex_que q_radio" value="3" id="shen" name="shen" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="jizhen">急诊PCI</label>
+                                    <input class="flex_que q_radio" value="3" id="jizhen" name="jizhen" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="que_select_box">
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">NYHA 分级</div>
+                                        <div class="answer" name="nyha">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">NYHA 分级</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">Ⅰ或Ⅱ级</div>
+                                                <div value="1" class="option">Ⅲ或Ⅳ级</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="left">左主干病变</label>
+                                    <input class="flex_que q_radio" value="2" id="left" name="left" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="more">多支病变</label>
+                                    <input class="flex_que q_radio" value="2" id="more" name="more" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="xueguan">血管造影提示有血栓</label>
+                                    <input class="flex_que q_radio" value="2" id="xueguan" name="xueguan" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p></p>
+            <div class="table-wrap">
+                <table class="countTab2">
+                    <thead>
+                    <tr>
+                        <th colspan="3">结果解读</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>评分</th>
+                        <th>危险分级</th>
+                        <th>主要并发症发生率（%）</th>
+                    </tr>
+                    <tr>
+                        <td>0~5</td>
+                        <td>极低危</td>
+                        <td>≤2</td>
+                    </tr>
+                    <tr>
+                        <td>6~8</td>
+                        <td>低危</td>
+                        <td>2~5</td>
+                    </tr>
+                    <tr>
+                        <td>9~11</td>
+                        <td>中危</td>
+                        <td>5~10</td>
+                    </tr>
+                    <tr>
+                        <td>12~14</td>
+                        <td>高危</td>
+                        <td>10~25</td>
+                    </tr>
+                    <tr>
+                        <td>≥15</td>
+                        <td>极高危</td>
+                        <td>&gt;25</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>PCI, Percutaneous Coronary Intervention。</p>
+            <p>主要手术并发症指死亡、Q波心梗，非择期CABG手术或卒中。Mayo系统简洁易行，对PCI术后风险有出色的预测能力，是目前临床上最广为接受的评分系统。</p>
+
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">1.de Feyter PJ, McFadden E. Risk score for percutaneous coronary intervention: forewarned is forearmed. J Am Coll Cardiol. 2003;42:1729-30.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text"> 2. Singh M, et al. Validation of Mayo Clinic risk adjustment model for in-hospital complications after percutaneous coronary interventions, using the National Heart, Lung, and Blood Institute Dynamic Registry. J Am Coll Cardiol. 2003;42:1722-8.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text"> 3. Singh M, et al. Correlates of procedural complications and a simple integer risk score for percutaneous coronary intervention. J Am Coll Cardiol. 2002;40:387-93.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text"> 4.Singh M, et al. Comparison of Mayo Clinic risk score and American College of Cardiology/American Heart Association lesion classification in the prediction adverse cardiovascular outcome following percutaneous coronary of interventions. JACC. 2004; 44; 357-61.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

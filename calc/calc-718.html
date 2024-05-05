@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-718.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-718" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>颈椎病患者脊髓功能状态评定</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">上肢功能（左肢）</div>
+                        <div class="answer" name="select7">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">上肢功能（左肢）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无使用功能</div>
+                                <div value="2" class="option">勉强握食具进餐，不能系扣、写字</div>
+                                <div value="4" class="option">能持勺子进餐，勉强系扣，写字扭曲</div>
+                                <div value="6" class="option">能持筷子进餐，能系扣，但不灵活</div>
+                                <div value="8" class="option">基本正常</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            上肢功能（右肢）
+                        </div>
+                        <div class="answer" name="select6">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">上肢功能（右肢）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无使用功能</div>
+                                <div value="2" class="option">勉强握食具进餐，不能系扣、写字</div>
+                                <div value="4" class="option">能持勺子进餐，勉强系扣，写字扭曲</div>
+                                <div value="6" class="option">能持筷子进餐，能系扣，但不灵活</div>
+                                <div value="8" class="option">基本正常</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            下肢功能
+                        </div>
+                        <div class="answer" name="select5">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">下肢功能</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">不能端坐、站立</div>
+                                <div value="2" class="option">能端坐，但不能站立</div>
+                                <div value="4" class="option">能站立，但不能行走</div>
+                                <div value="6" class="option">扶双拐或需人费力搀扶勉强行走</div>
+                                <div value="8" class="option">扶单拐或扶梯上下楼行走</div>
+                                <div value="10" class="option">能独立行走，跛行步态</div>
+                                <div value="12" class="option">基本正常</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            括约肌功能
+                        </div>
+                        <div class="answer" name="select4">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">括约肌功能</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">尿潴留，或大小便失禁</div>
+                                <div value="3" class="option">大小便困难或其他障碍</div>
+                                <div value="6" class="option">基本正常</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            四肢感觉(左肢)
+                        </div>
+                        <div class="answer" name="select3">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">四肢感觉(左肢)</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">麻、痛、紧、沉或痛觉减退</div>
+                                <div value="2" class="option">基本正常</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            四肢感觉(右肢)
+                        </div>
+                        <div class="answer" name="select2">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">四肢感觉(右肢)</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">麻、痛、紧、沉或痛觉减退</div>
+                                <div value="2" class="option">基本正常</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            束带感觉
+                        </div>
+                        <div class="answer" name="select1">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">束带感觉</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">有紧束感觉</div>
+                                <div value="2" class="option">基本正常</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">评分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_infor">
+                        <div class="flex-center calc-item">
+                            <div class="flex-item">
+                                <div id="resultmsg" class="skin-color"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>四十分法将对整体功能评价转变为可靠的数字表示，便于学术交流和资料的比较和统计，同时也为资料的计算机处理提供基础 。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">王立舜, 等. 关于颈脊髓损害功能评定标准的讨论(介绍一种新标准-四十分法). 中国脊柱脊髓杂志. 1991; 1: 52-4.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

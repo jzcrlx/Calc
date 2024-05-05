@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-139.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-139" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>国际淋巴瘤预后指数IPI</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="age">年龄&gt;60 岁</label>
+                                    <input class="flex_que q_radio" value="1" id="age" name="age" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="stage">分期: Ⅲ、Ⅳ期</label>
+                                    <input class="flex_que q_radio" value="1" id="stage" name="stage" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="part">结外侵犯部位数 ≥ 2</label>
+                                    <input class="flex_que q_radio" value="1" id="part" name="part" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="ps">PS评分（ECOG）: 2，3，4</label>
+                                    <input class="flex_que q_radio" value="1" id="ps" name="ps" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="ldh">LDH: 升高</label>
+                                    <input class="flex_que q_radio" value="1" id="ldh" name="ldh" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-md">评分:</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>一个不良因素1分，评分0~5分，分为4个危险度。</p>
+            <p></p>
+            <div class="table-wrap">
+                <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>评分</th>
+                        <th>危险度</th>
+                        <th>%CR</th>
+                        <th>5年<br>CR-DFS</th>
+                        <th>5年OS</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>0~1</td>
+                        <td>低危</td>
+                        <td>87%</td>
+                        <td>70%</td>
+                        <td>73%</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>低中危</td>
+                        <td>67%</td>
+                        <td>50%</td>
+                        <td>51%</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>中高危</td>
+                        <td>55%</td>
+                        <td>49%</td>
+                        <td>43%</td>
+                    </tr>
+                    <tr>
+                        <td>4~5</td>
+                        <td>高危</td>
+                        <td>44%</td>
+                        <td>40%</td>
+                        <td>26%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>PS评分（活动状态评分，ECOG）：</p>
+            <p>0分：活动能力完全正常，与起病前活动能力无任何差异；</p>
+            <p>1分：能自由走动及从事轻体力活动，包括一般家务或办公室工作，但不能从事较重的体力活动；</p>
+            <p>2分：能自由走动及生活自理，但已丧失工作能力，日间不少于一半时间可以起床活动；</p>
+            <p>3分：生活仅能部分自理，日间一半以上时间卧床或坐轮椅；</p>
+            <p>4分：卧床不起，生活不能自理。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">王吉耀主编. 《内科学》（八年制）[M]. 人民卫生出版社.2005</span>
+        </a>
+    </div>
+</div>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

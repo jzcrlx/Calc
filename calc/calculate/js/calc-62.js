@@ -1,0 +1,1 @@
+function MDCalc(z){a=z.pheny;b=z.alb;if(pref=="si"){pheny_conv=1/3.96;alb_conv=.1}if(pref=="us"){pheny_conv=1;alb_conv=1}a*=pheny_conv;b*=alb_conv;if(z.crcl==1){factor=.1}else{factor=.2}value=a/(factor*b+.1);value=value/pheny_conv;Answer(Round(value,1))}

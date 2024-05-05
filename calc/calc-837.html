@@ -1,0 +1,235 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-837.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-837" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>酸性磷酸酶 (ACP)</h2>
+        </div>
+        <form name="medform" action="get" id="medform">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_title">
+                        国际单位（推荐）
+                    </div>
+                    <div class="question_block ">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">nkat/L</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="item1" placeholder="nkat/L" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block ">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">µkat/L</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="item2" placeholder="µkat/L" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block ">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">nmol/(s•L)</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="item9" placeholder="nmol/(s•L)" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block ">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">µmol/(s•L)</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="item10" placeholder="µmol/(s•L)" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_title">
+                        常用单位
+                    </div>
+                    <div class="question_block ">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">U/L</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="item3" placeholder="U/L" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block ">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">IU/L</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="item4" placeholder="IU/L" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block ">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">µmol/(min•L)</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="item5" placeholder="µmol/(min•L)" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block ">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">µmol/(h•L)L</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="item6" placeholder="µmol/(h•L)" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block ">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">µmol/(h•mL)</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="item7" placeholder="µmol/(h•mL)" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <div style="padding-top: 10px;text-align: center">
+                            <button type="button" class="calc_btn" id="result" style="width: 80px">
+                                <span class="skin-color">计 算</span>
+                            </button>
+                            <button type="reset" class="calc_btn " id="clear" style="width: 80px;margin-left: 20px;">
+                                   重 置
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">名词介绍</span></h3>
+        <div class="jiedu">
+            <p>酸性磷酸酶主要分布于前列腺、肝、脾、乳汁、红细胞、血小板及骨骼等。以前列腺含量最为丰富。</p>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">正常值</span></h3>
+        <div class="jiedu">
+            <p>血清2.2-10.5U／L。</p>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">临床意义</span></h3>
+        <div class="jiedu">
+            <p>增高：前列腺癌，特别是有转移时，血清酸性磷酸酶可明显增高。变形性骨髓炎、原发性骨肿瘤、甲状腺功能亢进、白血病、乳腺癌、心肌梗死、肝炎、肝硬化、胆囊炎、溶血性疾病、急性尿潴留时可增高。此外，前列腺活检。膀胱镜检查、直肠检查等也可使酸性磷酸酶活性增高。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">注意事项</span></h3>
+        <div class="jiedu">
+            <p>检查前：</p>
+            <p>(1) 抽血前一天不吃过于油腻、高蛋白食物，避免大量饮酒。血液中的酒精成分会直接影响检验结果。</p>
+            <p>(2) 体检前一天的晚八时以后，应开始禁食12小时，以免影响检测结果。</p>
+            <p>(3) 抽血时应放松心情，避免因恐惧造成血管的收缩，增加采血的困难。</p>
+            <p>检查后：</p>
+            <p>(1) 抽血后，需在针孔处进行局部按压3-5分钟，进行止血。注意：不要揉，以免造成皮下血肿。</p>
+            <p>(2) 按压时间应充分。各人的凝血时间有差异，有的人需要稍长的时间方可凝血。所以当皮肤表层看似未出血就马上停止压迫，可能会因未完全止血，而使血液渗至皮下造成青淤。因此按压时间长些，才能完全止血。如有出血倾向，更应延长按压时间。</p>
+            <p>(3) 抽血后出现晕针症状如：头晕、眼花、乏力等应立即平卧、饮少量糖水，待症状缓解后再进行体检。</p>
+            <p>(4) 若局部出现淤血，24小时后用温热毛巾湿敷，可促进吸收。</p>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

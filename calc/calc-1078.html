@@ -1,0 +1,366 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>
+    <script type="text/javascript" src="calculate/js/calc-1078.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //获取当前日期            
+            // document.getElementById("bl_date").setAttribute("value",date.nowDate);
+            var time1 = new Date().Format("yyyy-MM-dd");
+            document.querySelector("#bl_date").setAttribute("value", time1);
+
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+
+        function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                    content: '已取消收藏！',
+                    time: 2,
+                    skin: 'msg',
+                    anim: 'scale'
+                });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                    content: '已成功收藏！',
+                    time: 2,
+                    skin: 'msg',
+                    anim: 'scale'
+                });
+            }
+        }
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function () {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <style>
+        .Qtext {
+
+            line-height: 2em;
+            background-color: #edf8fc;
+            font-size: medium;
+            font-weight: bold;
+            margin-top: 2em;
+        }
+
+        .Atext{
+            line-height: 2em;
+            font-size: medium;
+            display:none;            
+
+        }
+    </style>
+</head>
+
+<body class="show">
+    <div class="top">
+        <a href="../index.html"><img src="skin/common/images/5.png" />首页</a>
+        <a href="javascript:goBack();"><img src="skin/common/images/6.png" />返回</a>
+    </div>
+
+    <div class="medlive">
+        <div class="medcalc">
+            <div id="medcalc-1078" class="post">
+                <div id="meta">
+                </div>
+                <div id="title">
+                    <h2>狂犬病防治 - 狂犬疫苗使用</h2>
+                </div>
+                <!-- <div class="fa-set" style="border-radius:5px;font-size:large;color: white;background-color: #008000;line-height: 2em; display:flex ; flex-direction: row;"> 
+            <div style="width: 50% ; text-align: center;">          
+            <label for="211fa">211方案</label>
+            <input value="0" name="hbsab" id="211fa" type="radio">
+        </div>
+        <div style="width: 50% ; text-align: center;">
+            <label class="flex" for="5zfa">5针方案</label>
+            <input value="1" name="hbsab" id="5zfa" type="radio">    
+            </div>      
+
+        </div>    -->
+                <form name="medform" action="get" id="medform" style="margin-top: 10px">
+                    <div class="question_box">
+                        <div class="question_cont">
+                            <div class="question_block req">
+                                <div class="question_title">
+                                    暴露(咬、抓、舔伤)日期：<span class="info" onclick="showInfo('暴露日期',1)">
+                                    </span>
+                                    <input style="margin-left:2em;" type="date" id='bl_date' />
+                                </div>
+                            </div>
+                            <div class="btn_box" style="padding-bottom: 10px">
+                                <input class="submit_btn" type="button">
+                                <input class="reset_btn" type="button">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="showTips">
+                    <h3><span class="jiedu-title">注射日期 - (请输入日期后提交)</span></h3>
+                    <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center">211接种方案</th>
+                                <th style="text-align: center">5针接种方案</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <div style="text-align:center;">
+                                        <div style="line-height: 2em;" id="show211"></div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div style="text-align:center;">
+                                        <div style="line-height: 2em;" id="show5z"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div>
+                    <h3><span class="jiedu-title">解答QA:</span></h3>
+                    <div class="jiedu">
+                        <div style="text-align: left;font-size: medium;line-height: 2em;">
+                            &ensp;&ensp;<b>狂犬病</b>是狂犬病毒所致的人畜共患急性传染病，人多因被病兽咬伤而感染。</br>
+                            &ensp;&ensp;该病潜伏期长短不一，可防不可治，病死率为100%的急性传染病。</br>
+                            &ensp;&ensp;目前唯一有效的预防控制措施为：伤口处理、接种狂犬疫苗。</br>
+                            &ensp;&ensp;III级暴露患者除接种狂犬病疫苗外，应加用“狂犬病人免疫球蛋白”或“抗狂犬病血清”。</br>
+                            &ensp;&ensp;常见问题如下：
+                        </div>
+                        <div class="Qtext" onclick="showAnswer(this)">
+                            1、伤口处理方法？
+                            <span class="second-title-icon"></span>
+                        </div>
+                        <ul class="Atext">
+                            答：严格地伤口处理，</br>
+                            用清水或肥皂水反复冲洗受伤部位，时间不少于15分钟。</br>
+                            一般情况下伤口不包扎、不缝合。
+                        </ul>
+                        <div class="Qtext" onclick="showAnswer(this)">
+                            2、狂犬疫苗有什么不良反应？
+                            <span class="second-title-icon"></span>
+                        </div>
+                        <ul class="Atext">
+                            答：接种疫苗后应在院观察至少半小时。</br>
+                            极少数人可局部红肿、皮疹，一般无需特殊处理。</br>
+                            若有较明显反应或发热，请及时来院对症处理。
+                        </ul>
+                        <div class="Qtext" onclick="showAnswer(this)">
+                            3、接种狂犬疫苗后生活与饮食要注意什么？
+                            <span class="second-title-icon"></span>
+                        </div>
+
+                        <ul class="Atext">
+                            答：接种狂犬疫苗半月内一般忌饮酒、抽烟、浓茶、酸辣等刺激性食物，避免剧烈运动等，以免引起反应。
+                        </ul>
+                        <div class="Qtext" onclick="showAnswer(this)">
+                            4、儿童接种狂犬疫苗是否会影响其他疫苗的接种？
+                            <span class="second-title-icon"></span>
+                        </div>
+                        <ul class="Atext">
+                            答：不影响。</br>
+                            接种狂犬病疫苗期间也可以正常接种其他疫苗，但优先接种狂犬病疫苗。
+                        </ul>
+                        <div class="Qtext" onclick="showAnswer(this)">
+                            5、接种狂犬疫苗有无时间限制？
+                            <span class="second-title-icon"></span>
+                        </div>
+                        <ul class="Atext">
+                            答：原则上是接种狂犬疫苗越早效果越好。</br>
+                            如超过数日，甚至数月只要有条件都应尽快补接种。
+                        </ul>
+                        <div class="Qtext" onclick="showAnswer(this)">
+                            6、没按流程接种疫苗，延迟了一天或几天怎么办？
+                            <span class="second-title-icon"></span>
+                        </div>
+                        <ul class="Atext">
+                            答：按时接种疫苗，对机体产生免疫力非常重要，特别是前3针最关键，请注意按时接种。</br>
+                            如果是前3针延迟，建议重新全程免疫。</br>
+                            反之，只需调整接种时间，其后续针次相应顺延。
+                        </ul>
+                        <div class="Qtext" onclick="showAnswer(this)">
+                            7、不同品牌的狂犬疫苗能否混用吗？
+                            <span class="second-title-icon"></span>
+                        </div>
+                        <ul class="Atext">
+                            答：尽量使用同一品牌疫苗。</br>
+                            但临床观察混用不同品牌的疫苗不会影响其预防作用。
+                        </ul>
+                        <div class="Qtext" onclick="showAnswer(this)">
+                            8、如果被已接种过狂犬疫苗的猫狗咬(抓、舔)伤后，是否需要接种狂犬疫苗？
+                            <span class="second-title-icon"></span>
+                        </div>
+                        <ul class="Atext">
+                            答：需要。</br>
+                            因为动物接种狂犬疫苗后，保护率并非100%，仍可能带有狂犬病毒的情况。
+                        </ul>
+                        <div class="Qtext" onclick="showAnswer(this)">
+                            9、被人咬伤要不要接种狂犬疫苗？
+                            <span class="second-title-icon"></span>
+                        </div>
+                        <ul class="Atext">
+                            答：不一定。</br>
+                            如确定咬人者无狂犬病，就不需要。</br>
+                            但人口腔有多种病菌，仍需及时就医。
+                        </ul>
+                        <div class="Qtext" onclick="showAnswer(this)">
+                            10、孕妇可否接种狂犬疫苗？
+                            <span class="second-title-icon"></span>
+                        </div>
+                        <ul class="Atext">
+                            答：可以。</br>
+                            按照相关文献及指南：暴露后免疫没有任何禁忌症。</br>
+                            研究表明，孕妇接种狂犬疫苗是安全的，不会对胎儿造成影响。</br>
+                            但一般不建议孕妇行暴露前免疫。
+                        </ul>
+                        <div class="Qtext" onclick="showAnswer(this)">
+                            11、以前接种过狂犬疫苗，再次暴露还要再接种吗？
+                            <span class="second-title-icon"></span>
+                        </div>
+                        <ul class="Atext">
+                            答：不一定。</br>
+                            如果全程免疫后6月内，一般不需要再接种；</br>
+                            如果6～12月内者，应当于0和3天各接种1剂；</br>
+                            如果1～3年内者，应当于0、3、7天各接种1剂；</br>
+                            如果超过3年者，应当重新全程接种。</br>
+                            但务必首先、及时、彻底地进行伤口处理。
+                        </ul>
+                        <div class="Qtext" onclick="showAnswer(this)">
+                            12、什么动物会传染狂犬病？
+                            <span class="second-title-icon"></span>
+                        </div>
+                        <ul class="Atext">
+                            答：主要包括：①野生哺乳类动物（如：犬、狼、猫等肉食动物和蝙蝠等）；②家畜类（如：狗、猫、猪、牛、羊和马等）。</br>
+                            但，非哺乳类动物不会感染和传播狂犬病毒（如：禽类、鱼类、昆虫、蜥蜴、龟和蛇等）。
+                        </ul>
+                        <div class="Qtext" onclick="showAnswer(this)">
+                            13、暴露分类（受伤分类）
+                            <span class="second-title-icon"></span>
+                        </div>
+                        <ul class="Atext">
+                            <img width="100%" src="images/bllx.png" />                            
+                        </ul>
+                        <div class="Qtext" onclick="showAnswer(this)">
+                            14、狂犬病暴露后预防处置流程图
+                            <span class="second-title-icon"></span>
+                        </div>
+                        <ul class="Atext">
+                            <img width="100%" src="images/flowChart.png" />
+                        </ul>
+                    </div>
+                </div>
+
+
+                <div class="end">
+                    <!-- https://www.chinacdc.cn/jkzt/crb/zl/kqb/ -->
+                    <h3><span class="jiedu-title">参考文献</span></h3>
+                    <a href="//www.chinacdc.cn/jkzt/crb/zl/kqb/yqfb/200912/t20091221_24177.html" class="resource"
+                        target="_blank" style="margin-top: 3px">
+                        <span class="resource__img-wrapper">
+                            <img src="images/ref.png" alt="Research Paper">
+                        </span>
+                        <span class="resource__text">狂犬病暴露预防处置工作规范（2009年版）</span>
+                    </a>
+                    <a href="//www.chinacdc.cn/jkzt/crb/zl/kqb/yqfb/201602/P020160421460105996775.pdf" class="resource"
+                        target="_blank" style="margin-top: 3px">
+                        <span class="resource__img-wrapper">
+                            <img src="images/ref.png" alt="Research Paper">
+                        </span>
+                        <span class="resource__text">狂犬病预防控制技术指南（2016 版）</span>
+                    </a>
+                </div>
+            </div>
+            <script>
+                $(document).ready(function () {
+                    //提交
+                    $('.submit_btn').on('click', function (event) {
+                        event.stopPropagation();
+                        var data = new Date(document.querySelector("#bl_date").value);
+                        calc(data);
+                    });
+
+                    //重置
+                    $('.reset_btn').on('click', function (event) {
+                        // event.stopPropagation();
+                        // $('.q_radio').prop('checked', false);
+                        // $('.prompt_box').hide();
+                        resetData();
+                    });
+
+                    // 问题
+                    // $('.Qtext').on('click',function (event){                       
+                    //     // var value = $(this).val();
+                    //     // // data[name] = value;
+                    //     // showAnswer(value);
+
+                    //     console.log(this)
+                    // });
+                });
+            </script>
+
+        </div>
+        <div class="like_box" onclick="javascript:like();">
+            <div class="like-btn"></div>
+            <span>收藏</span>
+        </div>
+        <div style="
+        text-align: center;
+        color: black;       
+        font-size: small;
+        line-height: 2rem;
+      ">
+        <p style="text-align: center">
+            <img src="images/imgJZCRLX.jpg" width="120px" height="120px" />
+        </p>
+        <a style="line-height: 1.3rem">
+            <p>谢锐威 - 急诊超人老谢</p>
+            <p>深圳市中西医结合医院</p>
+            <p>扫码关注公众号，获取更多更新</p>
+        </a>       
+    </div>
+</body>
+</html>

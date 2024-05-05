@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-403.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-403">各胎龄新生儿神经、肌肉、成熟度</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2 fixWidth">
+                <tbody>
+                <tr>
+                    <th rowspan="2">临床表现项目</th>
+                    <th colspan="5">胎 龄</th>
+                </tr>
+                <tr>
+                    <td>30～32周</td>
+                    <td>33~34周</td>
+                    <td>35~36周</td>
+                    <td>37~38周</td>
+                    <td>39～40周</td>
+                </tr>
+                <tr>
+                    <th>前臂弹回</th>
+                    <td>无</td>
+                    <td>无或极慢</td>
+                    <td>较慢</td>
+                    <td>慢</td>
+                    <td>迅速</td>
+                </tr>
+                <tr>
+                    <th>围巾征</th>
+                    <td>毫无阻力</td>
+                    <td>毫无阻力</td>
+                    <td>稍有阻力</td>
+                    <td>肘不过中线</td>
+                    <td>明显阻力</td>
+                </tr>
+                <tr>
+                    <th>胭窝角</th>
+                    <td>180°</td>
+                    <td>160°</td>
+                    <td>120°</td>
+                    <td>90°</td>
+                    <td>＜90°</td>
+                </tr>
+                <tr>
+                    <th>足跟触耳</th>
+                    <td>无阻力</td>
+                    <td>无阻力</td>
+                    <td>稍有阻力</td>
+                    <td>明显阻力</td>
+                    <td>足跟不能触耳</td>
+                </tr>
+                <tr>
+                    <th>扶坐竖颈</th>
+                    <td>无力</td>
+                    <td>无力</td>
+                    <td>无力</td>
+                    <td>头略向前</td>
+                    <td>头向前片刻</td>
+                </tr>
+                <tr>
+                    <th>觅食反射</th>
+                    <td>无或弱</td>
+                    <td>需扶头强化</td>
+                    <td>有</td>
+                    <td>有</td>
+                    <td>有</td>
+                </tr>
+                <tr>
+                    <th>交叉伸腿反射</th>
+                    <td>无</td>
+                    <td>无或屈腿</td>
+                    <td>屈腿</td>
+                    <td>屈腿-伸</td>
+                    <td>屈-伸-内收</td>
+                </tr>
+                <tr>
+                    <th>拥抱反射</th>
+                    <td>无或弱</td>
+                    <td>伸臂外展</td>
+                    <td>伸臂外展</td>
+                    <td>屈臂内收</td>
+                    <td>屈臂内收</td>
+                </tr>
+                <tr>
+                    <th>握持反射</th>
+                    <td>能抓住，弱</td>
+                    <td>能抓住，弱</td>
+                    <td>能抓紧</td>
+                    <td>能将上臂带起</td>
+                    <td>能将身体带起</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

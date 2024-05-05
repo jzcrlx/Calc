@@ -1,0 +1,1 @@
+function MDCalc(z){score=z.age+z.high+z.dm+z.pm+z.other+z.pv+z.sm+z.tia;value=score;Answer(value)}

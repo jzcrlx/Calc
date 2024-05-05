@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-109.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-109" class="post">
+        <div id="meta">
+            <select id="units">
+                <option value="si" name="si" selected="selected">国际单位(SI)</option>
+                <option value="us" name="us">美国单位(US)</option>
+            </select>
+        </div><!--#meta-->
+        <div id="title">
+            <h2>GRACE缺血风险评估</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="cardiacarrest">院前心脏骤停</label>
+                                    <input class="flex_que q_radio" value="1" name="cardiacarrest" id="cardiacarrest" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="st">ST段下移</label>
+                                    <input class="flex_que q_radio" value="1" name="st" id="st" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="enzymes">心肌酶升高</label>
+                                    <input class="flex_que q_radio" value="1" name="enzymes" id="enzymes" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="flex-center calc-que ">
+                                <div class="calc-label-md">年龄</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="age" id="age" type="number">
+                                </div>
+                                <div class="calc-unit-md">岁</div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="flex-center calc-que ">
+                                <div class="calc-label-md">心率</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="hr" id="hr" type="number">
+                                </div>
+                                <div class="calc-unit-md">次/分</div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="flex-center calc-que ">
+                                <div class="calc-label-md">收缩压</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="sbp" id="sbp" type="number">
+                                </div>
+                                <div class="calc-unit-md">mmHg</div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="flex-center calc-que ">
+                                <div class="calc-label-md">血肌酐</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="cr" id="cr" placeholder="62 - 115" type="number">
+                                </div>
+                                <div class="calc-unit-md"><label class="cr" for="cr">μmol/L</label></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_blocks top0">
+                        <div class="question_block req">
+                            <div class="question_title">
+                                Killip分级
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="chf1">无心衰的临床表现</label>
+                                        <input class="flex_que q_radio" value="1" name="chf" id="chf1" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="chf2">肺部听诊啰音，可及第三心音(S3)，颈静脉压力升高</label>
+                                        <input class="flex_que q_radio" value="2" name="chf" id="chf2" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="chf3">Frank急性肺水肿</label>
+                                        <input class="flex_que q_radio" value="3" name="chf" id="chf3" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="chf4">心源性休克或低血压(收缩压低于90mmHg)，且存在周围血管收缩的证据(少尿，紫绀，发汗等)</label>
+                                        <input class="flex_que q_radio" value="4" name="chf" id="chf4" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">GRACE评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-hg">入院后六月内死亡率:</div>
+                                    <div class="flex-item">
+                                        <div id="resultmsg" class="skin-color"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="//www.ncbi.nlm.nih.gov/pubmed/17032691" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/pubmed.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Fox KA, Dabbous OH, Goldberg RJ, Pieper KS, Eagle KA, Van de Werf F, Avezum A,Goodman SG, Flather MD, Anderson FA Jr, Granger CB. Prediction of risk of death and myocardial infarction in the six months after presentation with acute coronary syndrome: prospective multinational observational study (GRACE). BMJ. 2006 Nov 25;333(7578):1091. Epub 2006 Oct 10. PubMed PMID: 17032691; PubMed Central PMCID: PMC1661748.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

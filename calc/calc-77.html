@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-77.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="medcalc-109" class="post">
+	<div id="meta">
+		<select id="units">
+			<option value="si" name="si" selected="selected">国际单位(SI)</option>
+			<option value="us" name="us">美国单位(US)</option>
+		</select>	
+	</div><!--#meta-->
+	<div id="title">
+	  <h2>肾小管钾浓度梯度（TTKG）计算</h2> 
+	  <!-- <h3 id="desc">Determines if potassium derangements are due to renal or extra-renal cause.</h3> -->
+	</div>
+	<form id="medform" name="medform" action="get">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr class="req">
+				<td>血清渗透压</td>
+				<td><input id="osm_s" name="osm_s" type="text"> <label class="osm" for="osm_s">mmoI/kg</label></td>
+			</tr>
+			<tr class="req">
+				<td class="">尿渗透压</td>
+				<td class=""><input id="osm_u" name="osm_u" type="text"> <label class="osm" for="osm_u">mmoI/kg</label> </td>
+			</tr>
+			<tr class="req">
+				<td class="">血清钾浓度</td>
+				<td class=""><input id="k_s" name="k_s" type="text">  <label for="k_s" class="k">mmol/L</label></td>
+			</tr>
+			<tr class="req">
+				<td class="">尿钾浓度</td>
+				<td class=""><input id="k_u" name="k_u" type="text"> <label for="k_u" class="k">mmol/L</label></td>
+			</tr>
+			<tr class="answer">
+				<td>肾小管钾浓度梯度</td>
+				<td><input readonly="readonly" placeholder="点击查看" id="result" name="result" type="text">    </td>
+			</tr>
+		</tbody></table>
+	</form>
+
+
+<!-- LEADERBOARD AD -->
+
+
+<!-- MDCalc_InternalMedicine_Leaderboard_728x90 -->
+<!-- <div style="width: 728px; height: 90px;" id="div-gpt-ad-1363049555981-4">
+<script type="text/javascript">
+googletag.cmd.push(function() { googletag.display('div-gpt-ad-1363049555981-4'); });
+</script>
+<iframe width="728" scrolling="no" height="90" frameborder="0" id="google_ads_iframe_/27484587/MDCalc_InternalMedicine_Leaderboard_728x90_0" name="google_ads_iframe_/27484587/MDCalc_InternalMedicine_Leaderboard_728x90_0" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;" src="javascript:&quot;&lt;html&gt;&lt;body style='background:transparent'&gt;&lt;/body&gt;&lt;/html&gt;&quot;"></iframe><iframe width="0" scrolling="no" height="0" frameborder="0" id="google_ads_iframe_/27484587/MDCalc_InternalMedicine_Leaderboard_728x90_0__hidden__" name="google_ads_iframe_/27484587/MDCalc_InternalMedicine_Leaderboard_728x90_0__hidden__" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom; visibility: hidden; display: none;" src="javascript:&quot;&lt;html&gt;&lt;body style='background:transparent'&gt;&lt;/body&gt;&lt;/html&gt;&quot;"></iframe></div>
+ -->
+
+<!-- end leaderboard ad -->
+
+
+
+<!-- <div id="usage" class="extra">
+Note that this formula is valid only when Uosm &gt;300 and UNa &gt;25. This test can help determine the source of potassium imbalance.</div>
+
+<div id="formula" class="extra">
+Transtubular Potassium Gradient (TTKG) = (P<sub>Osm</sub> * U<sub>Potassium</sub> ) / (P<sub>Potassium</sub> x U<sub>Osm</sub>) </div>
+
+
+<div id="postmeta">
+
+	<p>Posted in: <a rel="category tag" title="View all posts in Endocrine/Metabolic" href="//www.mdcalc.com/category/system/endocrinemetabolic/">Endocrine/Metabolic</a> • <a rel="category tag" title="View all posts in Endocrinology" href="//www.mdcalc.com/category/specialties/endocrinology/">Endocrinology</a> • <a rel="category tag" title="View all posts in Nephrology" href="//www.mdcalc.com/category/specialties/nephrology/">Nephrology</a> • <a rel="category tag" title="View all posts in Renal" href="//www.mdcalc.com/category/system/renal/">Renal</a></p>
+
+</div>postmeta -->
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

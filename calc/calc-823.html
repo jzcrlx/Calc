@@ -1,0 +1,774 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-823.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-823" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>贝克抑郁自评量表（BDI）</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <p>说明：美国的心理学家贝克设计了一个抑郁自评量表，包含21组，每组有4句陈述，每句都有一定数值为等级分。你可根据一周来的感觉，选择最适合自己情况的那句话。全部21组都做完后，依据总分，就能明白无误地了解自己是否有抑郁，抑郁的程度如何。这份量表虽然简单，但若能如实自评，结果仍十分可靠、准确。</p>
+                        <p>*贝克抑郁量表只能是否有抑郁以及其严重程度，但具体患了哪种抑郁症，是原发性的还是继发性等，还应由心理医生进一步检查以后确定。</p>
+                        <br>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                1.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item11">我不感到悲伤。</label>
+                                        <input class="flex_que q_radio" value="0" name="item1" id="item11" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item12">我感到悲伤</label>
+                                        <input class="flex_que q_radio" value="1" name="item1" id="item12" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item13">我始终悲伤，不能自制。</label>
+                                        <input class="flex_que q_radio" value="2" name="item1" id="item13" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item14">我太悲伤或不愉快，不堪忍受。</label>
+                                        <input class="flex_que q_radio" value="3" name="item1" id="item14" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="question_block req">
+                            <div class="question_title">
+                                2.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item21">我对将来并不失望。</label>
+                                        <input class="flex_que q_radio" value="0" name="item2" id="item21" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item22">对未来我感到心灰意冷</label>
+                                        <input class="flex_que q_radio" value="1" name="item2" id="item22" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item23">我感到前景黯淡。</label>
+                                        <input class="flex_que q_radio" value="2" name="item2" id="item23" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item24">我觉得将来毫无希望，无法改善。</label>
+                                        <input class="flex_que q_radio" value="3" name="item2" id="item24" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                3.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item31">我没有感到失败。</label>
+                                        <input class="flex_que q_radio" value="0" name="item3" id="item31" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item32">我觉得比一般人失败要多些。</label>
+                                        <input class="flex_que q_radio" value="1" name="item3" id="item32" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item33">回首往事，我能看到的是很多次失败。</label>
+                                        <input class="flex_que q_radio" value="2" name="item3" id="item33" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item34">我觉得我是一个完全失败的人。</label>
+                                        <input class="flex_que q_radio" value="3" name="item3" id="item34" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                4.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item41">我从各种事件中得到很多满足。</label>
+                                        <input class="flex_que q_radio" value="0" name="item4" id="item41" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item42">我不能从各种事件中感受到乐趣。</label>
+                                        <input class="flex_que q_radio" value="1" name="item4" id="item42" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item43">我不能从各种事件中得到真正的满足。</label>
+                                        <input class="flex_que q_radio" value="2" name="item4" id="item43" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item44">我对一切事情不满意或感到枯燥无味。</label>
+                                        <input class="flex_que q_radio" value="3" name="item4" id="item44" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                5.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item51">我不感到有罪过。</label>
+                                        <input class="flex_que q_radio" value="0" name="item5" id="item51" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item52">我在相当的时间里感到有罪过。</label>
+                                        <input class="flex_que q_radio" value="1" name="item5" id="item52" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item53">我在大部分时间里觉得有罪。</label>
+                                        <input class="flex_que q_radio" value="2" name="item5" id="item53" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item54">我在任何时候都觉得有罪。</label>
+                                        <input class="flex_que q_radio" value="3" name="item5" id="item54" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                6.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item61">我没有觉得受到惩罚。</label>
+                                        <input class="flex_que q_radio" value="0" name="item6" id="item61" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item62">我觉得可能会受到惩罚。</label>
+                                        <input class="flex_que q_radio" value="1" name="item6" id="item62" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item63">我预料将受到惩罚。</label>
+                                        <input class="flex_que q_radio" value="2" name="item6" id="item63" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item64">我觉得正受到惩罚。</label>
+                                        <input class="flex_que q_radio" value="3" name="item6" id="item64" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                7.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item71">我对自己并不失望。</label>
+                                        <input class="flex_que q_radio" value="0" name="item7" id="item71" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item72">我对自己感到失望。</label>
+                                        <input class="flex_que q_radio" value="1" name="item7" id="item72" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item73">我讨厌自己。</label>
+                                        <input class="flex_que q_radio" value="2" name="item7" id="item73" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item74">我恨自己。</label>
+                                        <input class="flex_que q_radio" value="3" name="item7" id="item74" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                8.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item81">我觉得并不比其他人更不好。</label>
+                                        <input class="flex_que q_radio" value="0" name="item8" id="item81" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item82">我要批判自己的弱点和错误。</label>
+                                        <input class="flex_que q_radio" value="1" name="item8" id="item82" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item83">我在所有的时间里都责备自己的错误。</label>
+                                        <input class="flex_que q_radio" value="2" name="item8" id="item83" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item84">我责备自己把所有的事情都弄坏了。</label>
+                                        <input class="flex_que q_radio" value="3" name="item8" id="item84" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                9.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item91">我没有任何想弄死自己的想法。</label>
+                                        <input class="flex_que q_radio" value="0" name="item9" id="item91" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item92">我有自杀想法，但我不会去做。</label>
+                                        <input class="flex_que q_radio" value="1" name="item9" id="item92" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item93">我想自杀。</label>
+                                        <input class="flex_que q_radio" value="2" name="item9" id="item93" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item94">如果有机会我就自杀。</label>
+                                        <input class="flex_que q_radio" value="3" name="item9" id="item94" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                10.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item101">我哭泣与往常一样。</label>
+                                        <input class="flex_que q_radio" value="0" name="item10" id="item101" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item102">我比往常哭得多。</label>
+                                        <input class="flex_que q_radio" value="1" name="item10" id="item102" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item103">我现在一直要哭。</label>
+                                        <input class="flex_que q_radio" value="2" name="item10" id="item103" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item104">我过去能哭，但现在要哭也哭不出来。</label>
+                                        <input class="flex_que q_radio" value="3" name="item10" id="item104" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                11.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item111">和过去相比，我现在生气并不更多。</label>
+                                        <input class="flex_que q_radio" value="0" name="item11" id="item111" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item112">我现在比往常更容易生气发火。</label>
+                                        <input class="flex_que q_radio" value="1" name="item11" id="item112" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item113">我觉得现在所有的时间都容易生气。</label>
+                                        <input class="flex_que q_radio" value="2" name="item11" id="item113" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item114">过去使我生气的事，现在一点也不能使我生气了。</label>
+                                        <input class="flex_que q_radio" value="3" name="item11" id="item114" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                11.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item121">我对其他人没有失去兴趣。</label>
+                                        <input class="flex_que q_radio" value="0" name="item12" id="item121" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item122">和过去相比，我对别人的兴趣减少了。</label>
+                                        <input class="flex_que q_radio" value="1" name="item12" id="item122" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item123">我对别人的兴趣大部分失去了。</label>
+                                        <input class="flex_que q_radio" value="2" name="item12" id="item123" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item124">我对别人的兴趣已全部丧失了。</label>
+                                        <input class="flex_que q_radio" value="3" name="item12" id="item124" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                13.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item131">我作出决定没什么困难。</label>
+                                        <input class="flex_que q_radio" value="0" name="item13" id="item131" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item132">我推迟作出决定比过去多了。</label>
+                                        <input class="flex_que q_radio" value="1" name="item13" id="item132" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item133">我作决定比以前困难大得多。</label>
+                                        <input class="flex_que q_radio" value="2" name="item13" id="item133" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item134">我再也不能作出决定了。</label>
+                                        <input class="flex_que q_radio" value="3" name="item13" id="item134" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                14.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item141">觉得我的外表看上去并不比过去更差。</label>
+                                        <input class="flex_que q_radio" value="0" name="item14" id="item141" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item142">我担心自己看上去显得老了，没有吸引力。</label>
+                                        <input class="flex_que q_radio" value="1" name="item14" id="item142" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item143">我觉得我的外貌有些变化，使我难看了。</label>
+                                        <input class="flex_que q_radio" value="2" name="item14" id="item143" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item144">我相信我看起来很丑陋。</label>
+                                        <input class="flex_que q_radio" value="3" name="item14" id="item144" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                15.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item151">我工作和以前一样好。</label>
+                                        <input class="flex_que q_radio" value="0" name="item15" id="item151" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item152">要着手做事，我现在需额外花些力气。</label>
+                                        <input class="flex_que q_radio" value="1" name="item15" id="item152" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item153">无论做什么我必须努力催促自己才行。</label>
+                                        <input class="flex_que q_radio" value="2" name="item15" id="item153" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item154">我什么工作也不能做了。</label>
+                                        <input class="flex_que q_radio" value="3" name="item15" id="item154" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                16.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item161">我睡觉与往常一样好。</label>
+                                        <input class="flex_que q_radio" value="0" name="item16" id="item161" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item162">我睡眠不如过去好。</label>
+                                        <input class="flex_que q_radio" value="1" name="item16" id="item162" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item163">我比往常早醒 1～2 小时，难以再睡。</label>
+                                        <input class="flex_que q_radio" value="2" name="item16" id="item163" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item164">我比往常早醒几个小时，不能再睡。</label>
+                                        <input class="flex_que q_radio" value="3" name="item16" id="item164" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                17.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item171">我并不感到比往常更疲乏。</label>
+                                        <input class="flex_que q_radio" value="0" name="item17" id="item171" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item172">我比过去更容易感到疲乏无力。</label>
+                                        <input class="flex_que q_radio" value="1" name="item17" id="item172" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item173">几乎不管做什么，我都感到疲乏无力。</label>
+                                        <input class="flex_que q_radio" value="2" name="item17" id="item173" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item174">我太疲乏无力，不能做任何事情。</label>
+                                        <input class="flex_que q_radio" value="3" name="item17" id="item174" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                18.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item181">我的食欲和往常一样。</label>
+                                        <input class="flex_que q_radio" value="0" name="item18" id="item181" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item182">我的食欲不如过去好。</label>
+                                        <input class="flex_que q_radio" value="1" name="item18" id="item182" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item183">我现在的食欲差得多了。</label>
+                                        <input class="flex_que q_radio" value="2" name="item18" id="item183" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item184">我一点也没有食欲了。</label>
+                                        <input class="flex_que q_radio" value="3" name="item18" id="item184" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                19.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item191">最近我的体重并无很大减轻。</label>
+                                        <input class="flex_que q_radio" value="0" name="item19" id="item191" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item192">我体重下降2.27 千克以上。</label>
+                                        <input class="flex_que q_radio" value="1" name="item19" id="item192" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item193">我体重下降5.54 千克以上。</label>
+                                        <input class="flex_que q_radio" value="2" name="item19" id="item193" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item194">我体重下降7.81 千克以上。</label>
+                                        <input class="flex_que q_radio" value="3" name="item19" id="item194" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                20.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item201">我对健康状况并不比往常更担心。</label>
+                                        <input class="flex_que q_radio" value="0" name="item20" id="item201" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item202">我担心身体上的问题，如疼痛、胃不适或便秘。</label>
+                                        <input class="flex_que q_radio" value="1" name="item20" id="item202" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item203">我很担心身体问题，想别的事情很难。</label>
+                                        <input class="flex_que q_radio" value="2" name="item20" id="item203" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item204">我对身体问题如此担忧，以致不能想其他任何事情。</label>
+                                        <input class="flex_que q_radio" value="3" name="item20" id="item204" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                21.
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item211">我没有发现自己对性的兴趣最近有什么变化。</label>
+                                        <input class="flex_que q_radio" value="0" name="item21" id="item211" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item212">我对性的兴趣比过去降低了。</label>
+                                        <input class="flex_que q_radio" value="1" name="item21" id="item212" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item213">我现在对性的兴趣大大下降。</label>
+                                        <input class="flex_que q_radio" value="2" name="item21" id="item213" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="item214">我对性的兴趣已经完全丧失。</label>
+                                        <input class="flex_que q_radio" value="3" name="item21" id="item214" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-md">结果:</div>
+                                    <div class="flex-item">
+                                        <div id="resultmsg" class="skin-color"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

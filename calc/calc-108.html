@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-108.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="medcalc-108" class="post">
+    <div id="meta">
+        <select id="units">
+            <option value="us" name="us" selected="selected">全身</option>
+            <option selected="selected" value="si" name="si">呼吸</option>
+        </select>
+    </div><!--#meta-->
+    <div id="title">
+        <h2>血管阻力</h2>
+    </div>
+    <form name="medform" action="get" id="medform">
+        <table border="0" cellpadding="0" cellspacing="0">
+
+            <tbody><tr class="req">
+                <td class="">心输出量</td>
+                <td class=""><input name="hgb" id="hgb" type="text"> L/min</td>
+            </tr>
+            <tr class="req">
+                <td class=""><label class="vrh">平均肺动脉压</label></td>
+                <td class=""><input name="bun" id="bun" type="text"> mmHg</td>
+            </tr>
+            <tr class="req">
+                <td class=""><label class="vrm">肺毛细血管契压</label></td>
+                <td class=""><label>
+                    <input name="sbp" id="sbp" type="text"> mmHg</label></td>
+            </tr>
+            <tr class="req">
+                <td class="">体表面积</td>
+                <td class=""><label>
+                    <input name="co" id="co" type="text"> m<sup>2</sup></label></td>
+            </tr>
+
+            <tr class="answer">
+                <td><label class="vrsvr">PVR</label>:</td>
+                <td>
+                    <div id="resultmsg"></div>
+                </td>
+            </tr>
+            <tr class="answer">
+                <td><label class="vrsvri">PVRI</label>:</td>
+                <td>
+                    <div id="resultmsg2"></div>
+                </td>
+            </tr>
+
+        </tbody></table>
+    </form>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

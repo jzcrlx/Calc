@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-295.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-294">阿尔兹海默病临床诊断标准</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2">
+                <thead>
+                <tr>
+                    <th>《中国精神疾病分类方案与诊断标准》第三版(CCMD-3 )</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>症状标准</th>
+                </tr>
+                <tr>
+                    <td>1)符合器质性精神障碍的诊断标准；<br>2)全面性智能性损害；<br>3)无突然的卒中样发作，疾病早期无局灶性神经系统损害的体征；<br>4)无临床或特殊检查提示智能损害是由其他躯体或脑的疾病所致；<br>5)下列特征可支持诊断但非必备条件：①高级皮层功能受损，可有失语、失认和失用；②淡漠、缺乏主动性活动，或易激惹和社交行为失控；③晚期重症病例可能出现帕金森症状和癫痫发作；④有躯体、神经系统影像学检查证据。<br>6)神经病理学检查有助于确诊。
+                    </td>
+                </tr>
+                <tr>
+                    <td>严重标准&nbsp;&nbsp;&nbsp;&nbsp;日常生活和社会功能明显受损。</td>
+                </tr>
+                <tr>
+                    <td>病程标准&nbsp;&nbsp;&nbsp;&nbsp;起病缓慢，病情发展虽可暂停，但难以逆转。</td>
+                </tr>
+                <tr>
+                    <td>排除标准&nbsp;&nbsp;&nbsp;&nbsp;排除脑血管病等其他脑器质性病变所致智能损害、抑郁症等精神障碍所致的假性痴呆、精神发育迟滞，或老年人良性健忘症。</td>
+                </tr>
+                <tr>
+                    <td>说明&nbsp;&nbsp;&nbsp;&nbsp;阿尔兹海默病痴呆可与血管性痴呆共存，如果脑血管病发作叠加于阿尔兹海默病的临床表现和病史之上，可引起智能损害症状的突然变化，这些病例应作双重诊断（和双重编码）。如血管性痴呆发生在阿尔兹海默病之前，根据临床表现也许无法作出阿尔兹海默病的诊断。</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">吴江主编. 神经病学（八年制）（第2版）. 2010年. p334.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-429.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-429" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>系统性红斑狼疮(SLE)的病情活动程度评分(SLEDAI)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_infor2">
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que1">惊厥:近期发作，除外代谢、感染、药物原因</label>
+                                    <input class="flex_que q_radio" value="8" id="que1" name="que1" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que2">精神症状严重:认知障碍干扰正常生活，除外尿毒症、药物影响</label>
+                                    <input class="flex_que q_radio" value="8" id="que2" name="que2" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que3">器质性脑病综合征<span class="info" onclick="showInfo('器质性脑病综合征')"></span></label>
+                                    <input class="flex_que q_radio" value="8" id="que3" name="que3" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que4">视觉障碍:系统性红斑狼疮视网膜病变，除外高血压、感染、药物所致</label>
+                                    <input class="flex_que q_radio" value="8" id="que4" name="que4" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que5">颅神经病变:累及颅神经的新出现的感觉、运动神经病变</label>
+                                    <input class="flex_que q_radio" value="8" id="que5" name="que5" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que6">狼疮性头痛:严重持续性头痛，麻醉性止痛药无效</label>
+                                    <input class="flex_que q_radio" value="8" id="que6" name="que6" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que7">脑血管意外:新出现的脑血管意外，应除外动脉硬化</label>
+                                    <input class="flex_que q_radio" value="8" id="que7" name="que7" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que8">血管炎:溃疡、坏疽、有触痛的手指小结节、甲周碎片状梗塞、出血或经活检、血管造影证实</label>
+                                    <input class="flex_que q_radio" value="8" id="que8" name="que8" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que9">关节炎:2个以上关节痛和炎性体征（压痛、肿胀、积液）</label>
+                                    <input class="flex_que q_radio" value="4" id="que9" name="que9" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que10">肌炎:近端肌痛或无力伴肌酸磷酸激酶升高，或肌电图改变，或活检证实</label>
+                                    <input class="flex_que q_radio" value="4" id="que10" name="que10" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que11">管型尿:出现颗粒管型或红细胞管型</label>
+                                    <input class="flex_que q_radio" value="4" id="que11" name="que11" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que12">血尿:红细胞&gt;5/高倍镜视野，除外结石、感染和其他原因</label>
+                                    <input class="flex_que q_radio" value="4" id="que12" name="que12" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que13">蛋白尿:&gt;0.5g/24h、新出现或者近期增加</label>
+                                    <input class="flex_que q_radio" value="4" id="que13" name="que13" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que14">脓尿:白细胞&gt;5/HPF，除外感染</label>
+                                    <input class="flex_que q_radio" value="4" id="que14" name="que14" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que15">脱发:新出现或复发的异常斑片状或弥漫性脱发</label>
+                                    <input class="flex_que q_radio" value="2" id="que15" name="que15" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que16">新皮疹:新出现或复发的炎症性皮疹</label>
+                                    <input class="flex_que q_radio" value="2" id="que16" name="que16" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que17">黏膜溃疡:新出现或复发的口腔或鼻粘膜溃疡</label>
+                                    <input class="flex_que q_radio" value="2" id="que17" name="que17" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que18">胸膜炎:胸膜炎性胸痛伴胸膜摩擦音、渗出或胸膜肥厚</label>
+                                    <input class="flex_que q_radio" value="2" id="que18" name="que18" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que19">心包炎:心包痛或心包摩擦音或心包积液（心电图或超声心动图证实</label>
+                                    <input class="flex_que q_radio" value="2" id="que19" name="que19" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que20">低补体:CH50、C3、C4低于正常值</label>
+                                    <input class="flex_que q_radio" value="2" id="que20" name="que20" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que21">抗ds-DNA抗体升高:&gt;25%（Farr法）或高于检测范围</label>
+                                    <input class="flex_que q_radio" value="2" id="que21" name="que21" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que22">发热:&gt;38℃，除外感染因素</label>
+                                    <input class="flex_que q_radio" value="1" id="que22" name="que22" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que23">血小板减少:&lt;100×10^9/L</label>
+                                    <input class="flex_que q_radio" value="1" id="que23" name="que23" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="que24">白细胞减少:&lt;3.0×10^9/L，排除药物所致</label>
+                                    <input class="flex_que q_radio" value="1" id="que24" name="que24" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-md">评分:</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>0-4分：病情基本无活动；</p>
+            <p>5-9分：轻度活动；</p>
+            <p>10-14分：中度活动；</p>
+            <p>≥15分：重度活动。</p>
+            <p>SLEDAI评分常用来评价系统性红斑狼疮的病情活动程度。不同的评分，决定着的不同剂量激素的使用和不同免疫抑制剂的选择。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Bombardier C, et al. Derivation of the SLEDAI: a disease activity index for lupus patients. Arthritis Rheum.1992;35:630-40.</span>
+        </a>
+    </div>
+</div>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

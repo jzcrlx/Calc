@@ -1,0 +1,710 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-717.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-717" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>SANS</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt"> 1. 面部表情很少变化：面部表情呆板、机械、冷漠、情绪不随谈话内容而变化或变化少。</div>
+                        <div class="answer" name="select1">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">1. 面部表情很少变化：面部表情呆板、机械、冷漠、情绪不随谈话内容而变化或变化少。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="5" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">2. 自发动作减少：在整个交谈过程中静坐着，很少或完全没有自发动作，坐位、姿势或手足都很少变动。</div>
+                        <div class="answer" name="select2">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">2. 自发动作减少：在整个交谈过程中静坐着，很少或完全没有自发动作，坐位、姿势或手足都很少变动。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="6" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">3. 姿势表情贫乏：在表达自己的思想时不借助手或躯体的位置变换，例如谈及主要话题时身体不向前倾，在松弛时也不向后靠。</div>
+                        <div class="answer" name="select3">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">3.
+                                    姿势表情贫乏：在表达自己的思想时不借助手或躯体的位置变换，例如谈及主要话题时身体不向前倾，在松弛时也不向后靠。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="7" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">4. 眼神接触差：避免与他人目光接触，也不用眼神以辅助表情。即使在讲话时眼睛也茫然凝神前方。</div>
+                        <div class="answer" name="select4">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">4. 眼神接触差：避免与他人目光接触，也不用眼神以辅助表情。即使在讲话时眼睛也茫然凝神前方。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="8" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">5. 无情感反应：在说笑话或开玩笑时都不能引出笑容。</div>
+                        <div class="answer" name="select5">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">5. 无情感反应：在说笑话或开玩笑时都不能引出笑容。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="9" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">6. 语调缺乏波动：语声常很单调，缺乏正常的抑扬顿挫，不用音调或音量的变化来强调重要的词汇，在谈到私事时也不减轻声重，几乎所有言语都用单一语调。</div>
+                        <div class="answer" name="select6">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">6.
+                                    语调缺乏波动：语声常很单调，缺乏正常的抑扬顿挫，不用音调或音量的变化来强调重要的词汇，在谈到私事时也不减轻声重，几乎所有言语都用单一语调。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="10" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">7. 情感平淡总评：全面评定症状的严重性。重点在于无反应、不适切、以及情感强度的全面减低。</div>
+                        <div class="answer" name="select7">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">7. 情感平淡总评：全面评定症状的严重性。重点在于无反应、不适切、以及情感强度的全面减低。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="11" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">8.
+                            语量贫乏：自发言语的语量有限，因而在回答问题时往往很简单，很肤浅，没有发挥，很少有自发的补充说明。回答的话可能是单词，有时干脆不回答。此时检查者往往感到自己必须时时敦促启发患者，鼓励他回答得详细一些。
+                        </div>
+                        <div class="answer" name="select8">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">8.
+                                    语量贫乏：自发言语的语量有限，因而在回答问题时往往很简单，很肤浅，没有发挥，很少有自发的补充说明。回答的话可能是单词，有时干脆不回答。此时检查者往往感到自己必须时时敦促启发患者，鼓励他回答得详细一些。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="12" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">9. 言语内容贫乏：对问题回答的语言虽够我，但不能提供充分信息，其内容含糊，过于抽象或过于具体、重复或刻板。检查者会发现患者的话不少，但并没有回答问题。
+                        </div>
+                        <div class="answer" name="select9">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">9.
+                                    言语内容贫乏：对问题回答的语言虽够我，但不能提供充分信息，其内容含糊，过于抽象或过于具体、重复或刻板。检查者会发现患者的话不少，但并没有回答问题。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="13" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">10.
+                            言语中断：在一种思维或一个概念结束之前，语流中断。在持续数秒至数分钟的沉默期之后，病人表示她／他不能回忆起他讲了些什么或打算讲什么。如果病人主动描述表示了自己的思维，或者当检查者问及他时，病人表示那正是停顿的原因，这样才可评为言语中断。
+                        </div>
+                        <div class="answer" name="select10">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">10.
+                                    言语中断：在一种思维或一个概念结束之前，语流中断。在持续数秒至数分钟的沉默期之后，病人表示她／他不能回忆起他讲了些什么或打算讲什么。如果病人主动描述表示了自己的思维，或者当检查者问及他时，病人表示那正是停顿的原因，这样才可评为言语中断。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="14" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">11.
+                            应答迟缓：病人要比平常花费更多时间来回答问题。他看上去“冷淡”。有检查者会怀疑他是否听见了这个问题，但可发现他实际上知道所提的问题，只是难以形成自己的思维来作出适切的回答。
+                        </div>
+                        <div class="answer" name="select11">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">11.
+                                    应答迟缓：病人要比平常花费更多时间来回答问题。他看上去“冷淡”。有检查者会怀疑他是否听见了这个问题，但可发现他实际上知道所提的问题，只是难以形成自己的思维来作出适切的回答。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="16" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">12. 言语障碍总评：由于思维贫乏的核心症状是语量贫乏和言语内容贫乏，总评重点主要在此二项。</div>
+                        <div class="answer" name="select12">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">12. 言语障碍总评：由于思维贫乏的核心症状是语量贫乏和言语内容贫乏，总评重点主要在此二项。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="17" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">13.
+                            衣着及个人卫生差：病人比平常不注意衣着及个人卫生。衣服邋遢，肮脏或污秽。可能很少洗澡，也不注意头发、指甲或牙齿的卫生，以致蓬头垢面、手脏、体臭或牙齿不洁及口臭。总之，外观不整洁或脏乱不堪，甚至不注意大小便卫生。
+                        </div>
+                        <div class="answer" name="select13">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">13.
+                                    衣着及个人卫生差：病人比平常不注意衣着及个人卫生。衣服邋遢，肮脏或污秽。可能很少洗澡，也不注意头发、指甲或牙齿的卫生，以致蓬头垢面、手脏、体臭或牙齿不洁及口臭。总之，外观不整洁或脏乱不堪，甚至不注意大小便卫生。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="18" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">14.
+                            工作或学习不能持久：病人难以找到或维持一个与其年龄、性别相适应的职业（或学业）。学生不做家庭作业，甚至不去上课，或者从学习成绩上反映出来，如果是大学生，尽管已注册不少选修课程，但在学期结束前就不得不放弃几门或全部放弃。如果已达工作年龄，病人往往不能坚持工作和明显地不负责任，上班迟到早退，不能完成所指派的任务（如购物或清洗），或者很粗心和三心二意。
+                        </div>
+                        <div class="answer" name="select14">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">14.
+                                    工作或学习不能持久：病人难以找到或维持一个与其年龄、性别相适应的职业（或学业）。学生不做家庭作业，甚至不去上课，或者从学习成绩上反映出来，如果是大学生，尽管已注册不少选修课程，但在学期结束前就不得不放弃几门或全部放弃。如果已达工作年龄，病人往往不能坚持工作和明显地不负责任，上班迟到早退，不能完成所指派的任务（如购物或清洗），或者很粗心和三心二意。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="19" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">15.
+                            躯体少动：病人懒于动弹，可能坐在椅子上一连几小时而没有任何自发活动，即使被邀参加集体活动，也是暂时性的，不一会就自行走开，仍独自回到座位上。也可能花不少时间在一些相对地不需要脑力或体力的事情，如看电视或一个人玩纸牌。家属可能反映病人大多数时间呆在家里，“除了坐着便无所事事”。不管是在家里或在住院病人活动室，病人大多数时间都坐在房间里。
+                        </div>
+                        <div class="answer" name="select15">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">15.
+                                    躯体少动：病人懒于动弹，可能坐在椅子上一连几小时而没有任何自发活动，即使被邀参加集体活动，也是暂时性的，不一会就自行走开，仍独自回到座位上。也可能花不少时间在一些相对地不需要脑力或体力的事情，如看电视或一个人玩纸牌。家属可能反映病人大多数时间呆在家里，“除了坐着便无所事事”。不管是在家里或在住院病人活动室，病人大多数时间都坐在房间里。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="20" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">16. 意志缺乏总评：全面评定意志缺乏的严重度，并要考虑病人的年龄和社会地位或出身。重点可放在一二个特别引人注意的症状。</div>
+                        <div class="answer" name="select16">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">16.
+                                    意志缺乏总评：全面评定意志缺乏的严重度，并要考虑病人的年龄和社会地位或出身。重点可放在一二个特别引人注意的症状。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="21" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">17.
+                            娱乐的兴致和活动减少：病人极少或没有任何兴趣或爱好。尽管这一症状可能隐匿地或缓慢地发生，但在原来的兴趣和活动的水平上确有明显下降。轻度兴趣丧失的病人多表现为被动或无所需求，例如仅偶尔有兴趣看看电视。最严重的表现是完全不参加或拒绝参加活动。评定时对娱乐兴趣的质和量均要考虑。
+                        </div>
+                        <div class="answer" name="select17">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">17.
+                                    娱乐的兴致和活动减少：病人极少或没有任何兴趣或爱好。尽管这一症状可能隐匿地或缓慢地发生，但在原来的兴趣和活动的水平上确有明显下降。轻度兴趣丧失的病人多表现为被动或无所需求，例如仅偶尔有兴趣看看电视。最严重的表现是完全不参加或拒绝参加活动。评定时对娱乐兴趣的质和量均要考虑。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="22" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">18.
+                            性活动减少：就病人的年龄和婚姻状况而言，其性兴趣和性活动减少。已婚者可能表现为对性生活没有兴趣或只是被动地进行性交。严重者根本就不参加性活动。单身者可能长期不介入有关性的活动，也不想去满足这种欲望。无论是已婚或未婚，主观上都感到没有什么性欲，即使在性交或手淫时也没有什么快感。
+                        </div>
+                        <div class="answer" name="select18">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">18.
+                                    性活动减少：就病人的年龄和婚姻状况而言，其性兴趣和性活动减少。已婚者可能表现为对性生活没有兴趣或只是被动地进行性交。严重者根本就不参加性活动。单身者可能长期不介入有关性的活动，也不想去满足这种欲望。无论是已婚或未婚，主观上都感到没有什么性欲，即使在性交或手淫时也没有什么快感。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="23" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">19. 亲密感缺乏：感到难以与他人建立起亲密的感情。</div>
+                        <div class="answer" name="select1">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">19. 亲密感缺乏：感到难以与他人建立起亲密的感情。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="24" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">20. 交友兴趣下降：病人与朋友和同龄人之间交往范围狭小。不管是同性或异性，他们很少或没有朋友，也不努力去发展这种关系，几乎所有时间都独自一人。</div>
+                        <div class="answer" name="select20">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">20.
+                                    交友兴趣下降：病人与朋友和同龄人之间交往范围狭小。不管是同性或异性，他们很少或没有朋友，也不努力去发展这种关系，几乎所有时间都独自一人。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="25" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">21. 兴趣/社交缺乏总评：应全面评定兴致缺乏/社交缺乏的严重度。并考虑病人的年龄、性别和家庭状况。</div>
+                        <div class="answer" name="select21">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">21. 兴趣/社交缺乏总评：应全面评定兴致缺乏/社交缺乏的严重度。并考虑病人的年龄、性别和家庭状况。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="26" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">22.
+                            不注意社交：病人表现为不注意社会工作或活动，在交谈过程中眼望他处，在讨论过程中不接话题，或者表现为不介入或不参与，他可能毫无任何明显原因地突然中止讨论。他看来有一种“隔阂感”或是“局外人”。在游戏、阅读或看电视时注意也不能集中。
+                        </div>
+                        <div class="answer" name="select22">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">22.
+                                    不注意社交：病人表现为不注意社会工作或活动，在交谈过程中眼望他处，在讨论过程中不接话题，或者表现为不介入或不参与，他可能毫无任何明显原因地突然中止讨论。他看来有一种“隔阂感”或是“局外人”。在游戏、阅读或看电视时注意也不能集中。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="27" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">23. 心理测试时注意不集中：尽管病人有相当的文化和智力水平，但简单的智能测试成绩却较差。可通过 100 减 7（至少念过初中）或 100 减
+                            3（至少念过小学）来评定，连续减五次，全错为 10 分。
+                        </div>
+                        <div class="answer" name="select23">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">23. 心理测试时注意不集中：尽管病人有相当的文化和智力水平，但简单的智能测试成绩却较差。可通过 100 减
+                                    7（至少念过初中）或 100 减 3（至少念过小学）来评定，连续减五次，全错为 10 分。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="28" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">24. 注意障碍总评：此项评分应评定病人在临床和测试中总的注意力。</div>
+                        <div class="answer" name="select24">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">24. 注意障碍总评：此项评分应评定病人在临床和测试中总的注意力。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">可疑</div>
+                                <div value="2" class="option">轻度</div>
+                                <div value="3" class="option">中度</div>
+                                <div value="4" class="option">重度</div>
+                                <div value="29" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">评分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>量表总分：即 24 项单项分的总和（范围为 0 - 120）</p>
+            <p>分量表综合评价总分：即 5 个分量表的总分（7，12，16，21 和 24）得分（范围为 0 - 25）</p>
+            <p> 分量表综合评价：即上述 5 个分量表单项分（5 个分数）</p>
+            <p>结果分型：按量表作者建议，可按 SANS 和 SAPS 结果，将精神分裂症进一步分型。凡分量表总评项 ≥ 3 者，称为“突出症状群”，然后根据有关阳性和阴性“突出症状群”及其组合，分为 3 型：</p>
+            <p>① 阳性症状为主型。有一个或多个突出的阳性症状群，无突出的阴性症状群。</p>
+            <p> ② 阴性症状为主型。有两个或更多的突出的阴性症状群，无突出的阳性症状群。</p>
+            <p> ③ 混合型：不符合 ① 或 ② 者。</p>
+            <p>1982 年，美国N.Andreasen 因研究阴性和阳性症状为主的精神分裂症的需要，编制了阴性症状量表(SANS)和阳性症状量表(SAPS)。其中SANS 弥补了以往精神病评定量表对阴性症状注意不足的缺点。
+                SANS24 条项目被分为5 个分量表： 一、情感平淡或迟钝： 二、思维贫乏： 三、意志缺乏： 四、兴趣社交缺乏： 五，注意障碍。</p>
+            <p> 评分为6 级评分：(0)无，正常或增加：(1)可疑；(2)轻度，程度虽轻但肯定存在；(3)中度；(4)显著；(5)严重。在每条项目下均有具体评定标准。
+                SANS 评定时间范围为最近 1个月。用于药理学研究可缩短为 1 周。</p>
+            <p> 一般采用自然的临床精神检查方式进行交谈。一开始可凭借原来的资料和临床经验，确定一名患者最可能进行交谈的话题引入检查。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Andreasen NC. The Scale for the Assessment of Negative Symptoms (SANS): conceptual and theoretical foundations. Br J Psychiatry Suppl. 1989;(7):49-58.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

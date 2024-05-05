@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-29.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div class="">
+        <!--"head-li-active"表示被选中项，依据需要追加即可。-->
+        <a class="head-li head-li-active" href="calc-29.html">常用单位</a>
+        <a class="head-li" href="calc-30.html">国际单位</a>
+    </div>
+    <div id="medcalc-29" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>Framingham心脏风险评分</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="que_select_box">
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">性别（仅可选择男性/女性，没有双性选择）</div>
+                                        <div class="answer" name="sex" id="sex">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">性别</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="f" class="option">女性</div>
+                                                <div value="m" class="option"> 男性</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            年龄（不适用于 &lt;35 或 &gt;74 ）
+                                        </div>
+                                        <div class="answer" name="age" id="age">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">年龄</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="a" class="option">30-34</div>
+                                                <div value="b" class="option">35-39</div>
+                                                <div value="c" class="option">40-44</div>
+                                                <div value="d" class="option">45-49</div>
+                                                <div value="e" class="option">50-54</div>
+                                                <div value="f" class="option">55-59</div>
+                                                <div value="g" class="option">60-64</div>
+                                                <div value="h" class="option">65-69</div>
+                                                <div value="i" class="option">70-74</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            总胆固醇 (mg/dL)
+                                        </div>
+                                        <div class="answer" name="tc" id="tc">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">总胆固醇 (mg/dL)</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="b" class="option">160-199</div>
+                                                <div value="c" class="option">200-239</div>
+                                                <div value="d" class="option">240-279</div>
+                                                <div value="e" class="option">&gt;280</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            HDL (mg/dL)
+                                        </div>
+                                        <div class="answer" name="hdl" id="hdl">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">HDL (mg/dL)</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="b" class="option">35-44</div>
+                                                <div value="c" class="option">45-49</div>
+                                                <div value="d" class="option">50-59</div>
+                                                <div value="e" class="option">&gt;60</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            BP (mm Hg) 请选择最高级别。
+                                        </div>
+                                        <div class="answer" name="bp" id="bp">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">BP (mm Hg)</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="a" class="option">SBP</div>
+                                                <div value="b" class="option">SBP 120-129 或 DBP 80-84</div>
+                                                <div value="c" class="option">SBP 130-139 或 DBP 85-89</div>
+                                                <div value="d" class="option">SBP 140-149 或 DBP 90-99</div>
+                                                <div value="e" class="option">SBP &gt;=150 或 DBP &gt;=100</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="diabetic">患者有糖尿病</label>
+                                    <input class="flex_que q_radio" value="1" id="diabetic" name="diabetic" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="smoker">患者吸烟</label>
+                                    <input class="flex_que q_radio" value="1" id="smoker" name="smoker" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-hg">10年冠心病危险:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-hg">相同年龄/性别的危险:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result2" readonly="" id="result2" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

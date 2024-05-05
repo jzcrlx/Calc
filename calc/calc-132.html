@@ -1,0 +1,339 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-132.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-132">结直肠癌TNM分期</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="2">原发灶</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Tx</td>
+                    <td>原发肿瘤无法评估</td>
+                </tr>
+                <tr>
+                    <td>T0</td>
+                    <td>无原发肿瘤证据</td>
+                </tr>
+                <tr>
+                    <td>Tis</td>
+                    <td>原位癌，黏膜内癌（侵犯固有层，未穿透黏膜肌层）</td>
+                </tr>
+                <tr>
+                    <td>T1</td>
+                    <td>肿瘤侵犯黏膜下层</td>
+                </tr>
+                <tr>
+                    <td>T2</td>
+                    <td>肿瘤侵犯固有肌层</td>
+                </tr>
+                <tr>
+                    <td>T3</td>
+                    <td>肿瘤穿透固有肌层，至浆膜下</td>
+                </tr>
+                <tr>
+                    <td>T4a</td>
+                    <td>肿瘤穿透脏层腹膜（包括通过肿瘤的肠穿孔和通过内脏腹膜表面的炎症区域的连续侵入）</td>
+                </tr>
+                <tr>
+                    <td>T4b</td>
+                    <td>肿瘤直接侵入或者黏附于邻近器官和结构</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="2">区域淋巴结</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Nx</td>
+                    <td>区域淋巴结无法评估</td>
+                </tr>
+                <tr>
+                    <td>N0</td>
+                    <td>无区域淋巴结转移</td>
+                </tr>
+                <tr>
+                    <td>N1</td>
+                    <td>1-3 个区域淋巴结转移（转移灶≥0.2mm）；或者任何数量的癌结节存在且所有可识别的淋巴结均阴性</td>
+                </tr>
+                <tr>
+                    <td>N1a</td>
+                    <td>1 个区域淋巴结阳性</td>
+                </tr>
+                <tr>
+                    <td>N1b</td>
+                    <td>2-3 个区域淋巴结阳性</td>
+                </tr>
+                <tr>
+                    <td>N1c</td>
+                    <td>无区域淋巴结阳性，但是在浆膜下、肠系膜或者无腹膜覆盖的结直肠周围组织中发现癌结节</td>
+                </tr>
+                <tr>
+                    <td>N2</td>
+                    <td>≥4 个区域淋巴结转移</td>
+                </tr>
+                <tr>
+                    <td>N2a</td>
+                    <td>4-6 个区域淋巴结转移</td>
+                </tr>
+                <tr>
+                    <td>N2b</td>
+                    <td>7 个以上区域淋巴结转移</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="2">远处转移</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>M0</td>
+                    <td>无远处转移(影像学证实的)</td>
+                </tr>
+                <tr>
+                    <td>M1a</td>
+                    <td>有 1 个位置或 1 个器官转移，无腹膜转移</td>
+                </tr>
+                <tr>
+                    <td>M1b</td>
+                    <td>有 2 个或更多的位点/器官转移，无腹膜转移</td>
+                </tr>
+                <tr>
+                    <td>M1c</td>
+                    <td>有腹膜转移，伴/不伴其它器官转移。</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="6">解剖分期/预后分组</th>
+                </tr>
+                <tr>
+                    <th>分期</th>
+                    <th>T</th>
+                    <th>N</th>
+                    <th>M</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>0</td>
+                    <td>Tis</td>
+                    <td>N0</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">Ⅰ</td>
+                    <td>T1</td>
+                    <td>N0</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <td>T2</td>
+                    <td>N0</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <td>ⅡA</td>
+                    <td>T3</td>
+                    <td>N0</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <td>ⅡB</td>
+                    <td>T4a</td>
+                    <td>N0</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <td>ⅡC</td>
+                    <td>T4b</td>
+                    <td>N0</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">ⅢA</td>
+                    <td>T1-T2</td>
+                    <td>N1/N1c</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <td>T1</td>
+                    <td>N2a</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">ⅢB</td>
+                    <td>T3-T4a</td>
+                    <td>N1/N1c</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <td>T2-T3</td>
+                    <td>N2a</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <td>T1-T2</td>
+                    <td>N2b</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <td rowspan="3">ⅢC</td>
+                    <td>T4a</td>
+                    <td>N2a</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <td>T3-T4a</td>
+                    <td>N2b</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <td>T4b</td>
+                    <td>N1-N2</td>
+                    <td>M0</td>
+                </tr>
+                <tr>
+                    <td>ⅣA</td>
+                    <td>any T</td>
+                    <td>any N</td>
+                    <td>M1a</td>
+                </tr>
+                <tr>
+                    <td>ⅣB</td>
+                    <td>any T</td>
+                    <td>any N</td>
+                    <td>M1b</td>
+                </tr>
+                <tr>
+                    <td>ⅣC</td>
+                    <td>any T</td>
+                    <td>any N</td>
+                    <td>M1c</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div>
+        <h3><span class="jiedu-title">说明</span></h3>
+        <div class="jiedu">
+            <p>
+                适用于：适用于腺癌、高级别神经内分泌癌、鳞状细胞癌。
+            </p>
+        </div>
+    </div>
+    <div class="ref">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">常见肿瘤 AJCC 分期手册（第八版） 2018 年执行.</span>
+        </a>
+    </div>
+</div>
+</div>
+
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

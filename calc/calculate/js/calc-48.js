@@ -1,0 +1,1 @@
+function MDCalc(z){value=2/3*z.dbp+1/3*z.sbp;Answer(Round(value,1))}$("#units").hide();

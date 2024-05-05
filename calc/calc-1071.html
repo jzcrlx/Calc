@@ -1,0 +1,459 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-1071.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-1071" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>静脉血栓栓塞(VTE)风险的Caprini预测评分</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="question_title">
+                                A1 每个危险因素1分
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa1">年龄40~59岁</label>
+                                        <input class="flex_que q_radio" value="1" id="qa1" name="age" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa2">计划小手术</label>
+                                        <input class="flex_que q_radio" value="1" id="qa2" name="qa2" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa3">近期大手术</label>
+                                        <input class="flex_que q_radio" value="1" id="qa3" name="qa3" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa4">肥胖（BMI＞30）</label>
+                                        <input class="flex_que q_radio" value="1" id="qa4" name="bmi" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa5">卧床的内科患者</label>
+                                        <input class="flex_que q_radio" value="1" id="qa5" name="qa5" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa6">炎症性肠病史</label>
+                                        <input class="flex_que q_radio" value="1" id="qa6" name="qa6" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa7">下肢水肿</label>
+                                        <input class="flex_que q_radio" value="1" id="qa7" name="qa7" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa8">静脉曲张</label>
+                                        <input class="flex_que q_radio" value="1" id="qa8" name="qa8" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa9">严重的肺部疾病，含肺炎（1个月内）</label>
+                                        <input class="flex_que q_radio" value="1" id="qa9" name="qa9" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa10">肺功能异常（慢性阻塞性肺病症）</label>
+                                        <input class="flex_que q_radio" value="1" id="qa10" name="qa10" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa11">急性心肌梗死（1个月内）</label>
+                                        <input class="flex_que q_radio" value="1" id="qa11" name="qa11" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa12">充血性心力衰竭（1个月内）</label>
+                                        <input class="flex_que q_radio" value="1" id="qa12" name="qa12" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa13">败血症（1个月内）</label>
+                                        <input class="flex_que q_radio" value="1" id="qa13" name="qa13" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa14">输血（1个月内）</label>
+                                        <input class="flex_que q_radio" value="1" id="qa14" name="qa14" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa15">下肢石膏或肢具固定</label>
+                                        <input class="flex_que q_radio" value="1" id="qa15" name="qa15" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa16">中心静脉置管</label>
+                                        <input class="flex_que q_radio" value="1" id="qa16" name="qa16" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa17">其他高危因素</label>
+                                        <input class="flex_que q_radio" value="1" id="qa17" name="qa17" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_title">
+                                A2 仅针对女性 (每项1分)
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa18">口服避孕药或激素替代治疗</label>
+                                        <input class="flex_que q_radio" value="1" id="qa18" name="qa18" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa19">妊娠期或产后（1个月）</label>
+                                        <input class="flex_que q_radio" value="1" id="qa19" name="qa19" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qa20">原因不明的死胎史或复发性自然流产（≥3次）或由于毒血症或发育受限原因早产</label>
+                                        <input class="flex_que q_radio" value="1" id="qa20" name="qa20" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_title">
+                                B 每个危险因素2分
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qb1">年龄60~74岁</label>
+                                        <input class="flex_que q_radio" value="2" id="qb1" name="age" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qb2">大手术（＜60 min）<sup>*</sup></label>
+                                        <input class="flex_que q_radio" value="2" id="qb2" name="oper" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qb3">腹腔镜手术（＜60 min）<sup>*</sup></label>
+                                        <input class="flex_que q_radio" value="2" id="qb3" name="oper" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qb4">关节镜手术（＜60 min）<sup>*</sup></label>
+                                        <input class="flex_que q_radio" value="2" id="qb4" name="oper" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qb5">既往恶性肿瘤</label>
+                                        <input class="flex_que q_radio" value="2" id="qb5" name="qb5" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qb6">肥胖（BMI＞40）</label>
+                                        <input class="flex_que q_radio" value="2" id="qb6" name="bmi" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="question_title">
+                                C 每个危险因素3分
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qc1">年龄≥75岁</label>
+                                        <input class="flex_que q_radio" value="3" id="qc1" name="age" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qc2">大手术持续2~3 h <sup>*</sup></label>
+                                        <input class="flex_que q_radio" value="3" id="qc2" name="oper" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qc3">肥胖（BMI＞50）</label>
+                                        <input class="flex_que q_radio" value="3" id="qc3" name="bmi" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qc4">浅静脉、深静脉血栓或肺栓塞病史</label>
+                                        <input class="flex_que q_radio" value="3" id="qc4" name="qc4" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qc5">血栓家族史</label>
+                                        <input class="flex_que q_radio" value="3" id="qc5" name="qc5" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qc6">现患恶性肿瘤或化疗</label>
+                                        <input class="flex_que q_radio" value="3" id="qc6" name="qc6" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qc7">肝素引起的血小板减少</label>
+                                        <input class="flex_que q_radio" value="3" id="qc7" name="qc7" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qc8">未列出的先天或后天血栓形成</label>
+                                        <input class="flex_que q_radio" value="3" id="qc8" name="qc8" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qc9">抗心磷脂抗体阳性</label>
+                                        <input class="flex_que q_radio" value="3" id="qc9" name="qc9" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qc10">凝血酶原20210A阳性</label>
+                                        <input class="flex_que q_radio" value="3" id="qc10" name="qc10" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qc11">因子Vleiden阳性</label>
+                                        <input class="flex_que q_radio" value="3" id="qc11" name="qc11" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qc12">狼疮抗凝物阳性</label>
+                                        <input class="flex_que q_radio" value="3" id="qc12" name="qc12" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qc13">血清同型半胱氨酸酶升高</label>
+                                        <input class="flex_que q_radio" value="3" id="qc13" name="qc13" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="question_title">
+                                D 每个危险因素5分
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qd1">脑卒中（1个月内）</label>
+                                        <input class="flex_que q_radio" value="5" id="qd1" name="qd1" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qd2">急性脊髓损伤（瘫痪）（1个月内）</label>
+                                        <input class="flex_que q_radio" value="5" id="qd2" name="qd2" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qd3">选择性下肢关节置换术</label>
+                                        <input class="flex_que q_radio" value="5" id="qd3" name="qd3" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qd4">髋关节、骨盆或下肢骨折</label>
+                                        <input class="flex_que q_radio" value="5" id="qd4" name="qd4" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qd5">多发性创伤（1个月内）</label>
+                                        <input class="flex_que q_radio" value="5" id="qd5" name="qd5" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="qd6">大手术（超过3 h）<sup>*</sup></label>
+                                        <input class="flex_que q_radio" value="5" id="qd6" name="oper" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">风险评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>注: *只能选择一个手术因素</p>
+            <p></p>
+            <div class="mainContainer">
+                <div>
+                    <table class="countTab1">
+                        <tbody>
+                        <tr>
+                            <th>评分</th>
+                            <th>DVT风险</th>
+                            <th>风险等级</th>
+                            <th>预防措施</th>
+                        </tr>
+                        <tr>
+                            <th>0-1分</th>
+                            <td style="text-align: center">&lt;10%</td>
+                            <td style="text-align: center">低危</td>
+                            <td style="text-align: center">尽早活动,物理预防</td>
+                        </tr>
+                        <tr>
+                            <th>2分</th>
+                            <td style="text-align: center">10%-20%</td>
+                            <td style="text-align: center">中危</td>
+                            <td style="text-align: center">药物预防或物理预防</td>
+                        </tr>
+                        <tr>
+                            <th>3-4分</th>
+                            <td style="text-align: center">20-40%</td>
+                            <td style="text-align: center">高危</td>
+                            <td style="text-align: center">药物预防或物理预防</td>
+                        </tr>
+                        <tr>
+                            <th>≥5分</th>
+                            <td style="text-align: center">40-80%</td>
+                            <td style="text-align: center">极高危</td>
+                            <td style="text-align: center">药物预防或物理预防</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="end">
+    </div>
+</div>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

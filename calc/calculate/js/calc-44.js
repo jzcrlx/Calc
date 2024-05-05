@@ -1,0 +1,1 @@
+function MDCalc(z){a=z.pt_pt;b=z.pt_ctrl;c=z.bili;if(pref=="si"){bili_conv=1/17.1}if(pref=="us"){bili_conv=1}c*=bili_conv;value=4.6*(a-b)+c;Answer(Round(value,0));msg=">32 分提示预后差，同时提示糖皮质激素治疗可能使患者受益。";Text(msg)}

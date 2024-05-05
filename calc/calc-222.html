@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-222.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-222" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>简易智能精神状态检查量表(MMSE)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="question_title">定向力</div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="xingqi">今天是星期几?</label>
+                                        <input class="flex_que q_radio" value="1" name="xingqi" id="xingqi" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="hao">今天是几号?</label>
+                                        <input class="flex_que q_radio" value="1" name="hao" id="hao" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="yuefen">现在是几月份?</label>
+                                        <input class="flex_que q_radio" value="1" name="yuefen" id="yuefen" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="jijie">现在是什么季节?</label>
+                                        <input class="flex_que q_radio" value="1" name="jijie" id="jijie" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="nianfen">今年的年份?</label>
+                                        <input class="flex_que q_radio" value="1" name="nianfen" id="nianfen" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="shengshi">现在我们在哪里(省、市)?</label>
+                                        <input class="flex_que q_radio" value="1" name="shengshi" id="shengshi" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="quxian">现在我们在什么地方(区、县)?</label>
+                                        <input class="flex_que q_radio" value="1" name="quxian" id="quxian" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="jiedao">现在我们在什么街道(乡、村)?</label>
+                                        <input class="flex_que q_radio" value="1" name="jiedao" id="jiedao" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="didian">这里是什么地方(地址名称)?</label>
+                                        <input class="flex_que q_radio" value="1" name="didian" id="didian" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="louceng">现在我们在第几层楼?</label>
+                                        <input class="flex_que q_radio" value="1" name="louceng" id="louceng" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">记忆力</div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="piqiu">复述：皮球</label>
+                                        <input class="flex_que q_radio" value="1" name="piqiu" id="piqiu" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="guoqi">复述：国旗</label>
+                                        <input class="flex_que q_radio" value="1" name="guoqi" id="guoqi" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="caomu">复述：树木</label>
+                                        <input class="flex_que q_radio" value="1" name="caomu" id="caomu" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">注意力和计算力</div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="jisuan1">100-7=93</label>
+                                        <input class="flex_que q_radio" value="1" name="jisuan1" id="jisuan1" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="jisaun2">93-7=86</label>
+                                        <input class="flex_que q_radio" value="1" name="jisaun2" id="jisaun2" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="jisuan3">86-7=79</label>
+                                        <input class="flex_que q_radio" value="1" name="jisuan3" id="jisuan3" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="jisuan4">79-7=72</label>
+                                        <input class="flex_que q_radio" value="1" name="jisuan4" id="jisuan4" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="jisuan5">72-7=65</label>
+                                        <input class="flex_que q_radio" value="1" name="jisuan5" id="jisuan5" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">回忆能力</div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="piqiu2">回忆：皮球</label>
+                                        <input class="flex_que q_radio" value="1" name="piqiu2" id="piqiu2" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="guoqi2">回忆：国旗</label>
+                                        <input class="flex_que q_radio" value="1" name="guoqi2" id="guoqi2" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="caomu2">回忆：树木</label>
+                                        <input class="flex_que q_radio" value="1" name="caomu2" id="caomu2" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">语言能力</div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="shoubiao">辨认：手表</label>
+                                        <input class="flex_que q_radio" value="1" name="shoubiao" id="shoubiao" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="gangbi">辨认：钢笔</label>
+                                        <input class="flex_que q_radio" value="1" name="gangbi" id="gangbi" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="shizi">复述：四十四只石狮子</label>
+                                        <input class="flex_que q_radio" value="1" name="shizi" id="shizi" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="biyan">按纸上指令做动作：闭上你的眼睛</label>
+                                        <input class="flex_que q_radio" value="1" name="biyan" id="biyan" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="nazhi">按口头指令动作：用右手拿纸</label>
+                                        <input class="flex_que q_radio" value="1" name="nazhi" id="nazhi" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="duizhe">按口头指令动作：将纸对折</label>
+                                        <input class="flex_que q_radio" value="1" name="duizhe" id="duizhe" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="datui">按口头指令动作：将纸放在自己大腿上</label>
+                                        <input class="flex_que q_radio" value="1" name="datui" id="datui" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="juzi">能够写一句完整句子(含主语、谓语、宾语)</label>
+                                        <input class="flex_que q_radio" value="1" name="juzi" id="juzi" type="checkbox">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="huatu">按样画图</label>
+                                        <input class="flex_que q_radio" value="1" name="huatu" id="huatu" type="checkbox">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>MMSE量表简单易行，国内外广泛应用，是痴呆筛选的首选量表。共30题，每项正确回答得1分，回答错误或者不知道得0分，量表总分范围为0-30分。</p>
+            <p> 评分参考：</p>
+            <p> 27-30分：认知功能正常；</p>
+            <p> ＜27分：认知功能障碍：</p>
+            <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;21-26分：轻度认知功能障碍；</p>
+            <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;10-20分：中度认知功能障碍；</p>
+            <p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0-9分：重度认知功能障碍。</p>
+            <p>MMSE: Mini-Mental State Examination. 得分与文化水平密切相关，正常界值划分标准为：文盲＞17分，小学＞20分，初中及以上＞24分。得分低于按受教育程度分组的分界值提示存在认知功能障碍。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">1、Folstein MF, et al. "Mini-mental state". A practical method for grading the cognitive state of patients for the clinician. Journal of psychiatric research. J Psychiatr Res. 1975;12(3):189-98. </span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">2、Rovner BW, Folstein MF. Mini-mental state exam in clinical practice. Hosp Pract (Off Ed). 1987;22(1A):99, 103, 106, 110.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">3、Tombaugh TN, McIntyre NJ. The mini-mental state examination: a comprehensive review. J Am Geriatr Soc. 1992;40(9):922-35.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

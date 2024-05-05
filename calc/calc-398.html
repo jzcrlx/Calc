@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-398.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-398" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>儿童心衰指数评分</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_infor2">
+                        <div class="que_title"><span>症状和体征</span></div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="benma">超声心动图提示心室功能异常、奔马律</label>
+                                    <input class="flex_que q_radio" value="2" id="benma" name="benma" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="shuizhong">水肿、胸腔积液、腹水</label>
+                                    <input class="flex_que q_radio" value="2" id="shuizhong" name="shuizhong" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="yingyang">营养不良、恶病质、发育迟缓</label>
+                                    <input class="flex_que q_radio" value="2" id="yingyang" name="yingyang" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="kouwen">叩诊或X线提示心界或心影明显增大</label>
+                                    <input class="flex_que q_radio" value="1" id="kouwen" name="kouwen" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="huodong">活动耐量下降、喂养困难</label>
+                                    <input class="flex_que q_radio" value="1" id="huodong" name="huodong" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="tijian">体检发现循环灌注差</label>
+                                    <input class="flex_que q_radio" value="2" id="tijian" name="tijian" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="tingzhen">听诊或X线提示肺水肿</label>
+                                    <input class="flex_que q_radio" value="1" id="tingzhen" name="tingzhen" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="anjing">安静时窦性心动过速</label>
+                                    <input class="flex_que q_radio" value="2" id="anjing" name="anjing" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="que_select_box">
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">肝脏增大</div>
+                                        <div class="answer" name="ganzang">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">肝脏增大</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="1" class="option">＜肋下4cm</div>
+                                                <div value="2" class="option">＞肋下4cm</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            呼吸急促，呼吸困难
+                                        </div>
+                                        <div class="answer" name="huxi">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">呼吸急促，呼吸困难</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="1" class="option">轻至中度</div>
+                                                <div value="2" class="option">中至中度</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="que_title"><span>药物治疗</span></div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="digaoxin">地高辛</label>
+                                    <input class="flex_que q_radio" value="1" id="digaoxin" name="digaoxin" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="que_select_box">
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">利尿剂</div>
+                                        <div class="answer" name="liniaoji">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">利尿剂</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="1" class="option">小至中等剂量</div>
+                                                <div value="2" class="option">中等剂量至大剂量</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="ace">ACE-I、ARB、其他血管扩张药物</label>
+                                    <input class="flex_que q_radio" value="1" id="ace" name="ace" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="shouti">β受体阻滞剂</label>
+                                    <input class="flex_que q_radio" value="1" id="shouti" name="shouti" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="feibanmo">非瓣膜置换原因行抗凝治疗</label>
+                                    <input class="flex_que q_radio" value="2" id="feibanmo" name="feibanmo" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="kangxinlv">抗心律失常药物、置入ICD</label>
+                                    <input class="flex_que q_radio" value="2" id="kangxinlv" name="kangxinlv" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="que_title"><span>循环生理</span></div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="danxinshi">单心室</label>
+                                    <input class="flex_que q_radio" value="2" id="danxinshi" name="danxinshi" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>正常儿童得分应在2分以下，最低分为0分，提示无心力衰竭，最高分为30分，提示严重心力衰竭。分数大小与心衰严重程度成正比。</p>
+            <p>对于年龄较小的患儿，目前常用的WHO心功能分级可能并不适合，纽约大学儿童心衰指数评分能更好地评价体肺分流相关性PAH、腔肺吻合术后、术后迟发性PH患儿的心功能状态。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Connolly D, et al. The New York University Pediatric Heart Failure Index: a new method of quantifying chronic heart failure severity in children. J Pediatr. 2001 May;138(5):644-8.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

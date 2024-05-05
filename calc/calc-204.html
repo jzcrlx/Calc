@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-204.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-204">肿瘤患者体力状况(KPS/ZPS)</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="2" style="word-break:break-all;">Karnofskyscoring（KPS，百分法）</th>
+                    <th colspan="2" style="word-break:break-all;">ECOG/WHO/Zubrod score（ZPS，5分法）</th>
+                </tr>
+                <tr>
+                    <th>体力状况</th>
+                    <th>评分（%）</th>
+                    <th>体力状况</th>
+                    <th>评分（级）</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>正常，无症状和体征</td>
+                    <td>100</td>
+                    <td>正常活动</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>能进行正常活动，有轻微症状和体征</td>
+                    <td>90</td>
+                    <td rowspan="2">症状轻，生活自在，能从事轻体力活动</td>
+                    <td rowspan="2">1</td>
+                </tr>
+                <tr>
+                    <td>勉强可进行正常活动，有一些症状或体征</td>
+                    <td>80</td>
+                </tr>
+                <tr>
+                    <td>生活可自理，但不能维持正常生活工作</td>
+                    <td>70</td>
+                    <td rowspan="2">能耐受肿瘤的症状，生活自理，但白天卧床时间不超过50%</td>
+                    <td rowspan="2">2</td>
+                </tr>
+                <tr>
+                    <td>生活能大部门自理，但偶尔需要别人帮助</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>常需人照顾</td>
+                    <td>50</td>
+                    <td rowspan="3">肿瘤症状严重，白天卧床时间超过50%，但还能起床站立，部分生活自理</td>
+                    <td rowspan="3">3</td>
+                </tr>
+                <tr>
+                    <td>生活不能自理，需要特别照顾和帮助</td>
+                    <td>40</td>
+                </tr>
+                <tr>
+                    <td>生活严重不能自理</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>病重，需要住院和积极的支持治疗</td>
+                    <td>20</td>
+                    <td rowspan="2">病重卧床不起</td>
+                    <td rowspan="2">4</td>
+                </tr>
+                <tr>
+                    <td>重危，临近死亡</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>死亡</td>
+                    <td>0</td>
+                    <td>死亡</td>
+                    <td>5</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>肿瘤患者进行治疗前应对其一般健康状态作出评价，一般健康状态的一个重要指标是评价其活动状态(performance
+                    status，PS)。活动状态是从患者的体力来了解其一般健康状况和对治疗耐受能力的指标。国际常用的有Karnofsky评分法（KPS）与东部肿瘤协作组(Eastern Cooperative Oncology Group,
+                    ECOG) 制定的Zubrod评分法（ZPS）。</p>
+                <p>Kamofsky评分若在40%以下，治疗反应常不佳，且往往难以耐受化疗反应；ECOG则制定了一个较简化的活动状态评分表，将患者的活动状态分为0~5共6级，一般认为活动状况3、4级的病人不适宜进行化疗。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">1. Karnofsky DA, Burchenal JH. The Clinical Evaluation of Chemotherapeutic Agents in Cancer. 1949. In: MacLeod CM(Ed), Evaluation of Chemotherapeutic Agents. Columbia Univ Press.p196.</span>
+            </a>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">2.Oken MM, et al. Toxicity and response criteria of the Eastern Cooperative Oncology Group. Am J Clin Oncol. 1982;5 (6): 649-55.</span>
+            </a>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">3.Buccheri G, et al.Karnofsky and ECOG performance status scoring in lung cancer: a prospective, longitudinal study of 536 patients from a single institution. Eur J Cancer. 1996;32A(7):1135-41.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

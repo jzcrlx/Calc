@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-touch-fullscreen" content="yes" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script
+      type="text/javascript"
+      src="calculate/js/action_localStorage.js"
+    ></script>
+    <script type="text/javascript">
+    //     let score ='';
+    //   $(document).ready(function () {
+    //     //检测是否已被收藏
+    //     // let strFileName = window.location.href.substring(
+    //     //   window.location.href.lastIndexOf("/") + 1
+    //     // );
+    //     // let strTitle = document
+    //     //   .getElementById("title")
+    //     //   .getElementsByTagName("h2")[0].textContent;
+    //     // if (haveLike(strFileName)) {
+    //     //   //有收收藏
+    //     //   document.querySelector(".like_box").className = "like_box active";
+    //     // }
+    //     // //加改使用历史
+    //     // historyToPage(strFileName, strTitle);
+
+    //     let urlinfo = window.location.href; //获取当前页面的url
+    //     let newsidinfo = urlinfo.substr(urlinfo.indexOf("?"), urlinfo.length); //取出参数字符串 这里会获得类似“id=1”这样的字符串
+    //     let strFind = decodeURI(newsidinfo.split("=")[1]).toUpperCase();    
+    //     score= eval(JSON.parse(strFind));
+    //   });
+
+   
+    
+
+      function goBack() {
+        history.go(-1);
+      }
+
+      function like() {
+        let strFileName = window.location.href.substring(
+          window.location.href.lastIndexOf("/") + 1
+        );
+        let strTitle = document
+          .getElementById("title")
+          .getElementsByTagName("h2")[0].textContent;
+        if (likeToPage(strFileName, strTitle)) {
+          //已有收藏，则提示已取消
+          document.querySelector(".like_box").className = "like_box";
+          layer.open({
+            content: "已取消收藏！",
+            time: 2,
+            skin: "msg",
+            anim: "scale",
+          });
+        } else {
+          //未收藏，则提示收藏之
+          document.querySelector(".like_box").className = "like_box active";
+          layer.open({
+            content: "已成功收藏！",
+            time: 2,
+            skin: "msg",
+            anim: "scale",
+          });
+        }
+      }
+
+      // window.onload = function() {
+
+      // }
+    </script>
+    <script type="text/javascript">
+      // 百度网站统计
+      var _hmt = _hmt || [];
+      (function () {
+        var hm = document.createElement("script");
+        hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  </head>
+  <!--body包进main里面-->
+  <body class="show">
+    <div class="top">
+      <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+    </div>
+    <div style="padding: 0 10px">
+      <div class="medcalc">
+        <div class="">
+          <!--"head-li-active"表示被选中项，依据需要追加即可。-->
+          <a class="head-li head-li-active" href="calc-114.html"
+            >1.适用于初治患者模型</a
+          >
+          <a class="head-li" href="calc-115.html">2.适用于在治患者模型</a>
+        </div>
+        <div>
+          <div style="font-weight: bold; font-size: 12px; margin-top: 10px">
+            经测试，该患者罹患肝癌的风险评分为:
+          </div>
+          <div id="gauge" style="height: 200px"></div>
+          <div id="tips" style="display: none">
+            <div
+              style="font-size: 12px; margin-bottom: 10px; text-align: center"
+            >
+              建议患者遵从医嘱接受抗病毒治疗，并定期复查
+            </div>
+            <div
+              style="
+                font-weight: bold;
+                font-size: 12px;
+                color: #008000;
+                margin-bottom: 20px;
+                text-align: center;
+              "
+            >
+              注意：若患者HBV DNA<20建议使用“在治患者模型”
+            </div>
+          </div>
+          <div id="bar" style="height: 250px"></div>
+          <div id="refs" style="display: none">
+            <div style="font-size: 16px; margin-top: 10px">参考文献:</div>
+            <div style="font-size: 12px; margin-bottom: 10px">
+              Risk estimation for hepatocellular carcinoma in chronic hepatitis
+              B (REACH-B): development and validation of a predictive score
+            </div>
+          </div>
+        </div>
+      </div>
+      <script
+        type="text/javascript"
+        src="js/echarts-4.5.0/echarts.min.js"
+      ></script>
+      <script type="text/javascript">    
+        var urlinfo = window.location.href; //获取当前页面的url
+        var newsidinfo = urlinfo.substr(urlinfo.indexOf("?"), urlinfo.length); //取出参数字符串 这里会获得类似“id=1”这样的字符串
+        var strFind = decodeURI(newsidinfo.split("=")[1]);    
+        var score = eval(JSON.parse(strFind));
+    
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById("gauge"));
+        var barChart = echarts.init(document.getElementById("bar"));
+
+        // 指定图表的配置项和数据
+        var option = {
+          tooltip: {
+            formatter: "{a}: {c}",
+          },
+          series: [
+            {
+              name: "肝癌发生风险评分",
+              type: "gauge",
+              radius: "85%",
+              min: 0,
+              max: 17,
+              splitNumber: 17,
+              axisLine: {
+                lineStyle: {
+                  width: 20,
+                  color: [
+                    [0.1, "#98FB98"],
+                    [0.2, "#00E600"],
+                    [0.3, "#00CD00"],
+                    [0.4, "#00B300"],
+                    [0.5, "#009A00"],
+                    [0.6, "#008000"],
+                    [0.7, "#006600"],
+                    [0.8, "#004C00"],
+                    [0.9, "#003300"],
+                    [1, "#001900"],
+                  ],
+                },
+              },
+              splitLine: {
+                length: 8,
+              },
+              pointer: {
+                length: "70%",
+              },
+              axisLabel: {
+                distance: -30,
+                formatter: function (value) {
+                  if (value > 0 && value < 17) {
+                    return "";
+                  }
+                  return value;
+                },
+              },
+              axisTick: {
+                splitNumber: 1,
+              },
+              detail: { formatter: "{value}" },
+              data: [{ value: score.score }],
+            },
+          ],
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+
+        var optionBar = {
+          title: {
+            text: "肝癌风险发生率(%)",
+            textStyle: {
+              fontSize: 14,
+            },
+          },
+          color: ["#008000"],
+          grid: {
+            left: "3%",
+            right: "4%",
+            bottom: "3%",
+            containLabel: true,
+          },
+          xAxis: [
+            {
+              type: "category",
+              data: ["三年内", "五年内", "十年内"],
+              axisTick: {
+                alignWithLabel: true,
+              },
+            },
+          ],
+          yAxis: [
+            {
+              type: "value",
+            },
+          ],
+          series: [
+            {
+              name: "肝癌风险发生率(%)",
+              label: {
+                normal: {
+                  show: true,
+                  position: "inside",
+                  formatter: "{c}%",
+                },
+              },
+              type: "bar",
+              barWidth: "60%",
+              barMaxWidth: 80,
+              data: score.data,
+            },
+          ],
+        };
+        barChart.setOption(optionBar);
+        $("#tips").show();
+        $("#refs").show();
+  
+      </script>
+    </div>
+  </body>
+</html>

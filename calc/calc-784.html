@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-784.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-784">改良Barkovich的新生儿缺氧缺血性脑病MRI分类(HIE-MRI)影像学评分</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab1" border="0" cellpadding="0" cellspacing="0">
+                <thead></thead>
+                <tbody>
+                <tr>
+                    <th>分水岭区</th>
+                    <th>影像学表现</th>
+                    <th>评分</th>
+                </tr>
+                <tr>
+                    <td>正常</td>
+                    <td></td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">轻度</td>
+                    <td>单个或局灶性白质损伤</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>前或后部白质损伤(包括脑室周围白质损伤)</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>中度</td>
+                    <td>前或后部分水岭区皮质及白质损伤</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">重度</td>
+                    <td>前后分水岭区信号异常(包括灰白质分界不清)</td>
+                    <td>4</td>
+                </tr>
+                <tr>
+                    <td>更广泛异常(包括灰白质不能分辨</td>
+                    <td>5</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-wrap">
+            <table class="countTab1" border="0" cellpadding="0" cellspacing="0">
+                <thead></thead>
+                <tbody>
+                <tr>
+                    <th>基底节/丘脑</th>
+                    <th>影像学表现</th>
+                    <th>评分</th>
+                </tr>
+                <tr>
+                    <td>正常</td>
+                    <td></td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>轻度</td>
+                    <td>局灶、轻度信号异常，通常在丘脑腹外侧核和/或壳核后部</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td rowspan="2">中度</td>
+                    <td>丘脑、豆状核信号异常</td>
+                    <td>2</td>
+                </tr>
+                <tr>
+                    <td>丘脑、豆状核、罗兰氏区信号异常</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>重度</td>
+                    <td>更广泛受累</td>
+                    <td>4</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-wrap">
+            <table class="countTab1" border="0" cellpadding="0" cellspacing="0">
+                <thead></thead>
+                <tbody>
+                <tr>
+                    <th>内囊后肢</th>
+                    <th>影像学表现</th>
+                    <th>评分</th>
+                </tr>
+                <tr>
+                    <td>正常</td>
+                    <td></td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>模糊</td>
+                    <td>信号强度减弱或不对称</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>异常</td>
+                    <td>T1和/或T2的信号缺失、反转或异常</td>
+                    <td>2</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-wrap">
+            <table class="countTab1" border="0" cellpadding="0" cellspacing="0">
+                <thead></thead>
+                <tbody>
+                <tr>
+                    <th>脑干/间脑</th>
+                    <th>影像学表现</th>
+                    <th>评分</th>
+                </tr>
+                <tr>
+                    <td>正常</td>
+                    <td></td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>中度</td>
+                    <td>失去解剖细节，前后脑桥区分明显，局部信号异常，轻度不对称</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <td>重度</td>
+                    <td>广泛信号异常，非正常髓鞘化，信号显著不对称，萎缩</td>
+                    <td>2</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">中国医师协会新生儿科医师分会·新生儿缺氧缺血性脑病磁共振诊断与损伤类型的分类建议·2017-12</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

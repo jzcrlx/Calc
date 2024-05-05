@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-146.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-146">多发性骨髓瘤(MM)Durie-Salmon分期</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>分期</th>
+                    <th>分期标准</th>
+                    <th>瘤细胞数（×10^12/m<sup>2</sup>体表面积）</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>Ⅰ期</th>
+                    <td>符合所有下列4项：<br> 1.血红蛋白&gt;100g/L；<br> 2.血清钙正常[≤3.0mmol/L（12mg/dL）]；<br> 3.骨骼X线：骨骼结构正常或孤立性骨浆细胞瘤；<br> 4.低M蛋白量：IgG&lt;50g/L，IgA&lt;30g/L，本周氏蛋白&lt;4g/24h尿。
+                    </td>
+                    <td>&lt;0.6</td>
+                </tr>
+                <tr>
+                    <th>Ⅱ期</th>
+                    <td>不符合Ⅰ期和Ⅲ期的所有患者</td>
+                    <td>0.6~1.2</td>
+                </tr>
+                <tr>
+                    <th>Ⅲ期</th>
+                    <td>符合下列一项或以上：<br> 1.血红蛋白&lt;85g/L；<br> 2.血清钙&gt;3.0mmol/L（12mg/dL）；<br> 3.骨骼X线：显示溶骨性病灶&gt;3个；<br> 4.高M蛋白量：IgG&gt;70g/L，IgA&gt;50g/L，本周氏蛋白&gt;12g/24h尿。
+                    </td>
+                    <td>&gt;1.2</td>
+                </tr>
+                <tr>
+                    <th>亚型</th>
+                    <th colspan="2">标准</th>
+                </tr>
+                <tr>
+                    <th>A组</th>
+                    <td colspan="2">血肌酐浓度&lt;176.8μmol/L（2mg/dL）</td>
+                </tr>
+                <tr>
+                    <th>B组</th>
+                    <td colspan="2">血肌酐浓度≥176.8μmol/L（2mg/dL）</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>DS分期是MM标准的临床分期，其缺陷是对骨骼损害严重程度的判断存在主观性。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">王吉耀主编. 内科学（八年制）（第2版）. 人民卫生出版社. 2010年. p828.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

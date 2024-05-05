@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-1072.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div class="">
+        <!-- //www.mdcalc.com/calc/3939/ckd-epi-equations-glomerular-filtration-rate-gfr#evidence -->
+        <!-- 新版2021 去除黑人: //pubmed.ncbi.nlm.nih.gov/34554658/ -->
+        <a class="head-li" href="calc-47.html">MDRD</a>
+        <a class="head-li" href="calc-112.html">CKD-EPI (肌酐)</a>
+        <a class="head-li head-li-active" href="calc-1072.html">CKD-EPI (胱抑素C)</a>
+        <a class="head-li" href="calc-1073.html">CKD-EPI (肌酐-胱抑素C)</a>
+        <a class="head-li" href="calc-22.html">Cockcroft-Gault</a>
+    </div>
+    <div id="medcalc-1072" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>eGFR肾小球滤过率 (CKD-EPI 胱抑素C)</h2>
+        </div>
+        <form name="medform" action="get" id="medform">
+            <div class="question_box">
+                <div class="question_cont" style="color: #777777">
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-bg">年龄</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="age" type="number">
+                                </div>
+                                <div class="calc-unit-sm">岁</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-bg">血清胱抑素C</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="scysc" placeholder="0.51 - 1.09" type="number">
+                                </div>
+                                <div class="calc-unit-sm">mg/L</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class=" calc-label-bg">
+                                    <label for="female">女性患者？</label>
+                                </div>
+                                <div class="flex-item">
+                                    <label><input class="flex_item q_radio" value="1" name="female" id="female" type="checkbox"> 是</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-bg">肾小球滤过率:<br>mL/(min/1.73m<sup>2</sup>)</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="formula-main">
+        <div class="formula-name formula-name-first skin-color font14">eGFR = 133 x (Scys/0.8)<sup><em>A</em></sup> x (0.996)<sup style="font-size: 12px;">年龄</sup> x <em>B</em></div>
+        <div class="formula-li">
+            <div class="formula-li-index">1)</div>
+            <div class="formula-li-txt">
+                <div class="formula-li-name"><em>A</em> 值根据血清胱抑素C的大小分别采用如下取值：</div>
+                <div class="formula-li-desc">血清胱抑素C ≤ 0.8mg/L = -0.499</div>
+                <div class="formula-li-desc">血清胱抑素C &gt; 0.8mg/L = -1.328</div>
+            </div>
+        </div>
+        <div class="formula-li">
+            <div class="formula-li-index">2)</div>
+            <div class="formula-li-txt">
+                <div class="formula-li-name"><em>B</em> 值根据性别不同分别采用如下取值：</div>
+                <div class="formula-li-desc">男性 = 1</div>
+                <div class="formula-li-desc">女性 = 0.932</div>
+            </div>
+        </div>
+        <div class="detail-btm-title">请截屏以保存计算结果</div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">公式说明</span></h3>
+        <div class="jiedu">
+            <p>2010年6月，国际临床化学和实验室医学联合会（IFCC）工作小组成功研发出一种用于测量血清胱抑素C的参考材料（ERM-DA471 / IFCC），并与大型诊断公司合作，共同制定出一项基于胱抑素C全球通用的GFR预测方程式。2012 胱抑素C方程的准确性与2009 肌酐方程相似，但可避免种族因素，且Michelle M. Estrella教授认为相较于肌酐，CysC受非肾脏因素影响较小。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="//kdigo.org/wp-content/uploads/2017/02/KDIGO_2012_CKD_GL.pdf" class="resource" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+            <span class="resource__text">1. Kidney F N , Kidney D . KDIGO 2012 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease. 2013.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+            <span class="resource__img-wrapper">
+                <img src="images/pubmed.png" alt="Research Paper">
+            </span>
+            <span class="resource__text">2. Mithcel L. Zoler. Nephrologists Make the Case for Cystatin C-Based eGFR. Medscape. May 18, 2021.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

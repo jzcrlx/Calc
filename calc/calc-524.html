@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-524.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-524">妊娠期糖尿病GDM诊断标准</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2">
+                <thead>
+                <tr>
+                    <th colspan="4">75g OGTT结果</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>抽血时间</th>
+                    <td>空腹</td>
+                    <td>1小时</td>
+                    <td>2小时</td>
+                </tr>
+                <tr>
+                    <th>血糖标准, mmol/L(mg/dL)</th>
+                    <td>5.1(92)</td>
+                    <td>10.0(180)</td>
+                    <td>8.5(153)</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>依据2014年妊娠合并糖尿病诊治指南：75g OGTT结果的3项中任何1项值达到或超过标准即可诊断GDM。</p>
+                <p>1．推荐医疗机构对所有尚未被诊断为PGDM或GDM的孕妇，在妊娠24～28周以及28周后首次就诊时行OGTT。OGTT前禁食至少8 h，试验前连续3 d正常饮食，即每日进食碳水化合物不少于150 g，检查期间静坐、禁烟。检查时，5 min内口服含75 g葡萄糖的液体300 ml，分别抽取孕妇服糖前及服糖后1、2 h的静脉血(从开始饮用葡萄糖水计算时间)，放入含有氟化钠的试管中，采用葡萄糖氧化酶法测定血糖水平。</p>
+                <p>2. 孕妇具有GDM高危因素或者医疗资源缺乏地区，建议妊娠24-28周首先检查FPG。FPG≥5.1mmol／L，可以直接诊断GDM，不必行OGTT；FPG&lt;4.4 mmol／L(80 mg／dl)，发生GDM可能性极小，可以暂时不行OGTT。FPG≥4.4 mmol／L且&lt;5.1mmol／L时，应尽早行OGTT。</p>
+                <p>3．孕妇具有GDM高危因素，首次OGTT结果正常，必要时可在妊娠晚期重复OGTT。</p>
+                <p>4．妊娠早、中期随孕周增加FPG水平逐渐下降，尤以妊娠早期下降明显，因而，妊娠早期FPG水平不能作为GDM的诊断依据。</p>
+                <p>5．未定期检查者，如果首次就诊时间在妊娠28周以后，建议首次就诊时或就诊后尽早行OGTT或FPG检查。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">中华医学会妇产科学分会产科学组等. 妊娠合并糖尿病诊治指南(2014) . 中华妇产科杂志. 2014;49:561-9.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

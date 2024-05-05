@@ -1,0 +1,227 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-450.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-450" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>外阴阴道假丝酵母菌病临床表现的评分标准</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks req">
+                        <div class="question_title">瘙痒</div>
+                        <div class="que_select_box">
+                            <div class="que_block">
+                                <div class="que_infor">
+                                    <div class="txt">选择</div>
+                                    <div class="answer" name="saoyang">请选择</div>
+                                </div>
+                                <div class="que_mark">
+                                    <div class="option-content">
+                                        <div class="option-title">
+                                            <div class="option-title-text">瘙痒</div>
+                                            <div class="option-title-close"></div>
+                                        </div>
+                                        <div class="options">
+                                            <div value="0" class="option">无</div>
+                                            <div value="1" class="option">偶有发作</div>
+                                            <div value="2" class="option">症状明显</div>
+                                            <div value="3" class="option">持续发作、坐立不安</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                疼痛
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="tengtong" id="tengtong1" type="radio">
+                                        <label class="flex" for="tengtong1">无</label>
+                                        <input class="flex_que q_radio" value="1" name="tengtong" id="tengtong2" type="radio">
+                                        <label class="flex" for="tengtong2">轻</label>
+                                        <input class="flex_que q_radio" value="2" name="tengtong" id="tengtong3" type="radio">
+                                        <label class="flex" for="tengtong3">中</label>
+                                        <input class="flex_que q_radio" value="3" name="tengtong" id="tengtong4" type="radio">
+                                        <label class="flex" for="tengtong4">重</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_title"><span>充血、水肿</span></div>
+                        <div class="que_select_box req">
+                            <div class="que_block">
+                                <div class="que_infor">
+                                    <div class="txt">选择</div>
+                                    <div class="answer" name="chongxue">请选择</div>
+                                </div>
+                                <div class="que_mark">
+                                    <div class="option-content">
+                                        <div class="option-title">
+                                            <div class="option-title-text">瘙痒</div>
+                                            <div class="option-title-close"></div>
+                                        </div>
+                                        <div class="options">
+                                            <div value="0" class="option">无</div>
+                                            <div value="1" class="option">＜1/3阴道壁充血</div>
+                                            <div value="2" class="option">1/3~2/3阴道壁充血</div>
+                                            <div value="3" class="option">＞2/3阴道壁充血</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                外阴抓痕、皲裂
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="waiyin" id="waiyin1" type="radio">
+                                        <label class="flex" for="waiyin1">无</label>
+                                        <input class="flex_que q_radio" value="3" name="waiyin" id="waiyin2" type="radio">
+                                        <label class="flex" for="waiyin2">有</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_title"><span>分泌物</span></div>
+                        <div class="que_select_box req">
+                            <div class="que_block">
+                                <div class="que_infor">
+                                    <div class="txt">选择</div>
+                                    <div class="answer" name="fenmi">请选择</div>
+                                </div>
+                                <div class="que_mark">
+                                    <div class="option-content">
+                                        <div class="option-title">
+                                            <div class="option-title-text">分泌物</div>
+                                            <div class="option-title-close"></div>
+                                        </div>
+                                        <div class="options">
+                                            <div value="0" class="option">无</div>
+                                            <div value="1" class="option">较正常稍多</div>
+                                            <div value="2" class="option">量多、无溢出</div>
+                                            <div value="3" class="option">量多、有溢出</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>有关症状严重程度，2004年中华医学会妇产科分会感染协作组提出了评分标准：评分≤6分者为轻、中度VVC，≥7分者为重度VVC。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">丰有吉主编. 妇产科学（八年制）（第2版）. 人民卫生出版社. 2010年. p272.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

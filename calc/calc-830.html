@@ -1,0 +1,223 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-830.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-830" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>慢性粒细胞白血病(CML) Hasford评分</h2>
+        </div>
+        <form name="medform" action="get" id="medform">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">年龄</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="age" type="number">
+                                </div>
+                                <div class="calc-unit-md">岁</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">脾脏大小</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="sp" type="number">
+                                </div>
+                                <div class="calc-unit-md">cm</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">血小板计数</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="plt" type="number">
+                                </div>
+                                <div class="calc-unit-md">10<sup>9</sup>/L</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">原始细胞</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="bla" type="number">
+                                </div>
+                                <div class="calc-unit-md">%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">嗜碱性粒细胞</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="bas" type="number">
+                                </div>
+                                <div class="calc-unit-md">%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">嗜酸性粒细胞</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="eos" type="number">
+                                </div>
+                                <div class="calc-unit-md">%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-md">Hasford 评分:</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                </div>
+                                <div class="calc-unit-md"></div>
+                            </div>
+                        </div>
+                        <div id="risk" style="display: none">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-md">风险等级:</div>
+                                    <div class="flex-item">
+                                        <div id="resultmsg1" class="skin-color"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div>
+        <h3><span class="jiedu-title">计算公式</span></h3>
+        <div class="jiedu">
+            <p>Hasford评分 =
+                0.666(当发病年龄大于等于50岁）+(0.042x脾脏大小）+1.0956x(当血小板数大于1500)+(0.0584x原始细胞）+0.20399x(当嗜碱性粒细胞大于3%)+(0.0413x嗜酸性粒细胞）x100</p>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果说明</span></h3>
+        <div class="jiedu">
+            <div class="mainContainer">
+                <div>
+                    <table class="countTab1">
+                        <tbody>
+                        <tr>
+                            <th>评分</th>
+                            <th>风险等级</th>
+                        </tr>
+                        <tr>
+                            <th>&lt;=780</th>
+                            <td style="text-align: center">低风险</td>
+                        </tr>
+                        <tr>
+                            <th>781-1480</th>
+                            <td style="text-align: center">中风险</td>
+                        </tr>
+                        <tr>
+                            <th>&gt;1480</th>
+                            <td style="text-align: center">高风险</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,273 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-781.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-781">常用左室功能参数</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>参数</th>
+                    <th></th>
+                    <th>公式</th>
+                    <th>参考正常值</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td rowspan="4">心室内径</td>
+                    <td>舒张末期内径 EDD</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>收缩末期内径 ESD</td>
+                    <td></td>
+                    <td>45～55毫米</td>
+                </tr>
+                <tr>
+                    <td>快充盈期末内径 SFD</td>
+                    <td></td>
+                    <td>25～37毫米</td>
+                </tr>
+                <tr>
+                    <td>慢充盈期末内径 RFD</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>内径变化</td>
+                    <td>△D＝EDD－ESD</td>
+                    <td></td>
+                    <td>15～20毫米</td>
+                </tr>
+                <tr>
+                    <td>内径缩短分数</td>
+                    <td>FS＝△D/EDD×100%</td>
+                    <td></td>
+                    <td>30.7%±0.54%</td>
+                </tr>
+                <tr>
+                    <td>心室容量</td>
+                    <td> V＝D<sup>3</sup> 舒张末期容量EDV<br>
+                        <table border="0" cellpadding="5" cellspacing="0">
+                            <tbody>
+                            <tr>
+                                <td style="height: 46px;border:none;padding:0;"> 或=</td>
+                                <td style="height: 46px;border:none;padding:0;"> D<sup>3</sup></td>
+                                <td style="height: 46px;border:none;padding:0;"> ×</td>
+                                <td style="height: 46px;border:none;padding:0;" align="center"> 7<br> <span style="border-top: solid 1px;">(2.4＋D)</span></td>
+                                <td style="height: 46px;border:none;padding:0;"> ,收缩末期容量ESV</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        快充盈期末容量RFDV <br> 慢充盈期末容量SFDV
+                    </td>
+                    <td></td>
+                    <td>100～125毫升 30～40毫升</td>
+                </tr>
+                <tr>
+                    <td>心搏量</td>
+                    <td>SV＝EDV－ESD</td>
+                    <td></td>
+                    <td>89±16毫升</td>
+                </tr>
+                <tr>
+                    <td>心排血量</td>
+                    <td>CO＝(SV×HR)/100 心率HR</td>
+                    <td></td>
+                    <td>4～6升/分</td>
+                </tr>
+                <tr>
+                    <td>心脏指数</td>
+                    <td>CI＝CO/BSA(体表面积)</td>
+                    <td></td>
+                    <td>2.6～4升/分/米</td>
+                </tr>
+                <tr>
+                    <td>射血分数</td>
+                    <td>EF＝(SV/EDV)×100%</td>
+                    <td></td>
+                    <td>70%±7%</td>
+                </tr>
+                <tr>
+                    <td>快充盈容量</td>
+                    <td>RFV＝RFDV－ESV</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>快充盈分数</td>
+                    <td>RFF＝(RFV/SV)×100%</td>
+                    <td></td>
+                    <td>65%±17%</td>
+                </tr>
+                <tr>
+                    <td>快充盈期充盈率</td>
+                    <td>RFR＝RFV/e－f(快充盈时间)</td>
+                    <td></td>
+                    <td>476±146毫升/秒</td>
+                </tr>
+                <tr>
+                    <td>慢充盈容量</td>
+                    <td>SFF＝(SFV/SV)×100%</td>
+                    <td></td>
+                    <td>14%±11%</td>
+                </tr>
+                <tr>
+                    <td>心室A波率</td>
+                    <td>VAW%＝[(EDD－SFD)/SFD]×100</td>
+                    <td></td>
+                    <td>4%±2.4%</td>
+                </tr>
+                <tr>
+                    <td>左室射血时间</td>
+                    <td> LVET＝A～A 主动脉瓣开放点A 主动脉瓣关闭点A</td>
+                    <td></td>
+                    <td> 296±19毫秒</td>
+                </tr>
+                <tr>
+                    <td> 射血前期 （与心电图同步记录）</td>
+                    <td>PEP＝Q～A</td>
+                    <td></td>
+                    <td>91±5毫秒</td>
+                </tr>
+                <tr>
+                    <td>射血前期/射血时间</td>
+                    <td>PEP/LVET</td>
+                    <td></td>
+                    <td>＜0.36</td>
+                </tr>
+                <tr>
+                    <td>等容收缩时间(与心电图同步记录)</td>
+                    <td>ICT＝PEP－(Q～M) 二尖瓣关闭点M</td>
+                    <td></td>
+                    <td>70±9毫秒</td>
+                </tr>
+                <tr>
+                    <td>等容舒张时间(与心音图同步记录)</td>
+                    <td>IRT＝第二心音主动脉瓣高频成分至二尖瓣开放点D的时距</td>
+                    <td></td>
+                    <td>90±10毫秒</td>
+                </tr>
+                <tr>
+                    <td> 左室舒张末期压 (与心电、心音图同步记录)</td>
+                    <td> LVEDP＝21.6×(QC/AE)＋1.1 QC,QRS起点至二尖瓣C点时间 AE,第二心音主动脉瓣高频成分至二尖瓣 峰时间</td>
+                    <td></td>
+                    <td> 10.9±1.3毫米汞柱</td>
+                </tr>
+                <tr>
+                    <td>左心室肌重量</td>
+                    <td>M＝1.05×[(EDD＋SWT＋PWT)－EDV] 室间隔厚度SWT,后壁厚度PWT</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>左心室肌重量指数</td>
+                    <td> M/BSA</td>
+                    <td></td>
+                    <td>99.21±21.78克/米</td>
+                </tr>
+                <tr>
+                    <td>体表面积</td>
+                    <td> BSA＝(0.0061×H＋0.0128×W)－0.1529 身高H(厘米),体重W(公斤)</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">杨志寅.诊断学大辞典.第2版.北京:华夏出版社,2004.1244-1263</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

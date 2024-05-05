@@ -1,0 +1,1 @@
+function MDCalc(z){value=z.sx;Answer(value);if(value==1){msg="I等级患者死亡率大约为30%"}if(value==2){msg="II等级患者死亡率大约为40%"}if(value==3){msg="III等级患者死亡率大约为50%"}if(value==4){msg="IV等级患者死亡率大约为80%"}if(value==5){msg="V等级患者死亡率大约为90%"}Text(msg)}$("#units").hide();

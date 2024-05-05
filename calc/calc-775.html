@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-775.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-775" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>实体瘤的疗效评价标准</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block req">
+                            <div class="question_title">
+                                靶病灶评估
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="chf0">所有靶病灶消失，全部病理淋巴结(包括靶结节和非靶结节)短直径必须减少至＜10
+                                            mm。</label>
+                                        <input class="flex_que q_radio" value="0" name="chf" id="chf0" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="chf1">靶病灶直径之和比基线水平减少至少30%。</label>
+                                        <input class="flex_que q_radio" value="1" name="chf" id="chf1" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="chf2">靶病灶减小的程度没达到PR，增加的程度也没达到PD水平，介于两者之间，研究时可以直径之和的最小值作为参考。</label>
+                                        <input class="flex_que q_radio" value="2" name="chf" id="chf2" type="radio">
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <label class="flex" for="chf3">以整个实验研究过程中所有测量的靶病灶直径之和的最小值为参照，直径和相对增加至少20%（如果基线测量值最小就以基线值为参照）；除此之外，必须满足直径和的绝对值增加至少5
+                                            mm（出现一个或多个新病灶也视为疾病进展）。</label>
+                                        <input class="flex_que q_radio" value="3" name="chf" id="chf3" type="radio">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-md">结果:</div>
+                                    <div class="flex-item">
+                                        <div id="resultmsg" class="skin-color"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">一、肿瘤病灶基线的定义</span></h3>
+        <div class="jiedu">
+            <p> 肿瘤病灶基线分为可测量病灶和不可测量病灶。</p>
+            <p>1、可测量病灶<br>
+                （1）至少有一条可以精确测量的径线的病灶。
+                （2）根据CT或MRI评价，病灶最长直径至少为10 mm（2个层厚,层厚5-8 mm）。
+                （3）根据胸部X线评价，病灶最长直径至少20 mm。
+                （4）根据测径器评价，最长直径≥10 mm的浅表性病灶。
+                （5）恶性淋巴结：病理学增大且可测量，单个淋巴结CT扫描短径须≥15 mm（CT扫描层厚推荐不超过5 mm）。基线和随访中，仅测量和随访短径。</p>
+            <p> 注：恶性肿瘤淋巴结用最短轴作为直径，其它可测量病灶用最长轴。</p>
+            <p> 2、不可测量病灶<br>
+                （1）不可测量病灶包括小病灶（包括短轴在10-14.9 mm的淋巴结）和真正无法测量的病灶，如胸膜或心包积液、腹水、炎性乳腺疾病、软脑膜病、累及皮肤或肺的淋巴管炎，测径器不能准确测量的临床病灶，体检发现的腹部肿块，重现影像技术无法测量的。
+                （2）骨病：骨病为不可测量的疾病，除软组织成份可采用CT或MRI评价外，且符合基线时可评价的定义。
+                （3）既往局部治疗：既往放疗病灶（或其它局部治疗的病灶）为不可测量病灶，除非治疗完成后进展</p>
+            <p> 3、正常部位<br>
+                （1）囊性病灶：单纯囊肿不应视为恶性病灶，也不应记录为目标病灶或非目标病灶。认为是囊性转移的囊性病灶是可测量病灶，如果符合上述特定定义。如果还出现了非囊性病灶，那么这些病灶首选为目标病灶。
+                （2）正常结节：短轴＜10 mm的结节被视为正常，不应记录或安装可测量或不可测量病灶分类。</p>
+        </div>
+        <h3><span class="jiedu-title">二、记录治疗评价</span></h3>
+        <div class="jiedu">
+            <p>在基线时必须评价所有部位疾病。基线评价应尽量在接近试验开始前进行。对于充分的基线评价，治疗前28天内必须进行所有要求的扫描，所有疾病必须正确记录。如果基线评价不充分，以后的状况通常为不确定。</p>
+            <p>1、目标病灶<br>
+                所有累及器官达最多2个病灶/每个器官，共5个病灶，所有可测量病灶应视为基线目标病灶。根据大小（最长病灶）和适合性选择目标病灶准确重复测量。记录每个病灶的最长直径，除外病理学淋巴结应记录短轴。基线时所有目标病灶直径（非结节病灶的最长径，结节病灶的最短轴）的总和是试验中进行的评价比较的基础。
+                （1）若两个病灶融合，就测量融合的肿块。如果目标病灶分裂，则使用各部分的总和。
+                （2）应继续记录变小的目标病灶的测量。如果目标病灶变的太小而不能测量，如认为病灶已消失则记录为0 mm；反之应记录为默认值5 mm。</p>
+            <p> 注：结节性标准缩小至＜10 mm（正常），仍应记录实际测量结果。</p>
+            <p> 2、非目标病灶<br>
+                所有不可测量的疾病均为非目标病灶病灶。所有未鉴别为目标病灶的可测量病灶也纳入非病灶疾病。不需要进行测量，但是评价以无、不确定、有/未增大、增大表示。1个器官的多发性非目标病灶在病例报告表上记录为一项（如：‘多发性骨盆淋巴结增大’或‘多发性肝转移’）。</p>
+        </div>
+        <h3><span class="jiedu-title">三、每次评价时的客观缓解状态</span></h3>
+        <div class="jiedu">
+            <p>疾病部位评价必须采用与基线相同的方法，包括一致进行增强和及时的扫描。如需变化，必须与放射学医师讨论该病例以明确是否可能用替代法。如不能，以后的客观状况为不明确。</p>
+            <p> 1、目标病灶<br>
+                （1）完全缓解（CR）：除结节性疾病外，所有目标病灶完全消失。所有目标结节须缩小至正常大小（短轴＜10 mm）。所有目标病灶均须评价。
+                （2）部分缓解（PR）：所有可测量目标病灶的直径总和低于基线≥30%。目标结节总和使用短径，而所有其它目标病灶的总和使用最长直径。所有目标病灶均须评价。
+                （3）疾病进展（PD）：以整个实验研究过程中所有测量的靶病灶直径之和的最小值为参照，直径和相对增加至少20%（如果基线测量值最小就以基线值为参照）；除此之外，必须满足直径和的绝对值增加至少5
+                mm（出现一个或多个新病灶也视为疾病进展）。
+                （4）疾病稳定（SD）：靶病灶减小的程度没达到PR，增加的程度也没达到PD水平，介于两者之间，研究时可以直径之和的最小值作为参考。  （5）不确定。未记录进展，且
+                1）1个或以上可测量的目标病灶未评价
+                2）或所用评价方法与基线不一致
+                3）或1个或以上目标病灶不能准确测量（如：看不清除，除非由于太小而不能测量）
+                4）或1个或以上目标病灶被切除或辐射，且未复发或增大。
+            </p>
+            <p> 2、非目标病灶<br>
+                （1）CR：所有非目标病灶消失或肿瘤标志物水平正常。所有淋巴结大小必须‘正常’（短轴＜10 mm）。
+                （2）非CR/非-PD：任何非目标病灶持续存在和/肿瘤标志物水平高于正常上限。
+                （3）PD：已有病灶明确进展。通常，总体肿瘤负荷须增大到足以停止治疗。目标病灶SD或PR时，罕见由于非目标病灶明确增大的进展。
+                （4）不明确：未测量进展，1个或以上非目标病灶部位未评价或评价方法与基线所用方法不一致。
+            </p>
+            <p> 3、新病灶 <br>
+                出现任何新发明确的恶性肿瘤病灶都表明PD。如果新病灶不明确，例如由于体积较小，进一步评价会明确病因。如果重复评价明确病灶，那么应在首次评价日期记录进展。在以前未扫描区发现的病灶被认为是新病灶。
+            </p>
+            <p> 4、补充研究<br>
+                （1）如果明确CR取决于体积减小但未完全消失的残留病灶，建议活检或细针抽吸残留病灶进行研究。如未发现疾病，主观状况记录为CR。
+                （2）如果明确进展取决于可能由于坏死增大的病灶，那么病灶应活检或细针抽吸以明确状态。</p>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

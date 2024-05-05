@@ -1,0 +1,158 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-107.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+	<div id="medcalc-107" class="post">
+		<div id="meta">
+		</div>
+		<div id="title">
+			<h2>镇静-躁动评分</h2>
+		</div>
+		<form id="medform" name="medform" action="get">
+			<div class="question_box">
+				<div class="question_cont">
+					<div class="question_blocks">
+						<div class="question_block req">
+							<div class="question_title">
+								体征/症状
+							</div>
+							<div class="question_infor2">
+								<div class="flex-center calc-que">
+									<div class="flex_box align_items_center">
+										<label class="flex" for="ccr1">不能唤醒。对恶性刺激无或仅有轻微反应</label>
+										<input class="flex_que q_radio" value="1" name="ccr" id="ccr1" type="radio">
+									</div>
+								</div>
+								<div class="flex-center calc-que">
+									<div class="flex_box align_items_center">
+										<label class="flex" for="ccr2">非常镇静。对刺激有反应，不能服从指令</label>
+										<input class="flex_que q_radio" value="2" name="ccr" id="ccr2" type="radio">
+									</div>
+								</div>
+								<div class="flex-center calc-que">
+									<div class="flex_box align_items_center">
+										<label class="flex" for="ccr3">镇静。难以唤醒，能服从简单指令</label>
+										<input class="flex_que q_radio" value="3" name="ccr" id="ccr3" type="radio">
+									</div>
+								</div>
+								<div class="flex-center calc-que">
+									<div class="flex_box align_items_center">
+										<label class="flex" for="ccr4">安静合作。服从指令</label>
+										<input class="flex_que q_radio" value="4" name="ccr" id="ccr4" type="radio">
+									</div>
+								</div>
+								<div class="flex-center calc-que">
+									<div class="flex_box align_items_center">
+										<label class="flex" for="ccr5">躁动。试图坐起但经语言提示劝阻可安静</label>
+										<input class="flex_que q_radio" value="5" name="ccr" id="ccr5" type="radio">
+									</div>
+								</div>
+								<div class="flex-center calc-que">
+									<div class="flex_box align_items_center">
+										<label class="flex" for="ccr6">非常躁动。无法平静，需要约束，咬气管内插管</label>
+										<input class="flex_que q_radio" value="6" name="ccr" id="ccr6" type="radio">
+									</div>
+								</div>
+								<div class="flex-center calc-que">
+									<div class="flex_box align_items_center">
+										<label class="flex" for="ccr7">危险躁动。拉拽气管内插管，攻击医护人员，翻越床栏</label>
+										<input class="flex_que q_radio" value="7" name="ccr" id="ccr7" type="radio">
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="answer_block">
+							<div class="question_infor">
+								<div class="flex-center calc-item ">
+									<div class="calc-label-md">分级:</div>
+									<div class="flex-item">
+										<input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

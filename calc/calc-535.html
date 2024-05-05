@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-535.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-535" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>造影剂肾病危险因素评分</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="age">年龄&gt;75 岁</label>
+                                    <input class="flex_que q_radio" value="4" id="age" name="age" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="hct">红细胞比容Hct(%) 男性：&lt;39 ；女性：&lt;36</label>
+                                    <input class="flex_que q_radio" value="3" id="hct" name="hct" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="flex-center calc-que">
+                                <div class="calc-label-lg">造影剂用量</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="zao" type="number">
+                                </div>
+                                <div class="calc-unit-ssm">ml</div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="que_select_box">
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">GFR（ml/min/1.73m2）</div>
+                                        <div class="answer" name="gfr">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">GFR（ml/min/1.73m2）</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">GFR&gt;60</div>
+                                                <div value="2" class="option">GFR=40-60</div>
+                                                <div value="4" class="option">GFR=20-39</div>
+                                                <div value="6" class="option">GFR＜20</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="sbp">介入治疗后24小时内SBP&lt;80mmHg持续&gt;1小时，且需要正性肌力支持</label>
+                                    <input class="flex_que q_radio" value="5" id="sbp" name="sbp" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="zhudong">使用主动脉内球囊反搏</label>
+                                    <input class="flex_que q_radio" value="5" id="zhudong" name="zhudong" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="nyha">心力衰竭(NYHA心功能Ⅲ或Ⅳ级，或肺水肿)</label>
+                                    <input class="flex_que q_radio" value="5" id="nyha" name="nyha" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="tang">糖尿病</label>
+                                    <input class="flex_que q_radio" value="3" id="tang" name="tang" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p></p>
+            <div class="table-wrap">
+                <table class="countTab2">
+                    <thead>
+                    <tr>
+                        <th>评分</th>
+                        <th>危险等级</th>
+                        <th>造影剂肾病发生率</th>
+                        <th>预计透析风险</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>&lt; 5分</th>
+                        <td>低危</td>
+                        <td>7.5%</td>
+                        <td>0.04%</td>
+                    </tr>
+                    <tr>
+                        <th>6-10分</th>
+                        <td>中危</td>
+                        <td>14%</td>
+                        <td>0.12%</td>
+                    </tr>
+                    <tr>
+                        <th>11-16分</th>
+                        <td>高危</td>
+                        <td>26.1%</td>
+                        <td>1.09%</td>
+                    </tr>
+                    <tr>
+                        <th>&gt; 16分</th>
+                        <td>极高危</td>
+                        <td>57.3%</td>
+                        <td>12.6%</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">说明</span></h3>
+        <div class="jiedu">
+            <p>造影剂肾病(CIN)的定义：应用造影剂后新发生的、未发现其他原因的血肌酐升高 &gt; 25%基础值或绝对值升高 &gt; 0.5mg/dL（44μmol/L）。</p>
+            <p>一般在用造影剂后24-48小时发生，5-7天后达到高峰，7-10天内可恢复正常。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">1.Barrett BJ, Parfrey PS. Clinical practice. Preventing nephropathy induced by contrast medium. N Engl J Med. 2006;354(4):379-86.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">2. Mehran R, et al. A simple risk score for prediction of contrast-induced nephropathy after percutaneous coronary intervention: development and initial validation. J Am Coll Cardiol. 2004;44(7):1393-9.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

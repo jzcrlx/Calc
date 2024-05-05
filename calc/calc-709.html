@@ -1,0 +1,433 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-709.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-709" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>汉密尔顿焦虑量表</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">一、焦虑心境：担心、担忧，感到有最坏的事情将要发生，容易被激惹。</div>
+                        <div class="answer" name="select1">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">一、焦虑心境：担心、担忧，感到有最坏的事情将要发生，容易被激惹。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状</div>
+                                <div value="1" class="option">轻</div>
+                                <div value="2" class="option">中等</div>
+                                <div value="3" class="option">重</div>
+                                <div value="4" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">二、紧张：紧张感、易疲劳、不能放松，情绪反应，易哭、颤抖、感到不安。</div>
+                        <div class="answer" name="select2">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">二、紧张：紧张感、易疲劳、不能放松，情绪反应，易哭、颤抖、感到不安。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状</div>
+                                <div value="1" class="option">轻</div>
+                                <div value="2" class="option">中等</div>
+                                <div value="3" class="option">重</div>
+                                <div value="4" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">三、害怕：害怕黑暗、陌生人、一人独处、动物、乘车或旅行及人多的场合。</div>
+                        <div class="answer" name="select3">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">三、害怕：害怕黑暗、陌生人、一人独处、动物、乘车或旅行及人多的场合。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状</div>
+                                <div value="1" class="option">轻</div>
+                                <div value="2" class="option">中等</div>
+                                <div value="3" class="option">重</div>
+                                <div value="4" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">四、失眠：难以入睡、易醒、睡得不深、多梦、梦魇、夜惊、睡醒后感到疲倦。</div>
+                        <div class="answer" name="select4">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">四、失眠：难以入睡、易醒、睡得不深、多梦、梦魇、夜惊、睡醒后感到疲倦。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状</div>
+                                <div value="1" class="option">轻</div>
+                                <div value="2" class="option">中等</div>
+                                <div value="3" class="option">重</div>
+                                <div value="4" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">五、认知功能：或称记忆力、注意力障碍。注意力不能集中，记忆力差。</div>
+                        <div class="answer" name="select5">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">五、认知功能：或称记忆力、注意力障碍。注意力不能集中，记忆力差。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状</div>
+                                <div value="1" class="option">轻</div>
+                                <div value="2" class="option">中等</div>
+                                <div value="3" class="option">重</div>
+                                <div value="4" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">六、抑郁心境：丧失兴趣、对以往爱好的事务缺乏快感、忧郁、早醒、昼重夜轻。</div>
+                        <div class="answer" name="select6">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">六、抑郁心境：丧失兴趣、对以往爱好的事务缺乏快感、忧郁、早醒、昼重夜轻。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状</div>
+                                <div value="1" class="option">轻</div>
+                                <div value="2" class="option">中等</div>
+                                <div value="3" class="option">重</div>
+                                <div value="4" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">七、躯体性焦虑（肌肉系统症状）：肌肉酸痛、活动不灵活、肌肉经常抽动、肢体抽动、牙齿打颤、声音发抖。</div>
+                        <div class="answer" name="select7">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">七、躯体性焦虑（肌肉系统症状）：肌肉酸痛、活动不灵活、肌肉经常抽动、肢体抽动、牙齿打颤、声音发抖。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状</div>
+                                <div value="1" class="option">轻</div>
+                                <div value="2" class="option">中等</div>
+                                <div value="3" class="option">重</div>
+                                <div value="4" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">八、感觉系统症状：视物模糊、发冷发热、软弱无力感、浑身刺痛。</div>
+                        <div class="answer" name="select8">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">八、感觉系统症状：视物模糊、发冷发热、软弱无力感、浑身刺痛。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状</div>
+                                <div value="1" class="option">轻</div>
+                                <div value="2" class="option">中等</div>
+                                <div value="3" class="option">重</div>
+                                <div value="4" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">九、心血管系统症状：心动过速、心悸、胸痛、血管跳动感、昏倒感、心博脱漏。</div>
+                        <div class="answer" name="select9">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">九、心血管系统症状：心动过速、心悸、胸痛、血管跳动感、昏倒感、心博脱漏。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状</div>
+                                <div value="1" class="option">轻</div>
+                                <div value="2" class="option">中等</div>
+                                <div value="3" class="option">重</div>
+                                <div value="4" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">十、呼吸系统症状：时常感到胸闷、窒息感、叹息、呼吸困难。</div>
+                        <div class="answer" name="select10">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">十、呼吸系统症状：时常感到胸闷、窒息感、叹息、呼吸困难。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状</div>
+                                <div value="1" class="option">轻</div>
+                                <div value="2" class="option">中等</div>
+                                <div value="3" class="option">重</div>
+                                <div value="4" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">十一、胃肠消化道症状：吞咽困难、嗳气、食欲不佳、消化不良（进食后腹痛、胃部烧灼痛、腹胀、恶心、胃部饱胀感）、肠鸣、腹泻、体重减轻、便秘</div>
+                        <div class="answer" name="select11">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">
+                                    十一、胃肠消化道症状：吞咽困难、嗳气、食欲不佳、消化不良（进食后腹痛、胃部烧灼痛、腹胀、恶心、胃部饱胀感）、肠鸣、腹泻、体重减轻、便秘
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状</div>
+                                <div value="1" class="option">轻</div>
+                                <div value="2" class="option">中等</div>
+                                <div value="3" class="option">重</div>
+                                <div value="4" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">十二、生殖、泌尿系统症状：尿意频繁、尿急、停经、性冷淡、过早射精、勃起不能、阳痿。</div>
+                        <div class="answer" name="select12">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">十二、生殖、泌尿系统症状：尿意频繁、尿急、停经、性冷淡、过早射精、勃起不能、阳痿。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状</div>
+                                <div value="1" class="option">轻</div>
+                                <div value="2" class="option">中等</div>
+                                <div value="3" class="option">重</div>
+                                <div value="4" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">十三、植物神经系统症状：口干、潮红、苍白、易出汗、易起“鸡皮疙瘩”、紧张性头痛、毛发竖起。</div>
+                        <div class="answer" name="select13">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">十三、植物神经系统症状：口干、潮红、苍白、易出汗、易起“鸡皮疙瘩”、紧张性头痛、毛发竖起。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状</div>
+                                <div value="1" class="option">轻</div>
+                                <div value="2" class="option">中等</div>
+                                <div value="3" class="option">重</div>
+                                <div value="4" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">十四、与人谈话时的行为表现：
+                            （1）一般表现：紧张、不能松弛、忐忑不安、咬手指、紧握拳、摸弄手帕、面肌抽动、不停顿足、手发抖、皱眉、表情僵硬、肌张力高、叹息样呼吸、面色苍白；
+                            （2）生理表现：吞咽、频繁打呃、安静时心率快、呼吸加快（20 次/分钟以上）、腱反射亢进、震颤、瞳孔放大、眼睑跳动、易出汗、眼球突出。
+                        </div>
+                        <div class="answer" name="select14">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">十四、与人谈话时的行为表现:
+                                    （1）一般表现：紧张、不能松弛、忐忑不安、咬手指、紧握拳、摸弄手帕、面肌抽动、不停顿足、手发抖、皱眉、表情僵硬、肌张力高、叹息样呼吸、面色苍白；
+                                    （2）生理表现：吞咽、频繁打呃、安静时心率快、呼吸加快（20 次/分钟以上）、腱反射亢进、震颤、瞳孔放大、眼睑跳动、易出汗、眼球突出。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状</div>
+                                <div value="1" class="option">轻</div>
+                                <div value="2" class="option">中等</div>
+                                <div value="3" class="option">重</div>
+                                <div value="4" class="option">极重</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">评分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p> HAMA应由经过训练的 2 名评定员进行联合检查，一般采用交谈和观察的方法，待检查结束后，2 名评定员独立评分。在评估心理或药物干预前后焦虑症状的改善情况时，首先在入组时评定当时或入组前一周的情况，然后再干预
+                2~6 周后再次评定来比较焦虑症状的严重程度和症状谱的变化。 </p>
+            <p> 1、焦虑因子分析：HAMA 将焦虑因子分为躯体性和精神性两大类。躯体性焦虑：七至十三项的得分比较高。精神性焦虑：一至六和十四项得分比较高。 </p>
+            <p> 2、HAMA 总分能较好的反映焦虑症状的严重程度。总分可以用来评价焦虑和抑郁障碍患者焦虑症状的严重程度和对各种药物、心理干预效果的评估。按照我国量表协作组提供的资料：总分 ≥29 分，可能为严重焦虑；≥21
+                分，肯定有明显焦虑；≥14 分，肯定有焦虑； 超过 7 分，可能有焦虑； 如小于 7 分，便没有焦虑症状。 对 HAMA
+                躯体性和精神性两大类因子的分析，不仅可以具体反映病人的精神病理学特点，也可反映靶症状群的治疗效果。 </p>
+            <p>汉密尔顿焦虑量表（Hamilton Anxiety Scale,HAMA）由 Hamilton 于 1959 年编制。最早是精神科临床中常用的量表之一，包括 14 个项目。《CCMD-3
+                中国精神疾病诊断标准》将其列为焦虑症的重要诊断工具，临床上常将其用于焦虑症的诊断及程度划分的依据。 </p>
+            <p> 主要用于评定神经症及其他病人的焦虑症状的严重程度，但不大适宜于估计各种精神病时的焦虑状态。同时，与
+                HAMD（汉密尔顿抑郁量表）相比较，有些重复的项目，如抑郁心境、躯体性焦虑、胃肠道症状及失眠等，故对于焦虑症与抑郁症也不能很好的进行鉴别。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text"> Hamilton M. The assessment of anxiety states by rating. Br J Med Psychol. 1959;32(1):50-5. </span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

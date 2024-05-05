@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-529.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-57" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>烧伤补液（第三军医大学公式）</h2>
+        </div>
+        <form name="medform" action="get" id="medform">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">体重</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="weight" type="number">
+                                </div>
+                                <div class="calc-unit-md">kg</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">烧伤面积比</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="tbsa" type="number">
+                                </div>
+                                <div class="calc-unit-md">%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">烧伤后时长</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="hour" id="hour" type="number">
+                                </div>
+                                <div class="calc-unit-md">小时</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">目前补液量</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="f" id="f" type="number">
+                                </div>
+                                <div class="calc-unit-md">ml</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block" style="margin-top: 12px;">
+                        <div class="question_infor">
+                            <div style="padding-top: 10px;text-align: center">
+                                <button type="button" class="calc_btn" id="result">查看结果</button>
+                            </div>
+                        </div>
+                        <div class="question_infor">
+                            <div class="result-list">
+                                <div class="result" id="res1">
+                                    <span style="font-weight: bold">烧伤首日:</span>
+                                    <h2 style="margin-top: 5px"><span id="resultmsg11"></span><span style="font-size: 14px;"> ml</span></h2>
+                                    <div style="font-size: 14px;margin-bottom: 10px">补液总量</div>
+                                    <h2 style="margin-top: 5px"><span id="resultmsg12"></span><span style="font-size: 14px"> ml</span></h2>
+                                    <div style="font-size: 14px;margin-bottom: 10px">等渗林格乳酸钠溶液量</div>
+                                    <h2 style="margin-top: 5px"><span id="resultmsg13"></span><span style="font-size: 14px"> ml</span></h2>
+                                    <div style="font-size: 14px;margin-bottom: 10px">胶体溶液量</div>
+                                    <h2 style="margin-top: 5px"><span id="resultmsg14"></span><span style="font-size: 14px"> ml</span></h2>
+                                    <div style="font-size: 14px;">每日正常需水量（5%葡萄糖注射液）</div>
+                                </div>
+                                <div class="result" id="res2" style="margin-top: 10px">
+                                    <span style="font-weight: bold">烧伤首日前8小时:</span>
+                                    <h2 style="margin-top: 5px"><span id="resultmsg21"></span><span style="font-size: 14px;"> ml</span></h2>
+                                    <div id="label21" style="font-size: 14px;margin-bottom: 10px">起始补液量(前8h)</div>
+                                    <h2 style="margin-top: 5px"><span id="resultmsg22"></span><span style="font-size: 14px"> ml/h</span>
+                                    </h2>
+                                    <div id="label22" style="font-size: 14px;">起始补液速度(前8h)</div>
+                                </div>
+                                <div class="result" id="res3" style="margin-top: 10px">
+                                    <span style="font-weight: bold">烧伤首日后16小时:</span>
+                                    <h2 style="margin-top: 5px"><span id="resultmsg31"></span><span style="font-size: 14px;"> ml</span></h2>
+                                    <div style="font-size: 14px;margin-bottom: 10px">起始补液量(后16)</div>
+                                    <h2 style="margin-top: 5px"><span id="resultmsg32"></span><span style="font-size: 14px"> ml/h</span>
+                                    </h2>
+                                    <div style="font-size: 14px;">起始补液速度(后16)</div>
+                                </div>
+                                <div class="result" id="res4" style="margin-top: 10px">
+                                    <span style="font-weight: bold">烧伤后第2日:</span>
+                                    <h2 style="margin-top: 5px"><span id="resultmsg41"></span><span style="font-size: 14px;"> ml</span></h2>
+                                    <div style="font-size: 14px;margin-bottom: 10px">电解质溶液量</div>
+                                    <h2 style="margin-top: 5px"><span id="resultmsg42"></span><span style="font-size: 14px"> ml</span></h2>
+                                    <div style="font-size: 14px;margin-bottom: 10px">胶体溶液量</div>
+                                    <h2 style="margin-top: 5px"><span id="resultmsg43"></span><span style="font-size: 14px"> ml</span></h2>
+                                    <div style="font-size: 14px">每日正常需水量（5%葡萄糖注射液）</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">计算公式</span></h3>
+        <div class="jiedu">
+            <div class="title">烧伤首日：</div>
+            <p>补液总量 Qty=tbsa×体重×1.5+2000</p>
+            <p>等渗林格乳酸钠溶液量=tbsa×体重×1</p>
+            <p>胶体溶液量= tbsa×体重×0.5</p>
+            <p>每日正常需水量（5%葡萄糖注射液）=2000</p>
+
+            <div class="title">烧伤首日前8小时：</div>
+            <p>起始补液量=Qty/2-目前补液量</p>
+            <p>起始补液速度=起始补液量/(8-烧伤后时间)</p>
+
+            <div class="title">烧伤首日后16小时：</div>
+            <p>追加补液量=Qty/2</p>
+            <p>追加补液速度=Qty/2/16</p>
+
+            <div class="title">烧伤后第2日：</div>
+            <p>电解质溶液量=tbsa×体重/2</p>
+            <p>胶体溶液量= tbsa×体重×0.25</p>
+            <p>每日正常需水量（5%葡萄糖注射液）=2000</p>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">说明</span></h3>
+        <div class="jiedu">
+            <p>烧伤面积比(TBSA, total burn surface area).</p>
+            <p>伤后第一个24h内，成人每1%Ⅱ度、Ⅲ度烧伤面积补给等渗乳酸钠林格溶液1ml，胶体0.5ml，同时补给基础水分2000ml，伤后8小时内补入估计量的一半，后16小时补入另一半；伤后第二个24小时电解质和胶体液减半，基础水分不变。</p>
+            <p>该公式于1962年根据147例成人大面积烧伤病人早期补液情况总结而成。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">杨宗城主编.《烧伤治疗学》（第3版）[M].人民卫生出版社.2006.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-342.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-342">肱骨髁上骨折分类</h2>
+    </div>
+    <div class="mainContainer">
+        <p>伸直型：最多见，占 90％ 以上。跌倒时有肘关节在半屈曲或伸直位，手心触地，暴力经前臂传达至肱骨下端，将肱骨髁推向后方。由于重力将肱骨干推向前方，造成肱骨髁上骨折。骨折线由前下斜向后上方。骨折近段常刺破肱前肌损伤正中神经和肱动脉。骨折时，肱骨下端除接受前后暴力外，还可伴有侧方暴力，按移位情况又分尺偏型和桡偏型。</p>
+        <p> &nbsp;&nbsp;&nbsp;&nbsp;1．尺偏型，骨折暴力来自肱骨髁前外方，骨折时肱骨髁被推向后内方。内侧骨皮质受挤压，产生一定塌陷。前外侧骨膜破裂，内侧骨膜完整。骨折远端尺侧移位。因此复位后远端容易向尺侧再移位。即使达到解剖复位，因而内侧皮质挤压缺损而会向内偏斜。尺偏型骨折后肘内翻发生率最高。</p>
+        <p> &nbsp;&nbsp;&nbsp;&nbsp;2．桡偏型，与尺偏型相反。骨折断端桡侧骨皮质因压挤而塌陷。外侧骨膜保持连续。尺侧骨膜断裂，骨折远端向桡侧移位。此型骨折不完全复位也不会产生严重肘外翻，但解剖复位或矫正过度时，亦可形成肘内翻畸形。 </p>
+        <br>
+        <p> 屈曲型：较少见。肘并节在屈曲位跌倒，暴力由后下方向前上方撞击尺骨鹰嘴，髁上骨折后远端向前移位，骨折线常为后下斜向前上方，与伸直型相反。很少发生血管、神经损伤。 </p>
+        <p> 粉碎型：多见于成年人。引型骨折多属肱骨髁间骨折，按骨折线形状可分 T 型和 Y 型或粉碎型骨折。 </p>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

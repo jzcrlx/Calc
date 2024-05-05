@@ -1,0 +1,149 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-247.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-247">真性球麻痹和假性球麻痹的鉴别</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab1">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>真性球麻痹</th>
+                    <th>假性球麻痹</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>病变部位</th>
+                    <td>疑核，舌咽、迷走神经(一侧或两侧)</td>
+                    <td>双侧皮质脑干束</td>
+                </tr>
+                <tr>
+                    <th>下颌反射</th>
+                    <td>消失</td>
+                    <td>亢进</td>
+                </tr>
+                <tr>
+                    <th>咽反射</th>
+                    <td>消失</td>
+                    <td>存在</td>
+                </tr>
+                <tr>
+                    <th>强哭强笑</th>
+                    <td>无</td>
+                    <td>有</td>
+                </tr>
+                <tr>
+                    <th>舌肌萎缩</th>
+                    <td>常有</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <th>双侧锥体束征</th>
+                    <td>无</td>
+                    <td>常有</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>舌咽、迷走神经损伤</p>
+                <p>舌咽神经和迷走神经多半同时受损，主要表现为声音嘶哑、吞咽困难、饮水返呛、咽反射消失，临床上称球麻痹(真性球麻痹)。一侧损伤时症状较轻，张口时可见到瘫痪一侧的软腭弓较低，悬雍垂偏向健侧，患者发“啊”音时患侧软腭上抬受限，伴患侧咽部感觉缺失及咽反射消失。见于吉兰-巴雷综合征、Wallenberg综合征等。舌咽、迷走神经的运动核受双侧皮质脑干束支配，当一侧损害时不出现球麻痹症状；当双侧皮质脑干束损伤时才出现构音障碍和吞咽困难，而咽反射存在，称核上性延髓麻痹或假性球麻痹。常见于两侧半球的血管病变。真性球麻痹与假性球麻痹的鉴别如表所示。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">吴江主编. 神经病学（八年制）（第2版）. 2010年. p19-20.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

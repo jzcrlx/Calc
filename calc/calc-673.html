@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-673.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-673" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>Ottawa踝关节骨折诊断规则</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="painmalleolarzone">踝部疼痛</label>
+                                    <input class="flex_que q_radio" value="1" id="painmalleolarzone" name="painmalleolarzone" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="painmidfootzone">足中部疼痛</label>
+                                    <input class="flex_que q_radio" value="1" id="painmidfootzone" name="painmidfootzone" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que" id="common-link" style="display: none">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="inabilitybearweight">受伤即刻和急诊就诊时均无法负重</label>
+                                    <input class="flex_que q_radio" value="1" id="inabilitybearweight" name="inabilitybearweight" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que" id="painmalleolarzone-link" style="display: none">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="posterior">踝骨后尖端、踝骨及其远端 6 cm 内某一侧边压痛</label>
+                                    <input class="flex_que q_radio" value="1" id="posterior" name="posterior" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que" id="painmidfootzone-link1" style="display: none">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="base">第 5 跖骨基底骨压痛</label>
+                                    <input class="flex_que q_radio" value="1" id="base" name="base" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que" id="painmidfootzone-link2" style="display: none">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="navicular">足舟骨骨压痛</label>
+                                    <input class="flex_que q_radio" value="1" id="navicular" name="navicular" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-hg">建议:</div>
+                                <div class="flex-item">
+                                    <div id="resultmsg" class="skin-color"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">临床应用</span></h3>
+        <div class="jiedu">
+            <p>Ottawa 踝关节骨折诊断规则（Ottawa Ankle Rule）可以帮助临床医生减少不必要的踝关节摄片，且其假阴性率小于 0.8%（95% 可信区间）[2]。</p>
+            <p>某些患者未被纳入到研究中，尤其是妊娠妇女以及（头部损伤或中毒等各种原因所致的）依从性降低而无法完成测试的人。一些研究强烈支持对大于 6 岁的儿童应该使用该规则（敏感性 98.5%）[3]。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="//www.ncbi.nlm.nih.gov/m/pubmed/1554175/" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Stiell IG et al. Ann Emerg Med. 1992 Apr;21(4):384-90. </span>
+        </a>
+        <a href="//www.ncbi.nlm.nih.gov/m/pubmed/8433468/" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Stiell IG et al. JAMA. 1993 Mar 3;269(9):1127-32.</span>
+        </a>
+        <a href="//www.ncbi.nlm.nih.gov/m/pubmed/19187397/" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Dowling S et al. Acad Emerg Med. 2009 Apr;16(4):277-87. </span>
+        </a>
+    </div>
+</div>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

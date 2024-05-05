@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-57.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-57" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>烧伤补液（Parkland 公式）</h2>
+        </div>
+        <form name="medform" action="get" id="medform">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">体重</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="weight" type="number">
+                                </div>
+                                <div class="calc-unit-md">kg</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">烧伤面积比</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="tbsa" type="number">
+                                </div>
+                                <div class="calc-unit-md">%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">烧伤后时长</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="hour" id="hour" type="number">
+                                </div>
+                                <div class="calc-unit-md">小时</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">目前补液量</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="f" id="f" type="number">
+                                </div>
+                                <div class="calc-unit-md">ml</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block" style="margin-top: 12px;">
+                        <div class="question_infor">
+                            <div style="padding-top: 10px;text-align: center">
+                                <button type="button" class="calc_btn" id="result">查看结果</button>
+                            </div>
+                        </div>
+                        <div class="question_infor">
+                            <div class="result-list" style="display: none">
+                                <div class="result" id="res1">
+                                    <h2><span id="resultmsg11"></span><span style="font-size: 14px"> ml</span></h2>
+                                    <div id="resultmsg12" style="font-size: 14px">液体需要量(首个24h)</div>
+                                </div>
+                                <div class="result" id="res2">
+                                    <h2><span id="resultmsg21"></span><span style="font-size: 14px"> ml</span></h2>
+                                    <div id="resultmsg22" style="font-size: 14px">起始补液量(前8h)</div>
+                                </div>
+                                <div class="result" id="res3">
+                                    <h2><span id="resultmsg31"></span><span style="font-size: 14px"> ml/h</span></h2>
+                                    <div id="resultmsg32" style="font-size: 14px">起始补液量速度(前8h)</div>
+                                </div>
+                                <div class="result" id="res4">
+                                    <h2><span id="resultmsg41"></span><span style="font-size: 14px"> ml</span></h2>
+                                    <div id="resultmsg42" style="font-size: 14px">追加补液量(后16h)</div>
+                                </div>
+                                <div class="result" id="res5">
+                                    <h2><span id="resultmsg51"></span><span style="font-size: 14px"> ml/h</span></h2>
+                                    <div id="resultmsg52" style="font-size: 14px">追加补液量速度(后16h)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">计算公式</span></h3>
+        <div class="jiedu">
+            <p>液体需要量 Qty = 烧伤面积比*体重*4</p>
+            <p>起始补液量=Qty/2-目前补液量</p>
+            <p>起始补液速度=起始补液量/(8-烧伤后时间)</p>
+            <p>追加补液量=Qty/2</p>
+            <p>追加补液速度=Qty/2/16</p>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">说明</span></h3>
+        <div class="jiedu">
+            <p>计算除维持补液外，烧伤后首个24小时内的静脉补液量（通常为乳酸林格液）；</p>
+            <p>第一个8小时给予液体总需要量的一半, 剩余的一半在接下来的16小时输注完。</p>
+            <p>成人烧伤九分法：每侧上肢9%，每侧下肢18%，头部9%，前部躯干18%，后部躯干18%。</p>
+            <p>儿童烧伤九分法：每侧上肢9%，每侧下肢14%，头部18%，前部躯干18%，后部躯干18%。</p>
+            <p>相关公式: <a href="calc-527.html">烧伤面积(新九分法)</a></p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">1、Baxter CR. Fluid volume and electrolyte changes in the early post-burn period. Clin Plast Surg. 1974;1:693–703.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">2、Cartotto RC, et al. How well does the Parkland formula estimate actual fluid resuscitation volumes? J Burn Care Rehabil. 2002;23(4):258-65. </span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

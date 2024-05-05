@@ -1,0 +1,298 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-778.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-778" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>Comfort疼痛评分</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">警觉程度</div>
+                        <div class="answer" name="select1">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">警觉程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="1" class="option">深睡眠</div>
+                                <div value="2" class="option selected">浅睡眠</div>
+                                <div value="3" class="option">昏昏欲睡</div>
+                                <div value="4" class="option">完全清醒和警觉</div>
+                                <div value="5" class="option">高度警惕</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            平静或激动
+                        </div>
+                        <div class="answer" name="select2">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">平静或激动</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="1" class="option selected">平静</div>
+                                <div value="2" class="option">轻度焦虑</div>
+                                <div value="3" class="option">焦虑</div>
+                                <div value="4" class="option">非常焦虑</div>
+                                <div value="5" class="option">惊恐</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">呼吸反应</div>
+                        <div class="answer" name="select3">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">呼吸反应</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="1" class="option selected">无咳嗽或无自主呼吸</div>
+                                <div value="2" class="option">稍微的自主呼吸或对机械通气无反应</div>
+                                <div value="3" class="option">偶尔咳嗽或呼吸对抗</div>
+                                <div value="4" class="option">呼吸对抗活跃，频繁咳嗽</div>
+                                <div value="5" class="option">严重呼吸对抗、咳嗽/憋气</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            体动
+                        </div>
+                        <div class="answer" name="select4">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">体动</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="1" class="option">无体动</div>
+                                <div value="2" class="option selected">偶尔轻微体动</div>
+                                <div value="3" class="option">频繁轻微体动</div>
+                                <div value="4" class="option">四肢有力活动</div>
+                                <div value="5" class="option">躯干及头部有力活动</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">血压</div>
+                        <div class="answer" name="select5">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">血压</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="1" class="option">低于基础值</div>
+                                <div value="2" class="option selected">始终在基础值</div>
+                                <div value="3" class="option">偶尔升高超过15%或更多(观察期间1～3次)</div>
+                                <div value="4" class="option">频繁升高超过15%或更多(＞3次)</div>
+                                <div value="5" class="option">持续升高超过15%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            心率
+                        </div>
+                        <div class="answer" name="select6">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">心率</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="1" class="option">低于基础值</div>
+                                <div value="2" class="option selected">始终在基础值</div>
+                                <div value="3" class="option">偶尔升高超过15%或更多(观察期间1～3次)</div>
+                                <div value="4" class="option">频繁升高超过15%或更多(＞3次)</div>
+                                <div value="5" class="option">持续升高超过15%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">肌肉张力</div>
+                        <div class="answer" name="select7">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">肌肉张力</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="1" class="option">肌肉完全放松，没有张力</div>
+                                <div value="2" class="option">肌肉张力减低</div>
+                                <div value="3" class="option selected">肌肉张力正常</div>
+                                <div value="4" class="option">肌肉张力增加，手指和脚趾弯曲</div>
+                                <div value="5" class="option">肌肉极度僵硬，手指和脚趾弯曲</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            面部紧张程度
+                        </div>
+                        <div class="answer" name="select8">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">面部紧张程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="1" class="option">面部肌肉完全放松</div>
+                                <div value="2" class="option selected">面部肌肉张力正常，无面部肌肉紧张</div>
+                                <div value="3" class="option">面部部分肌肉张力增加</div>
+                                <div value="4" class="option">面部全部肌肉张力增加</div>
+                                <div value="5" class="option">面部扭曲，表情痛苦</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">评分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>Comfort评分主要用于新生儿到17岁的ICU患儿的观察，以及新生儿至3岁手术后患儿的疼痛评估。</p>
+            <p>
+                Comfort评分共包括8个项目，每一个项目评分为1～5分，总分为40分。将镇静程度分为3级：8～16分为深度镇静；17～26分为轻度镇静；27～40分为镇静不足、躁动。其中，Comfort评分17～26分</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">中华医学会麻醉学分会·小儿术后镇痛专家共识(2017版)·2017-12</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

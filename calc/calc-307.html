@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-307.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-307">Frankel 脊髓损伤分级法</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2">
+                <tbody>
+                <tr>
+                    <th>等级</th>
+                    <th>功能状况</th>
+                </tr>
+                <tr>
+                    <td>A</td>
+                    <td>损伤平面以下深浅感觉完全消失，肌肉运动功能完全消失</td>
+                </tr>
+                <tr>
+                    <td>B</td>
+                    <td>损伤平面以下运动功能完全消失，仅存某些包括骶区感觉</td>
+                </tr>
+                <tr>
+                    <td>C</td>
+                    <td>损伤平面以下仅有某些肌肉运动功能，无有用功能存在</td>
+                </tr>
+                <tr>
+                    <td>D</td>
+                    <td>损伤平面以下肌肉功能不完全，可扶拐行走</td>
+                </tr>
+                <tr>
+                    <td>E</td>
+                    <td>深浅感觉、肌肉运动及大小便功能良好，可有病理反射</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>Frankel 法对脊髓损伤的程度进行了粗略的分级，对脊髓损伤的评定有较大的实用价值，但对脊髓圆椎和马尾损伤的评定有一定的缺陷，缺乏反射和括约肌功能判定，尤其是对膀胱、直肠括约肌功能状况表达不够清楚。</p>
+                <p>因此国内、外许多学者又在 Frankel 的基础上针对颈、胸、腰等不同平面的脊髓或马尾损伤的恢复标准进行了综合的修订，制订出了适用于胸腰椎损伤的标准一和适用于完全性颈髓损伤的标准二。</p>
+                <p>它的每一评价标准均分为 5 个等级，使脊髓损伤分级更为细致，优点是对于颈脊髓损伤、双下肢无功能者也能依据上肢功能进行评定。</p>
+                <p>美国脊髓损伤协会 (ASIA) 也在 Frankel 分级的基础上进行了修订。</p>
+                <p>ASIA 脊髓损伤分法与 Frankel 法相比区别不大，仍是一种划分等级的方法，而且各等级间的界限也不十分的清楚，因此也不能很好地克服 Frankel 法的缺点。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">Frankel HL, et al. The value of postural reduction in the initial management of closed injuries of the spine with paraplegia and tetraplegia. I. Paraplegia. 1969;7(3):179-192.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

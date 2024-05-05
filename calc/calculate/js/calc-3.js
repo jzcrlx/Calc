@@ -1,0 +1,1 @@
+function MDCalc(z){value=10*z.wbc*(z.neut+z.band);Answer(Round(value,1))}$("#units").hide();

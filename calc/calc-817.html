@@ -1,0 +1,439 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-817.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-817" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>皮肤病生活质量指数（Dermatology Life Quality Index, DLQI-R）</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box end">
+                <div class="question_sub_title">
+                    以下问题的目的是确定你的皮肤问题多大程度上影响了你的生活。请只考虑最近一周的情况！
+                </div>
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="question_title">
+                                1.上周内，你的皮肤的瘙痒或疼痛（包括酸痛、刺痛等等）的症状重吗？
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="3" name="item1" id="item1_1" type="radio">
+                                        <label class="flex" for="item1_1">非常严重</label>
+                                        <input class="flex_que q_radio" value="2" name="item1" id="item1_2" type="radio">
+                                        <label class="flex" for="item1_2">严重</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item1" id="item1_3" type="radio">
+                                        <label class="flex" for="item1_3">较轻</label>
+                                        <input class="flex_que q_radio" value="0" name="item1" id="item1_4" type="radio">
+                                        <label class="flex" for="item1_4">无</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                2.上周内，你的皮肤病变有多少次让你觉察到或者让你感到尴尬？
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="3" name="item2" id="item2_1" type="radio">
+                                        <label class="flex" for="item2_1">非常严重</label>
+                                        <input class="flex_que q_radio" value="2" name="item2" id="item2_2" type="radio">
+                                        <label class="flex" for="item2_2">严重</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item2" id="item2_3" type="radio">
+                                        <label class="flex" for="item2_3">较轻</label>
+                                        <input class="flex_que q_radio" value="0" name="item2" id="item2_4" type="radio">
+                                        <label class="flex" for="item2_4">无</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                3.上周内，你的皮肤病变在多大程度上影响了购物、家务或者园艺活动？
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="3" name="item3" id="item3_1" type="radio">
+                                        <label class="flex" for="item3_1">非常严重</label>
+                                        <input class="flex_que q_radio" value="2" name="item3" id="item3_2" type="radio">
+                                        <label class="flex" for="item3_2">严重</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item3" id="item3_3" type="radio">
+                                        <label class="flex" for="item3_3">较轻</label>
+                                        <input class="flex_que q_radio" value="0" name="item3" id="item3_4" type="radio">
+                                        <label class="flex" for="item3_4">无</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="-1" name="item3" id="item3_5" type="radio">
+                                        <label class="flex" for="item3_5">不相关</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                4.上周内，你的皮肤病变在多大程度上影响了你的穿着？
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="3" name="item4" id="item4_1" type="radio">
+                                        <label class="flex" for="item4_1">非常严重</label>
+                                        <input class="flex_que q_radio" value="2" name="item4" id="item4_2" type="radio">
+                                        <label class="flex" for="item4_2">严重</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item4" id="item4_3" type="radio">
+                                        <label class="flex" for="item4_3">较轻</label>
+                                        <input class="flex_que q_radio" value="0" name="item4" id="item4_4" type="radio">
+                                        <label class="flex" for="item4_4">无</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="-1" name="item4" id="item4_5" type="radio">
+                                        <label class="flex" for="item4_5">不相关</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                5.上周内，你的皮肤病变在多大程度上影响了你的社交或休闲活动？
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="3" name="item5" id="item5_1" type="radio">
+                                        <label class="flex" for="item5_1">非常严重</label>
+                                        <input class="flex_que q_radio" value="2" name="item5" id="item5_2" type="radio">
+                                        <label class="flex" for="item5_2">严重</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item5" id="item5_3" type="radio">
+                                        <label class="flex" for="item5_3">较轻</label>
+                                        <input class="flex_que q_radio" value="0" name="item5" id="item5_4" type="radio">
+                                        <label class="flex" for="item5_4">无</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="-1" name="item5" id="item5_5" type="radio">
+                                        <label class="flex" for="item5_5">不相关</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                6.上周内，你的皮肤病变在多大程度上让体育运动变得困难？
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="3" name="item6" id="item6_1" type="radio">
+                                        <label class="flex" for="item6_1">非常严重</label>
+                                        <input class="flex_que q_radio" value="2" name="item6" id="item6_2" type="radio">
+                                        <label class="flex" for="item6_2">严重</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item6" id="item6_3" type="radio">
+                                        <label class="flex" for="item6_3">较轻</label>
+                                        <input class="flex_que q_radio" value="0" name="item6" id="item6_4" type="radio">
+                                        <label class="flex" for="item6_4">无</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="-1" name="item6" id="item6_5" type="radio">
+                                        <label class="flex" for="item6_5">不相关</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                7.上周内，你的皮肤病变使你暂停工作或学习？
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item7" id="item7_1" type="radio">
+                                        <label class="flex" for="item7_1">是</label>
+                                        <input class="flex_que q_radio" value="2" name="item7" id="item7_2" type="radio">
+                                        <label class="flex" for="item7_2">否</label>
+                                        <input class="flex_que q_radio" value="-1" name="item7" id="item7_4" type="radio">
+                                        <label class="flex" for="item7_4">不相关</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block" id="item7More">
+                            <div class="question_title">
+                                如果“否”，上周的工作或学习中，你的皮肤病变对你造成了多大的困扰？如果上题选“是”，这题请选“无”
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="3" name="item7More" id="item7More_1" type="radio">
+                                        <label class="flex" for="item7More_1">严重</label>
+                                        <input class="flex_que q_radio" value="2" name="item7More" id="item7More_2" type="radio">
+                                        <label class="flex" for="item7More_2">较轻</label>
+                                        <input class="flex_que q_radio" value="0" name="item7More" id="item7More_4" type="radio">
+                                        <label class="flex" for="item7More_4">无</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                8．上周内，你的皮肤病变在多大程度上给你的同伴、亲密朋友或者家人带来麻烦？
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="3" name="item8" id="item8_1" type="radio">
+                                        <label class="flex" for="item8_1">非常严重</label>
+                                        <input class="flex_que q_radio" value="2" name="item8" id="item8_2" type="radio">
+                                        <label class="flex" for="item8_2">严重</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item8" id="item8_3" type="radio">
+                                        <label class="flex" for="item8_3">较轻</label>
+                                        <input class="flex_que q_radio" value="0" name="item8" id="item8_4" type="radio">
+                                        <label class="flex" for="item8_4">无</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="-1" name="item8" id="item8_5" type="radio">
+                                        <label class="flex" for="item8_5">不相关</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                9.上周内，你的皮肤病变在多大程度上造成性生活的困难？
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="3" name="item9" id="item9_1" type="radio">
+                                        <label class="flex" for="item9_1">非常严重</label>
+                                        <input class="flex_que q_radio" value="2" name="item9" id="item9_2" type="radio">
+                                        <label class="flex" for="item9_2">严重</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item9" id="item9_3" type="radio">
+                                        <label class="flex" for="item9_3">较轻</label>
+                                        <input class="flex_que q_radio" value="0" name="item9" id="item9_4" type="radio">
+                                        <label class="flex" for="item9_4">无</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="-1" name="item9" id="item9_5" type="radio">
+                                        <label class="flex" for="item9_5">不相关</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                10.上周内，治疗过程中有多大的困难？例如使家中变得不洁净或者耽误时间
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="3" name="item10" id="item10_1" type="radio">
+                                        <label class="flex" for="item10_1">非常严重</label>
+                                        <input class="flex_que q_radio" value="2" name="item10" id="item10_2" type="radio">
+                                        <label class="flex" for="item10_2">严重</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item10" id="item10_3" type="radio">
+                                        <label class="flex" for="item10_3">较轻</label>
+                                        <input class="flex_que q_radio" value="0" name="item10" id="item10_4" type="radio">
+                                        <label class="flex" for="item10_4">无</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="-1" name="item10" id="item10_5" type="radio">
+                                        <label class="flex" for="item10_5">不相关</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-lg">DLQI得分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-lg">DLQI-R得分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result1" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p> DLQI得分:</p>
+            <p> 0~1 分=无影响， 2~5 分=轻度影响</p>
+            <p> 6~10 分=中度影响， 11~20 分=重度影响</p>
+            <p> 21~30分=极严重影响</p>
+        </div>
+    </div>
+    <div class="ref">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">1. Finlay AY and Khan GK. Dermatology Life Quality Index (DLQI): a simple practical measure for routine clinical use. Clin Exp Dermatol 1994; 19:210-216.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">2. Basra MK, Fenech R, Gatt RM, Salek MS and Finlay AY. The Dermatology Life Quality Index 1994-2007: a comprehensive review of validation data and clinical results. Br J Dermatol 2008; 159:997-1035.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">3. Hongbo Y, Thomas CL, Harrison MA, Salek MS and Finlay AY. Translating the science of quality of life into practice: What do dermatology life quality index scores mean? J Invest Dermatol 2005; 125:659-64.</span>
+        </a>
+        <a href="//onlinelibrary.wiley.com/doi/full/10.1111/bjd.18435" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">4. DLQI-R scoring improves the discriminatory power of the Dermatology Life Quality Index in patients with psoriasis, pemphigus and morphea</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-144.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-144">卵巢癌FIGO分期</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0" width="90%">
+                <thead>
+                <tr>
+                    <th>FIGO分期</th>
+                    <th>肿瘤表现</th>
+                    <th>TNM</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>I</td>
+                    <td>肿瘤局限于卵巢或输卵管</td>
+                    <td>T1</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;IA</td>
+                    <td>肿瘤局限于一侧卵巢，包膜完整，卵巢表面无肿瘤；腹水或腹腔冲洗液未找到恶性细胞</td>
+                    <td>T1a</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;IB</td>
+                    <td>肿瘤局限于双侧卵巢，包膜完整，卵巢表面无肿瘤；腹水或腹腔冲洗液未找到恶性细胞</td>
+                    <td>T1b</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;IC</td>
+                    <td>肿瘤局限于单或双侧卵巢并伴有如下任何一项：包膜破裂；卵巢表面有肿瘤；腹水或腹腔冲洗液有恶性细胞</td>
+                    <td>T1c</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;IC1</td>
+                    <td>术中手术导致肿瘤破裂</td>
+                    <td>T1c</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;IC2</td>
+                    <td>术前肿瘤包膜破裂，或者卵巢或输卵管表面出现肿瘤</td>
+                    <td>T1c</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;IC3</td>
+                    <td>腹水或腹腔冲洗液中出现恶性细胞</td>
+                    <td>T1c</td>
+                </tr>
+                <tr>
+                    <td>Ⅱ</td>
+                    <td>肿瘤累及一侧或双侧卵巢伴有盆腔扩散，或腹膜癌</td>
+                    <td>T2</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;ⅡA</td>
+                    <td>扩散和/或种植到子宫和（或）输卵管；腹水或腹腔冲洗液无恶性细胞</td>
+                    <td>T2a</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;ⅡB</td>
+                    <td>扩散到其他盆腔器官；腹水或腹腔冲洗液无恶性细胞</td>
+                    <td>T2b</td>
+                </tr>
+                <tr>
+                    <td>Ⅲ</td>
+                    <td>肿瘤侵犯一侧或双侧卵巢，并有显微镜证实的盆腔外腹膜转移和/或局部淋巴结转移</td>
+                    <td>T3/N1</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;ⅢA</td>
+                    <td>病变大体所见局限于真骨盆，淋巴结阴性，但腹腔腹膜面有镜下种植，或镜下证实己扩展到小肠或肠系膜</td>
+                    <td>T3a</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;ⅢA1</td>
+                    <td>仅有腹膜后淋巴结阳性（细胞学或组织学确认）</td>
+                    <td>T3a/T3aN1</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;ⅢA2</td>
+                    <td>骨盆外（骨盆缘之上）累及腹膜的微小转移，伴有或不伴有腹膜后淋巴结阳性</td>
+                    <td>T3c/T3cN1</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;ⅢB</td>
+                    <td>肉眼盆腔外腹膜转移灶最大径线≤2cm</td>
+                    <td>任何T，任何N</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;ⅢC</td>
+                    <td>肉眼盆腔外腹膜转移灶最大径线＞2cm，和（或）区域淋巴结转移</td>
+                    <td>M1</td>
+                </tr>
+                <tr>
+                    <td>Ⅳ</td>
+                    <td>超出腹腔外的远处转移</td>
+                    <td>T3c/T3cN1</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;ⅣA</td>
+                    <td>胸水细胞学阳性</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;ⅣB</td>
+                    <td>转移至腹腔外器官（包括腹股沟淋巴结和腹腔外淋巴结）</td>
+                    <td></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>
+                    1973年FIGO（国际妇产科联合会）首次发布卵巢癌、卵管癌和腹膜癌的分期，1988年有过一次修订。本次为第三个版本(2014)。
+                </p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">Mutch DG, Prat J. 2014 FIGO staging for ovarian, fallopian tube and peritoneal cancer. Gynecol Oncol. 2014;133(3):401-4.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

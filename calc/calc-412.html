@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-412.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-412">尿石的一般特征</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap"><table class="countTab2" border="0" cellpadding="0" cellspacing="0"> <thead> <tr> <th>类型</th> <th>比率(%)</th> <th>晶体</th> <th>性状</th> <th>pH值对溶解度的影响</th> <th>X线密度(骨骼=1.0)</th> <th>力学特性</th> </tr> </thead> <tbody> <tr> <th rowspan="2">草酸钙类</th> <td rowspan="2">67.2</td> <td>一水草酸钙</td> <td>呈褐色，铸形或桑葚状，质地坚硬</td> <td rowspan="2">影响不大</td> <td rowspan="2">0.50(不透X线)</td> <td rowspan="2">脆性</td> </tr> <tr> <td>二水草酸钙</td> <td>呈白色，表面有晶莹的刺状突起，质地松脆</td> </tr> <tr> <th>磷酸钙类</th> <td>22.4</td> <td>羟基磷灰石，碳酸磷灰石，二水磷酸氢钙，磷酸三钙</td> <td>浅灰色，坚硬，可有同心层，其中二水磷酸氢钙最硬</td> <td>&lt;5.5时升高</td> <td>1.0(不透X线)</td> <td>脆性</td> </tr> <tr> <th>尿酸类</th> <td>6.9</td> <td>无水尿酸，二水尿酸，尿酸铵，一水尿酸钠</td> <td>极易吸附尿色素而呈黄色或砖红色，圆形光滑，结构致密，中等硬度</td> <td>&gt;6.8时,无水、二水尿酸升高；尿酸铵则降低</td> <td>0.05(透X线)</td> <td>脆性</td> </tr> <tr> <th>磷酸铵镁</th> <td>1.7</td> <td>六水磷酸铵镁</td> <td>灰色，不规则或鹿角形，松散易碎</td> <td>&lt;5.5时升高5.5时升高</td> <td>0.20(半透X线)</td> <td>脆性</td> </tr> <tr> <th>胱氨酸</th> <td>1.1</td> <td>胱氨酸</td> <td>蜡黄色，表面光亮，可呈圆形或鹿角形</td> <td>&gt;7.5时升高</td> <td>0.15(半透X线)</td> <td>韧性</td> </tr> </tbody>
+        </table></div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>含钙类结石(草酸钙、磷酸钙类)最多见，接近结石总数的90%；尿酸类结石大多发生于男性病人；磷酸铵镁结石则大多见于女性病人；胱氨酸结石在儿童中的比率较高。其他成分结石，如碳酸钙结石、二氧化硅结石等则罕见。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">陈孝平主编. 外科学（八年制）（第2版）. 人民卫生出版社. 2010年.p831.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

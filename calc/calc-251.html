@@ -1,0 +1,259 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-251.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-251" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>JOA脊髓型颈椎病评分</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="que_title">
+                    <span>运动功能</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">上肢</div>
+                        <div class="answer" name="yundongshangzhi">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">上肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="4" class="option">正常</div>
+                                <div value="3" class="option">用筷子吃饭有些困难</div>
+                                <div value="2" class="option">用筷子吃饭很困难</div>
+                                <div value="1" class="option">能用汤匙吃饭，但不能用筷子</div>
+                                <div value="0" class="option">自己不能吃饭</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            下肢
+                        </div>
+                        <div class="answer" name="yundongxiazhi">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">下肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="4" class="option">正常</div>
+                                <div value="3" class="option">不用任何辅助，可以行走但是有轻度的肌肉挛缩</div>
+                                <div value="2" class="option">上下台阶需要扶栏杆</div>
+                                <div value="1" class="option">在平地上行走需要辅助器具</div>
+                                <div value="0" class="option">不能行走</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="que_title">
+                    <span>感觉</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">上肢</div>
+                        <div class="answer" name="ganjueshangzhi">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">上肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="2" class="option">正常</div>
+                                <div value="1" class="option">轻微感觉缺失</div>
+                                <div value="0" class="option">明显感觉缺失</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">下肢</div>
+                        <div class="answer" name="ganjuexiazhi">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">下肢</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="2" class="option">正常</div>
+                                <div value="1" class="option">轻微感觉缺失</div>
+                                <div value="0" class="option">明显感觉缺失</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">躯体</div>
+                        <div class="answer" name="ganjuequti">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">躯体</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="2" class="option">正常</div>
+                                <div value="1" class="option">轻微感觉缺失</div>
+                                <div value="0" class="option">明显感觉缺失</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            膀胱功能
+                        </div>
+                        <div class="answer" name="ganjuepangguang">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">膀胱功能</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="3" class="option">正常</div>
+                                <div value="2" class="option">轻度功能障碍</div>
+                                <div value="1" class="option">严重功能障碍</div>
+                                <div value="0" class="option">完全尿潴留</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">评分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>此标准指评定治疗成绩所必要的症状，比较治疗前后效果的评定按以下方法进行。 </p>
+            <p> 1．分数表示方法：以各阶段评分数的总合进行比较。比如治疗前10分至治疗后15分。此时，治疗成绩可用指数化形式表示。 </p>
+            <p>(1)改善率＝［治疗后分数-治疗前分数］/治疗后分数×100％。 </p>
+            <p>(2)改善指数＝［治疗后分数-治疗前分数］/治疗后分数。 </p>
+            <p>(3)改善率＝［治疗后分数-治疗前分数］/［正常-治疗前分数］。 </p>
+            <p>2．阶段性表示方法：各阶段评定数字用以表示各阶段的情况(如肌力0～5级)各项目可以分别比较。比如按上肢运动功能4→2，下肢运动功能3→l，知觉1→1，膀胱功能不能评定(尿路障碍)等方法表示。 </p>
+            <p>
+                3．治疗成绩综合评定：进行优、良、可或有效、无效的综合评定时，必要时在明确定义下评定。比如用分数表示时，将改善率75％以上者定为优等；或用等级性表示法，一个项目中有一个等级以上的改善，且无恶化项目者为有效等。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">蒋协远 等主编. 骨科临床疗效评价标准. 人民卫生出版社. 2005.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

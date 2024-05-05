@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-239.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-239">多发性硬化McDonald诊断标准</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab1">
+                <thead>
+                <tr>
+                    <th width="40%">临床表现</th>
+                    <th width="60%">附加证据</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>≥2次发作<sup>a</sup>；具有≥2个以上客观临床证据的病变或者存在1个客观临床证据的病变同时伴有既往发作<sup>b</sup>合理的病史证据</td>
+                    <td>无<sup>c</sup></td>
+                </tr>
+                <tr>
+                    <td>≥2次发作<sup>a</sup>；具有1个病变的客观临床证据</td>
+                    <td>具有以下证明病变空间多发的证据(DIS)：<br> (1)在CNS的4个MS典型区域(脑室周围、近皮质、幕下和脊髓)<sup>d</sup>中至少有2个区域有≥1个T2病变；<br>
+                        (2)或者等待以后涉及CNS不同部位病变的临床发作<sup>a</sup></td>
+                </tr>
+                <tr>
+                    <td>1次发作<sup>a</sup>；具有≥2个病变的客观临床证据</td>
+                    <td>具有以下证明病变时间多发的证据(DIT)：<br> (1)在任何时间同时存在无症状的钆增强的与非增强的病变；<br>
+                        (2)或者在随后的MRI检查可见新的T2和(或)钆增强病变(1或多个)，不考虑参考基线MRI的时间性；<br> (3)或者等待第2次临床发作<sup>a</sup></td>
+                </tr>
+                <tr>
+                    <td>有1次发作<sup>a</sup>；存在1个病变的客观临床证据(临床孤立综合征)</td>
+                    <td>具有证明病变空间(同前DCS)及时间多发(同前DIT)的证据</td>
+                </tr>
+                <tr>
+                    <td>提示MS的隐匿的神经功能障碍进展(原发进展型MS)</td>
+                    <td>
+                        疾病进展1年(回顾性或前瞻性确定)同时具有下列3项标准的2项<sup>d</sup>：<br>(1)脑病变的空间多发证据；根据MS特征性的病变区域(脑室周围、近皮质或幕下)内≥1个T2病变；<br>(2)脊髓病变的空间多发证据：根据脊髓≥2个T2病变；<br>(3)脑脊液阳性[等电聚焦电泳的寡克隆带证据和(或)IgG指数增高]
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>MS：完全符合标准，其他疾病不能更好地解释临床表现。</p>
+                <p>可能MS(possible MS)：不完全符合标准，临床表现怀疑MS。</p>
+                <p>非MS(not MS)：在随访和评估过程中发现其他能更好解释临床表现的疾病诊断。<br></p>
+                <p><sup>a</sup>发作(复发、恶化)：指在排除发热或感染的前提下，由患者描述或客观观察到的当时或既往的至少持续24h的典型的CNS急性炎性脱髓鞘事件。发作要同时具有客观神经系统检查的医学记录，应该除外那些缺乏合理的、客观的神经系统检查和医学记录的事件。一些符合MS临床症状以及发展演变特点的既往事件，能够为前期脱髓鞘事件提供合理的证据支持。然而，有关阵发性症状(既往或当时)的报告，应该由持续至少24h以上的多段发作事件组成。在做出MS确诊前，至少要有1次发作是由以下证据来证实的(客观神经系统检查证据；可早于患者视觉功能障碍描述的视觉诱发电位证据；或MRI检查发现CNS内存在能够解释既往神经系统症状的脱髓鞘责任病变的证据)。<br></p>
+                <p><sup>b</sup>基于2次具有客观神经系统检查阳性的发作做出的临床诊断是最可靠的。在缺乏客观的神经系统检查阳性的情况下，既往1次发作中的合理历史证据，可以包括支持既往的炎性脱髓鞘事件以及相关临床症状及其演变特征等证据；然而，至少有1次发作是必须由客观发现证据支持的。<br></p>
+                <p><sup>c</sup>不需要额外的检查。但是，最好任何MS的诊断都能在影像的协助下基于这些标准而做出。如果影像或其他检测(例如脑脊液)已实施并呈阴性结果，做出MS诊断前需要极为谨慎，并必须考虑是否需要作出其他诊断。客观证据必须存在并支持MS诊断，同时找不到更合理的疾病解释临床表现。<br></p>
+                <p><sup>d</sup>钆增强病变并不是必需的；脑干或脊髓病变引起的相关症候应该被排除在典型症状性病变之外(除外视神经脊髓炎可能)&nbsp;。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">吴江主编. 神经病学（八年制）（第2版）. 人民卫生出版社. 2010年.p242-3.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

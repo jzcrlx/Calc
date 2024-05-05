@@ -1,0 +1,558 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-821.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-821" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>匹兹堡睡眠质量指数（PSQI）</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <p>下面一些问题是关于您最近1个月的睡眠情况，请选择回填写最符合您近1个月实际情况的答案。请回答下列问题</p>
+                        <br>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                1.近1个月，晚上上床睡觉通常（ ）点钟
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="item1" oninput="if(value>23)value=23;if(value<0)value=0" type="number">
+                                    </div>
+                                    <div class="calc-unit-bg" style="width: 150px">点(如22,以24小时计时)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                2.近1个月，从上床到入睡通常需要（ ）分钟
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="item2" oninput="if(value>1440)value=1440;if(value<1)value=1" type="number">
+                                    </div>
+                                    <div class="calc-unit">分钟</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                3.近1个月，通常早上（ ）点起床
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="item3" oninput="if(value>23)value=23;if(value<0)value=0" type="number">
+                                    </div>
+                                    <div class="calc-unit" style="width: 150px">点(如8,以24小时计时)</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                4.近1个月，每夜通常实际睡眠（ ）小时(不等于卧床时间)
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="item4" oninput="if(value>24)value=24;if(value<1)value=1" type="number">
+                                    </div>
+                                    <div class="calc-unit">小时</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                5a. 近1个月，入睡困难(30分钟内不能入睡)
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item5a" id="item5a1" type="radio">
+                                        <label class="flex" for="item5a1">无</label>
+                                        <input class="flex_que q_radio" value="1" name="item5a" id="item5a2" type="radio">
+                                        <label class="flex" for="item5a2">&lt;１次／周</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="item5a" id="item5a3" type="radio">
+                                        <label class="flex" for="item5a3">１～２次／周</label>
+                                        <input class="flex_que q_radio" value="3" name="item5a" id="item5a4" type="radio">
+                                        <label class="flex" for="item5a4">≥３次／周</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                5b. 近1个月，夜间易醒或早醒
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item5b" id="item5b1" type="radio">
+                                        <label class="flex" for="item5b1">无</label>
+                                        <input class="flex_que q_radio" value="1" name="item5b" id="item5b2" type="radio">
+                                        <label class="flex" for="item5b2">&lt;１次／周</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="item5b" id="item5b3" type="radio">
+                                        <label class="flex" for="item5b3">１～２次／周</label>
+                                        <input class="flex_que q_radio" value="3" name="item5b" id="item5b4" type="radio">
+                                        <label class="flex" for="item5b4">≥３次／周</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                5c. 近1个月，夜间去厕所
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item5c" id="item5c1" type="radio">
+                                        <label class="flex" for="item5c1">无</label>
+                                        <input class="flex_que q_radio" value="1" name="item5c" id="item5c2" type="radio">
+                                        <label class="flex" for="item5c2">&lt;１次／周</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="item5c" id="item5c3" type="radio">
+                                        <label class="flex" for="item5c3">１～２次／周</label>
+                                        <input class="flex_que q_radio" value="3" name="item5c" id="item5c4" type="radio">
+                                        <label class="flex" for="item5c4">≥３次／周</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                5d. 近1个月，呼吸不畅
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item5d" id="item5d1" type="radio">
+                                        <label class="flex" for="item5d1">无</label>
+                                        <input class="flex_que q_radio" value="1" name="item5d" id="item5d2" type="radio">
+                                        <label class="flex" for="item5d2">&lt;１次／周</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="item5d" id="item5d3" type="radio">
+                                        <label class="flex" for="item5d3">１～２次／周</label>
+                                        <input class="flex_que q_radio" value="3" name="item5d" id="item5d4" type="radio">
+                                        <label class="flex" for="item5d4">≥３次／周</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                5e. 近1个月，咳嗽或鼾声高
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item5e" id="item5e1" type="radio">
+                                        <label class="flex" for="item5e1">无</label>
+                                        <input class="flex_que q_radio" value="1" name="item5e" id="item5e2" type="radio">
+                                        <label class="flex" for="item5e2">&lt;１次／周</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="item5e" id="item5e3" type="radio">
+                                        <label class="flex" for="item5e3">１～２次／周</label>
+                                        <input class="flex_que q_radio" value="3" name="item5e" id="item5e4" type="radio">
+                                        <label class="flex" for="item5e4">≥３次／周</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                5f. 近1个月，感觉冷
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item5f" id="item5f1" type="radio">
+                                        <label class="flex" for="item5f1">无</label>
+                                        <input class="flex_que q_radio" value="1" name="item5f" id="item5f2" type="radio">
+                                        <label class="flex" for="item5f2">&lt;１次／周</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="item5f" id="item5f3" type="radio">
+                                        <label class="flex" for="item5f3">１～２次／周</label>
+                                        <input class="flex_que q_radio" value="3" name="item5f" id="item5f4" type="radio">
+                                        <label class="flex" for="item5f4">≥３次／周</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                5g. 近1个月，感觉热
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item5g" id="item5g1" type="radio">
+                                        <label class="flex" for="item5g1">无</label>
+                                        <input class="flex_que q_radio" value="1" name="item5g" id="item5g2" type="radio">
+                                        <label class="flex" for="item5g2">&lt;１次／周</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="item5g" id="item5g3" type="radio">
+                                        <label class="flex" for="item5g3">１～２次／周</label>
+                                        <input class="flex_que q_radio" value="3" name="item5g" id="item5g4" type="radio">
+                                        <label class="flex" for="item5g4">≥３次／周</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                5h. 近1个月，做恶梦
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item5h" id="item5h1" type="radio">
+                                        <label class="flex" for="item5h1">无</label>
+                                        <input class="flex_que q_radio" value="1" name="item5h" id="item5h2" type="radio">
+                                        <label class="flex" for="item5h2">&lt;１次／周</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="item5h" id="item5h3" type="radio">
+                                        <label class="flex" for="item5h3">１～２次／周</label>
+                                        <input class="flex_que q_radio" value="3" name="item5h" id="item5h4" type="radio">
+                                        <label class="flex" for="item5h4">≥３次／周</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                5i. 近1个月，疼痛不适
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item5i" id="item5i1" type="radio">
+                                        <label class="flex" for="item5i1">无</label>
+                                        <input class="flex_que q_radio" value="1" name="item5i" id="item5i2" type="radio">
+                                        <label class="flex" for="item5i2">&lt;１次／周</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="item5i" id="item5i3" type="radio">
+                                        <label class="flex" for="item5i3">１～２次／周</label>
+                                        <input class="flex_que q_radio" value="3" name="item5i" id="item5i4" type="radio">
+                                        <label class="flex" for="item5i4">≥３次／周</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                5j. 近1个月，其它影响睡眠的事情
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item5j" id="item5j1" type="radio">
+                                        <label class="flex" for="item5j1">无</label>
+                                        <input class="flex_que q_radio" value="1" name="item5j" id="item5j2" type="radio">
+                                        <label class="flex" for="item5j2">&lt;１次／周</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="item5j" id="item5j3" type="radio">
+                                        <label class="flex" for="item5j3">１～２次／周</label>
+                                        <input class="flex_que q_radio" value="3" name="item5j" id="item5j4" type="radio">
+                                        <label class="flex" for="item5j4">≥３次／周</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                6.近1个月，总的来说，您认为自己的睡眠质量
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item6" id="item61" type="radio">
+                                        <label class="flex" for="item61">很好</label>
+                                        <input class="flex_que q_radio" value="1" name="item6" id="item62" type="radio">
+                                        <label class="flex" for="item62">较好</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="item6" id="item63" type="radio">
+                                        <label class="flex" for="item63">较差</label>
+                                        <input class="flex_que q_radio" value="3" name="item6" id="item64" type="radio">
+                                        <label class="flex" for="item64">很差</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                7. 近1个月，您用药物催眠的情况
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item7" id="item71" type="radio">
+                                        <label class="flex" for="item71">无</label>
+                                        <input class="flex_que q_radio" value="1" name="item7" id="item72" type="radio">
+                                        <label class="flex" for="item72">&lt;１次／周</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="item7" id="item73" type="radio">
+                                        <label class="flex" for="item73">１～２次／周</label>
+                                        <input class="flex_que q_radio" value="3" name="item7" id="item74" type="radio">
+                                        <label class="flex" for="item74">≥３次／周</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                8. 近1个月，您常感到困倦吗？
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item8" id="item81" type="radio">
+                                        <label class="flex" for="item81">无</label>
+                                        <input class="flex_que q_radio" value="1" name="item8" id="item82" type="radio">
+                                        <label class="flex" for="item82">&lt;１次／周</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="item8" id="item83" type="radio">
+                                        <label class="flex" for="item83">１～２次／周</label>
+                                        <input class="flex_que q_radio" value="3" name="item8" id="item84" type="radio">
+                                        <label class="flex" for="item84">≥３次／周</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                9.近1个月，您做事情的精力不足吗
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item9" id="item91" type="radio">
+                                        <label class="flex" for="item91">没有</label>
+                                        <input class="flex_que q_radio" value="1" name="item9" id="item92" type="radio">
+                                        <label class="flex" for="item92">偶尔有</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="2" name="item9" id="item93" type="radio">
+                                        <label class="flex" for="item93">有时有</label>
+                                        <input class="flex_que q_radio" value="3" name="item9" id="item94" type="radio">
+                                        <label class="flex" for="item94">经常有</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-lg">睡眠质量得分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-lg">入睡时间得分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result2" readonly="" id="result2" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-lg">睡眠时间得分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result3" readonly="" id="result3" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-lg">睡眠效率得分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result4" readonly="" id="result4" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-lg">睡眠障碍得分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result5" readonly="" id="result5" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-lg">催眠药物得分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result6" readonly="" id="result6" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-lg">日间功能障碍得分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result7" readonly="" id="result7" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-lg">PSQI 总分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result8" readonly="" id="result8" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-hg">结果:</div>
+                                    <div class="flex-item">
+                                        <div id="resultmsg" class="skin-color"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>PSQI量表可用于评估睡眠障碍患者的睡眠质量，也适用于普通人，评估1个月内的睡眠情况，由19个自评和5个他评条目构成，共21分。</p>
+            <p>0-5分为质量很好，6-10分为质量还行，11-15分为质量一般，16-21分为质量很差。</p>
+        </div>
+    </div>
+
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

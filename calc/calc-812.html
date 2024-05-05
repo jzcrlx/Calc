@@ -1,0 +1,228 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-812.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-812" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>弥漫性大B细胞淋巴瘤预后(IPI24)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block req">
+                            <div class="flex-center calc-que">
+                                <div class="calc-label-lg">年龄</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="age" type="number">
+                                </div>
+                                <div class="calc-unit-md">岁</div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="flex-center calc-que">
+                                <div class="calc-label-lg">外周血淋巴细胞<br>绝对计数</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="count" type="number">
+                                </div>
+                                <div class="calc-unit-md">10⁹/L</div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="flex-center calc-que">
+                                <div class="calc-label-lg">LDH 值/正常值</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="ldh" type="number">
+                                </div>
+                                <div class="calc-unit-md"></div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="question_title">
+                                Ann Arbor分期<span class="info" onclick="showInfo('Ann Arbor分期')">
+                            </span></div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" id="ann1" name="ann" type="radio">
+                                        <label class="flex" for="ann1">I期</label>
+                                        <input class="flex_que q_radio" value="4" id="ann2" name="ann" type="radio">
+                                        <label class="flex" for="ann2">II期</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que" style="margin-bottom: 0">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="9" id="ann3" name="ann" type="radio">
+                                        <label class="flex" for="ann3">III期</label>
+                                        <input class="flex_que q_radio" value="25" id="ann4" name="ann" type="radio">
+                                        <label class="flex" for="ann4">IV期</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            ECOG活动状态<span class="info" onclick="showInfo('ECOG活动状态')">
+                        </span></div>
+                        <div class="question_infor">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <input class="flex_que q_radio" value="0" id="ecog1" name="ecog" type="radio">
+                                    <label class="flex" for="ecog1">0或1</label>
+                                    <input class="flex_que q_radio" value="20" id="ecog2" name="ecog" type="radio">
+                                    <label class="flex" for="ecog2">2，3或4</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            肿块性病变
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <input class="flex_que q_radio" value="0" id="lesion1" name="lesion" type="radio">
+                                    <label class="flex" for="lesion1">&lt;10 cm</label>
+                                    <input class="flex_que q_radio" value="15" id="lesion2" name="lesion" type="radio">
+                                    <label class="flex" for="lesion2">≥10 cm</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block req">
+                        <div class="question_title">
+                            性别
+                        </div>
+                        <div class="question_infor2">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <input class="flex_que q_radio" value="10" id="sex1" name="sex" type="radio">
+                                    <label class="flex" for="sex1">男性</label>
+                                    <input class="flex_que q_radio" value="0" id="sex2" name="sex" type="radio">
+                                    <label class="flex" for="sex2">女性</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-lg">4个月无事件生存:</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>24个月无事件生存（EFS24）是评估新诊断的弥漫大B细胞淋巴瘤（DLBCL）患者用蒽环类免疫化疗（R-CHOP或类似疗法）治疗后疾病相关结局的一个可靠指标。
+                约70%患者在完成免疫化疗后可实现24个月无事件生存，而达到EFS24的患者总生存期与年龄和性别相匹配的普通人群相当。</p>
+            <p>在一项纳入1348名接受免疫化疗的弥漫大B淋巴细胞瘤患者的国际队列研究中，我们使用EFS24临床终点建立了IPI24风险预测模型，并在1177名独立患者中验证了该模型。</p>
+            <p>IPI24为每位患者预测达到EFS24的概率（0-100%），可用于患者预后、治疗分层和风险评估。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Maurer MJ, GhesquiÃ¨res H, Jais J-P, et al. Event-Free Survival at 24 Months Is a Robust End Point for Disease-Related Outcome in Diffuse Large B-Cell Lymphoma Treated With Immunochemotherapy. Journal of Clinical Oncology. 2014;32(10):1066-1073. 10.1200/jco.2013.51.5866.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Maurer MJ et al. Personalized Risk Prediction for Event-free Survival at 24 months in Patients with Diffuse Large B-Cell Lymphoma. Am J Hematol. 2016 Feb;91(2):179-84. doi: 10.1002/ajh.24223. Epub 2015 Nov 26.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

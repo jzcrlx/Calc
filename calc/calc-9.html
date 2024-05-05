@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-9.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="medcalc-9" class="post">
+	<div id="meta"> 
+		<select id="units">
+			<option value="si" name="si" selected="selected">国际单位(SI)</option>
+			<option value="us" name="us">美国单位(US)</option>
+		</select>	   
+	</div><!--#meta-->                          
+	<div id="title">
+	  <h2>重症监护室死亡率与APACHE II评分</h2> 
+	</div>                       
+	<form name="medform" action="get" id="medform">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr class="req">
+				<td class="" valign="top">患者有器官功能不全病史?</td>
+				<td class="">
+				<ul>
+					<li><label> <input value="6" name="immuno" id="immuno" type="radio"> 是的，且为急诊手术后转入</label></li>
+					<li><label> <input value="5" name="immuno" id="immuno" type="radio"> 是的，且为非手术后转入</label></li>
+					<li><label> <input value="2" name="immuno" id="immuno" type="radio"> 是的，且为择期手术后转入</label></li>
+					<li><label> <input value="0" name="immuno" id="immuno" type="radio"> 否</label></li>
+				</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="">患者有急性肾功能衰竭?</td>
+				<td class=""><label class=""> <input value="1" name="arf" id="arf" type="checkbox"> 是</label></td>
+			</tr>
+			<tr class="req">
+				<td class="">年龄</td>
+				<td class=""><input name="age" id="age" type="text"> 岁</td>
+			</tr>
+			<tr class="req">
+				<td class="">体温（肛温，摄氏度）</td>
+				<td class=""><input name="temp" id="temp" type="text"> °C 或 °F (其中一个!)</td>
+			</tr>
+			<tr class="req">
+				<td class="">平均动脉压(MAP)</td>
+				<td class=""><input name="map" id="map" type="text"></td>
+			</tr>
+			<tr class="req">
+				<td class="">动脉血 pH</td>
+				<td class=""><input name="ph" id="ph" type="text"></td>
+			</tr>
+			<tr class="req">
+				<td class="">心率</td>
+				<td class=""><input name="hr" id="hr" type="text"> bpm</td>
+			</tr>
+			<tr class="req">
+				<td class="">呼吸频率</td>
+				<td class=""><input name="rr" id="rr" type="text"> bpm</td>
+			</tr>
+			<tr class="req">
+				<td>钠 （血清）</td>
+				<td><input name="na" id="na" type="text"> <label for="na" class="na">mmol/L</label></td>
+			</tr>
+			<tr class="req">
+				<td>钾 （血清）</td>
+				<td><input name="pot" id="pot" type="text"> <label for="pot" class="k">mmol/L</label></td>
+			</tr>
+			<tr class="req">
+				<td>肌酐 （血清）</td>
+				<td><input name="cr" id="cr" type="text"> <label for="cr" class="cr">μmol/L</label></td>
+			</tr>
+			<tr class="req">
+				<td>血球压积</td>
+				<td><input name="hct" id="hct" type="text"></td>
+			</tr>
+			<tr class="req">
+				<td>白细胞计数</td>
+				<td><input name="wbc" id="wbc" type="text"> x10<sup>3</sup> cells / mm<sup>3</sup></td>
+			</tr>
+			<tr class="not_req">
+				<td>格拉斯哥昏迷评分</td>
+				<td><input name="gcs" id="gcs" type="text"> 分</td>
+			</tr>
+
+			<tr class="not_req">
+				<td>肺泡-动脉氧分压差（<span style="color: red">如FiO<sub>2</sub> ≥ 0.5请输入）</span></td>
+				<td><label> <input name="aagrad" id="aagrad" type="text"> mm Hg</label></td>
+			</tr>
+			<tr class="not_req">
+				<td>PaO2<span style="color: red"> (如 FiO<sub>2</sub> &lt; 0.5请输入)</span></td>
+				<td><label> <input name="pao2" id="pao2" type="text"> mm Hg</label></td>
+			</tr>
+			<tr class="answer">
+				<td>Apache II 评分</td>
+				<td><input readonly="readonly" placeholder="点击查看" name="result" id="result" type="text"> 分</td>
+			</tr>
+			<tr class="answer">
+				<td colspan="2"><div id="resultmsg"></div></td>
+			</tr>
+		</tbody></table>
+	</form>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

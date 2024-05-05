@@ -1,0 +1,276 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-121.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-121" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>血脂单位换算</h2>
+        </div>
+        <form name="medform" action="get" id="medform" style="margin-top: 10px">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_block">
+                        <div class="question_title">
+                            总胆固醇（TC）
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="flex-item">
+                                    <input class="calc-input" name="tc1" id="tc1" type="number">
+                                </div>
+                                <div class="calc-unit">mmol/L</div>
+                                <img src="calculate/images/change.png" class="change">
+                                <div class="flex-item">
+                                    <input class="calc-input" name="tc2" id="tc2" type="number">
+                                </div>
+                                <div class="calc-unit-sm">mg/dL</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block">
+                        <div class="question_title">
+                            低密度脂蛋白（LDL-C）
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="flex-item">
+                                    <input class="calc-input" name="ldl1" id="ldl1" type="number">
+                                </div>
+                                <div class="calc-unit">mmol/L</div>
+                                <img src="calculate/images/change.png" class="change">
+                                <div class="flex-item">
+                                    <input class="calc-input" name="ldl2" id="ldl2" type="number">
+                                </div>
+                                <div class="calc-unit-sm">mg/dL</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question_block">
+                        <div class="question_title">
+                            高密度脂蛋白（HDL-C）
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="flex-item">
+                                    <input class="calc-input" name="hdl1" id="hdl1" type="number">
+                                </div>
+                                <div class="calc-unit">mmol/L</div>
+                                <img src="calculate/images/change.png" class="change">
+                                <div class="flex-item">
+                                    <input class="calc-input" name="hdl2" id="hdl2" type="number">
+                                </div>
+                                <div class="calc-unit-sm">mg/dL</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question_block">
+                        <div class="question_title">
+                            甘油三酯（TG）
+                        </div>
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="flex-item">
+                                    <input class="calc-input" name="tg1" id="tg1" type="number">
+                                </div>
+                                <div class="calc-unit">mmol/L</div>
+                                <img src="calculate/images/change.png" class="change">
+                                <div class="flex-item">
+                                    <input class="calc-input" name="tg2" id="tg2" type="number">
+                                </div>
+                                <div class="calc-unit-sm">mg/dL</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">计算公式</span></h3>
+        <div class="jiedu" style="text-align: left">
+            <p>总胆固醇(TC): 1mmol/L=1mg/dL×0.02586</p>
+            <p>低密度脂蛋白(LDL-C): 1mmol/L=1mg/dL×0.02586</p>
+            <p>高密度脂蛋白(HDL-C): 1mmol/L=1mg/dL×0.02586</p>
+            <p>甘油三酯(TG): 1mmol/L=1mg/dL×0.01129</p>
+        </div>
+    </div>
+    <div class="view_img">
+        <h3><span class="jiedu-title">临床意义</span></h3>
+        <div class="jiedu">
+            <p>临床上血脂检测的基本项目为TC、LDL-C、HDL-C和TG，血脂异常的主要危害是增加动脉粥样硬化性心血管疾病（ASCVD）的发病危险。</p>
+            <p>中国ASCVD一级预防人群血脂合适水平和异常分层标准见下表。</p>
+            <img class="formula-tbimg" src="calculate/images/ascvd1.png">
+            <p>LDL-C或TC水平对个体或群体ASCVD发病危险具有独立的预测作用，全面评价ASCVD总体危险是防治血脂异常的必要前提，根据个体ASCVD危险分层判断血脂异常干预的目标水平。</p>
+            <p>血脂异常危险分层以及目标值见表2。</p>
+            <img class="formula-tbimg" src="calculate/images/ascvd2.png">
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="//m.medlive.cn/guide/1/18251" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">中华医学会全科医学分会. 血脂异常基层诊疗指南(实践版·2019)[J]. 中华全科医师杂志. 2019年5月第18卷第5期.</span>
+        </a>
+        <a href="//m.medlive.cn/guide/1/12050" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">中国成人血脂异常防治指南修订联合委员会. 中国成人血脂异常防治指南（2016 年修订版）中国循环杂志.2016,31(10):937-953.</span>
+        </a>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#tc1").change(function () {
+            var value = parseFloat($("#tc1").val());
+            value = value * 38.66;
+            $('#tc2').val(Round(value, 3));
+        });
+
+        $("#tc2").change(function () {
+            var value = parseFloat($("#tc2").val());
+            value = value * 0.02586;
+            $('#tc1').val(Round(value, 3));
+        });
+
+        $("#ldl1").change(function () {
+            var value = parseFloat($("#ldl1").val());
+            value = value * 38.66;
+            $('#ldl2').val(Round(value, 3));
+        });
+
+        $("#ldl2").change(function () {
+            var value = parseFloat($("#ldl2").val());
+            value = value * 0.02586;
+            $('#ldl1').val(Round(value, 3));
+        });
+
+        $("#hdl1").change(function () {
+            var value = parseFloat($("#hdl1").val());
+            value = value * 38.66;
+            $('#hdl2').val(Round(value, 3));
+        });
+
+        $("#hdl2").change(function () {
+            var value = parseFloat($("#hdl2").val());
+            value = value * 0.02586;
+            $('#hdl1').val(Round(value, 3));
+        });
+
+        $("#tg1").change(function () {
+            var value = parseFloat($("#tg1").val());
+            value = value * 88.6;
+            $('#tg2').val(Round(value, 3));
+        });
+
+        $("#tg2").change(function () {
+            var value = parseFloat($("#tg2").val());
+            value = value * 0.01129;
+            $('#tg1').val(Round(value, 3));
+        });
+    })
+</script>
+<script src="js/viewer/viewer.js"></script>
+<link href="js/viewer/viewer.css" rel="stylesheet">
+<script src="js/viewer/jquery-viewer.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var $image = $('.view_img');
+
+        $image.viewer({
+            inline: false,
+            toolbar: 0,
+            navbar: 0,
+            title: '',
+            button: 0,
+            viewed: function () {
+            }
+        });
+    });
+</script>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

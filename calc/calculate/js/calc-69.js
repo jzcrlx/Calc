@@ -1,0 +1,1 @@
+function MDCalc(z){a=z.na;c=z.bun;d=z.glu;e=z.etoh;if(pref=="si"){bun_conv=1/.357;glu_conv=1/.0555;etoh_conv=1/.217}if(pref=="us"){bun_conv=1;glu_conv=1;etoh_conv=1}c=c*bun_conv;d=d*glu_conv;e=e*etoh_conv;value=2*a+c/2.8+d/18+e/4.6;Answer(Round(value,1));Text("正常血清渗透压 = 285-295 mOsm/kg<br/>正常血清渗透压差（测量值－计算值）为 -14 至 +10.")}

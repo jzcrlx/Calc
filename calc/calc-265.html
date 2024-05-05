@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-265.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-265">骨盆骨折Young和Burgress分型</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="3">结果解读</th>
+                </tr>
+                <tr>
+                    <th colspan="2">分型</th>
+                    <th>特征</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th rowspan="3">侧方挤压型(LC)</th>
+                    <th>Ⅰ型</th>
+                    <td>是前环的耻坐骨支骨折以及骶骨压缩骨折，骨盆的所有韧带结构完整，骨盆环稳定。</td>
+                </tr>
+                <tr>
+                    <th>Ⅱ型</th>
+                    <td>常合并骶髂后韧带撕裂或后部髂棘撕脱。由于后环损伤不是稳定的嵌插，出现旋转不稳定。骨盆底韧带仍然完整，故垂直方向相对稳定。</td>
+                </tr>
+                <tr>
+                    <th>Ⅲ型</th>
+                    <td>又称"风卷样"骨盆(windswept)。典型滚筒机制造成的损伤，首先是受累侧骨盆因承受内旋移位而产生LC-Ⅱ型损伤，当车轮碾过对侧半骨盆时则产生外旋应力(或前后挤压)损伤。</td>
+                </tr>
+                <tr>
+                    <th rowspan="3">前后挤压型(APC)</th>
+                    <th>Ⅰ型</th>
+                    <td>为稳定型损伤，单纯耻骨联合或耻骨支损伤。</td>
+                </tr>
+                <tr>
+                    <th>Ⅱ型</th>
+                    <td>为旋转不稳定损伤，合并耻骨联合分离或耻骨支骨折，骶结节、骶棘韧带及骶髂前韧带损伤。</td>
+                </tr>
+                <tr>
+                    <th>Ⅲ型</th>
+                    <td>常合并骶髂后韧带撕裂，发生旋转和垂直不稳定。</td>
+                </tr>
+                <tr>
+                    <th colspan="2">垂直剪力损伤(VS)</th>
+                    <td>轴向暴力作用于骨盆，骨盆的韧带与骨性稳定结构全部撕裂。髂骨翼无明显外旋，但向上和向后移位常见。</td>
+                </tr>
+                <tr>
+                    <th colspan="2">混合暴力损伤(CM)</th>
+                    <td>由于多种机制造成的损伤，APC、LC及VS三种损伤中任意两种或三种之间的联合损伤，通常以LC合并VS多见。</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>该分型系统，紧密围绕骨折的受伤机制，在骨盆骨折的急救过程中，被较多应用。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">陈孝平主编. 外科学（八年制）（第2版）. 人民卫生出版社. 2010年.p978.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

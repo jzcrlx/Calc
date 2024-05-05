@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-394.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-394"></h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="3">新生儿TPN每日所需电解质推荐量</th>
+                </tr>
+                <tr>
+                    <th>电解质[mmol/（kg·d）]</th>
+                    <th>早产儿</th>
+                    <th>足月儿</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>钠</th>
+                    <td>2.0~3.0</td>
+                    <td>2.0~3.0</td>
+                </tr>
+                <tr>
+                    <th>钾</th>
+                    <td>1.0~2.0</td>
+                    <td>1.0~2.0</td>
+                </tr>
+                <tr>
+                    <th>钙</th>
+                    <td>0.6~0.8</td>
+                    <td>0.5~0.6</td>
+                </tr>
+                <tr>
+                    <th>磷</th>
+                    <td>1.0~1.2</td>
+                    <td>1.2~1.3</td>
+                </tr>
+                <tr>
+                    <th>镁</th>
+                    <td>0.3~0.4</td>
+                    <td>0.4~0.5</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="2">新生儿TPN每日所需维生素推荐量</th>
+                </tr>
+                <tr>
+                    <th>维生素种类</th>
+                    <th>新生儿推荐量</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>VitA(μg)<sup>a</sup></th>
+                    <td>150~300</td>
+                </tr>
+                <tr>
+                    <th>VitD(μg)<sup>b</sup></th>
+                    <td>0.8</td>
+                </tr>
+                <tr>
+                    <th>VitE(mg)<sup>c</sup></th>
+                    <td>2.8~3.5</td>
+                </tr>
+                <tr>
+                    <th>VitK(μg)</th>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <th>VitB1(mg)</th>
+                    <td>0.35~0.5</td>
+                </tr>
+                <tr>
+                    <th>VitB2(mg)</th>
+                    <td>0.15~0.2</td>
+                </tr>
+                <tr>
+                    <th>泛酸(mg)</th>
+                    <td>1~2</td>
+                </tr>
+                <tr>
+                    <th>VitB6(mg)</th>
+                    <td>0.15~0.2</td>
+                </tr>
+                <tr>
+                    <th>VitB12(mg)</th>
+                    <td>0.3</td>
+                </tr>
+                <tr>
+                    <th>VitC(mg)</th>
+                    <td>15~25</td>
+                </tr>
+                <tr>
+                    <th>叶酸(μg)</th>
+                    <td>56</td>
+                </tr>
+                <tr>
+                    <th>生物素(μg)</th>
+                    <td>5~8</td>
+                </tr>
+                <tr>
+                    <th>烟酸(mg)</th>
+                    <td>4~6.8</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <sup>a</sup>1ug视黄醇当量（RE）=1ug全反式视黄醇=3.3IU维生素A；<p></p><p><sup>b</sup>10ug维生素D=400IU；</p>
+                        <p><sup>c</sup>2.8mg
+                            a-生育醇=2.8IU维生素E
+                    </p></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="3">新生儿TPN每日所需微量元素推荐量</th>
+                </tr>
+                <tr>
+                    <th>微量元素种类</th>
+                    <th>早产儿(kg/d)</th>
+                    <th>足月儿(kg/d)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>铁(μg)</th>
+                    <td>200</td>
+                    <td>50~100</td>
+                </tr>
+                <tr>
+                    <th>锌(μg)</th>
+                    <td>400~450</td>
+                    <td>250&lt;3个月；100&gt;3个月</td>
+                </tr>
+                <tr>
+                    <th>铜(μg)</th>
+                    <td>20</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <th>硒(μg)</th>
+                    <td>2~3</td>
+                    <td>2~3</td>
+                </tr>
+                <tr>
+                    <th>锰(μg)</th>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <th>钼(μg)</th>
+                    <td>1</td>
+                    <td>0.25</td>
+                </tr>
+                <tr>
+                    <th>铬(μg)</th>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <th>碘(μg)</th>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>肠外营养液基本成分包括氨基酸、脂肪乳剂、碳水化合物、维生素、电解质、微量元素和水。</p>
+                <p><b>能量：</b>251.04~334.72kJ/(kg•d)[60~80kcal/(kg•d)]；</p>
+                <p><b>氨基酸：</b>生后12~24h即可应用(肾功能不全者例外)，从(1.0~2.0)g/(kg•d)开始[早产儿建议从1.0g/(kg•d)开始]，按0.5g/(kg•d)的速度逐渐增加，足月儿可至3g/(kg•d)，早产儿可增至3.5g/(kg•d)。氮︰非蛋白热卡=1g︰418.40~936.80kJ(1g︰100~200kcal)；
+                </p>
+                <p><b>脂肪乳剂：</b>出生24h后即可应用，剂量从(0.5~1.0)g/(kg•d)开始，足月儿无黄疸者从(1.0~2.0)g/(kg•d)开始，按0.5g/(kg•d)的速度逐渐增加，总量不超过3g/(kg•d)；
+                </p>
+                <p><b>葡萄糖：</b>开始剂量为(4~8)mg/(kg•min)，按(1~2)mg/(kg•min)的速度逐渐增加，最大剂量不超过(11~14)mg/(kg•min)。</p>
+                <p><strong>维生素、电解质、微量元素</strong>见上表。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">中华医学会肠外肠内营养学分会儿科学组、中华医学会儿科学分会新生儿学组、中华医学会小儿外科学分会新生儿外科学组. 中国新生儿营养支持临床应用指南. 中华小儿外科杂志, 2013;34:782-7.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-731.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-731">眼眶肉瘤</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <tbody>
+                <tr>
+                    <td>T-----原发肿瘤</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>x</sub>淋巴瘤未确定；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>0</sub>无淋巴瘤证据；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>1</sub>肿瘤仅累及结膜，未累及眼睑或者眼眶；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>2</sub>肿瘤累及眼眶，伴或不伴结膜受累；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>3</sub>肿瘤累及眼睑和/或眼眶，伴或不伴结膜受累；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;T<sub>4</sub>眼眶外延伸至周围结构，如骨、颌面部鼻窦、脑；</td>
+                </tr>
+                <tr>
+                    <td>N（区域淋巴结）</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;N<sub>x</sub>受累区域淋巴结无法评估；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;N<sub>0</sub>无区域淋巴结受累；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;N<sub>1</sub>淋巴结区域受累，眼附属器结构引流区域，纵隔上（耳前、腮腺、颌下腺及颈部淋巴结）；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;N<sub>1a</sub>单个纵膈上区域淋巴结受累；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;N<sub>1b</sub>2 个或以上纵膈上区域淋巴结受累；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;N<sub>2</sub>纵膈淋巴结受累；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;N<sub>3</sub>外周或中央区域淋巴结弥漫性或者播散性受累；</td>
+                </tr>
+                <tr>
+                    <td>M(远处转移）</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;M<sub>0</sub>无淋巴结以外受累证据；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;M<sub>1a</sub>眼附属器外不连续的组织或器官受累（如颌下腺、肺、肝、脾脏、肾脏、乳腺）；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;M<sub>1b</sub>骨髓受累；</td>
+                </tr>
+                <tr>
+                    <td>&nbsp;&nbsp;&nbsp;M<sub>1c</sub>同时存在 M1a 和 M1b。</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>适用于：眼附属器淋巴瘤。</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

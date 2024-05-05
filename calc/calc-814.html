@@ -1,0 +1,515 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-814.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <style>
+        .question_title{
+            padding-right: 0px;
+            margin-top: 10px;
+            margin-left: -10px;
+        }
+    </style>
+    <div id="medcalc-814" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>银屑病面积与严重性指数（PASI评分）</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="question_title question_cont">
+                    头颈部(含颈部)皮损面积及严重程度
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">头颈部(含颈部)皮损面积</div>
+                        <div class="answer" name="head_area">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">头颈部(含颈部)皮损面积</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">0</div>
+                                <div value="1" class="option">1-9%</div>
+                                <div value="2" class="option">10-29%</div>
+                                <div value="3" class="option">30-49%</div>
+                                <div value="4" class="option">50-69%</div>
+                                <div value="5" class="option">70-89%</div>
+                                <div value="6" class="option">90-100%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">
+                            (1) 浸润(I)严重程度
+                        </div>
+                        <div class="answer" name="head_i">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">(1) 浸润(I)严重程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">皮损与正常皮肤平齐</div>
+                                <div value="1" class="option">皮损轻微高出于正常皮肤表面</div>
+                                <div value="2" class="option">中等程度隆起，斑块的边缘为圆或斜坡型</div>
+                                <div value="3" class="option">皮损肥厚，隆起明显</div>
+                                <div value="4" class="option">皮损高度增厚，隆起极为明显</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">
+                            (2) 红斑(E)严重程度
+                        </div>
+                        <div class="answer" name="head_e">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">(2) 红斑(E)严重程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无红斑可见</div>
+                                <div value="1" class="option">呈淡红色</div>
+                                <div value="2" class="option">红色</div>
+                                <div value="3" class="option">深红色</div>
+                                <div value="4" class="option">红色极深</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">
+                            (3) 表皮脱屑/鳞屑(D)严重程度
+                        </div>
+                        <div class="answer" name="head_d">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">(3) 表皮脱屑/鳞屑(D)严重程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">表面无可见鳞屑</div>
+                                <div value="1" class="option">部分皮损表面上覆有鳞屑，以细微的鳞屑为主</div>
+                                <div value="2" class="option">大多数皮损表面完全或不完全覆有鳞屑，鳞屑呈片状</div>
+                                <div value="3" class="option">几乎全部皮损表面覆有鳞屑，鳞屑较厚成层</div>
+                                <div value="4" class="option">全部皮损表面均覆有鳞屑，鳞屑很厚成层</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question_title question_cont">
+                    上肢皮损面积及严重程度
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">上肢皮损面积</div>
+                        <div class="answer" name="arm_area">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">上肢皮损面积</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">0</div>
+                                <div value="1" class="option">1-9%</div>
+                                <div value="2" class="option">10-29%</div>
+                                <div value="3" class="option">30-49%</div>
+                                <div value="4" class="option">50-69%</div>
+                                <div value="5" class="option">70-89%</div>
+                                <div value="6" class="option">90-100%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">
+                            (1) 浸润(I)严重程度
+                        </div>
+                        <div class="answer" name="arm_i">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">(1) 浸润(I)严重程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">皮损与正常皮肤平齐</div>
+                                <div value="1" class="option">皮损轻微高出于正常皮肤表面</div>
+                                <div value="2" class="option">中等程度隆起，斑块的边缘为圆或斜坡型</div>
+                                <div value="3" class="option">皮损肥厚，隆起明显</div>
+                                <div value="4" class="option">皮损高度增厚，隆起极为明显</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">
+                            (2) 红斑(E)严重程度
+                        </div>
+                        <div class="answer" name="arm_e">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">(2) 红斑(E)严重程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无红斑可见</div>
+                                <div value="1" class="option">呈淡红色</div>
+                                <div value="2" class="option">红色</div>
+                                <div value="3" class="option">深红色</div>
+                                <div value="4" class="option">红色极深</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">
+                            (3) 表皮脱屑/鳞屑(D)严重程度
+                        </div>
+                        <div class="answer" name="arm_d">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">(3) 表皮脱屑/鳞屑(D)严重程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">表面无可见鳞屑</div>
+                                <div value="1" class="option">部分皮损表面上覆有鳞屑，以细微的鳞屑为主</div>
+                                <div value="2" class="option">大多数皮损表面完全或不完全覆有鳞屑，鳞屑呈片状</div>
+                                <div value="3" class="option">几乎全部皮损表面覆有鳞屑，鳞屑较厚成层</div>
+                                <div value="4" class="option">全部皮损表面均覆有鳞屑，鳞屑很厚成层</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question_title question_cont">
+                    躯干部(含腋窝与腹股沟)皮损面积及严重程度
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">躯干部(含腋窝与腹股沟)皮损面积</div>
+                        <div class="answer" name="body_area">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">躯干部(含腋窝与腹股沟)皮损面积</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">0</div>
+                                <div value="1" class="option">1-9%</div>
+                                <div value="2" class="option">10-29%</div>
+                                <div value="3" class="option">30-49%</div>
+                                <div value="4" class="option">50-69%</div>
+                                <div value="5" class="option">70-89%</div>
+                                <div value="6" class="option">90-100%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">
+                            (1) 浸润(I)严重程度
+                        </div>
+                        <div class="answer" name="body_i">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">(1) 浸润(I)严重程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">皮损与正常皮肤平齐</div>
+                                <div value="1" class="option">皮损轻微高出于正常皮肤表面</div>
+                                <div value="2" class="option">中等程度隆起，斑块的边缘为圆或斜坡型</div>
+                                <div value="3" class="option">皮损肥厚，隆起明显</div>
+                                <div value="4" class="option">皮损高度增厚，隆起极为明显</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">
+                            (2) 红斑(E)严重程度
+                        </div>
+                        <div class="answer" name="body_e">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">(2) 红斑(E)严重程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无红斑可见</div>
+                                <div value="1" class="option">呈淡红色</div>
+                                <div value="2" class="option">红色</div>
+                                <div value="3" class="option">深红色</div>
+                                <div value="4" class="option">红色极深</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">
+                            (3) 表皮脱屑/鳞屑(D)严重程度
+                        </div>
+                        <div class="answer" name="body_d">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">(3) 表皮脱屑/鳞屑(D)严重程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">表面无可见鳞屑</div>
+                                <div value="1" class="option">部分皮损表面上覆有鳞屑，以细微的鳞屑为主</div>
+                                <div value="2" class="option">大多数皮损表面完全或不完全覆有鳞屑，鳞屑呈片状</div>
+                                <div value="3" class="option">几乎全部皮损表面覆有鳞屑，鳞屑较厚成层</div>
+                                <div value="4" class="option">全部皮损表面均覆有鳞屑，鳞屑很厚成层</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="question_title question_cont">
+                    下肢(含臀部)皮损面积及严重程度
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">下肢(含臀部)皮损面积</div>
+                        <div class="answer" name="leg_area">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">下肢(含臀部)皮损面积</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">0</div>
+                                <div value="1" class="option">1-9%</div>
+                                <div value="2" class="option">10-29%</div>
+                                <div value="3" class="option">30-49%</div>
+                                <div value="4" class="option">50-69%</div>
+                                <div value="5" class="option">70-89%</div>
+                                <div value="6" class="option">90-100%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">
+                            (1) 浸润(I)严重程度
+                        </div>
+                        <div class="answer" name="leg_i">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">(1) 浸润(I)严重程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">皮损与正常皮肤平齐</div>
+                                <div value="1" class="option">皮损轻微高出于正常皮肤表面</div>
+                                <div value="2" class="option">中等程度隆起，斑块的边缘为圆或斜坡型</div>
+                                <div value="3" class="option">皮损肥厚，隆起明显</div>
+                                <div value="4" class="option">皮损高度增厚，隆起极为明显</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">
+                            (2) 红斑(E)严重程度
+                        </div>
+                        <div class="answer" name="leg_e">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">(2) 红斑(E)严重程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无红斑可见</div>
+                                <div value="1" class="option">呈淡红色</div>
+                                <div value="2" class="option">红色</div>
+                                <div value="3" class="option">深红色</div>
+                                <div value="4" class="option">红色极深</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block">
+                    <div class="que_infor">
+                        <div class="txt">
+                            (3) 表皮脱屑/鳞屑(D)严重程度
+                        </div>
+                        <div class="answer" name="leg_d">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">(3) 表皮脱屑/鳞屑(D)严重程度</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">表面无可见鳞屑</div>
+                                <div value="1" class="option">部分皮损表面上覆有鳞屑，以细微的鳞屑为主</div>
+                                <div value="2" class="option">大多数皮损表面完全或不完全覆有鳞屑，鳞屑呈片状</div>
+                                <div value="3" class="option">几乎全部皮损表面覆有鳞屑，鳞屑较厚成层</div>
+                                <div value="4" class="option">全部皮损表面均覆有鳞屑，鳞屑很厚成层</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">PASI评分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">公式说明</span></h3>
+        <div class="jiedu">
+            <p>PASI（头颈）=0.1×（E+I+D）× 皮损面积;</p>
+            <p>PASI（上肢）=0.2×（E+I+D）× 皮损面积;</p>
+            <p>PASI（躯干）=0.3×（E+I+D）× 皮损面积;</p>
+            <p>PASI（下肢）=0.4×（E+I+D）× 皮损面积;</p>
+            <p>PASI总分＝PASI（头颈）＋PASI（上肢）＋PASI（上肢）＋PASI（躯干）</p>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>疗效判定标准:</p>
+            <p>按照银屑病皮损面积及严重程度指数(psoriasis area and severity index，PASI)评分标准，记录治疗前后的PASI评分，根据PASI评分下降率进行疗效判定。</p>
+            <p>PASI评分下降率=(治疗前PASI评分-治疗后PASI评分)/治疗前PASI评分x100%。</p>
+            <p>痊愈，PASI评分下降率&gt;90%</p>
+            <p>显效，PASI评分下降率为60%-89%</p>
+            <p>有效，PASI评分下降率为20%-59%</p>
+            <p>无效，PASI评分下降率&lt;20%</p>
+            <p>总有效率=(痊愈例数+显效例数+有效例数)/总例数x100%。</p>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

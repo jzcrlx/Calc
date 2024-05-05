@@ -1,0 +1,1 @@
+function MDCalc(z){a=z.osm_s;b=z.osm_u;c=z.k_s;d=z.k_u;value=d*a/(b*c);Answer(Round(value,2))}

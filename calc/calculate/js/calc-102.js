@@ -1,0 +1,1 @@
+function MDCalc(z){score=0;var r2=0;for(x in z){if(x!=="result"&&x!=="result2"){score+=z[x]}}Answer(score);if(score<1){r2=100}if(score>0&&score<3){r2=45}if(score>2&&score<5){r2=36}if(score>4&&score<7){r2=15}if(score>6&&score<9){r2=3}if(score>8){r2=0}Answer2(r2)}$("#units").hide();

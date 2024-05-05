@@ -1,0 +1,1 @@
+function MDCalc(z){value=z.paco2*z.pao2/(z.atm*z.atm2);Answer(Math.round(parseFloat(value)*1e4)/100)}

@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-715.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    
+<div class="medcalc">
+    <div id="medcalc-715" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>肩关节疾患治疗成绩判定标准</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box end">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="que_title">
+                                <span>指标</span>
+                            </div>
+                            <div class="que_select_box" style="padding: 0 10px;margin-top: 10px">
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">疼痛（30 分）</div>
+                                        <div class="answer" name="select1">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">疼痛（30 分）</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="30" class="option">无</div>
+                                                <div value="25" class="option">压痛或仅在运动、重体力劳动时出现疼痛</div>
+                                                <div value="18" class="option">日常生活轻微疼痛</div>
+                                                <div value="10" class="option">中等程度可以忍受的疼痛（使用镇痛剂，有时夜间痛）</div>
+                                                <div value="5" class="option">高度疼痛（活动受限，夜间经常痛）</div>
+                                                <div value="0" class="option">因为疼痛而完全不能活动</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="que_title">
+                            <span>功能（20 分）</span>
+                        </div>
+                        <div class="question_block">
+                            <div class="que_select_box" style="padding: 0 10px;margin-top: 10px">
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">外展肌力的强度</div>
+                                        <div class="answer" name="select2">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">&nbsp;&nbsp;&nbsp;&nbsp;外展肌力的强度</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="5" class="option">正常</div>
+                                                <div value="4" class="option">优</div>
+                                                <div value="3" class="option">良</div>
+                                                <div value="2" class="option">可</div>
+                                                <div value="1" class="option">差</div>
+                                                <div value="0" class="option">零</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">耐久力：（在肘伸展位内旋位，举起1KG哑铃保持水平的时间）</div>
+                                        <div class="answer" name="select3">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">&nbsp;&nbsp;&nbsp;&nbsp;耐久力：（在肘伸展位内旋位，举起1KG哑铃保持水平的时间）</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="5" class="option">10 秒以上</div>
+                                                <div value="3" class="option">3 秒以上</div>
+                                                <div value="1" class="option">2 秒以上</div>
+                                                <div value="0" class="option">不能</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="que_title">
+                            <span>日常生活动作（10分）（如果有其他不能做的动作各减1分）</span>
+                        </div>
+                        <div class="question_block" style="padding: 0 10px;">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="chex1">能梳头</label>
+                                    <input class="flex_que q_radio" value="1" id="chex1" name="chex1" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="chex2">能系带子</label>
+                                    <input class="flex_que q_radio" value="1" id="chex2" name="chex2" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="chex3">能手摸嘴</label>
+                                    <input class="flex_que q_radio" value="1" id="chex3" name="chex3" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="chex4">能睡眠时压着患处</label>
+                                    <input class="flex_que q_radio" value="1" id="chex4" name="chex4" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="chex5">能取上衣侧面口袋的东西</label>
+                                    <input class="flex_que q_radio" value="1" id="chex5" name="chex5" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="chex6">能用手摸对侧眼</label>
+                                    <input class="flex_que q_radio" value="1" id="chex6" name="chex6" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="chex7">能关或拉开门</label>
+                                    <input class="flex_que q_radio" value="1" id="chex7" name="chex7" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="chex8">能用手取头上的东西</label>
+                                    <input class="flex_que q_radio" value="1" id="chex8" name="chex8" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="chex9">能大小便</label>
+                                    <input class="flex_que q_radio" value="1" id="chex9" name="chex9" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="chex10">能穿上衣</label>
+                                    <input class="flex_que q_radio" value="1" id="chex10" name="chex10" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="que_select_box">
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">活动度（主动运动，坐位进行）（30分）</div>
+                                        <div class="answer" name="select4">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">活动度（主动运动，坐位进行）（30分）</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="15" class="option">150 度以上</div>
+                                                <div value="12" class="option">120 度以上</div>
+                                                <div value="9" class="option">90 度以上</div>
+                                                <div value="6" class="option">60 度以上</div>
+                                                <div value="3" class="option">30 度以上</div>
+                                                <div value="0" class="option">0 度</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">外旋（9分）</div>
+                                        <div class="answer" name="select5">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">外旋（9分）</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="9" class="option">60 度以上</div>
+                                                <div value="6" class="option">30 度以上</div>
+                                                <div value="3" class="option">0 度以上</div>
+                                                <div value="1" class="option">-20 度以上</div>
+                                                <div value="0" class="option">-20 度以下</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">内旋（6分）</div>
+                                        <div class="answer" name="select6">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">内旋（6分）</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="6" class="option">Th12 以上</div>
+                                                <div value="4" class="option">L5 以上</div>
+                                                <div value="2" class="option">臀部</div>
+                                                <div value="0" class="option">其余以下</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">X 线评价（5分）</div>
+                                        <div class="answer" name="select7">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">X 线评价（5分）</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="5" class="option">正常</div>
+                                                <div value="3" class="option">中度变化或半脱位</div>
+                                                <div value="1" class="option">重度变化或脱位</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">关节稳定性（15分）</div>
+                                        <div class="answer" name="select8">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">关节稳定性（15分）</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="15" class="option">正常</div>
+                                                <div value="10" class="option">轻度不稳定或有要脱臼的不稳定感</div>
+                                                <div value="5" class="option">重度不稳定或既往有半脱位状态</div>
+                                                <div value="0" class="option">既往有脱臼</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">得分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

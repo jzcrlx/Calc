@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-436.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-436">常用孕妇用药对胎儿的影响</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2">
+                <thead>
+                <tr>
+                    <th>药名</th>
+                    <th>给药孕期</th>
+                    <th>不良影响</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>沙立度胺</th>
+                    <td>早期</td>
+                    <td>四肢长骨多处缺损，指趾畸形、短肢或无肢"海豹肢体畸形"，心、眼、耳、肾受损及锁肛</td>
+                </tr>
+                <tr>
+                    <th>氨甲喋呤</th>
+                    <td>早期</td>
+                    <td>无脑儿、脑积水、腭裂、流产</td>
+                </tr>
+                <tr>
+                    <th>环磷酰胺</th>
+                    <td>早期</td>
+                    <td>四肢及外鼻畸形、腭裂、耳缺如</td>
+                </tr>
+                <tr>
+                    <th>苯丁酸氦芥</th>
+                    <td>早期</td>
+                    <td>肾、输尿管缺损、腭裂</td>
+                </tr>
+                <tr>
+                    <th>己烯雌酚</th>
+                    <td>妊娠期</td>
+                    <td>女胎青春期患阴道腺病、男性女性化、睾丸发育不良</td>
+                </tr>
+                <tr>
+                    <th>雄激素</th>
+                    <td>早期</td>
+                    <td>女胎男性化</td>
+                </tr>
+                <tr>
+                    <th>丙硫氧嘧啶</th>
+                    <td>妊娠期</td>
+                    <td>成骨迟缓、智力低下、甲状腺肿</td>
+                </tr>
+                <tr>
+                    <th>甲硫咪唑</th>
+                    <td>早期</td>
+                    <td>长期应用甲状腺机能低下</td>
+                </tr>
+                <tr>
+                    <th>四环素</th>
+                    <td>早期</td>
+                    <td>手指畸形、先天性白内障、长骨发育不良</td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <td>后期</td>
+                    <td>乳齿黄染、珐琅质形成不全</td>
+                </tr>
+                <tr>
+                    <th>肾上腺皮质激素</th>
+                    <td>早期</td>
+                    <td>腭裂、无脑儿、并指畸形、死胎、成骨迟缓</td>
+                </tr>
+                <tr>
+                    <th>苯妥英钠</th>
+                    <td>妊娠期</td>
+                    <td>腭裂、唇裂、心脏、骨骼发育不全</td>
+                </tr>
+                <tr>
+                    <th>苯巴比妥</th>
+                    <td>妊娠期</td>
+                    <td>四肢畸形、肝、脑缺损</td>
+                </tr>
+                <tr>
+                    <th>氯丙嗪</th>
+                    <td>妊娠期</td>
+                    <td>脑发育不良、视网膜病变</td>
+                </tr>
+                <tr>
+                    <th>氯氮</th>
+                    <td>早期</td>
+                    <td>腭裂、唇裂</td>
+                </tr>
+                <tr>
+                    <th>甲丙氨酯</th>
+                    <td>早期</td>
+                    <td>先天性心脏病</td>
+                </tr>
+                <tr>
+                    <th>水杨酸类</th>
+                    <td>妊娠期</td>
+                    <td>肾畸形、中枢神经损伤、发育障碍、新生儿紫癜、死胎</td>
+                </tr>
+                <tr>
+                    <th>非那西丁</th>
+                    <td>妊娠期</td>
+                    <td>肾、骨骼畸形</td>
+                </tr>
+                <tr>
+                    <th>美可洛嗪</th>
+                    <td>早期</td>
+                    <td>唇裂、腭裂、小指症、脑脊髓功能障碍</td>
+                </tr>
+                <tr>
+                    <th>苯海拉明</th>
+                    <td>妊娠期</td>
+                    <td>唇裂</td>
+                </tr>
+                <tr>
+                    <th>双香豆素</th>
+                    <td>妊娠期</td>
+                    <td>软骨发育不良、颅内出血、死胎</td>
+                </tr>
+                <tr>
+                    <th>华法林</th>
+                    <td>早期</td>
+                    <td>小头畸形、大脑发育不良、先天性失明</td>
+                </tr>
+                <tr>
+                    <th>氯喹</th>
+                    <td>妊娠期</td>
+                    <td>耳聋、脑积水、肾畸形、死胎</td>
+                </tr>
+                <tr>
+                    <th>链霉素</th>
+                    <td>妊娠期</td>
+                    <td>耳聋</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>药物对胚胎影响大致可分为以下几个时期：</p>
+                <p>妊娠前期从女性发育成熟到卵子受精时期，在这段期间内，使用药物一般比较安全，但要注意在体内半衰期较长的药物。</p>
+                <p>受精第1日~第14日受精卵发育到胚泡形成，这段期间如果药物导致大量胚囊细胞受损，会导致胚胎的死亡。如果只有少量细胞受损，不会影响其他胚囊细胞最终分化发育成正常个体。</p>
+                <p>受精15日到妊娠3个月左右该期是经典的致畸期。在这段时间内，首先是心脏、脑开始分化发育，继而是眼、四肢、性腺与生殖器官等。由于各种器官、躯干、四肢在短时间内迅速分化，所以极易受到包括药物毒性在内的各种致畸因素影响。一旦正在分化器官受到影响，就可能形成畸形，这段期间内，药物毒性作用越早，发生畸形可能越严重。</p>
+                <p>妊娠3个月至分娩这段期间药物致畸可能性大大下降，但有些药物仍可能影响胎儿正常发育。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">丰有吉主编. 妇产科学（八年制）（第2版）. 人民卫生出版社. 2010年. p65~6.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

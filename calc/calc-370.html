@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-370.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-370">性发育Tanner分期</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>乳房</th>
+                    <th>阴毛</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>Ⅰ期(青春期前)</th>
+                    <td>仅乳头凸出</td>
+                    <td>无</td>
+                </tr>
+                <tr>
+                    <th>Ⅱ期</th>
+                    <td>乳房、乳头凸起，乳晕直径扩大<br>平均年龄：9.8岁</td>
+                    <td>长而稀疏，黑色，分布于大阴唇<br>平均年龄：10.5岁</td>
+                </tr>
+                <tr>
+                    <th>Ⅲ期</th>
+                    <td>乳房及乳晕继续增大，两者无界限<br>平均年龄：11.2岁</td>
+                    <td>增粗、卷曲、颜色加深，阴阜出现稀疏毛发<br>平均年龄：11.4岁</td>
+                </tr>
+                <tr>
+                    <th>Ⅳ期</th>
+                    <td>乳晕、乳头进一步凸起于乳房表面<br>平均年龄：12.1岁</td>
+                    <td>成年人毛发，浓密，但仅限于阴阜<br>平均年龄：12岁</td>
+                </tr>
+                <tr>
+                    <th>Ⅴ期</th>
+                    <td>乳晕回降，与乳房弧度连续<br>平均年龄：14.6岁</td>
+                    <td>成年人毛发及分布<br>平均年龄：13.7岁</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="view_img">
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>青春期为第二性征开始发育和获得性生殖能力的时期。女性第二性征发育以乳房发育为先，继而出现阴毛、腋毛。月经初潮通常晚于第二性征发育，此时已具有生育能力。 </p>
+                <p></p>
+                <img class="formula-tbimg" src="calculate/images/female.jpg">
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">1、Marshall WA, Tanner JM.Variations in the pattern ofpubertal changes in boys. Arch DisChild. 1970;45(239):13-23.</span>
+            </a>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">2、Marshall WA, Tanner JM. Variations in pattern of pubertal changes in girls. Arch Dis Child. 1969;44(235):291-303.</span>
+            </a>
+        </div>
+    </div>
+</div>
+<script src="js/viewer/viewer.js"></script>
+<link href="js/viewer/viewer.css" rel="stylesheet">
+<script src="js/viewer/jquery-viewer.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var $image = $('.view_img');
+
+        $image.viewer({
+            inline: false,
+            toolbar: 0,
+            navbar: 0,
+            title: '',
+            button: 0,
+            viewed: function () {
+            }
+        });
+    });
+</script>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

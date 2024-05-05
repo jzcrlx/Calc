@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-257.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-257">股骨转子间骨折改良Evans分类</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="view_img">
+            <img class="formula-tbimg" src="calculate/images/evans.jpg">
+            <div>
+                <h3><span class="jiedu-title">说明</span></h3>
+                <div class="jiedu">
+                    <p>改良Evans分类是根据大或小转子部是否出现骨折而影响稳定性进行的分型：</p>
+                    <p>①ⅠA型(无移位)和ⅠB型(有移位)为骨折线由外上方向内下方沿转子间线走行的两部分骨折，即简单骨折，解剖复位容易，复位后稳定；</p>
+                    <p>②ⅡA型骨折是累及大转子的三部分骨折，ⅡB型骨折是累及小转子的三部分骨折；</p>
+                    <p>③Ⅲ型骨折为累及大转子与小转子的四部分骨折</p>
+                    <p>1979年，Kyle在Evans分类的基础上，将股骨转子间骨折按照累及的范围和移位程度，分为4型(见下表)</p>
+                    <p></p>
+                    <img class="formula-tbimg" src="calculate/images/kyle1.jpg">
+                    <img class="formula-tbimg" src="calculate/images/kyle2.jpg">
+                </div>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text"> 陈孝平主编. 外科学（八年制）（第2版）. 人民卫生出版社. 2010年.p959.</span>
+            </a>
+        </div>
+    </div>
+</div>
+<script src="js/viewer/viewer.js"></script>
+<link href="js/viewer/viewer.css" rel="stylesheet">
+<script src="js/viewer/jquery-viewer.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var $image = $('.view_img');
+
+        $image.viewer({
+            inline: false,
+            toolbar: 0,
+            navbar: 0,
+            title: '',
+            button: 0,
+            viewed: function () {
+            }
+        });
+    });
+</script>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-335.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-335">肱骨外髁骨折北京积水潭医院分型</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2">
+                <tbody>
+                <tr>
+                    <th colspan="2">
+                        <div align="left">北京积水潭医院根据病理变化分为 4 型。</div>
+                    </th>
+                </tr>
+                <tr>
+                    <td>Ⅰ 型：</td>
+                    <td>无移位骨折型。骨膜未撕裂，X 线片可见到干骺端有骨折线。</td>
+                </tr>
+                <tr>
+                    <td>Ⅱ 型：</td>
+                    <td>侧方移位型。骨块向侧方、前方或后方移位。骨折端间隙增大轻度移位者，骨膜部分撕裂，重度移位者，完全撕裂，复位后骨块不稳定，在固定中可发生再移位。</td>
+                </tr>
+                <tr>
+                    <td>Ⅲ 型：</td>
+                    <td>旋转移位型。骨折块向侧方、前方或后方移位。并旋转移位。由于局部伸筋膜骨膜完全断裂，加之前臂伸肌的牵拉，故骨折块纵轴向外旋转移位可达
+                        90°～180°。在横轴上也可发生向前或向后的不同程度的旋转。肱尺关节无变化。
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ⅳ 型：</td>
+                    <td>骨折脱位型。骨折块可侧方移位、旋转移位，同时肘关节可向桡侧、尺侧及后方脱位。关节囊及侧副韧带撕裂，肘部软组织损伤严重。此型骨折并不少见。Hardacre 报告 46
+                        例移位型骨折，合并肘关节脱位者 9 例，约占 20%。因肘部软组织损伤严重，治疗较其他三型困难，预后亦较其他三型差。故北京积水潭医院将此类骨折称为骨折脱位型，以引起重视。
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="margin-bottom: 15px">
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>儿童肘部骨折中较常见。实际是外髁骨骺分离。其发生率仅次于肱骨髁上骨折。多由间接复合外力造成当儿童撞倒时手掌着地，前臂多处于旋前，肘关节稍屈曲位，大部分外力沿桡骨传至桡骨头，再撞击肱骨外髁骨折而发生骨折。同时多合并肘外翻应力，伸肌牵拉等因素而形成骨折，骨折线由外髁上部斜向下内达滑车桡侧部，骨块常包括桡侧干骺端骨片，肱骨小头骨骺和滑车桡侧部分，可因外力方向、前臂旋转及内收牵拉，而产生不同的类型。</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

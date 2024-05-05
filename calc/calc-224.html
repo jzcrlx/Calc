@@ -1,0 +1,615 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-224.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-224" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>汉密尔顿抑郁量表(Hamilton Depression Scale，HAMD)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">1.抑郁情绪</div>
+                        <div class="answer" name="yiyuqingxu">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">抑郁情绪</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">只在问到时才诉述</div>
+                                <div value="2" class="option">在言语中自发地表达</div>
+                                <div value="3" class="option">不用言语也可从表情、姿势、声音或欲哭中流露出这种情绪</div>
+                                <div value="4" class="option">病人的自发和非自发语言（表情、动作），几乎完全表现为这种情绪</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">2.有罪感</div>
+                        <div class="answer" name="zuiegan">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">有罪感</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">责备自己，感到自己已连累他人</div>
+                                <div value="2" class="option">认为自己犯了罪，或反复思考以往的过失和错误</div>
+                                <div value="3" class="option">认为目前的疾病，是对自己错误的惩罚，或有罪恶妄想</div>
+                                <div value="4" class="option">罪恶妄想伴有指责或威胁性幻觉</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">3.自杀</div>
+                        <div class="answer" name="zisha">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">自杀</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">觉得活着没有意义</div>
+                                <div value="2" class="option">希望自己已经死去，或常想到与死有关的事</div>
+                                <div value="3" class="option">消极观念（自杀念头）</div>
+                                <div value="4" class="option">有严重自杀行为</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">4.入睡困难</div>
+                        <div class="answer" name="rushuikunnan">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">入睡困难</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">主诉有时有入睡困难，即上床后半小时仍不能入睡</div>
+                                <div value="2" class="option">主诉每晚均有入睡困难</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">5.睡眠不深</div>
+                        <div class="answer" name="shuimianbushen">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">睡眠不深</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">睡眠浅多恶梦</div>
+                                <div value="2" class="option">半夜（晚上12点以前）曾醒来（不包括上厕所）</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">6.早醒</div>
+                        <div class="answer" name="zaoshui">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">早醒</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">有早醒，比平时早醒1小时，但能重新入睡</div>
+                                <div value="2" class="option">早醒后无法重新入睡</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">7.工作和兴趣</div>
+                        <div class="answer" name="gongzuo">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">工作和兴趣</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">提问时才诉述</div>
+                                <div value="2" class="option">自发地直接或间接表达对活动、工作或学习失去兴趣，如感到没精打采，犹豫不决，不能坚持或需强迫自己去工作或活动
+                                </div>
+                                <div value="3" class="option">病室劳动或娱乐不满3小时</div>
+                                <div value="4" class="option">因目前的疾病而停止工作，住院患者不参加任何活动或者没有他人帮助便不能完成病室日常事务</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">8.迟缓：指思维和语言缓慢，注意力难以集中，主动性减退。</div>
+                        <div class="answer" name="chihuan">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">迟缓：指思维和语言缓慢，注意力难以集中，主动性减退。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">精神检查中发现轻度迟缓</div>
+                                <div value="2" class="option">精神检查中发现明显迟缓</div>
+                                <div value="3" class="option">精神检查进行困难</div>
+                                <div value="4" class="option">完全不能回答问题（木僵）</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">9.激越</div>
+                        <div class="answer" name="jiyue">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">激越</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">检查时表现的有些心神不定</div>
+                                <div value="2" class="option">显的心神不定或小动作多</div>
+                                <div value="3" class="option">不能静坐，检查中曾站立</div>
+                                <div value="4" class="option">搓手，咬手指，扯头发，咬嘴唇</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">10.精神性焦虑</div>
+                        <div class="answer" name="jiaolv">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">精神性焦虑</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">问到时才诉述</div>
+                                <div value="2" class="option">自发地表达</div>
+                                <div value="3" class="option">表情和言谈流露明显忧虑</div>
+                                <div value="4" class="option">明显惊恐</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">11.躯体性焦虑：指焦虑的生理症状，包括口干、腹胀、腹泻、打呃、腹绞痛、心悸、头痛、过度换气和叹息、以及尿频和出汗等。</div>
+                        <div class="answer" name="qutixingjiaolv">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">
+                                    躯体性焦虑：指焦虑的生理症状，包括口干、腹胀、腹泻、打呃、腹绞痛、心悸、头痛、过度换气和叹息、以及尿频和出汗等。
+                                </div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻度</div>
+                                <div value="2" class="option">中度，有肯定的上述症状</div>
+                                <div value="3" class="option">重度，上述症状严重，影响生活或需加处理</div>
+                                <div value="4" class="option">严重影响生活和活动</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">12.胃肠道症状</div>
+                        <div class="answer" name="weichangdao">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">胃肠道症状</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">食欲减退，但不需他人鼓励便自行进食</div>
+                                <div value="2" class="option">进食需他人催促或请求或需要应用泻药或助消化药</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">13.全身症状</div>
+                        <div class="answer" name="quanshen">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">全身症状</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">四肢、背部或颈部沉重感，背痛，头痛，肌肉疼痛，全身乏力或疲倦</div>
+                                <div value="2" class="option">上述症状明显</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">14.性症状：指性欲减退、月经紊乱等</div>
+                        <div class="answer" name="xingzhengzhuang">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">性症状：指性欲减退、月经紊乱等</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无症状，或者不能肯定，或者该项对被评者不适合。</div>
+                                <div value="1" class="option">轻度</div>
+                                <div value="2" class="option">重度</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">15.疑病</div>
+                        <div class="answer" name="yibing">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">疑病</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">对身体过分关注</div>
+                                <div value="2" class="option">反复考虑健康问题</div>
+                                <div value="3" class="option">有疑病妄想</div>
+                                <div value="4" class="option">伴幻觉的疑病妄想</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">16.体重减轻</div>
+                        <div class="answer" name="tizhong">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">体重减轻</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">一周内体重减轻1斤以上</div>
+                                <div value="2" class="option">一周内体重减轻2斤以上</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">17.自知力</div>
+                        <div class="answer" name="zizhili">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">自知力</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">知道自己有病，表现为忧郁</div>
+                                <div value="1" class="option">知道自己有病，但归于伙食太差、环境问题、工作过忙、病毒感染或需要休息等</div>
+                                <div value="2" class="option">完全否认有病</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">18.日夜变化（如果症状在早晨或傍晚加重，先指出哪一种，然后按其变化程度评分）</div>
+                        <div class="answer" name="riyebianhua">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">日夜变化（如果症状在早晨或傍晚加重，先指出哪一种，然后按其变化程度评分）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">轻度变化</div>
+                                <div value="2" class="option">重度变化</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">19.人格解体或现实解体：指非真实感或虚无妄想。</div>
+                        <div class="answer" name="rengejieti">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">人格解体或现实解体：指非真实感或虚无妄想。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">问及时才诉述</div>
+                                <div value="2" class="option">自发诉述</div>
+                                <div value="3" class="option">有虚无妄想</div>
+                                <div value="4" class="option">伴幻觉的虚无妄想</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">20.偏执症状</div>
+                        <div class="answer" name="pianzhi">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">偏执症状</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">有猜疑</div>
+                                <div value="2" class="option">有关系观念</div>
+                                <div value="3" class="option">有关系妄想或被害妄想</div>
+                                <div value="4" class="option">伴有幻觉的关系妄想或被害妄想</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">21.强迫症状：指强迫思维和强迫行为。</div>
+                        <div class="answer" name="qiangpo">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">强迫症状：指强迫思维和强迫行为。</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">问及时才诉述</div>
+                                <div value="2" class="option">自发诉述</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">22.能力减退感</div>
+                        <div class="answer" name="nenglijiantui">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">能力减退感</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">仅于提问时方引出主观体验</div>
+                                <div value="2" class="option">病人主动表示能力减退感</div>
+                                <div value="3" class="option">需鼓励、指导和安慰才能完成病室日常事务或个人卫生</div>
+                                <div value="4" class="option">穿衣、梳洗、进食、铺床或个人卫生均需他人协助</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">23.绝望感</div>
+                        <div class="answer" name="juewanggan">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">绝望感</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">有时怀疑"情况是否会好转"，但解释后能接受</div>
+                                <div value="2" class="option">持续感到"没有希望"，但解释后能接受</div>
+                                <div value="3" class="option">对未来感到灰心、悲观和绝望，解释后不能排除</div>
+                                <div value="4" class="option">自动反复诉述"我的病不会好了"或诸如此类的情况</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">24.自卑感</div>
+                        <div class="answer" name="zibei">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">自卑感</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">无</div>
+                                <div value="1" class="option">仅在询问时诉述有自卑感（我不如他人）</div>
+                                <div value="2" class="option">自动诉述有自卑感（我不如他人）</div>
+                                <div value="3" class="option">病人主动诉述："我一无是处"或"低人一等"，与评2分者只是程度的差别</div>
+                                <div value="4" class="option">自卑感达妄想的程度，例如"我是废物"或类似情况</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">评分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>总分＜8分：正常；</p>
+            <p>总分在8～20分：可能有抑郁症；</p>
+            <p>总分在20～35分：肯定有抑郁症；</p>
+            <p>总分＞35分：严重抑郁症。</p>
+            <p>汉密尔顿抑郁量表(Hamilton Depression Scale，HAMD)是由Hamilton编制，是临床上评定抑郁状态时应用得最为普遍的量表。量表是24项版本，方法简单，标准明确，便于掌握。适用于有抑郁症状的成人。总分能够较好的反映疾病严重程度，也能很好的衡量治疗效果，是经典和被公认的抑郁评定量表。</p>
+            <p>HAMD大部分项目采用0~4分的5级评分法。各级的标准为：(0)无；(1)轻度；(2)中度；(3)重度；(4)极重度。少数项目采用0~2分的3级评分法，其分级的标准为：(0)无；(1)轻~中度；(2)重度。</p>
+            <p>应由经过训练的两名评定员对被评定者进行汉密尔顿抑郁量表联合检查。一般采用交谈与观察方式，待检查结束后，两名评定员分别独立评分。</p>
+            <p>若需比较治疗前后抑郁症状和病情的变化，则于入组时，评定当时或入组前一周的情况，治疗后2-6周，再次评定，以资比较。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Hamilton M . A rating scale for depression. J Neurol Neurosurg Psychiatry. 1960;23:56–62.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+function MDCalc(z){score=0;for(x in z){if(x!=="result"){score+=z[x]}}Answer(score);if(score==0){msg="研究得出死亡率为0%"}if(score==1){msg="研究得出死亡率为13%"}if(score==2){msg="研究得出死亡率为26%"}if(score==3){msg="研究得出死亡率为72%"}if(score==4){msg="研究得出死亡率为97%"}if(score==5){msg="研究得出死亡率为100%."}if(score==6){msg="尽管在研究中没有患者得分为6分，但死亡率估计为100%"}Text(msg)}$("#units").hide();

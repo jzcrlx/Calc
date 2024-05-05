@@ -1,0 +1,1 @@
+function MDCalc(z){score=0;for(x in z){if(x!=="result"){score+=z[x]}}if(score==0){msg="患者属于严重预后的低风险人群"}if(score>0){msg="患者属于严重预后的高危人群"}Text(msg)}$("#units").hide();

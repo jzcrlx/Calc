@@ -1,0 +1,1 @@
+function MDCalc(z){score=z.latelactate+z.inr+z.cr+z.grade;if(score==3){msg="如果INR，肌酸酐和脑病指示剂全在24小时内显现，转移至移植中心准备移植。"}if(score>3){msg="转移至移植中心，准备移植。"}if(score<3){msg="不符合移植标准。"}if(z.earlylactate==1){msg+="慎重考虑转至移植中心，准备移植。"}if(z.phos==1){msg+="不符合国王学院标准的，根据Goldfrank's，血清磷酸盐“是在预测接受移植或死于肝毒性醋氨酚时是敏感的特效药”。"}Text(msg)}$("#units").hide();

@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-443.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-443" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>预产期</h2>
+        </div>
+        <form name="medform" action="get" id="medform">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_block req">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-md">末次月经</div>
+                                <div class="flex-item">
+                                    <input value="2022-12-15" class="calc-input date" name="lmp" type="date">
+                                </div>
+                                <div class="calc-unit-ssm"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer_block">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item ">
+                                <div class="calc-label-md">预产期:</div>
+                                <div class="flex-item">
+                                    <input class="calc-input skin-color-bold" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                </div>
+                                <div class="calc-unit-ssm"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">计算公式</span></h3>
+        <div class="jiedu">
+            <p>末次月经LMP第一日算起，月份减3或加9，日数加7。</p>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">临床意义</span></h3>
+        <div class="jiedu">
+            <p>妊娠期全过程从末次月经的第1日开始计算，孕龄为280日，即40周。</p>
+            <p>妊娠满28周（196日）及以上，胎儿及其附属物自然临产开始到由母体娩出的全过程，成为分娩（delivery）。</p>
+            <p>妊娠满28周至不满37足周（196-258日）期间分娩，称为早产（premature delivery）。</p>
+            <p>妊娠满37周至不满42足周（259-293日）期间分娩，称为足月产（term delivery）。</p>
+            <p>妊娠满42周（294日）及以上分娩，称为过期产（postterm delivery）。</p>
+            <p>对于妊娠41周以后的孕妇可常规引产。</p>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">说明</span></h3>
+        <div class="jiedu">
+            <p>英文名称: expected date of confinement,EDC</p>
+            <p>如末次月经第1日是2007年9月10日，预产期应为2008年6月17日。若孕妇只知农历日期，应先换算成公历在推算预产期。实际分娩日期与推算的预产期有可能相差1-2周。若孕妇记不清末次月经日期或哺乳期尚未月经来潮而受孕者，可根据早孕反应开始出现时间、胎动开始时间、子宫底高度和B型超声检查的胎囊大小（GS）、头臀长度（CRL）、胎头双顶径（BPD）及股骨长度（FL）值推算出预产期。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">谢幸，苟文丽主编.妇产科学（第8版）[M].北京：人民卫生出版社，2013.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

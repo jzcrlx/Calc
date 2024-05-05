@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-226.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-226">中华医学会神经病学分会血管性痴呆诊断标准草案要点</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab1">
+                <tbody>
+                <tr>
+                    <th>1.临床很可能(probable)血管性痴呆</th>
+                </tr>
+                <tr>
+                    <td>(1)痴呆符合DSM-IV-R的诊断标准。<br>(2)脑血管疾病的诊断：临床和影像学表现支持。<br>(3)痴呆与脑血管病密切相关，痴呆发生于卒中后3个月内，并持续6个月以上；或认知功能障碍突然加重、或波动、或呈阶梯样逐渐进展。<br>
+                        (4)支持血管性痴呆诊断：①认知功能损害的不均匀性(斑块状损害)；②人格相对完整；③病程波动，有多次脑卒中史；④可呈现步态障碍、假性球麻痹等体征；⑤存在脑血管病的危险因素。
+                    </td>
+                </tr>
+                <tr>
+                    <th>2. 可能为(possible)血管性痴呆</th>
+                </tr>
+                <tr>
+                    <td>(1)符合上述痴呆的诊断；<br>(2)有脑血管病和局灶性神经系统体征；<br>(3)痴呆和脑血管病可能有关，但在时间或影像学方面证据不足。</td>
+                </tr>
+                <tr>
+                    <th>3.确诊血管性痴呆</th>
+                </tr>
+                <tr>
+                    <td>临床诊断为很可能或可能的血管性痴呆，并由尸检或活组织检查证实不含超过年龄相关的神经原纤维缠结(NFTs)和老年斑(SP)数，以及其他变性疾患组织学特征。</td>
+                </tr>
+                <tr>
+                    <th>4.排除性诊断(排除其他原因所致的痴呆)</th>
+                </tr>
+                <tr>
+                    <td>(1)意识障碍；<br>(2)其他神经系统疾病所致的痴呆(如阿尔茨海默病等)；<br>(3)全身性疾病引起的痴呆；<br>(4)精神疾病(抑郁症等)。</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">吴江主编. 神经病学（八年制）（第2版）. 2010年. p191-2.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

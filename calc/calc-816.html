@@ -1,0 +1,562 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-816.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-816" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>Bath强直性脊柱炎功能指数(BASFI)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box end">
+                <div class="question_sub_title">
+                    请选择(0-10)上指示出您在过去一星期的活动情况。0=轻易完成；10=不可能完成，其它则处于0-10分之间，选择一个最符合自己的选项。(说明:工具是指协助您完成某一动作或活动的器械)
+                </div>
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="question_title">
+                                1.无需别人帮忙或借助工具而能穿上袜子或紧身衣
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item1" id="item1_1" type="radio">
+                                        <label class="flex" for="item1_1">1</label>
+                                        <input class="flex_que q_radio" value="2" name="item1" id="item1_2" type="radio">
+                                        <label class="flex" for="item1_2">2</label>
+                                        <input class="flex_que q_radio" value="3" name="item1" id="item1_3" type="radio">
+                                        <label class="flex" for="item1_3">3</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="4" name="item1" id="item1_4" type="radio">
+                                        <label class="flex" for="item1_4">4</label>
+                                        <input class="flex_que q_radio" value="5" name="item1" id="item1_5" type="radio">
+                                        <label class="flex" for="item1_5">5</label>
+                                        <input class="flex_que q_radio" value="6" name="item1" id="item1_6" type="radio">
+                                        <label class="flex" for="item1_6">6</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="7" name="item1" id="item1_7" type="radio">
+                                        <label class="flex" for="item1_7">7</label>
+                                        <input class="flex_que q_radio" value="8" name="item1" id="item1_8" type="radio">
+                                        <label class="flex" for="item1_8">8</label>
+                                        <input class="flex_que q_radio" value="9" name="item1" id="item1_9" type="radio">
+                                        <label class="flex" for="item1_9">9</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item1" id="item1_0" type="radio">
+                                        <label class="flex" for="item1_0"> 0=轻易完成</label>
+                                        <input class="flex_que q_radio" value="10" name="item1" id="item1_10" type="radio">
+                                        <label class="flex" for="item1_10">10=不可能完成</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                2.无需借助工具能自己弯腰从地上拾起钢笔
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item2" id="item2_1" type="radio">
+                                        <label class="flex" for="item2_1">1</label>
+                                        <input class="flex_que q_radio" value="2" name="item2" id="item2_2" type="radio">
+                                        <label class="flex" for="item2_2">2</label>
+                                        <input class="flex_que q_radio" value="3" name="item2" id="item2_3" type="radio">
+                                        <label class="flex" for="item2_3">3</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="4" name="item2" id="item2_4" type="radio">
+                                        <label class="flex" for="item2_4">4</label>
+                                        <input class="flex_que q_radio" value="5" name="item2" id="item2_5" type="radio">
+                                        <label class="flex" for="item2_5">5</label>
+                                        <input class="flex_que q_radio" value="6" name="item2" id="item2_6" type="radio">
+                                        <label class="flex" for="item2_6">6</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="7" name="item2" id="item2_7" type="radio">
+                                        <label class="flex" for="item2_7">7</label>
+                                        <input class="flex_que q_radio" value="8" name="item2" id="item2_8" type="radio">
+                                        <label class="flex" for="item2_8">8</label>
+                                        <input class="flex_que q_radio" value="9" name="item2" id="item2_9" type="radio">
+                                        <label class="flex" for="item2_9">9</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item2" id="item2_0" type="radio">
+                                        <label class="flex" for="item2_0"> 0=轻易完成</label>
+                                        <input class="flex_que q_radio" value="10" name="item2" id="item2_10" type="radio">
+                                        <label class="flex" for="item2_10">10=不可能完成</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                3.无需别人帮忙或借助工具而能触及较高的架子
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item3" id="item3_1" type="radio">
+                                        <label class="flex" for="item3_1">1</label>
+                                        <input class="flex_que q_radio" value="2" name="item3" id="item3_2" type="radio">
+                                        <label class="flex" for="item3_2">2</label>
+                                        <input class="flex_que q_radio" value="3" name="item3" id="item3_3" type="radio">
+                                        <label class="flex" for="item3_3">3</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="4" name="item3" id="item3_4" type="radio">
+                                        <label class="flex" for="item3_4">4</label>
+                                        <input class="flex_que q_radio" value="5" name="item3" id="item3_5" type="radio">
+                                        <label class="flex" for="item3_5">5</label>
+                                        <input class="flex_que q_radio" value="6" name="item3" id="item3_6" type="radio">
+                                        <label class="flex" for="item3_6">6</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="7" name="item3" id="item3_7" type="radio">
+                                        <label class="flex" for="item3_7">7</label>
+                                        <input class="flex_que q_radio" value="8" name="item3" id="item3_8" type="radio">
+                                        <label class="flex" for="item3_8">8</label>
+                                        <input class="flex_que q_radio" value="9" name="item3" id="item3_9" type="radio">
+                                        <label class="flex" for="item3_9">9</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item3" id="item3_0" type="radio">
+                                        <label class="flex" for="item3_0"> 0=轻易完成</label>
+                                        <input class="flex_que q_radio" value="10" name="item3" id="item3_10" type="radio">
+                                        <label class="flex" for="item3_10">10=不可能完成</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                4.不用手支撑或借助其他帮助而能从一张无扶手的椅子上站起来
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item4" id="item4_1" type="radio">
+                                        <label class="flex" for="item4_1">1</label>
+                                        <input class="flex_que q_radio" value="2" name="item4" id="item4_2" type="radio">
+                                        <label class="flex" for="item4_2">2</label>
+                                        <input class="flex_que q_radio" value="3" name="item4" id="item4_3" type="radio">
+                                        <label class="flex" for="item4_3">3</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="4" name="item4" id="item4_4" type="radio">
+                                        <label class="flex" for="item4_4">4</label>
+                                        <input class="flex_que q_radio" value="5" name="item4" id="item4_5" type="radio">
+                                        <label class="flex" for="item4_5">5</label>
+                                        <input class="flex_que q_radio" value="6" name="item4" id="item4_6" type="radio">
+                                        <label class="flex" for="item4_6">6</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="7" name="item4" id="item4_7" type="radio">
+                                        <label class="flex" for="item4_7">7</label>
+                                        <input class="flex_que q_radio" value="8" name="item4" id="item4_8" type="radio">
+                                        <label class="flex" for="item4_8">8</label>
+                                        <input class="flex_que q_radio" value="9" name="item4" id="item4_9" type="radio">
+                                        <label class="flex" for="item4_9">9</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item4" id="item4_0" type="radio">
+                                        <label class="flex" for="item4_0"> 0=轻易完成</label>
+                                        <input class="flex_que q_radio" value="10" name="item4" id="item4_10" type="radio">
+                                        <label class="flex" for="item4_10">10=不可能完成</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                5.躺在地板上，无需他人帮助而能站起来
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item5" id="item5_1" type="radio">
+                                        <label class="flex" for="item5_1">1</label>
+                                        <input class="flex_que q_radio" value="2" name="item5" id="item5_2" type="radio">
+                                        <label class="flex" for="item5_2">2</label>
+                                        <input class="flex_que q_radio" value="3" name="item5" id="item5_3" type="radio">
+                                        <label class="flex" for="item5_3">3</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="4" name="item5" id="item5_4" type="radio">
+                                        <label class="flex" for="item5_4">4</label>
+                                        <input class="flex_que q_radio" value="5" name="item5" id="item5_5" type="radio">
+                                        <label class="flex" for="item5_5">5</label>
+                                        <input class="flex_que q_radio" value="6" name="item5" id="item5_6" type="radio">
+                                        <label class="flex" for="item5_6">6</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="7" name="item5" id="item5_7" type="radio">
+                                        <label class="flex" for="item5_7">7</label>
+                                        <input class="flex_que q_radio" value="8" name="item5" id="item5_8" type="radio">
+                                        <label class="flex" for="item5_8">8</label>
+                                        <input class="flex_que q_radio" value="9" name="item5" id="item5_9" type="radio">
+                                        <label class="flex" for="item5_9">9</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item5" id="item5_0" type="radio">
+                                        <label class="flex" for="item5_0"> 0=轻易完成</label>
+                                        <input class="flex_que q_radio" value="10" name="item5" id="item5_10" type="radio">
+                                        <label class="flex" for="item5_10">10=不可能完成</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                6.不扶物站立10min未感不
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item6" id="item6_1" type="radio">
+                                        <label class="flex" for="item6_1">1</label>
+                                        <input class="flex_que q_radio" value="2" name="item6" id="item6_2" type="radio">
+                                        <label class="flex" for="item6_2">2</label>
+                                        <input class="flex_que q_radio" value="3" name="item6" id="item6_3" type="radio">
+                                        <label class="flex" for="item6_3">3</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="4" name="item6" id="item6_4" type="radio">
+                                        <label class="flex" for="item6_4">4</label>
+                                        <input class="flex_que q_radio" value="5" name="item6" id="item6_5" type="radio">
+                                        <label class="flex" for="item6_5">5</label>
+                                        <input class="flex_que q_radio" value="3" name="item6" id="item6_6" type="radio">
+                                        <label class="flex" for="item6_6">6</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="7" name="item6" id="item6_7" type="radio">
+                                        <label class="flex" for="item6_7">7</label>
+                                        <input class="flex_que q_radio" value="8" name="item6" id="item6_8" type="radio">
+                                        <label class="flex" for="item6_8">8</label>
+                                        <input class="flex_que q_radio" value="9" name="item6" id="item6_9" type="radio">
+                                        <label class="flex" for="item6_9">9</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item6" id="item6_0" type="radio">
+                                        <label class="flex" for="item6_0"> 0=轻易完成</label>
+                                        <input class="flex_que q_radio" value="10" name="item6" id="item6_10" type="radio">
+                                        <label class="flex" for="item6_10">10=不可能完成</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                7.不扶栏杆且不依靠助行工具而能爬12～15级楼梯（每步一梯级）
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item7" id="item7_1" type="radio">
+                                        <label class="flex" for="item7_1">1</label>
+                                        <input class="flex_que q_radio" value="2" name="item7" id="item7_2" type="radio">
+                                        <label class="flex" for="item7_2">2</label>
+                                        <input class="flex_que q_radio" value="3" name="item7" id="item7_3" type="radio">
+                                        <label class="flex" for="item7_3">3</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="4" name="item7" id="item7_4" type="radio">
+                                        <label class="flex" for="item7_4">4</label>
+                                        <input class="flex_que q_radio" value="5" name="item7" id="item7_5" type="radio">
+                                        <label class="flex" for="item7_5">5</label>
+                                        <input class="flex_que q_radio" value="6" name="item7" id="item7_6" type="radio">
+                                        <label class="flex" for="item7_6">6</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="7" name="item7" id="item7_7" type="radio">
+                                        <label class="flex" for="item7_7">7</label>
+                                        <input class="flex_que q_radio" value="8" name="item7" id="item7_8" type="radio">
+                                        <label class="flex" for="item7_8">8</label>
+                                        <input class="flex_que q_radio" value="9" name="item7" id="item7_9" type="radio">
+                                        <label class="flex" for="item7_9">9</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item7" id="item7_0" type="radio">
+                                        <label class="flex" for="item7_0"> 0=轻易完成</label>
+                                        <input class="flex_que q_radio" value="10" name="item7" id="item7_10" type="radio">
+                                        <label class="flex" for="item7_10">10=不可能完成</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                8.不用转身而能望向您的肩部
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item8" id="item8_1" type="radio">
+                                        <label class="flex" for="item8_1">1</label>
+                                        <input class="flex_que q_radio" value="2" name="item8" id="item8_2" type="radio">
+                                        <label class="flex" for="item8_2">2</label>
+                                        <input class="flex_que q_radio" value="3" name="item8" id="item8_3" type="radio">
+                                        <label class="flex" for="item8_3">3</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="4" name="item8" id="item8_4" type="radio">
+                                        <label class="flex" for="item8_4">4</label>
+                                        <input class="flex_que q_radio" value="5" name="item8" id="item8_5" type="radio">
+                                        <label class="flex" for="item8_5">5</label>
+                                        <input class="flex_que q_radio" value="6" name="item8" id="item8_6" type="radio">
+                                        <label class="flex" for="item8_6">6</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="7" name="item8" id="item8_7" type="radio">
+                                        <label class="flex" for="item8_7">7</label>
+                                        <input class="flex_que q_radio" value="8" name="item8" id="item8_8" type="radio">
+                                        <label class="flex" for="item8_8">8</label>
+                                        <input class="flex_que q_radio" value="9" name="item8" id="item8_9" type="radio">
+                                        <label class="flex" for="item8_9">9</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item8" id="item8_0" type="radio">
+                                        <label class="flex" for="item8_0"> 0=轻易完成</label>
+                                        <input class="flex_que q_radio" value="10" name="item8" id="item8_10" type="radio">
+                                        <label class="flex" for="item8_10">10=不可能完成</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                9.能进行体能活动，如身体锻练、散步或其他体育运动之类的活动
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item9" id="item9_1" type="radio">
+                                        <label class="flex" for="item9_1">1</label>
+                                        <input class="flex_que q_radio" value="2" name="item9" id="item9_2" type="radio">
+                                        <label class="flex" for="item9_2">2</label>
+                                        <input class="flex_que q_radio" value="3" name="item9" id="item9_3" type="radio">
+                                        <label class="flex" for="item9_3">3</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="4" name="item9" id="item9_4" type="radio">
+                                        <label class="flex" for="item9_4">4</label>
+                                        <input class="flex_que q_radio" value="5" name="item9" id="item9_5" type="radio">
+                                        <label class="flex" for="item9_5">5</label>
+                                        <input class="flex_que q_radio" value="6" name="item9" id="item9_6" type="radio">
+                                        <label class="flex" for="item9_6">6</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="7" name="item9" id="item9_7" type="radio">
+                                        <label class="flex" for="item9_7">7</label>
+                                        <input class="flex_que q_radio" value="8" name="item9" id="item9_8" type="radio">
+                                        <label class="flex" for="item9_8">8</label>
+                                        <input class="flex_que q_radio" value="9" name="item9" id="item9_9" type="radio">
+                                        <label class="flex" for="item9_9">9</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item9" id="item9_0" type="radio">
+                                        <label class="flex" for="item9_0"> 0=轻易完成</label>
+                                        <input class="flex_que q_radio" value="10" name="item9" id="item9_10" type="radio">
+                                        <label class="flex" for="item9_10">10=不可能完成</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="question_title">
+                                10.无论是做家务活，还是在上班，您都能完成一整天的活动
+                            </div>
+                            <div class="question_infor2">
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="1" name="item10" id="item10_1" type="radio">
+                                        <label class="flex" for="item10_1">1</label>
+                                        <input class="flex_que q_radio" value="2" name="item10" id="item10_2" type="radio">
+                                        <label class="flex" for="item10_2">2</label>
+                                        <input class="flex_que q_radio" value="3" name="item10" id="item10_3" type="radio">
+                                        <label class="flex" for="item10_3">3</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="4" name="item10" id="item10_4" type="radio">
+                                        <label class="flex" for="item10_4">4</label>
+                                        <input class="flex_que q_radio" value="5" name="item10" id="item10_5" type="radio">
+                                        <label class="flex" for="item10_5">5</label>
+                                        <input class="flex_que q_radio" value="6" name="item10" id="item10_6" type="radio">
+                                        <label class="flex" for="item10_6">6</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="7" name="item10" id="item10_7" type="radio">
+                                        <label class="flex" for="item10_7">7</label>
+                                        <input class="flex_que q_radio" value="8" name="item10" id="item10_8" type="radio">
+                                        <label class="flex" for="item10_8">8</label>
+                                        <input class="flex_que q_radio" value="9" name="item10" id="item10_9" type="radio">
+                                        <label class="flex" for="item10_9">9</label>
+                                    </div>
+                                </div>
+                                <div class="flex-center calc-que">
+                                    <div class="flex_box align_items_center">
+                                        <input class="flex_que q_radio" value="0" name="item10" id="item10_0" type="radio">
+                                        <label class="flex" for="item10_0"> 0=轻易完成</label>
+                                        <input class="flex_que q_radio" value="10" name="item10" id="item10_10" type="radio">
+                                        <label class="flex" for="item10_10">10=不可能完成</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-lg">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

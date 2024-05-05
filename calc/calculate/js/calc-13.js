@@ -1,0 +1,1 @@
+function MDCalc(z){if(pref=="si"){wt_conv=1}if(pref=="us"){wt_conv=1/2.2}z.wt=z.wt*wt_conv;value=.4*z.wt*(24-z.hco3);Answer(Round(value,1))}

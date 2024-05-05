@@ -1,0 +1,316 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-497.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-497" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>Barthel指数评定</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">饮食</div>
+                        <div class="answer" name="yinshi" style="margin-right: 20px;">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">饮食</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option selected">无法完成</div>
+                                <div value="5" class="option">需要帮助（如切食物，搅拌食物等）</div>
+                                <div value="10" class="option">独立<span class="info" onclick="showInfo('饮食','独立')"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">床-椅移动</div>
+                        <div class="answer" name="chuang" style="margin-right: 20px;">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">床-椅移动</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">完全不能做</div>
+                                <div value="5" class="option">需要较多帮助<span class="info" onclick="showInfo('床-椅移动','需要较多帮助')"></span></div>
+                                <div value="10" class="option">需要帮助<span class="info" onclick="showInfo('床-椅移动','需要帮助')"></span></div>
+                                <div value="15" class="option">独立<span class="info" onclick="showInfo('床-椅移动','独立')"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">个人卫生</div>
+                        <div class="answer" name="geren" style="margin-right: 20px;">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">个人卫生</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">需要协助</div>
+                                <div value="5" class="option">独立<span class="info" onclick="showInfo('床-椅移动','独立')"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">如厕</div>
+                        <div class="answer" name="ruce" style="margin-right: 20px;">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">如厕</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">完全依赖他人</div>
+                                <div value="5" class="option">需要帮助<span class="info" onclick="showInfo('如厕','需要帮助')"></span></div>
+                                <div value="10" class="option">独立<span class="info" onclick="showInfo('如厕','独立')"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">洗浴</div>
+                        <div class="answer" name="xiyu" style="margin-right: 20px;">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">洗浴</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">完全依赖他人</div>
+                                <div value="5" class="option">独立<span class="info" onclick="showInfo('洗浴','独立')"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">平地行走</div>
+                        <div class="answer" name="xingzou" style="margin-right: 20px;">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">平地行走</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">完全依赖他人</div>
+                                <div value="5" class="option">操作轮椅<span class="info" onclick="showInfo('平地行走','操作轮椅')"></span></div>
+                                <div value="10" class="option">需要帮助<span class="info" onclick="showInfo('平地行走','需要帮助')"></span></div>
+                                <div value="15" class="option">独立<span class="info" onclick="showInfo('平地行走','独立')"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">上下楼梯</div>
+                        <div class="answer" name="luoti" style="margin-right: 20px;">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">上下楼梯</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">完全依赖他人</div>
+                                <div value="5" class="option">需要帮助<span class="info" onclick="showInfo('上下楼梯','需要帮助')"></span></div>
+                                <div value="10" class="option">独立<span class="info" onclick="showInfo('上下楼梯','独立')"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">穿脱衣服</div>
+                        <div class="answer" name="chuanyi" style="margin-right: 20px;">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">穿脱衣服</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">完全依赖他人</div>
+                                <div value="5" class="option">需要帮助<span class="info" onclick="showInfo('穿脱衣服','需要帮助')"></span></div>
+                                <div value="10" class="option">独立<span class="info" onclick="showInfo('穿脱衣服','独立')"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">排便控制</div>
+                        <div class="answer" name="paibian" style="margin-right: 20px;">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">排便控制</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">完全依赖他人</div>
+                                <div value="5" class="option">需要帮助<span class="info" onclick="showInfo('排便控制','需要帮助')"></span></div>
+                                <div value="10" class="option">独立<span class="info" onclick="showInfo('排便控制','独立')"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">排尿控制</div>
+                        <div class="answer" name="painiao" style="margin-right: 20px;">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">排尿控制</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">完全依赖他人</div>
+                                <div value="5" class="option">需要帮助<span class="info" onclick="showInfo('排尿控制','需要帮助')"></span></div>
+                                <div value="10" class="option">独立<span class="info" onclick="showInfo('排尿控制','独立')"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">评分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>严重程度评估：</p>
+            <p>0～20分 功能严重障碍，日常生活完全依赖。</p>
+            <p>21～40分 生活需要很大帮助，属重度依赖。</p>
+            <p>41～60分 生活需要中等程度帮助。</p>
+            <p>&gt;60分 生活大部自理，轻度依赖。</p>
+            <p>100分 基本生活独立自理，不需他人照顾。</p>
+            <p>Barthel指数是用来测量个体基本生活能力，提供残疾严重程度评分的量表。它共有10项内容，每项根据是否需要帮助和帮助的程度及所花时间长短决定给予15、10、5或0分，总分100分，表示基本日常生活自理，得分越少，日常生活依赖他人越多。据研究，40～60分者从康复治疗中受益最大。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">戴红主编. 《康复医学》[M].北京大学医学出版社.2004年</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

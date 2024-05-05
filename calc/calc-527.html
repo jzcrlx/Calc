@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-527.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-527">烧伤面积(新九分法)</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                <thead>
+                <tr>
+                    <th colspan="2">部位</th>
+                    <th colspan="2">占成人体表%</th>
+                    <th>占儿童体表%</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th rowspan="3">头颈</th>
+                    <td>发部</td>
+                    <td>3</td>
+                    <td rowspan="3">9</td>
+                    <td rowspan="3">成人＋(12－年龄)</td>
+                </tr>
+                <tr>
+                    <td>面部</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>颈部</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <th rowspan="3">双上肢</th>
+                    <td>双手</td>
+                    <td>5</td>
+                    <td rowspan="3">9×2</td>
+                    <td rowspan="3">同成人</td>
+                </tr>
+                <tr>
+                    <td>双前臂</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>双上臂</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <th rowspan="3">躯干</th>
+                    <td>躯干前</td>
+                    <td>13</td>
+                    <td rowspan="3">9×3</td>
+                    <td rowspan="3">同成人</td>
+                </tr>
+                <tr>
+                    <td>躯干后</td>
+                    <td>13</td>
+                </tr>
+                <tr>
+                    <td>会阴</td>
+                    <td>1</td>
+                </tr>
+                <tr>
+                    <th rowspan="7">双下肢</th>
+                    <td>双臀</td>
+                    <td>5</td>
+                    <td rowspan="7">9×5＋1</td>
+                    <td rowspan="7">成人－(12－年龄)</td>
+                </tr>
+                <tr>
+                    <td>双臀（男）</td>
+                    <td>5</td>
+                </tr>
+                <tr>
+                    <td>双臀（女）</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>双大腿</td>
+                    <td>21</td>
+                </tr>
+                <tr>
+                    <td>双小腿</td>
+                    <td>13</td>
+                </tr>
+                <tr>
+                    <td>双足（男）</td>
+                    <td>7</td>
+                </tr>
+                <tr>
+                    <td>双足（女）</td>
+                    <td>6</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">结果解读</span></h3>
+            <div class="jiedu">
+                <p>中国九分法：根据实际测量结果，按解剖部位将人体以"九"为单位估计烧伤面积，即头颈一个"九"，双上肢两个"九"，躯干三个"九"，双下肢(包括臀部)五个"九"再加"一"。儿童则因头部面积相对较大，双下肢相对较小，随年龄而变，以12岁作为年龄分界线，在计算面积时，相应加减年龄因素。</p>
+            </div>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>烧伤面积以相对于体表面积的百分率来表示。60年代以前，我国均沿用国外的方法，如Wallace九分法。应用过程中发现与我国人体表面积不完全相符。60年代初，通过纸铸法实测了我国人体表面积，经统计学处理后，简化为公式，创建了适合我国人体体表面积的分类法：中国九分法。</p>
+                <p></p>
+                <img class="formula-tbimg" src="calculate/images/fire.jpg">
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">陈孝平主编. 《外科学》(八年制)[M]. 人民卫生出版社.2010年</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

@@ -1,0 +1,219 @@
+@charset "utf-8";
+/* CSS Document */
+#Layout {
+}
+
+.mainContainer {
+    color: #595959;
+    font-size: 16px;
+}
+
+.titleBar {
+    margin: 0 auto;
+    padding: 15px 0;
+}
+
+.titleBar h1, .titleBar h2 {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+#title {
+    margin-top: -55px;
+}
+
+.titleBar h2 {
+    background: url(images/border_b.jpg) repeat-x left bottom scroll;
+    font-size: 16px;
+    font-weight: bold;
+    color: #1d78b6;
+    line-height: 26px;
+    padding: 15px 0;
+    text-align: left;
+}
+
+
+/* 第一类 */
+.countTab1 {
+    width: 100%;
+    border: 1px solid #bacfee;
+    border-collapse: collapse;
+    margin: 0 auto 20px auto;
+}
+
+.countTab1 thead th {
+    border: 1px solid #bacfee;
+    background: #f7faff;
+    padding: 5px;
+}
+
+.countTab1 tbody th, .countTab1 tbody td {
+    border: 1px solid #bacfee;
+    background: #f7faff;
+    text-align: center;
+    padding: 5px;
+}
+
+.countTab1 tbody td {
+    background: #fff;
+    font-weight: normal;
+    text-align: left;
+}
+
+.countTab1 tbody span {
+    color: #333;
+    display: block;
+}
+
+.countTab1 td, .countTab1 th {
+    min-width: 60px;
+    max-width: calc(100vw - 20px);
+}
+
+/* 第二类 */
+.countTab2 {
+    width: 100%;
+    border: 1px solid #bacfee;
+    border-collapse: collapse;
+    margin: 0 auto 20px auto;
+}
+
+.countTab2 thead th {
+    border: 1px solid #bacfee;
+    background: #f7faff;
+    padding: 10px;
+    color: #333;
+    text-align: center;
+}
+
+.countTab2 tbody th {
+    border: 1px solid #bacfee;
+    background: #f7faff;
+    text-align: center;
+    padding: 5px;
+}
+
+.countTab2 tbody td {
+    border: 1px solid #bacfee;
+    padding: 5px;
+    background: #fff;
+    font-weight: normal;
+    text-align: left;
+}
+
+.countTab2 td, .countTab2 th {
+    min-width: 60px;
+    max-width: calc(100vw - 20px);
+}
+
+.countTab2 tbody .count {
+    background: #1d78b6 !important;
+    color: #fff !important;
+}
+
+.countTab2 tbody span {
+    color: #333;
+    font-weight: bold;
+}
+
+/* 结果类样式表 */
+.countTabResult {
+    width: 95%;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0 auto 20px auto;
+}
+
+.countTabResult thead th {
+    border: 1px solid #ccc;
+    background: #666;
+    padding: 5px;
+    color: #fff;
+}
+
+.countTabResult tbody th, .countTabResult tbody td {
+    border: 1px solid #ccc;
+    background: #EFEFEF;
+    text-align: center;
+    padding: 5px;
+    width: 25%;
+}
+
+.countTabResult tbody td {
+    background: #fff;
+    font-weight: normal;
+    text-align: left;
+    width: 80%;
+}
+
+.countTabResult tbody span {
+    color: #333;
+    display: block;
+}
+
+.countTab {
+    width: 95%;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0 auto 20px auto;
+}
+
+.countTab caption {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 0;
+    font-size: 1.2em;
+}
+
+.countTab thead th {
+    border: 1px solid #ccc;
+    background: #666;
+    padding: 10px;
+    color: #fff;
+}
+
+.countTab tbody th, .countTab tbody td {
+    border: 1px solid #ccc;
+    background: #EFEFEF;
+    text-align: center;
+    padding: 5px;
+    text-align: left;
+}
+
+.countTab tbody td {
+    background: #fff;
+    font-weight: normal;
+    text-align: left;
+}
+
+.countTab tbody .count {
+    background: #9c0 !important;
+    color: #fff !important;
+}
+
+.countTab tbody span {
+    color: #333;
+    font-weight: bold;
+}
+
+.countFormTab {
+    width: 90%;
+    margin: 0 auto;
+    border: 0;
+}
+
+.countFormTab td, .countFormTab th {
+}
+
+.ref {
+    padding-bottom: 15px;
+}
+
+.big-table {
+    overflow: auto;
+}
+
+.table-wrap {
+    width: 100%;
+    overflow: scroll;
+}

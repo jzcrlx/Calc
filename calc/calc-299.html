@@ -1,0 +1,400 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-299.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-299">骨骼肌肌力检查方法</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab1">
+                <thead>
+                <tr>
+                    <th>肌肉</th>
+                    <th>脊髓节段</th>
+                    <th>神经</th>
+                    <th>功能</th>
+                    <th>检查方法</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>冈上肌</th>
+                    <td>C5-6</td>
+                    <td>肩胛上神经</td>
+                    <td>上臂外展</td>
+                    <td>上臂自垂直位开始外展，检查者施以阻力</td>
+                </tr>
+                <tr>
+                    <th>冈下肌</th>
+                    <td>C5-6</td>
+                    <td>肩胛上神经</td>
+                    <td>上臂外旋</td>
+                    <td>上臂垂直，屈肘90°，上臂用力外旋，检查者将患者前臂向内侧推</td>
+                </tr>
+                <tr>
+                    <th>前锯肌</th>
+                    <td>C5-7</td>
+                    <td>胸长神经</td>
+                    <td>肩胛下角外展和向前</td>
+                    <td>伸臂前推，检查者施以阻力，瘫痪侧肩胛离开胸壁呈翼状肩胛</td>
+                </tr>
+                <tr>
+                    <th>背阔肌</th>
+                    <td>C6-8</td>
+                    <td>胸背神经</td>
+                    <td>上臂内收、伸直和内旋</td>
+                    <td>上臂自水平外展位向下用力，检查者施加阻力</td>
+                </tr>
+                <tr>
+                    <th>胸大肌</th>
+                    <td>C5~T1</td>
+                    <td>胸前神经</td>
+                    <td>上臂内收、屈曲和内旋</td>
+                    <td>维持臂部向前平伸，检查者将臂部向外侧推</td>
+                </tr>
+                <tr>
+                    <th>三角肌</th>
+                    <td>C5-6</td>
+                    <td>腋神经</td>
+                    <td>上臂外展</td>
+                    <td>维持上臂水平外展位，检查者将患者肘部向下推</td>
+                </tr>
+                <tr>
+                    <th>肱二头肌</th>
+                    <td>C5-6</td>
+                    <td>肌皮神经</td>
+                    <td>前臂屈曲和外旋</td>
+                    <td>维持肘部屈曲、前臂外旋位，检查者使其伸直</td>
+                </tr>
+                <tr>
+                    <th>肱三头肌</th>
+                    <td>C7-8</td>
+                    <td>桡神经</td>
+                    <td>前臂伸直</td>
+                    <td>维持肘部伸直位，检查者使其屈曲</td>
+                </tr>
+                <tr>
+                    <th>旋前圆肌</th>
+                    <td>C6-7</td>
+                    <td>正中神经</td>
+                    <td>前臂内旋</td>
+                    <td>肘部半屈，前臂内旋，检查者予阻力</td>
+                </tr>
+                <tr>
+                    <th>腕伸肌</th>
+                    <td>C6-8</td>
+                    <td>桡神经</td>
+                    <td>腕部伸直</td>
+                    <td>维持腕部背屈位，检查者自手背下压</td>
+                </tr>
+                <tr>
+                    <th>指总伸肌</th>
+                    <td>C6-8</td>
+                    <td>桡神经</td>
+                    <td>示指至小指的掌指关节伸直</td>
+                    <td>前臂内旋位，维持指部伸直，检查者在近端指节处下压</td>
+                </tr>
+                <tr>
+                    <th>拇长伸肌</th>
+                    <td>C7-8</td>
+                    <td>桡神经</td>
+                    <td>拇指远端指节伸直</td>
+                    <td>伸直拇指远端指节，检查者施加阻力</td>
+                </tr>
+                <tr>
+                    <th>拇短伸肌</th>
+                    <td>C7-8</td>
+                    <td>桡神经</td>
+                    <td>拇指近端指节伸直</td>
+                    <td>伸直拇指近端指节，检查者施加阻力</td>
+                </tr>
+                <tr>
+                    <th>拇长展肌</th>
+                    <td>C7-8</td>
+                    <td>桡神经</td>
+                    <td>拇指外展</td>
+                    <td>拇指外展，检查者在第一掌骨施加阻力</td>
+                </tr>
+                <tr>
+                    <th>拇短展肌</th>
+                    <td>C8~T1</td>
+                    <td>正中神经</td>
+                    <td>拇指在和掌部垂直方向展开</td>
+                    <td>患者做此动作，检查者在第一掌骨施加阻力</td>
+                </tr>
+                <tr>
+                    <th>桡侧腕屈肌</th>
+                    <td>C6-7</td>
+                    <td>正中神经</td>
+                    <td>腕屈曲和外展</td>
+                    <td>维持腕屈曲，检查者在桡侧掌部施加阻力</td>
+                </tr>
+                <tr>
+                    <th>尺侧腕屈肌</th>
+                    <td>C7~T1</td>
+                    <td>尺神经</td>
+                    <td>腕屈曲和内收</td>
+                    <td>维持腕屈曲，检查者在尺侧掌部施加阻力</td>
+                </tr>
+                <tr>
+                    <th>指浅屈肌</th>
+                    <td>C7~T1</td>
+                    <td>正中神经</td>
+                    <td>示指至小指的近端指间关节屈曲</td>
+                    <td>屈曲中段指节，检查者施加阻力</td>
+                </tr>
+                <tr>
+                    <th>指深屈肌</th>
+                    <td>C7~T1</td>
+                    <td>正中神经（示指、中指）、尺神经（无名指、小指）</td>
+                    <td>远端指间关节屈曲</td>
+                    <td>屈曲远端指节，检查者施加阻力</td>
+                </tr>
+                <tr>
+                    <th>拇长屈肌</th>
+                    <td>C7~T1</td>
+                    <td>正中神经</td>
+                    <td>拇指远端指节屈曲</td>
+                    <td>屈曲拇指远端指节，检查者施加阻力</td>
+                </tr>
+                <tr>
+                    <th>拇短屈肌</th>
+                    <td>C8~T1</td>
+                    <td>正中神经、尺神经</td>
+                    <td>拇指近端指节屈曲</td>
+                    <td>屈曲拇指近端指节，检查者施加阻力</td>
+                </tr>
+                <tr>
+                    <th>对掌拇肌</th>
+                    <td>C8~T1</td>
+                    <td>正中神经</td>
+                    <td>第一掌骨向掌前转动</td>
+                    <td>各指间关节伸直，拇指和无名指远端指节掌侧相互贴紧，检查者将其分开</td>
+                </tr>
+                <tr>
+                    <th>蚓装肌</th>
+                    <td>C7~T1</td>
+                    <td>正中神经（示指、中指）、尺神经（无名指、小指）</td>
+                    <td>指间关节伸直</td>
+                    <td>近端指间关节伸直，检查者施加阻力</td>
+                </tr>
+                <tr>
+                    <th>手背侧骨间肌</th>
+                    <td>C8~T1</td>
+                    <td>尺神经</td>
+                    <td>手指分开（拇指和小指除外）</td>
+                    <td>将伸直的手指分开，检查者将中间三指聚拢</td>
+                </tr>
+                <tr>
+                    <th>手掌侧骨间肌</th>
+                    <td>C8~T1</td>
+                    <td>尺神经</td>
+                    <td>手指聚拢（拇指除外）</td>
+                    <td>伸直的手指夹住纸条，检查者试将其拉出</td>
+                </tr>
+                <tr>
+                    <th>小指展肌</th>
+                    <td>C8~T1</td>
+                    <td>尺神经</td>
+                    <td>小指外展</td>
+                    <td>伸直的小指外展，检查者施加阻力</td>
+                </tr>
+                <tr>
+                    <th>髂腰肌</th>
+                    <td>L1-3</td>
+                    <td>腰丛神经、股神经</td>
+                    <td>髋部屈曲</td>
+                    <td>仰卧、屈膝、维持髋部屈曲，检查者将大腿向足侧推</td>
+                </tr>
+                <tr>
+                    <th>股四头肌</th>
+                    <td>L2-4</td>
+                    <td>股神经</td>
+                    <td>膝关节伸直</td>
+                    <td>仰卧、伸膝，检查者屈曲之</td>
+                </tr>
+                <tr>
+                    <th>股内收肌群</th>
+                    <td>L2-5</td>
+                    <td>闭孔神经、坐骨神经</td>
+                    <td>股部内收</td>
+                    <td>仰卧、伸直下肢，两膝并拢，检查者将其分开</td>
+                </tr>
+                <tr>
+                    <th>臀中、臀小肌</th>
+                    <td>L4~S1</td>
+                    <td>臀上神经</td>
+                    <td>股外展和内旋</td>
+                    <td>仰卧、伸直下肢，分开两膝，检查者使其并拢</td>
+                </tr>
+                <tr>
+                    <th>臀大肌</th>
+                    <td>L5~S2</td>
+                    <td>臀下神经</td>
+                    <td>髋部伸直</td>
+                    <td>俯卧，下肢伸直，抬高下肢，检查者施加阻力</td>
+                </tr>
+                <tr>
+                    <th>胫前肌</th>
+                    <td>L4-5</td>
+                    <td>腓深神经</td>
+                    <td>足背屈</td>
+                    <td>维持足部背屈，检查者下压足背</td>
+                </tr>
+                <tr>
+                    <th>拇趾长伸肌</th>
+                    <td>L4~S1</td>
+                    <td>腓深神经</td>
+                    <td>拇趾伸直和足背屈</td>
+                    <td>足部固定于中间位，伸直拇趾，检查者施加阻力</td>
+                </tr>
+                <tr>
+                    <th>趾长伸肌</th>
+                    <td>L4~S1</td>
+                    <td>腓深神经</td>
+                    <td>足趾伸直和足背屈</td>
+                    <td>足部固定于中间位，伸直足趾，检查者施加阻力</td>
+                </tr>
+                <tr>
+                    <th>腓肠肌、比目鱼肌</th>
+                    <td>L5~S2</td>
+                    <td>胫神经</td>
+                    <td>足部跖屈</td>
+                    <td>膝伸直，足部跖屈，检查者施加阻力</td>
+                </tr>
+                <tr>
+                    <th>拇趾长屈肌</th>
+                    <td>L5~S2</td>
+                    <td>胫神经</td>
+                    <td>拇趾跖屈</td>
+                    <td>足部固定于中间位，拇趾跖屈，检查者在拇趾远端趾节施加阻力</td>
+                </tr>
+                <tr>
+                    <th>趾长屈肌</th>
+                    <td>L5~S2</td>
+                    <td>胫神经</td>
+                    <td>足趾跖屈</td>
+                    <td>足部固定于中间位，足趾跖屈，检查者施加阻力</td>
+                </tr>
+                <tr>
+                    <th>胫后肌</th>
+                    <td>L5~S1</td>
+                    <td>胫神经</td>
+                    <td>足部内翻</td>
+                    <td>足部跖屈位，内旋足部，检查者在足内缘施加阻力</td>
+                </tr>
+                <tr>
+                    <th>腓骨肌群</th>
+                    <td>L4~S1</td>
+                    <td>腓神经</td>
+                    <td>足部外翻</td>
+                    <td>足部跖屈位，外旋足部，检查者在足外缘施加阻力</td>
+                </tr>
+                <tr>
+                    <th>股二头肌</th>
+                    <td>L4~S2</td>
+                    <td>胫神经</td>
+                    <td>膝部屈曲</td>
+                    <td>俯卧位，维持膝部屈曲，检查者向足侧方向推小腿</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>各块肌肉肌力的检查需要测试相应的具体动作的力量。并非每一患者均要测试所有的肌肉和肌力，需针对病情选择重点检查。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">吴江主编. 神经病学（八年制）（第2版）. 2010年. p72.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

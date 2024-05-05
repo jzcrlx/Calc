@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-596.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-596" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>国人未来10年缺血性心血管病（ICVD）的发病危险性评估(女性)</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="que_select_box">
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">年龄</div>
+                                        <div class="answer" name="age">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">年龄</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">35-39</div>
+                                                <div value="1" class="option">40-44</div>
+                                                <div value="2" class="option">45-49</div>
+                                                <div value="3" class="option">50-54</div>
+                                                <div value="4" class="option">55-59</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            收缩压(mmHg)
+                                        </div>
+                                        <div class="answer" name="shousuo">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">收缩压(mmHg)</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="-2" class="option">&lt;120</div>
+                                                <div value="0" class="option">120-129</div>
+                                                <div value="1" class="option">130-139</div>
+                                                <div value="2" class="option">140-159</div>
+                                                <div value="3" class="option">160-179</div>
+                                                <div value="4" class="option">≥180</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            体重指数(kg/m2)
+                                        </div>
+                                        <div class="answer" name="weight">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">体重指数(kg/m2)</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">&lt;24</div>
+                                                <div value="1" class="option">24-27.9</div>
+                                                <div value="2" class="option">&gt;28</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            总胆固醇(mg/dL)
+                                        </div>
+                                        <div class="answer" name="danguchun">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">总胆固醇(mg/dL)</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">160-179</div>
+                                                <div value="1" class="option">≥180</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="smoke">吸烟</label>
+                                    <input class="flex_que q_radio" value="1" id="smoke" name="smoke" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="dm">糖尿病(mg/dL)</label>
+                                    <input class="flex_que q_radio" value="1" id="dm" name="dm" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p></p>
+            <div class="table-wrap">
+                <table class="countTab2">
+                    <thead>
+                    <tr>
+                        <th colspan="6">10年ICVD绝对危险参考标准</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th colspan="3">女</th>
+                    </tr>
+                    <tr>
+                        <td>年龄(岁)</td>
+                        <td>平均危险</td>
+                        <td>最低危险</td>
+                    </tr>
+                    <tr>
+                        <td>35-39</td>
+                        <td>0.3</td>
+                        <td>0.1</td>
+                    </tr>
+                    <tr>
+                        <td>40-44</td>
+                        <td>0.4</td>
+                        <td>0.1</td>
+                    </tr>
+                    <tr>
+                        <td>45-49</td>
+                        <td>0.6</td>
+                        <td>0.2</td>
+                    </tr>
+                    <tr>
+                        <td>50-54</td>
+                        <td>0.9</td>
+                        <td>0.3</td>
+                    </tr>
+                    <tr>
+                        <td>55-59</td>
+                        <td>1.4</td>
+                        <td>0.5</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>第一步：评分；</p>
+            <p>第二步：求和，将所有分值相加；</p>
+            <p>第三步：找出绝对风险，根据求和总分查ICVD危险度，并与最后与参考标准进行比较。</p>
+            <p>
+            应用注意事项：
+            </p><p>1、该危险评估表仅适于尚未发生心血管病者。若已经患有心血管病，则再次发生心血管病事件的概率会比模型预测的发病危险大大增加。</p>
+            <p>
+                2、由于本研究的终点事件中未包括心绞痛发病一类事件，所得出的ICVD事件绝对危险比实际危险要低。临床应用时对此应有所考虑。据Framingham资料估计，在40岁以上人群中包括和不包括心绞痛的冠心病事件绝对危险平均相差3%-5%,年龄越大差别越大。</p>
+            <p>3、本研究人群入组时年龄范围为35-59岁，所得出的预测模型和评估方法应用于此范围之外的其他年龄人群时结果仅供参考。</p>
+            <p>4、预测模型和评估方法对于那些各种危险因素都是轻中度升高的人最为适合，对于那些人群中并不多见的、多种危险因素都处于很高水平的人会有较大误差。 </p>
+            <p>5、该法仅评估10年内发病危险。对年轻人来说,很多情况下低危是由于年轻所导致的，并不意味着终生低危。这时参考平均危险和最低危险计算相对危险，对于决定是否应予必要的干预更为恰当。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">国人缺血性心血管病发病危险的评估方法及简易评估工具的开发研究. 中华心血管病杂志, 2003;(12):893-900.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

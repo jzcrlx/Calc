@@ -1,0 +1,277 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-684.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-684" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>短暂性脑缺血发作(TIA)的ABCD3-I评分</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="diabetes">糖尿病</label>
+                                    <input class="flex_que q_radio" value="1" id="diabetes" name="diabetes" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="hypertension">高血压</label>
+                                    <input class="flex_que q_radio" value="1" id="hypertension" name="hypertension" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="ageOver60">年龄 ≥ 60 岁</label>
+                                    <input class="flex_que q_radio" value="1" id="ageOver60" name="ageOver60" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="que_select_box">
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">临床表现</div>
+                                        <div class="answer" name="clinic">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">临床表现</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">无肌无力</div>
+                                                <div value="1" class="option">言语障碍，不伴肌无力</div>
+                                                <div value="2" class="option">单侧肌无力</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block req">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            症状持续时间
+                                        </div>
+                                        <div class="answer" name="duration">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">症状持续时间</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="0" class="option">小于 10 分钟</div>
+                                                <div value="1" class="option">10 - 59 分钟</div>
+                                                <div value="2" class="option">60 分钟或更久</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="dual">再发 TIA（7 天内第 2 次发作）</label>
+                                    <input class="flex_que q_radio" value="2" id="dual" name="dual" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="stenosis">同侧颈内动脉狭窄 ≥ 50%</label>
+                                    <input class="flex_que q_radio" value="2" id="stenosis" name="stenosis" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="mri">MRI 弥散序列呈现高信号</label>
+                                    <input class="flex_que q_radio" value="2" id="mri" name="mri" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">评分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="question_infor">
+                                <div class="flex-center calc-item">
+                                    <div class="calc-label-md">结果:</div>
+                                    <div class="flex-item">
+                                        <div id="resultmsg" class="skin-color"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p></p>
+            <p>ABCD³-I 评分</p>
+            <div class="table-wrap">
+                <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>计算公式</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>A = 年龄（<b>A</b>ge）：&gt; 60 岁记 1 分</td>
+                    </tr>
+                    <tr>
+                        <td>B = 血压（<b>B</b>lood pressure）：发作时血压 ≥ 140/90 mmHg 记 1 分</td>
+                    </tr>
+                    <tr>
+                        <td>C = 临床表现（<b>C</b>linical features）：言语障碍不伴无力记 1 分，单侧无力记 2 分</td>
+                    </tr>
+                    <tr>
+                        <td>D = 症状持续时间（Symptom <b>D</b>uration）：10 - 59 分钟记 1 分，60 分钟以上记 2 分</td>
+                    </tr>
+                    <tr>
+                        <td>D = 糖尿病（<b>D</b>iabetes）：糖尿病患者记 1 分</td>
+                    </tr>
+                    <tr>
+                        <td>D = 再发（<b>D</b>ual）：7 天内第 2 次 TIA 发作记 2 分</td>
+                    </tr>
+                    <tr>
+                        <td>I = 影像（<b>I</b>maging）：同侧颈内动脉狭窄 &gt; 49% 记 2 分</td>
+                    </tr>
+                    <tr>
+                        <td>I = 影像（<b>I</b>maging）：发作时弥散序列高信号记 2 分</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p>ABCD³-I 评分（ABCD³-I Score）用于评估患者短暂性脑缺血发作（TIA）后脑卒中的发生风险。</p>
+            <div class="table-wrap">
+                <table class="countTab2" border="0" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr>
+                        <th>分级</th>
+                        <th>分数</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>低危</td>
+                        <td>0 - 3 分</td>
+                    </tr>
+                    <tr>
+                        <td>中危</td>
+                        <td>4 - 7 分</td>
+                    </tr>
+                    <tr>
+                        <td>高危</td>
+                        <td>8 - 13 分</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="//www.ncbi.nlm.nih.gov/m/pubmed/20934388/" class="resource" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Merwick A et al. Lancet Neurol. 2010 Nov;9(11):1060-9. </span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

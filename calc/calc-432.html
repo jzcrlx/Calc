@@ -1,0 +1,395 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-432.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-432" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>自身免疫性肝炎的诊断标准与评分系统</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_blocks">
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="sex">性别:女</label>
+                                    <input class="flex_que q_radio" value="2" id="sex" name="sex" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="que_select_box">
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">AP:AST(或ALT)</div>
+                                        <div class="answer" name="ap">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">AP:AST(或ALT)</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="-2" class="option">＞3</div>
+                                                <div value="2" class="option">＜1.5</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            γ球蛋白或IgG水平高于正常值
+                                        </div>
+                                        <div class="answer" name="qiudanbai">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">γ球蛋白或IgG水平高于正常值</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="3" class="option">＞2.0</div>
+                                                <div value="2" class="option">1.5-2.0</div>
+                                                <div value="1" class="option">1.0-1.5</div>
+                                                <div value="0" class="option">＜1.0</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            ANA，SMA，或抗-LKM-1滴度
+                                        </div>
+                                        <div class="answer" name="ana">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">ANA，SMA，或抗-LKM-1滴度</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="3" class="option">＞1:80</div>
+                                                <div value="2" class="option">1:80</div>
+                                                <div value="1" class="option">1:40</div>
+                                                <div value="0" class="option">＜1:40</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="ama">AMA阳性</label>
+                                    <input class="flex_que q_radio" value="-4" id="ama" name="ama" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="que_select_box">
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">病毒标记物</div>
+                                        <div class="answer" name="bingdu">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">病毒标记物</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="-3" class="option">阳性</div>
+                                                <div value="3" class="option">阴性</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            药物
+                                        </div>
+                                        <div class="answer" name="yaowu">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">药物</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="-4" class="option">有</div>
+                                                <div value="1" class="option">无</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            酒精
+                                        </div>
+                                        <div class="answer" name="jiujing">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">酒精</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="2" class="option">＜25g/d</div>
+                                                <div value="-2" class="option">＞60g/d</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block">
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="hla">HLA：DR3或DR4</label>
+                                    <input class="flex_que q_radio" value="1" id="hla" name="hla" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="mianyi">免疫性疾病：甲状腺炎、结肠炎或其它</label>
+                                    <input class="flex_que q_radio" value="2" id="mianyi" name="mianyi" type="checkbox">
+                                </div>
+                            </div>
+                            <div class="flex-center calc-que">
+                                <div class="flex_box align_items_center">
+                                    <label class="flex" for="qita">其它标记物：抗-SLA、抗-actin、抗-LC1、pANCA</label>
+                                    <input class="flex_que q_radio" value="1" id="qita" name="qita" type="checkbox">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="question_block req">
+                            <div class="que_select_box">
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">组织学表现</div>
+                                        <div class="answer" name="zuzhi">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">组织学表现</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="3" class="option">界面性肝炎</div>
+                                                <div value="2" class="option">浆细胞浸润</div>
+                                                <div value="1" class="option">玫瑰花结</div>
+                                                <div value="-5" class="option">无上述病变</div>
+                                                <div value="-3" class="option">胆道病变</div>
+                                                <div value="-3" class="option">无病变</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="que_block">
+                                    <div class="que_infor">
+                                        <div class="txt">
+                                            治疗应答
+                                        </div>
+                                        <div class="answer" name="zhiliao">请选择</div>
+                                    </div>
+                                    <div class="que_mark">
+                                        <div class="option-content">
+                                            <div class="option-title">
+                                                <div class="option-title-text">治疗应答</div>
+                                                <div class="option-title-close"></div>
+                                            </div>
+                                            <div class="options">
+                                                <div value="2" class="option">有效</div>
+                                                <div value="3" class="option">复发</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="answer_block">
+                            <div class="question_infor">
+                                <div class="flex-center calc-item ">
+                                    <div class="calc-label-md">得分:</div>
+                                    <div class="flex-item">
+                                        <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p></p>
+            <div class="table-wrap">
+                <table class="countTab2">
+                    <thead>
+                    <tr>
+                        <th colspan="3">国际AIH工作组制订的诊断标准：</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>特征</th>
+                        <th>确诊</th>
+                        <th>疑似</th>
+                    </tr>
+                    <tr>
+                        <th>肝组织学</th>
+                        <td>中等或严重界面性肝炎，伴或不伴小叶性肝炎或小叶中央-门脉桥接坏死，但无胆道病变或明确肉芽肿或其它各种病因提示的明显改变。</td>
+                        <td>与确诊病例相同。</td>
+                    </tr>
+                    <tr>
+                        <th>血清生化</th>
+                        <td>各种血清转氨酶异常，特别是血清碱性磷酸酶无明显升高。血清α-抗胰蛋白酶、铜和铜蓝蛋白水平正常。</td>
+                        <td>与确诊病例相同，但患者有异常血清铜或铜蓝蛋白水平，需相关检查排除Wilson病。</td>
+                    </tr>
+                    <tr>
+                        <th>血清免疫球蛋白</th>
+                        <td>血清总球蛋白或γ球蛋白或IgG水平＞1.5×UNL。</td>
+                        <td>各种血清球蛋白或γ球蛋白或IgG水平高于正常值上限。</td>
+                    </tr>
+                    <tr>
+                        <th>血清自身抗体</th>
+                        <td>血清ANA、SMA，或抗-LKM-1抗体滴度＞1:80。儿童低滴度(尤其抗-LKM-1抗体)有意义。血清AMA阴性。</td>
+                        <td>与确诊病例相同。但滴度≥1:40。这类血清抗体阴性病例但其它血清抗体*阳性。</td>
+                    </tr>
+                    <tr>
+                        <th>病毒标记物</th>
+                        <td>血清甲肝、乙肝和丙肝病毒感染标志物阴性。</td>
+                        <td>与确诊病例相同。</td>
+                    </tr>
+                    <tr>
+                        <th>其它病原因素</th>
+                        <td>平均酒精消耗量低于25g/d。近期无使用肝毒性药物病史。</td>
+                        <td>酒精消耗量低于50g/d及近期无使用肝毒性药物史。有提示酒精消耗量较大或近期使用肝毒性药物，如戒酒或停用药物后仍持续肝损害。</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><b>1、诊断标准：</b></p>
+            <p>*其它血清抗体：包括核周型ANCA、抗可溶性肝抗原抗体/肝胰抗原抗体、抗肌动蛋白抗体、抗肝细胞质Ⅰ型抗体和抗唾液酸糖蛋白受体抗体。</p>
+            <p><b>2、评分系统：</b></p>
+            <p> 治疗前积分：确诊病例＞15；疑似病例10-15。</p>
+            <p> 治疗后积分：确诊病例＞17；疑似病例12-17。</p>
+            <p>
+                1993年和1999年国际AIH工作组先后制订AIH诊断标准和AIH诊断评分系统。临床诊断标准能满足大多数病例明确诊断或排除AIH。原始评分系统作为研究工具，可满足临床试验的可比性，也适用于不易符合标准的疑似病例。原始评分系统对治疗应答进行分级，治疗前后可呈现不同积分。</p>
+            <p>
+                治疗前积分10分的敏感性为100%，特异性73%，诊断准确性为67%。治疗前积分为15分"确诊AIH"的敏感性为95%，特异性97%，诊断准确性为94%。儿童AIH病例的回顾性研究中支持原始制订评分系统的应用价值。</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">1、Manns MP, et al. Diagnosis and management of autoimmune hepatitis. Hepatology. 2010;51(6):2193-213.</span>
+        </a>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text"> 2、王吉耀主编. 内科学（八年制）（第2版）. 人民卫生出版社. 2010年. p498.</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

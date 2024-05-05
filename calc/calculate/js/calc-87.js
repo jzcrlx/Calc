@@ -1,0 +1,1 @@
+function MDCalc(z){var msg="";var msg1="";var k=1;if(z.danwei==1){msg="舒张充盈期";msg1="二尖瓣面积";k=37.7}else if(z.danwei==2){msg="收缩射血期";msg1="主动脉瓣面积";k=44.3}else if(z.danwei==3){msg="舒张充盈期";msg1="三尖瓣面积";k=44.3}else if(z.danwei==4){msg="收缩射血期";msg1="肺动脉瓣面积";k=44.3}value=z.co*1e3/(k*Math.sqrt(z.mvg)*z.hr*z.dfp);Answer(Math.round(parseFloat(value)*100)/100);Text(msg);Text2(msg1)}

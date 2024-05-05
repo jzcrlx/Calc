@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-258.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-258">胫骨平台骨折Schatzker分型</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="view_img">
+            <div style="text-align: center">图1:</div>
+            <img class="formula-tbimg" src="calculate/images/schat.jpg">
+            <div style="text-align: center">图2:</div>
+            <img class="formula-tbimg" src="calculate/images/schat2.jpg">
+        </div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>
+                    Schatzker分型是Schatzker于1979年提出，其特点是简单实用。将胫骨平台骨折分为6型，每一型都有相对应的手术入路和固定方法。SchatzkerⅠ型、Ⅱ型、Ⅲ型是典型的低能量损伤造成的，而复杂的Ⅳ型、Ⅴ型、Ⅵ型骨折，则是由高能量损伤造成的。</p>
+                <p>①Ⅰ型：累及外侧平台的楔形劈裂骨折。典型的楔形非粉碎性骨折块向外下劈裂移位，此型骨折常见于无骨质疏松的年轻患者；</p>
+                <p>②Ⅱ型：累及外侧平台的楔形劈裂骨折合并平台负重区的压缩骨折。侧方楔形骨块劈裂分离，并有关节面向下压缩陷入干骺端，此型骨折最常见于老年患者；</p>
+                <p>③Ⅲ型：累及外侧平台的压缩骨折。关节面被压缩陷入平台，外侧皮质完整，易发生于骨质疏松者；</p>
+                <p>④Ⅳ型：累及内侧平台骨折。此型骨折可以是单纯的楔形劈裂或是粉碎和压缩骨折，常累及胫骨棘；</p>
+                <p>⑤Ⅴ型：累及双侧平台骨折。两侧胫骨平台劈裂，特征是干骺端与骨干仍保持连续性；</p>
+                <p>⑥Ⅵ型：伴有干骺端与骨干分离的平台骨折。除单髁、双髁及关节面骨折外，还存在胫骨近端横形或斜形骨折。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">陈孝平主编. 外科学（八年制）（第2版）. 人民卫生出版社. 2010年.p968.</span>
+            </a>
+        </div>
+    </div>
+</div>
+<script src="js/viewer/viewer.js"></script>
+<link href="js/viewer/viewer.css" rel="stylesheet">
+<script src="js/viewer/jquery-viewer.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var $image = $('.view_img');
+
+        $image.viewer({
+            inline: false,
+            toolbar: 0,
+            navbar: 0,
+            title: '',
+            button: 0,
+            viewed: function () {
+            }
+        });
+    });
+</script>
+
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

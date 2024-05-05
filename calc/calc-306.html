@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-306.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-306">神经损伤 Sunderland 分类法</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap">
+            <table class="countTab2">
+                <thead>
+                <tr>
+                    <th>分级</th>
+                    <th>描述</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>第一度损伤</td>
+                    <td>传导阻滞。神经纤维的连续性保持完整，无华勒变性。髓鞘损伤，损伤部位沿轴突的神经传导生理性中段，轴突没有断裂。不发生 Wallerian 变性。神经无再生，无 Tinnel
+                        征（运动前移）通常在3-4周内自行恢复。
+                    </td>
+                </tr>
+                <tr>
+                    <td>第二度损伤</td>
+                    <td>轴突中断，但神经内膜管完整，损伤远端发生华勒变性。轴突断裂，损伤远端发生 Wallerian 变性，近端一个或多个结间段发生变性，神经内膜管保持完整（Schwann
+                        细胞基地膜）为轴突再生提供了完好的解剖通道。可自行恢复，轴突以每日 1-2mm 速度向远端生长。
+                    </td>
+                </tr>
+                <tr>
+                    <td>第三度损伤</td>
+                    <td>神经纤维（包括轴突和鞘管）横断，而神经束膜完整。轴突和内膜管断裂，但神经束膜保持完整。由于神经内膜管的破坏，导致结构紊乱。有自行恢复的可能性，但由于神经内膜疤痕化，恢复常不完全。</td>
+                </tr>
+                <tr>
+                    <td>第四度损伤</td>
+                    <td>神经束遭到严重破坏或断裂，但神经干通过神经外膜组织保持连续。神经束膜损伤，可保留部分神经外膜和神经束膜，为发生神经干离断。很少能自行恢复，需手术修复。</td>
+                </tr>
+                <tr>
+                    <td>第五度损伤</td>
+                    <td>整个神经干完全断裂。需手术修复才能恢复。</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="end">
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>Sunderland 分类法中的第三、四、五度损伤与 Seddon 分类法中的神经断裂相当，只是神经损伤程度上有所差异。</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

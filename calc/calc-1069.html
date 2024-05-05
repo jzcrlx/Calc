@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-1069.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-1069" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>糖化血红蛋白 (HbA1c)</h2>
+        </div>
+        <form name="medform" action="get" id="medform">
+            <div class="question_box">
+                <div class="question_cont">
+                    <div class="question_title">
+                        HbA1c
+                    </div>
+                    <div class="question_block ">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-lg">IFCC: mmol/mol</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="hba1c_ifcc" placeholder="mmol/mol" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block ">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-lg">DCCT: %</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="hba1c_ngsp" placeholder="%" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_title">
+                        平均血糖
+                    </div>
+                    <div class="question_block ">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-lg">eAG(mg/dL)</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="glc_mg" placeholder="mg/dL" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question_block ">
+                        <div class="question_infor">
+                            <div class="flex-center calc-item">
+                                <div class="calc-label-lg">eAG(mmol/L)</div>
+                                <div class="flex-item">
+                                    <input class="calc-input" name="glc_mmol" placeholder="mmol/L" type="number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="answer">
+                        <div style="padding-top: 10px;text-align: center">
+                            <button type="button" class="calc_btn" id="result" style="width: 80px">
+                                <span class="skin-color">计 算</span>
+                            </button>
+                            <button type="reset" class="calc_btn " id="clear" style="width: 80px;margin-left: 20px;">
+                                重 置
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">临床意义</span></h3>
+        <div class="jiedu">
+            <p>由国际临床化学联合会（IFCC）提出的一种新参照方法可得出真实的糖基化血红蛋白浓度，其结果使用定量单位（mmol/mol）表述。有专家称：血糖指数或平均血糖可以代表长期血糖控制的平均水平。由于平均血糖变化与HbA1c有关，现在很多国家已经开始使用IFCC规定的单位（mmol/mol）出化验报告了。</p>
+            <p>糖化血红蛋白一般是经血红蛋白的珠蛋白β链N端缬氨酸残基与葡萄糖发生非酶糖化所形成的Amadori产物，其与红细胞的平均寿命等有着直接的相关性。由于红细胞的寿命是120天，因此HbA1c可以更客观、清晰地反应患者体内的2-3个月的平均血糖水平。</p>
+            <p>在最新颁布的《中国2型糖尿病防治指南（2020年版）》中，HbA1c被正式纳入糖尿病诊断标准当中，以HbA1c≥6.5%为切点，辅助糖尿病诊断。</p>
+            <p>HbA1c纳入糖尿病诊断标准，对提高糖尿病的诊断效率及准确性、降低糖尿病漏诊率具有重要意义。HbA1c是临床随访的关键指标，指南强调个体化的HbA1c控制目标，HbA1c也是血糖控制金标准。将HbA1c作为糖尿病诊断和控制的依据，不仅能够对糖尿病患者自身的血糖情况进行科学、准确地评估，还能够对糖尿病患者潜在的并发症情况进行预测和评估，对血糖控制的稳定情况和疗效进行判断。</p>
+        </div>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">取值范围</span></h3>
+        <div class="jiedu">
+            <p>IFCC(mmol/mol):  0~150</p>
+            <p>DCCT(%):  0~16</p>
+            <p>平均血糖(mg/dL):  0~414</p>
+            <p>平均血糖(mmol/L):  0~23</p>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

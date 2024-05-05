@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-413.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-413">人类精液变量参考值(WHO)</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap"><table class="countTab2" border="0" cellpadding="0" cellspacing="0"> <thead> <tr> <th>参考值</th> <th>参考值下限</th> <th>第四版 相关参数</th> </tr> </thead> <tbody> <tr> <th>量</th> <td>1.5 ml（1.4-1.7 ml）</td> <td>≥2.0 ml</td> </tr> <tr> <th>总精子数</th> <td>39×10<sup>6</sup>（33-46）/一次射精</td> <td>≥40×10<sup>6</sup> /一次射精</td> </tr> <tr> <th>精子密度</th> <td>15×10<sup>6</sup>（12-16）mL</td> <td>≥20×10<sup>6</sup>mL</td> </tr> <tr> <th>总活力（快速前向运动+非快速前向运动）</th> <td>40%（38-42%）</td> <td>a+b≥50%或a≥25%</td> </tr> <tr> <th>快速前向运动</th> <td>32%（31-34%）</td> <td></td> </tr> <tr> <th>存活率（活精子）</th> <td>58%（55-63%）</td> <td>≥50%</td> </tr> <tr> <th>形态（正常形态）</th> <td>4%（3-4%）</td> <td>≥15%</td> </tr> <tr> <th colspan="3">其他统计数据</th> </tr> <tr> <th>PH</th> <td>≥7.2</td> <td>≥7.2</td> </tr> <tr> <th>圆形细胞</th> <td>≤5×10<sup>6</sup>mL</td> <td>≤5×10<sup>6</sup>mL</td> </tr> <tr> <th>白细胞（过氧化物酶染色阳性）</th> <td>&lt;1.0×10<sup>6</sup>mL</td> <td>&lt;1.0×10<sup>6</sup>mL</td> </tr> <tr> <th>MAR试验（与颗粒结合的活动精子）</th> <td>&lt;50%</td> <td></td> </tr> <tr> <th>免疫珠试验（与免疫珠结合的活动精子）</th> <td>&lt;50%</td> <td></td> </tr> <tr> <th>精浆锌</th> <td>≥2.4μmol /一次射精</td> <td></td> </tr> <tr> <th>精浆果糖</th> <td>≥13μmol /一次射精</td> <td></td> </tr> <tr> <th>精浆中性葡萄糖苷酶</th> <td>≥20mU /一次射精</td> <td></td> </tr> </tbody>
+        </table></div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>根据精液常规检查的结果，如精子密度少于20×10^6mL，称少精子症(oligospermia)；精液中无精子，称无精子症(azoospermia)；前向运动(a+b)精子少于50%，或快速前向运动(a)精子少于25%，称弱精子症(asthenospermia)。</p>
+                <p>精液收集注意事项：禁欲3~7天，尽可能在实验室采用手淫法取精液，全部收集到干净玻璃容器内，不要采用性交中断法、避孕套和塑料瓶。精液取出后应立即送检，天冷时注意保温，检查时间最好在30分钟内，不超过60分钟内进行。</p>
+                <p>结果分析说明：一次检查结果不一定能完全准确反应精液情况，应间隔1~2周、重复检查2~3次。如近期有发热等影响精液检查的因素，应在3个月后复查。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text"> 世界卫生组织. 世界卫生组织人类精液检查与处理实验室手册(第5版). 人民卫生出版社, 2011, p192.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

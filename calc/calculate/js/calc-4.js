@@ -1,0 +1,1 @@
+function MDCalc(z){mat=1;if(20>z.pt_hct){mat=2.5}if(z.pt_hct>=20){mat=2}if(z.pt_hct>=25){mat=1.5}if(z.pt_hct>=35){mat=1}value=z.retic*z.pt_hct/z.nl_hct;value2=value/mat;Answer(Round(value,2));Answer2(Round(value2,2))}$("#units").hide();

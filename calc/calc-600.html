@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-600.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div id="Layout" class="medcalc">
+    <div class="titleBar" id="title">
+        <h2 id="medcalc-600">房颤症状评分-AF</h2>
+    </div>
+
+    <div class="mainContainer">
+        <div class="table-wrap"><table class="countTab2" cellpadding="0"> <thead> <tr> <th>分级（class）</th> <th>症状</th> </tr> </thead> <tbody> <tr> <th>0级</th> <td>无房颤导致的症状</td> </tr> <tr> <th>1级</th> <td>房颤导致的症状对生活质量几乎无影响（minimal effect）：<br>-症状轻微或偶尔发生<br>-单次房颤发作，无晕厥或心衰</td> </tr> <tr> <th>2级</th> <td>房颤导致的症状轻度影响生活质量：<br>-持续性房颤患者对症状有轻微的觉察，或者<br>-阵发性房颤患者发作次数很少（例如，不超过每年几次）</td> </tr> <tr> <th>3级</th> <td>房颤导致的症状中度影响生活质量：<br>-持续性房颤患者大部分时间对症状有中等程度的感知，或者<br>-阵发性房颤患者发作次数增多（例如，至少每隔几个月1次）和/或症状加重</td> </tr> <tr> <th>4级</th> <td>房颤导致的症状严重影响生活质量：<br>-持续性房颤患者症状难以忍受，和/或<br>-阵发性房颤患者频繁发作且症状明显，和/或<br>-房颤引起晕厥，和/或<br>-房颤继发充血性心力衰竭</td> </tr> </tbody>
+        </table></div>
+        <div>
+            <h3><span class="jiedu-title">说明</span></h3>
+            <div class="jiedu">
+                <p>CCS-SAF评分主要用于床旁评价房颤患者症状严重程度，以及对患者生活质量的影响，具有临床可操作性。同时，它还可以指导护理，协助评估治疗效果。</p>
+                <p>CCS-SAF评分中房颤导致的相关症状具体指：心悸、呼吸困难、头晕（晕厥）、胸痛及乏力。</p>
+            </div>
+        </div>
+        <div class="ref">
+            <h3><span class="jiedu-title">参考文献</span></h3>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text">1. Dorian P,et al. A novel, simple scale for assessing the symptom severity of atrial fibrillation at the bedside: the CCS SAF scale. Can J Cardiol. 2006;22:383–6.</span>
+            </a>
+            <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+                <span class="resource__text"> 2. Dorian P, et al. Validation of a new simple scale to measure symptoms in atrial fibrillation: the Canadian Cardiovascular Society Severity in Atrial Fibrillation scale. Circ Arrhythm Electrophysiol. 2009;2(3):218-24.</span>
+            </a>
+        </div>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>

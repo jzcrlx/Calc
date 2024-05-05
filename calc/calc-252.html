@@ -1,0 +1,423 @@
+﻿<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="shortcut icon " type="images/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="skin/common/table.css" />
+    <link rel="stylesheet" href="skin/common/index.css" />
+    <link rel="stylesheet" href="skin/common.css" />
+    <title>医学计算工具 - 急诊超人老谢</title>
+    <script type="text/javascript" src="js/iscroll4.js"></script>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="calculate/common/globalJS.js"></script>
+    <script type="text/javascript" src="calculate/common/date.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>    
+    <script type="text/javascript" src="calculate/js/calc-252.js"></script>
+    <script type="text/javascript" src="calculate/js/action_localStorage.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //检测是否已被收藏
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (haveLike(strFileName)) {
+                //有收收藏
+                document.querySelector('.like_box').className = 'like_box active';
+            }
+            //加改使用历史
+            historyToPage(strFileName, strTitle);
+        });
+ function like() {
+            let strFileName = window.location.href.substring(window.location.href.lastIndexOf("/") + 1);
+            let strTitle = document.getElementById("title").getElementsByTagName('h2')[0].textContent;
+            if (likeToPage(strFileName, strTitle)) {
+                //已有收藏，则提示已取消    
+                document.querySelector('.like_box').className = 'like_box';
+                layer.open({
+                            content: '已取消收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            } else {
+                //未收藏，则提示收藏之           
+                document.querySelector('.like_box').className = 'like_box active';
+                layer.open({
+                            content: '已成功收藏！',
+                            time: 2,
+                            skin: 'msg',
+                            anim: 'scale'
+                        });
+            }
+        }       
+    </script>
+    <script type="text/javascript">
+        // 百度网站统计
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?62d5f914585ee5474784a364a3968555";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body class="show">
+<div class="top">
+    <a href="../index.html" ><img src="skin/common/images/5.png"/>首页</a>
+    <a href="javascript:goBack();"><img src="skin/common/images/6.png"/>返回</a>
+</div>
+
+<div class="medlive">
+    <div class="medcalc">
+    <div id="medcalc-252" class="post">
+        <div id="meta">
+        </div>
+        <div id="title">
+            <h2>JOA脊髓型颈椎病评分</h2>
+        </div>
+        <form id="medform" name="medform" action="get">
+            <div class="que_select_box">
+                <div class="que_title">
+                    <span>自觉症状</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">腰痛</div>
+                        <div class="answer" name="yaotong">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">腰痛</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="3" class="option">腰痛全部消失</div>
+                                <div value="2" class="option">有时轻疼痛</div>
+                                <div value="1" class="option">经常腰疼痛</div>
+                                <div value="0" class="option">经常激烈腰痛</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            下肢疼痛及麻木
+                        </div>
+                        <div class="answer" name="xiazhitengtong">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">下肢疼痛及麻木</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="3" class="option">下肢腿痛、麻木全部消失</div>
+                                <div value="2" class="option">有时轻下肢痛、不麻木</div>
+                                <div value="1" class="option">有时下肢痛、麻木较重</div>
+                                <div value="0" class="option">有时下肢激烈疼痛、麻木</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            步行能力
+                        </div>
+                        <div class="answer" name="buxingnengli">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">步行能力</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="3" class="option">能完成正常步行</div>
+                                <div value="2" class="option">500m以上可能出现疼痛、麻木无力</div>
+                                <div value="1" class="option">步行界限100~500m以内</div>
+                                <div value="0" class="option">100m以内</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="que_title">
+                    <span>客观检查</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">直腿抬高试验（包括腘绳肌）</div>
+                        <div class="answer" name="zhijiaotaigao">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">直腿抬高试验（包括腘绳肌）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="2" class="option">正常</div>
+                                <div value="1" class="option">30°~70°</div>
+                                <div value="0" class="option">小于30°</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">感觉</div>
+                        <div class="answer" name="ganjue">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">感觉</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="2" class="option">正常</div>
+                                <div value="1" class="option">轻微感觉障碍</div>
+                                <div value="0" class="option">明显感觉障碍</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            肌力下降（MRC分级）
+                        </div>
+                        <div class="answer" name="jilixiajiang">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">肌力下降（MRC分级）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="2" class="option">正常（5）</div>
+                                <div value="1" class="option">轻度肌力低下（4）</div>
+                                <div value="0" class="option">明显肌力低下（3~0）</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="que_title">
+                    <span>日常活动受限度（ADL）</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">平卧翻身</div>
+                        <div class="answer" name="pingwofanshen">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">平卧翻身</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="2" class="option">正常</div>
+                                <div value="1" class="option">轻度受限</div>
+                                <div value="0" class="option">明显受限</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">站立</div>
+                        <div class="answer" name="zhanli">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">站立</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="2" class="option">正常</div>
+                                <div value="1" class="option">轻度受限</div>
+                                <div value="0" class="option">明显受限</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            洗漱
+                        </div>
+                        <div class="answer" name="xishu">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">洗漱</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="2" class="option">正常</div>
+                                <div value="1" class="option">轻度受限</div>
+                                <div value="0" class="option">明显受限</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            前屈
+                        </div>
+                        <div class="answer" name="qianqu">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">前屈</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="2" class="option">正常</div>
+                                <div value="1" class="option">轻度受限</div>
+                                <div value="0" class="option">明显受限</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            坐位（大约1小时）
+                        </div>
+                        <div class="answer" name="zuowei">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">坐位（大约1小时）</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="2" class="option">正常</div>
+                                <div value="1" class="option">轻度受限</div>
+                                <div value="0" class="option">明显受限</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            举重物
+                        </div>
+                        <div class="answer" name="juzhongwu">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">举重物</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="2" class="option">正常</div>
+                                <div value="1" class="option">轻度受限</div>
+                                <div value="0" class="option">明显受限</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">
+                            行走
+                        </div>
+                        <div class="answer" name="xingzou">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">行走</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="2" class="option">正常</div>
+                                <div value="1" class="option">轻度受限</div>
+                                <div value="0" class="option">明显受限</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="que_title">
+                    <span>膀胱功能</span>
+                </div>
+                <div class="que_block req">
+                    <div class="que_infor">
+                        <div class="txt">膀胱功能</div>
+                        <div class="answer" name="pangguang">请选择</div>
+                    </div>
+                    <div class="que_mark">
+                        <div class="option-content">
+                            <div class="option-title">
+                                <div class="option-title-text">膀胱功能</div>
+                                <div class="option-title-close"></div>
+                            </div>
+                            <div class="options">
+                                <div value="0" class="option">正常</div>
+                                <div value="-3" class="option">轻度受限</div>
+                                <div value="-6" class="option">明显受限（尿潴留、尿失禁）</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="answer_block">
+                    <div class="question_infor">
+                        <div class="flex-center calc-item ">
+                            <div class="calc-label-md">评分:</div>
+                            <div class="flex-item">
+                                <input class="calc-input" name="result" readonly="" id="result" placeholder="点击查看" type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h3><span class="jiedu-title">结果解读</span></h3>
+        <div class="jiedu">
+            <p>JOA总评分为0~29分，分数越低表明功能障碍越明显。改善指数＝［治疗后分数-治疗前分数］/治疗后分数。改善率＝［治疗后分数-治疗前分数］/ [正常-治疗前分数]×100％。</p>
+            <p>通过改善指数可反映患者治疗前后腰椎功能的改善情况，通过改善率可了解临床治疗效果。改善率还可对应于通常采用的疗效判定标准：改善率为100%时为治愈，改善率＞60%为显效，25~60%为有效，＜25%为无效。</p>
+            <p>英文名称：JOA score rating system for low back pain.</p>
+        </div>
+    </div>
+    <div class="end">
+        <h3><span class="jiedu-title">参考文献</span></h3>
+        <a href="" class="resource notClickable" target="_blank" style="margin-top: 3px">
+                    <span class="resource__img-wrapper">
+                        <img src="images/ref.png" alt="Research Paper">
+                    </span>
+            <span class="resource__text">Izumida S, Inoue S. Assessment of treatment for low back pain. J Jpn Orthop Assoc 1986;60:391–4 (in Japanese).</span>
+        </a>
+    </div>
+</div>
+</div>
+<div class="like_box" onclick="javascript:like();">
+    <div class="like-btn"></div>
+    <span>收藏</span>
+</div>
+</body>
+</html>
